@@ -108,7 +108,24 @@ def main():
     for batch in BATCHES:
         sector = batch["sector"]
         print(f"  {sector}...")
-        results = research_batch(client, sector, batch["companies"])
+        
+        # Retry up to 3 times on rate limit
+        for attempt in range(3):
+            try:
+                results = research_batch(client, sector, batch["companies"])
+                break
+            except Exception as e:
+                if "rate_limit" in str(e).lower() or "429" in str(e):
+                    wait = 60 * (attempt + 1)
+                    print(f"    Rate limited. Waiting {wait}s...")
+                    time.sleep(wait)
+                else:
+                    print(f"    Error: {e}")
+                    results = []
+                    break
+        else:
+            results = []
+
         print(f"    {len(results)} companies returned")
         for c in results:
             name = c.get("name", "")
@@ -126,10 +143,9 @@ def main():
         with open(path, "w") as f:
             json.dump(companies, f, indent=2)
         print(f"    Saved. Total: {len(companies)}")
-        time.sleep(3)
+        
+        # Wait 30 seconds between batches to avoid rate limits
+        print("    Waiting 30s before next batch...")
+        time.sleep(30)
 
     print(f"\nDone. {len(companies)} companies in docs/data/companies.json")
-
-
-if __name__ == "__main__":
-    main()
