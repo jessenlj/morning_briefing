@@ -1,0 +1,121 @@
+[
+  {
+    "date": "2026-04-11",
+    "date_display": "Saturday, April 11, 2026",
+    "companies": [
+      {
+        "name": "OpenAI",
+        "what_they_do": "AI research lab and ChatGPT creator",
+        "event": "Valued at $852 billion after raising $122 billion, approaching IPO",
+        "event_type": "funding",
+        "sector": "AI",
+        "problem_space": "Frontier AI models and compute infrastructure"
+      },
+      {
+        "name": "Meta",
+        "what_they_do": "Social media and technology conglomerate",
+        "event": "Launched Muse Spark AI model through Meta Superintelligence Labs",
+        "event_type": "launch",
+        "sector": "AI",
+        "problem_space": "Competing in generalist AI model market"
+      },
+      {
+        "name": "Valar Nuclear",
+        "what_they_do": "Small modular reactor (SMR) company for data center power",
+        "event": "Raised $450M Series C, valuation reached $2.0 billion",
+        "event_type": "funding",
+        "sector": "Energy",
+        "problem_space": "AI data center power infrastructure and energy supply"
+      },
+      {
+        "name": "Rebellions",
+        "what_they_do": "South Korean AI chip maker specializing in inference hardware",
+        "event": "Closed $400M pre-IPO round at $2.34B valuation",
+        "event_type": "funding",
+        "sector": "Semiconductors",
+        "problem_space": "AI chip alternatives to NVIDIA for cost and sovereignty"
+      },
+      {
+        "name": "Chapter",
+        "what_they_do": "AI-powered retirement and 401k management platform",
+        "event": "Raised $100M in Series E funding",
+        "event_type": "funding",
+        "sector": "Fintech",
+        "problem_space": "Retirement planning and 401k optimization"
+      },
+      {
+        "name": "Patlytics",
+        "what_they_do": "AI platform for patent research and lifecycle management",
+        "event": "Raised $40M in Series B funding led by SignalFire",
+        "event_type": "funding",
+        "sector": "Legal Tech",
+        "problem_space": "Patent research automation and IP management"
+      },
+      {
+        "name": "Anthropic",
+        "what_they_do": "AI safety company and model creator",
+        "event": "Model Context Protocol reached 97M installs; approaching $19B annualized revenue",
+        "event_type": "release",
+        "sector": "AI",
+        "problem_space": "AI agent infrastructure and foundational protocols"
+      },
+      {
+        "name": "Google",
+        "what_they_do": "Search and technology conglomerate",
+        "event": "Launched Gemini 3.1 Flash-Lite model at $0.25 per million input tokens",
+        "event_type": "launch",
+        "sector": "AI",
+        "problem_space": "Cost-efficient AI inference at scale"
+      }
+    ],
+    "problem_spaces": [
+      "AI compute infrastructure and power supply",
+      "AI chip manufacturing and semiconductor alternatives",
+      "Frontier AI model development",
+      "AI agent infrastructure and protocols",
+      "Cost-efficient AI inference",
+      "Financial planning and retirement management",
+      "Patent research and IP management",
+      "Internet infrastructure security",
+      "Software bloat and feature creep"
+    ],
+    "predictions": [
+      {
+        "source": "Briefing analysis",
+        "text": "Q1 2026 venture funding at $300B represents 70% of all 2025 VC spending, signaling either sustainable AI-driven growth or a spectacular bubble forming in real-time",
+        "type": "warning"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "Nuclear becomes the AI infrastructure play with potential $100B+ market, but faces regulatory delays, public perception risks, and potential acquisition by big tech",
+        "type": "prediction"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "NVIDIA's 80%+ AI chip market dominance will be challenged by regional alternatives like Rebellions, but CUDA lock-in and software ecosystem advantages remain significant barriers",
+        "type": "prediction"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "AI pricing is becoming commodity-like; at $0.25 per million tokens, cost-efficiency rather than capability is becoming the competitive battlefield",
+        "type": "thesis"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "OpenAI and Anthropic are the fastest-growing companies in tech history; reaching $25B and $19B annualized revenue respectively in under a decade",
+        "type": "prediction"
+      },
+      {
+        "source": "Hacker News signal",
+        "text": "Technical community prioritizes foundational infrastructure (BGP security, simple tools) over AI feature insertion; skeptical of AI-generated content quality",
+        "type": "thesis"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "Energy infrastructure will be the binding constraint on AI scaling; major tech companies are betting on nuclear as the only viable path to reliable, abundant power",
+        "type": "prediction"
+      }
+    ],
+    "full_briefing": "Based on the search results, here's today's most important news in VC/startup funding, AI, and tech:\n\n## TOP STORIES\n\n**Record-Breaking Q1 2026 VC Funding: \nThe first quarter of 2026 was unlike any other for venture investment, driven by unprecedented spending on AI compute and frontier labs. Crunchbase data shows investors poured $300 billion into 6,000 startups globally in the quarter, up over 150% quarter over quarter and year over year. That marks an all-time high for global venture investment not approached by any other quarter on record.\n** https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/\n\n**OpenAI Approaches IPO at Unprecedented Scale: \nLast month, OpenAI announced that it is now valued at $852 billion after collecting $122 billion, surpassing the previous record for the largest funding round ever, also held by OpenAI when the ChatGPT maker raised $40 billion a year ago.\n** https://techcrunch.com/2026/04/01/startup-funding-shatters-all-records-in-q1/\n\n**Meta Launches Muse Spark AI Model: \nMeta is debuting its first major artificial intelligence model since the costly hiring of Scale AI's Alexandr Wang nine months ago, as the Facebook parent aims to carve out a niche in a market that's being dominated by OpenAI, Anthropic and Google. Dubbed Muse Spark and originally code-named Avocado, the AI model announced Wednesday is the first from the company's new Muse series developed by Meta Superintelligence Labs, the AI unit that Wang oversees.\n** https://www.cnbc.com/2026/04/08/meta-debuts-first-major-ai-model-since-14-billion-deal-to-bring-in-alexandr-wang.html\n\n## VC & FUNDING\n\n**Valar Nuclear: $450M Series C** \n\nThe funding comes just months after a $130M Series A, boosting Valar's valuation to $2.0 billion. Backers include defense-tech veterans like Palmer Luckey and Palantir CTO Shyam Sankar, underlining confidence in Valar's nuclear approach to a looming energy crunch. As data-center power demand is projected to double by 2026, Valar is positioning its reactors as a pioneering solution to fill the gap.\n https://techstartups.com/2026/04/01/top-startup-and-tech-funding-news-april-1-2025/\n\n**PROBLEM THEY'RE SOLVING:**\nAI data centers need massive, reliable power that doesn't exist in grid infrastructure. Traditional energy can't scale fast enough for AI compute demand.\n\n**DIRECT COMPETITORS:**\nTerraPower (Bill Gates-backed, similar SMR approach but slower timeline), NuScale Power (public SMR company but higher costs), Kairos Power (Google partnership but earlier stage), Commonwealth Fusion (fusion approach, longer timeline).\n\n**ADJACENT PROBLEMS:**\nGrid-scale battery storage (EnerVenue raised $300M), power transmission infrastructure (utilities struggling), cooling systems for data centers, rare earth mining for nuclear fuel.\n\n**WHAT HAPPENS IF THEY WIN:**\nInvestor lens: Nuclear becomes the AI infrastructure play, potentially $100B+ market. Risk: regulatory delays, public perception, technical execution. Google/Microsoft could acquire or build competing solutions.\nFounder lens: Enables truly autonomous AI cities, space-based data centers, removes geography constraints on compute. Would need: advanced robotics for maintenance, new regulatory frameworks, distributed nuclear expertise.\n\n---\n\n**Rebellions AI Chip: $400M Pre-IPO**\n\nRebellions, a South Korean AI chip maker, closed a massive $400 million pre-IPO round at a $2.34 billion valuation. The Seoul-based company specializes in AI inference hardware, and this infusion (raising total funding to $850M) will bankroll new products and U.S.\n https://techstartups.com/2026/04/01/top-startup-and-tech-funding-news-april-1-2025/\n\n**PROBLEM THEY'RE SOLVING:**\nNVIDIA has 80%+ AI chip market share with extreme pricing power. Asian companies need domestic AI chip alternatives for sovereignty and cost control.\n\n**DIRECT COMPETITORS:**\nCerebras (IPO'd, focus on training), Graphcore (struggling, acquired by SoftBank), SambaNova (private, similar inference focus), Groq (faster but limited memory), Chinese players like Cambricon.\n\n**ADJACENT PROBLEMS:**\nAI software stack optimization (need to work with chips), data center cooling/power, memory bandwidth bottlenecks, chip manufacturing capacity constraints.\n\n**WHAT HAPPENS IF THEY WIN:**\nInvestor lens: Breaks NVIDIA duopoly, massive TAM in inference. Risks: software ecosystem lock-in to NVIDIA CUDA, geopolitical tensions, technical performance gaps.\nFounder lens: Democratizes AI compute globally, enables local AI sovereignty. Would need: robust software toolchain, partnerships with cloud providers, chip fabrication at scale.\n\n---\n\n**Chapter Retirement AI: $100M Series E**\n\nNEW YORK, NY, Chapter, the leading AI company focused on retirement, announced today that it has raised $100 million in Series E funding.\n https://vcnewsdaily.com/\n\n**PROBLEM THEY'RE SOLVING:**\n401k management is broken - people can't navigate complex investment options, fees are hidden, retirement planning is intimidating. 50M+ Americans are undersaving.\n\n**DIRECT COMPETITORS:**\nHuman Interest (payroll integration focus), Guideline (SMB-focused), Betterment for Business, existing providers like Fidelity/Vanguard with digital transformation efforts.\n\n**ADJACENT PROBLEMS:**\nHealthcare cost planning (massive retirement expense), Social Security optimization, estate planning, long-term care insurance, tax-loss harvesting for retirees.\n\n**WHAT HAPPENS IF THEY WIN:**\nInvestor lens: $7.3T retirement market, recurring revenue model, expansion to broader fintech. Risk: regulatory changes, incumbent response, fiduciary liability issues.\nFounder lens: Fixes retirement crisis, could expand to all life financial planning. Would need: insurance partnerships, healthcare cost prediction models, longevity research integration.\n\n---\n\n**Patlytics Patent AI: $40M Series B**\n\nNEW YORK, NY, Patlytics, the AI platform for the full patent lifecycle, announced $40 million in Series B funding led by SignalFire.\n https://vcnewsdaily.com/\n\n**PROBLEM THEY'RE SOLVING:**\nPatent research takes hundreds of lawyer hours per case, costing $50k-500k per patent dispute. Prior art searches are incomplete and slow.\n\n**DIRECT COMPETITORS:**\nClearAccessIP, PatSnap (acquired by Clarivate), Derwent Innovation, traditional law firms with manual processes, Google Patents (free but limited).\n\n**ADJACENT PROBLEMS:**\nIP valuation for M&A, trademark monitoring, trade secrets management, R&D competitive intelligence, patent portfolio optimization.\n\n**WHAT HAPPENS IF THEY WIN:**\nInvestor lens: $50B+ legal tech market, SaaS expansion to all IP functions. Risk: legal profession resistance, accuracy liability, Big Law building internal tools.\nFounder lens: Democratizes patent system, enables small inventors to compete. Would need: global patent database access, regulatory approval for legal advice, integration with court systems.\n\n## AI DEVELOPMENTS\n\n**Anthropic Model Context Protocol Reaches 97M Installs:** \nAnthropic's Model Context Protocol crossed 97 million installs in March 2026, a milestone that signals its transition from experimental standard to foundational infrastructure for building AI agents. Every major AI provider now ships MCP-compatible tooling, and the protocol has become the default mechanism by which agents connect to external tools, APIs, and data sources.\n https://www.crescendo.ai/news/latest-ai-news-and-updates\n\nThis is infrastructure becoming invisible - when protocols reach this scale, they define how the entire ecosystem connects. The winner isn't the AI model, it's who controls the pipes.\n\n**Google's Gemini 3.1 Flash-Lite Pricing War:** \nGoogle introduced Gemini 3.1 Flash-Lite, a new efficiency-focused model delivering 2.5 faster response times and 45% faster output generation compared to earlier Gemini versions, priced at just $0.25 per million input tokens. The release reflects a growing industry shift toward making powerful AI more affordable for startups and enterprises alike, intensifying the cost-efficiency race among leading AI providers.\n https://www.crescendo.ai/news/latest-ai-news-and-updates\n\nPricing is becoming the battlefield. At $0.25 per million tokens, this is approaching commodity pricing for what was cutting-edge 12 months ago.\n\n**OpenAI Revenue Milestone:** \nOpenAI has surpassed $25 billion in annualized revenue and is reportedly taking early steps toward a public listing, potentially as soon as late 2026. Rival Anthropic is approaching $19 billion in annualized revenue.\n https://www.crescendo.ai/news/latest-ai-news-and-updates\n\nThese numbers make AI labs the fastest-growing companies in tech history. For context: Facebook took 8 years to reach $10B revenue.\n\n**AI Infrastructure Energy Crisis:** \nReuters reports that major tech companies are putting real financial weight behind next-generation nuclear projects as they seek reliable electricity for power-hungry AI data centers. These deals are providing nuclear firms with capital and, just as importantly, a more credible commercial path at a moment when utilities and governments are scrambling to figure out how to support fast-rising data-center demand. This is one of the biggest second-order effects of the AI boom.\n https://techstartups.com/2026/04/10/top-tech-news-today-april-10-2026/\n\n## HACKER NEWS SIGNAL\n\nBased on recent trends from the Hacker News ecosystem:\n\n**BGP Security Still Broken:** The technical community is focused on fundamental internet infrastructure problems that AI can't solve. \n\"Is BGP Safe Yet? No. Test Your ISP\"\n remains a top discussion, showing concern about basic internet plumbing while everyone talks AI.\n\n**Anti-Bloat Movement:** \nThe motivation isn't novelty. It's control. I don't need ads, onboarding flows and popups, AI sidebars, bloated menus, unnecessary network calls , etc. A notepad should never touch the network.\n There's growing pushback against AI being inserted into every software tool.\n\n**Human vs AI Content Curation:** \n\"Don't post generated/AI-edited comments. HN is for conversation between humans\"\n - the technical community is drawing hard lines about AI-generated content quality and authenticity.\n\nThe sentiment: Infrastructure matters more than AI features. Build simple, reliable tools first.\n\n## ONE LINE TO REMEMBER\n\n\nStartup investment in the first quarter of 2026 alone totaled close to 70% of all venture capital spending in 2025.\n - The AI boom has created the fastest capital deployment in venture history, but the real question is whether this is sustainable growth or a spectacular bubble forming in real-time."
+  }
+]
