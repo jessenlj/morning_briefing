@@ -40,8 +40,6 @@ SUBSTACKS = {
     "The Diff (Byrne Hobart)":         "https://diff.substack.com/feed",
 }
 
-# ── I/O ───────────────────────────────────────────────────────────────────────
-
 def load(path, default):
     os.makedirs(DATA_DIR, exist_ok=True)
     if os.path.exists(path):
@@ -53,8 +51,6 @@ def save(path, data):
     os.makedirs(DATA_DIR, exist_ok=True)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
-
-# ── SUBSTACK ──────────────────────────────────────────────────────────────────
 
 def fetch_substacks():
     cutoff = datetime.now(timezone.utc) - timedelta(days=LOOKBACK)
@@ -73,8 +69,6 @@ def fetch_substacks():
         except Exception as ex:
             print(f"  [Substack] {name}: {ex}")
     return posts
-
-# ── PROMPTS ───────────────────────────────────────────────────────────────────
 
 def news_prompt():
     return f"""Today is {TODAY}. Search the web for today's most important VC/startup/AI/tech news.
@@ -148,7 +142,7 @@ def extraction_prompt(text):
 }}"""
 
 def high_growth_prompt(c):
-    return f"""Evaluate for high-growth potential. Return ONLY JSON.
+    return f"""Evaluate for high-growth potential. Return ONLY JSON, nothing else.
 {json.dumps(c)}
 {{"is_high_growth": true, "confidence": "high|medium|low", "reasoning": "2-3 sentences on market size, timing, team signals, competitive position"}}"""
 
@@ -177,8 +171,6 @@ PAST_DATE: [YYYY-MM-DD]
 Separate with ---
 If none: respond exactly NONE"""
 
-# ── API ───────────────────────────────────────────────────────────────────────
-
 def sonnet_search(prompt, max_tokens=6000):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     messages = [{"role": "user", "content": prompt}]
@@ -206,8 +198,6 @@ def sonnet(prompt, max_tokens=2000):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     return client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
         messages=[{"role": "user", "content": prompt}]).content[0].text
-
-# ── EXTRACTION ────────────────────────────────────────────────────────────────
 
 def extract(text):
     raw = haiku(extraction_prompt(text), 2000)
@@ -251,8 +241,6 @@ def parse_connections(text):
             parsed.append(fields)
     return parsed
 
-# ── STOCK PRICES ──────────────────────────────────────────────────────────────
-
 def fetch_prices(companies):
     if not YFINANCE:
         return companies
@@ -275,8 +263,6 @@ def fetch_prices(companies):
             except Exception as ex:
                 print(f"    [Stock] {name}: {ex}")
     return companies
-
-# ── COMPANY UPDATE ────────────────────────────────────────────────────────────
 
 def update_companies(companies, extracted, hg_new):
     for c in extracted:
@@ -317,8 +303,6 @@ def update_companies(companies, extracted, hg_new):
             companies[name].update({"status": "public", "ipo_date": TODAY_ISO[:7]})
 
     return companies
-
-# ── METRICS ───────────────────────────────────────────────────────────────────
 
 def compute_metrics(briefings, companies):
     now = datetime.now(timezone.utc)
@@ -382,7 +366,6 @@ def compute_metrics(briefings, companies):
         for bg in co.get("founder_backgrounds",[]):
             founder_patterns[v][bg] += 1
 
-    # Acceleration flags
     accelerating = []
     for space, cnt30 in s30.most_common(20):
         cnt90 = s90.get(space, 0)
@@ -427,11 +410,8 @@ def build_flags(metrics):
         flags.append(f"Most active investors in database: {', '.join(top_inv)}")
     return flags
 
-# ── WEBSITE ───────────────────────────────────────────────────────────────────
-
 def generate_website(briefings, companies, metrics):
     os.makedirs("docs", exist_ok=True)
-    # Write data files (fetched by JS)
     save(BRIEFINGS_F, briefings)
     save(COMPANIES_F, companies)
     save(METRICS_F, metrics)
@@ -448,7 +428,7 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;b
 .site-header{{background:#1a1a1a;color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center}}
 .site-header h1{{font-size:18px;font-weight:600}}
 .site-header p{{font-size:12px;color:#888;margin-top:2px}}
-.nav{{background:#fff;border-bottom:1px solid #e5e5e5;display:flex;overflow-x:auto;position:sticky;top:0;z-index:100;gap:0}}
+.nav{{background:#fff;border-bottom:1px solid #e5e5e5;display:flex;overflow-x:auto;position:sticky;top:0;z-index:100}}
 .nav button{{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent;white-space:nowrap}}
 .nav button:hover{{color:#1a1a1a}}.nav button.active{{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}}
 .container{{max-width:1200px;margin:0 auto;padding:24px 20px}}
@@ -461,7 +441,6 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;b
 @media(max-width:768px){{.grid-2,.grid-3,.grid-4{{grid-template-columns:1fr}}}}
 .metric{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;text-align:center}}
 .metric-val{{font-size:28px;font-weight:600}}.metric-label{{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}}
-.metric-sub{{font-size:12px;color:#666;margin-top:4px}}
 .tag{{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin:2px;background:#f0f0ee;color:#555}}
 .tag.v{{background:#e8f4fd;color:#1a6bb5}}.tag.t{{background:#f0fdf4;color:#166534}}
 .tag.hg{{background:#fef3c7;color:#92400e}}.tag.f{{background:#f3f4f6;color:#374151}}
@@ -494,7 +473,6 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;b
 .briefing-text p{{margin-bottom:10px;line-height:1.75}}.briefing-text a{{color:#0066cc}}
 .briefing-text .bul{{display:flex;gap:8px;margin-bottom:6px;padding-left:10px}}
 .briefing-text .dash{{color:#ccc;flex-shrink:0}}
-.conn-card{{border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa;border-radius:0 6px 6px 0}}
 .cat-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}}
 .cat-card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s}}
 .cat-card:hover{{border-color:#999}}
@@ -529,80 +507,67 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;b
   <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
 </div>
-
 <script>
-const BASE = '{SITE}';
-let DB = {{}}, charts = {{}};
-
-async function loadData() {{
-  const [b, c, m] = await Promise.all([
+const BASE='{SITE}';
+let DB={{}},charts={{}};
+async function loadData(){{
+  const [b,c,m]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({{}})),
     fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({{}})),
   ]);
-  DB.briefings = b; DB.companies = c; DB.metrics = m;
+  DB.briefings=b;DB.companies=c;DB.metrics=m;
   initAll();
 }}
-
-function tab(id, btn) {{
+function tab(id,btn){{
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }}
-
-function pct(v) {{
-  if(v==null) return '—';
-  const s=v>=0?'+':'', cls=v>=0?'up':'down';
+function pct(v){{
+  if(v==null)return '—';
+  const s=v>=0?'+':'',cls=v>=0?'up':'down';
   return `<span class="${{cls}}">${{s}}${{v.toFixed(1)}}%</span>`;
 }}
-
-function fmt(text) {{
-  if(!text) return '';
-  text = text.replace(/## (.+)/gm,'<h4>$1</h4>');
-  text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-  text = text.replace(/^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$/gm,'<div class="subh">$1</div>');
-  text = text.replace(/^[-*] (.+)/gm,'<div class="bul"><span class="dash">—</span><span>$1</span></div>');
-  text = text.replace(/(https?:\/\/[^\s<)\]]+)/g,'<a href="$1">$1</a>');
-  text = text.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>');
+function fmt(text){{
+  if(!text)return '';
+  text=text.replace(/## (.+)/gm,'<h4>$1</h4>');
+  text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  text=text.replace(/^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$/gm,'<div class="subh">$1</div>');
+  text=text.replace(/^[-*] (.+)/gm,'<div class="bul"><span class="dash">—</span><span>$1</span></div>');
+  text=text.replace(/(https?:\/\/[^\s<)\]]+)/g,'<a href="$1">$1</a>');
+  text=text.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>');
   return '<p>'+text+'</p>';
 }}
-
-// ── DASHBOARD ─────────────────────────────────────────────────────────────────
-function renderDashboard() {{
-  const {{briefings,companies,metrics}} = DB;
-  const cos = Object.values(companies);
-  const hg = metrics.high_growth||[];
-  const nv30 = metrics.narrative_velocity?.['30_day']||{{}};
-  const nv90 = metrics.narrative_velocity?.['90_day']||{{}};
-  const invDeals = metrics.investor_activity?.by_deals||{{}};
-  const exits = metrics.exits||[];
-  const accel = metrics.narrative_velocity?.accelerating||[];
-
-  document.getElementById('hdr-stats').textContent =
-    `${{briefings.length}} briefings · ${{cos.length}} companies · ${{hg.length}} high-growth`;
-
-  const spaces = [...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,8);
-  const invEntries = Object.entries(invDeals).slice(0,8);
-  const maxInv = invEntries[0]?.[1]||1;
-  const momentumEntries = Object.entries(nv30).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  const max30 = momentumEntries[0]?.[1]||1;
-
-  document.getElementById('tab-dashboard').innerHTML = `
+function renderDashboard(){{
+  const {{briefings,companies,metrics}}=DB;
+  const cos=Object.values(companies);
+  const hg=metrics.high_growth||[];
+  const nv30=metrics.narrative_velocity?.['30_day']||{{}};
+  const nv90=metrics.narrative_velocity?.['90_day']||{{}};
+  const invDeals=metrics.investor_activity?.by_deals||{{}};
+  const exits=metrics.exits||[];
+  const spaces=[...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,8);
+  const invEntries=Object.entries(invDeals).slice(0,8);
+  const maxInv=invEntries[0]?.[1]||1;
+  const momentumEntries=Object.entries(nv30).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max30=momentumEntries[0]?.[1]||1;
+  document.getElementById('hdr-stats').textContent=`${{briefings.length}} briefings · ${{cos.length}} companies · ${{hg.length}} high-growth`;
+  document.getElementById('tab-dashboard').innerHTML=`
     <div class="grid-4" style="margin-bottom:20px">
       ${{[['Total Companies',cos.length,''],['Briefings',briefings.length,''],['High-Growth',hg.length,'flagged'],['Exits',exits.length,'tracked']].map(([l,v,s])=>`
-      <div class="metric"><div class="metric-val">${{v}}</div><div class="metric-label">${{l}}</div>${{s?`<div class="metric-sub">${{s}}</div>`:''}}</div>`).join('')}}
+      <div class="metric"><div class="metric-val">${{v}}</div><div class="metric-label">${{l}}</div>${{s?`<div style="font-size:12px;color:#999">${{s}}</div>`:''}}</div>`).join('')}}
     </div>
     <div class="grid-2" style="margin-bottom:16px">
       <div class="card">
-        <div class="section-title" style="margin-top:0">Sector radar — 30-day vs 90-day</div>
+        <div class="section-title" style="margin-top:0">Sector radar — 30d vs 90d</div>
         <div class="chart-h"><canvas id="radarMain"></canvas></div>
       </div>
       <div class="card">
         <div class="section-title" style="margin-top:0">30-day momentum</div>
         ${{momentumEntries.map(([sp,cnt])=>{{
-          const cnt90=nv90[sp]||0, exp=cnt90/3||0.1;
-          const acc=Math.round((cnt/exp-1)*100);
+          const cnt90=nv90[sp]||0,exp=cnt90/3||0.1,acc=Math.round((cnt/exp-1)*100);
           return `<div class="momentum-row">
             <div style="flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${{sp}}</div>
             <div class="bar-track" style="flex:2"><div class="bar-fill" style="width:${{(cnt/max30*100).toFixed(0)}}%"></div></div>
@@ -640,29 +605,23 @@ function renderDashboard() {{
         <div style="font-size:12px;color:#666">${{e.industry_vertical||''}}${{e.date?' · '+e.date:''}}</div></div>
       </div>`).join('')||'<div style="color:#999;font-size:13px">No exits yet.</div>'}}
     </div>`;
-
-  if(spaces.length) {{
-    const ctx = document.getElementById('radarMain');
-    if(ctx) new Chart(ctx,{{
-      type:'radar',
-      data:{{
-        labels:spaces.map(s=>s.length>20?s.slice(0,18)+'…':s),
-        datasets:[
-          {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.1)',pointRadius:3}},
-          {{label:'90d (÷3)',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#ccc',backgroundColor:'rgba(200,200,200,0.1)',pointRadius:3,borderDash:[4,4]}},
-        ]
-      }},
-      options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},scales:{{r:{{ticks:{{stepSize:1,font:{{size:10}}}},pointLabels:{{font:{{size:10}}}}}}}}}}
+  if(spaces.length){{
+    const ctx=document.getElementById('radarMain');
+    if(ctx)new Chart(ctx,{{type:'radar',data:{{
+      labels:spaces.map(s=>s.length>20?s.slice(0,18)+'…':s),
+      datasets:[
+        {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.1)',pointRadius:3}},
+        {{label:'90d (÷3)',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#ccc',backgroundColor:'rgba(200,200,200,0.1)',pointRadius:3,borderDash:[4,4]}},
+      ]
+    }},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},scales:{{r:{{ticks:{{stepSize:1,font:{{size:10}}}},pointLabels:{{font:{{size:10}}}}}}}}}}
     }});
   }}
 }}
-
-// ── BRIEFINGS ─────────────────────────────────────────────────────────────────
-function renderBriefings() {{
-  document.getElementById('tab-briefings').innerHTML = `
+function renderBriefings(){{
+  document.getElementById('tab-briefings').innerHTML=`
     <input class="search-bar" placeholder="Search briefings..." oninput="filterBriefings(this.value)">
     <div id="blist"></div>`;
-  document.getElementById('blist').innerHTML = DB.briefings.slice().reverse().map(e=>`
+  document.getElementById('blist').innerHTML=DB.briefings.slice().reverse().map(e=>`
     <div class="card" id="${{e.date}}">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-size:16px;font-weight:600">${{e.date_display||e.date}}</div>
@@ -672,29 +631,27 @@ function renderBriefings() {{
       <div class="briefing-text">${{fmt(e.full_briefing)}}</div>
     </div>`).join('');
 }}
-function filterBriefings(q) {{
+function filterBriefings(q){{
   q=q.toLowerCase();
   document.querySelectorAll('#blist .card').forEach(el=>{{el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';}});
 }}
-
-// ── COMPANIES ─────────────────────────────────────────────────────────────────
-let activeV = null;
-function renderCompanies() {{
-  const cos = Object.entries(DB.companies);
-  const verticals = [...new Set(cos.map(([,c])=>c.industry_vertical).filter(Boolean))].sort();
-  document.getElementById('tab-companies').innerHTML = `
+let activeV=null;
+function renderCompanies(){{
+  const cos=Object.entries(DB.companies);
+  const verticals=[...new Set(cos.map(([,c])=>c.industry_vertical).filter(Boolean))].sort();
+  document.getElementById('tab-companies').innerHTML=`
     <input class="search-bar" placeholder="Search companies..." oninput="filterCos(this.value)" id="cosearch">
     <div class="filter-bar"><button class="pill active" onclick="filterV(null,this)">All</button>${{verticals.map(v=>`<button class="pill" onclick="filterV('${{v.replace(/'/g,"\\\\'")}}',this)">${{v}}</button>`).join('')}}</div>
     <div id="coslist"></div>`;
   renderCoslist(cos);
 }}
-function filterV(v,btn) {{
+function filterV(v,btn){{
   activeV=v;
   document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   filterCos(document.getElementById('cosearch').value);
 }}
-function filterCos(q) {{
+function filterCos(q){{
   q=(q||'').toLowerCase();
   const cos=Object.entries(DB.companies).filter(([n,c])=>{{
     const mq=!q||n.toLowerCase().includes(q)||(c.what_they_do||'').toLowerCase().includes(q);
@@ -703,9 +660,9 @@ function filterCos(q) {{
   }});
   renderCoslist(cos);
 }}
-function renderCoslist(cos) {{
+function renderCoslist(cos){{
   const el=document.getElementById('coslist');
-  if(!el) return;
+  if(!el)return;
   el.innerHTML=cos.sort((a,b)=>((b[1].last_updated||'')).localeCompare(a[1].last_updated||'')).map(([n,c])=>{{
     const rounds=c.funding_rounds||[];
     const total=rounds.reduce((s,r)=>s+(r.amount_m||0),0);
@@ -724,29 +681,26 @@ function renderCoslist(cos) {{
       </div>
       <div class="detail">
         <div class="section-title" style="margin-top:0">Funding history</div>
-        ${{rounds.length?rounds.map(r=>`<div class="round"><span class="round-stage">${{r.stage||''}}</span><div><div style="font-weight:500">${{r.amount_m?'$${{r.amount_m}}M':''}}${{r.valuation_b?' · $${{r.valuation_b}}B val':''}}</div><div style="font-size:12px;color:#666">${{(r.investors||[]).join(', ')||'—'}}</div></div><div style="font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap">${{r.date||''}}</div></div>`).join(''):'<div style="color:#999;font-size:13px">No rounds tracked</div>'}}
+        ${{rounds.length?rounds.map(r=>`<div class="round"><span class="round-stage">${{r.stage||''}}</span><div><div style="font-weight:500">${{r.amount_m?'$'+r.amount_m+'M':''}}${{r.valuation_b?' · $'+r.valuation_b+'B val':''}}</div><div style="font-size:12px;color:#666">${{(r.investors||[]).join(', ')||'—'}}</div></div><div style="font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap">${{r.date||''}}</div></div>`).join(''):'<div style="color:#999;font-size:13px">No rounds tracked</div>'}}
         ${{c.high_growth&&c.high_growth_reasoning?`<div style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:6px;font-size:12px;color:#92400e"><strong>High-growth signal:</strong> ${{c.high_growth_reasoning}}</div>`:''}}
       </div>
     </div>`;
   }}).join('');
 }}
-
-// ── DEAL FLOW ─────────────────────────────────────────────────────────────────
-function renderDealflow() {{
-  const cos = Object.entries(DB.companies);
-  const stageOrder = ['Pre-Seed','Seed','Series A','Series B','Series C','Series D','Growth','Unknown'];
-  const byStage = {{}};
+function renderDealflow(){{
+  const cos=Object.entries(DB.companies);
+  const stageOrder=['Pre-Seed','Seed','Series A','Series B','Series C','Series D','Growth','Unknown'];
+  const byStage={{}};
   cos.filter(([,c])=>c.status!=='public').forEach(([n,c])=>{{
     (c.funding_rounds||[]).forEach(r=>{{
       const s=r.stage||'Unknown';
-      if(!byStage[s]) byStage[s]=[];
+      if(!byStage[s])byStage[s]=[];
       byStage[s].push({{n,c,r}});
     }});
   }});
-
   let privateHtml='';
   stageOrder.forEach(stage=>{{
-    if(!byStage[stage]?.length) return;
+    if(!byStage[stage]?.length)return;
     const sorted=byStage[stage].sort((a,b)=>(b.r.date||'').localeCompare(a.r.date||''));
     privateHtml+=`<div class="section-title">${{stage}}</div>`;
     privateHtml+=sorted.map(({{{n,c,r}}})=>`
@@ -766,44 +720,37 @@ function renderDealflow() {{
         </div>
       </div>`).join('');
   }});
-
-  const publicCos = cos.filter(([,c])=>c.status==='public');
-  const publicHtml = publicCos.length ?
-    `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
-      <thead><tr style="border-bottom:2px solid #e5e5e5">
-        ${{['Company','Ticker','Current Price','Today','Since IPO','IPO Date'].map(h=>`<th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em">${{h}}</th>`).join('')}}
-      </tr></thead><tbody>
-      ${{publicCos.map(([n,c])=>`<tr style="border-bottom:1px solid #f5f5f5">
-        <td style="padding:10px 12px;font-weight:500">${{n}}</td>
-        <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ticker||'—'}}</td>
-        <td style="padding:10px 12px">${{c.current_price?'$'+c.current_price:'—'}}</td>
-        <td style="padding:10px 12px">${{pct(c.price_change_today_pct)}}</td>
-        <td style="padding:10px 12px">${{pct(c.price_change_since_ipo_pct)}}</td>
-        <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ipo_date||'—'}}</td>
-      </tr>`).join('')}}
-      </tbody></table></div>` : '<div style="color:#999">No public companies tracked yet.</div>';
-
-  document.getElementById('tab-dealflow').innerHTML =
+  const publicCos=cos.filter(([,c])=>c.status==='public');
+  const publicHtml=publicCos.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
+    <thead><tr style="border-bottom:2px solid #e5e5e5">
+      ${{['Company','Ticker','Price','Today','Since IPO','IPO Date'].map(h=>`<th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em">${{h}}</th>`).join('')}}
+    </tr></thead><tbody>
+    ${{publicCos.map(([n,c])=>`<tr style="border-bottom:1px solid #f5f5f5">
+      <td style="padding:10px 12px;font-weight:500">${{n}}</td>
+      <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ticker||'—'}}</td>
+      <td style="padding:10px 12px">${{c.current_price?'$'+c.current_price:'—'}}</td>
+      <td style="padding:10px 12px">${{pct(c.price_change_today_pct)}}</td>
+      <td style="padding:10px 12px">${{pct(c.price_change_since_ipo_pct)}}</td>
+      <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ipo_date||'—'}}</td>
+    </tr>`).join('')}}
+    </tbody></table></div>`:'<div style="color:#999">No public companies tracked yet.</div>';
+  document.getElementById('tab-dealflow').innerHTML=
     `<div class="section-title" style="margin-top:0">Private — all funding rounds</div>${{privateHtml}}
      <div class="section-title" style="margin-top:32px">Gone public</div>${{publicHtml}}`;
 }}
-
-// ── NARRATIVE VELOCITY ────────────────────────────────────────────────────────
-function renderVelocity() {{
+function renderVelocity(){{
   const nv30=DB.metrics.narrative_velocity?.['30_day']||{{}};
   const nv90=DB.metrics.narrative_velocity?.['90_day']||{{}};
   const timeline=DB.metrics.narrative_velocity?.timeline||{{}};
   const spaces=[...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,10);
   const topSpaces=Object.entries(nv90).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([s])=>s);
-
   document.getElementById('tab-velocity').innerHTML=`
     <div class="grid-2" style="margin-bottom:16px">
-      <div class="card"><div class="section-title" style="margin-top:0">Sector radar — 30-day vs 90-day</div><div class="chart-h-lg"><canvas id="radarFull"></canvas></div></div>
-      <div class="card"><div class="section-title" style="margin-top:0">Bubble — size=90d total, position=30d count vs acceleration</div><div class="chart-h-lg"><canvas id="bubbleMain"></canvas></div></div>
+      <div class="card"><div class="section-title" style="margin-top:0">Sector radar — 30d vs 90d</div><div class="chart-h-lg"><canvas id="radarFull"></canvas></div></div>
+      <div class="card"><div class="section-title" style="margin-top:0">Bubble — size=total mentions, position=acceleration</div><div class="chart-h-lg"><canvas id="bubbleMain"></canvas></div></div>
     </div>
     <div class="card"><div class="section-title" style="margin-top:0">Activity stream — top problem spaces over time</div><div class="chart-h-lg"><canvas id="riverMain"></canvas></div></div>`;
-
-  if(spaces.length) {{
+  if(spaces.length){{
     new Chart(document.getElementById('radarFull'),{{type:'radar',data:{{
       labels:spaces.map(s=>s.length>22?s.slice(0,20)+'…':s),
       datasets:[
@@ -813,12 +760,11 @@ function renderVelocity() {{
     }},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom'}}}},scales:{{r:{{ticks:{{stepSize:1}},pointLabels:{{font:{{size:11}}}}}}}}}}
     }});
   }}
-
   const bData=Object.entries(nv30).map(([sp,c30])=>{{
     const c90=nv90[sp]||0,exp=c90/3||0.5,acc=(c30/exp)-1;
     return {{x:c30,y:acc,r:Math.min(Math.sqrt(c90)*4+4,30),label:sp}};
   }}).filter(d=>d.x>0);
-  if(bData.length) {{
+  if(bData.length){{
     new Chart(document.getElementById('bubbleMain'),{{type:'bubble',
       data:{{datasets:[{{label:'Problem spaces',data:bData,backgroundColor:'rgba(26,26,26,0.6)',borderColor:'#1a1a1a'}}]}},
       options:{{responsive:true,maintainAspectRatio:false,
@@ -827,15 +773,14 @@ function renderVelocity() {{
       }}
     }});
   }}
-
   const dateMap={{}};
   DB.briefings.forEach(e=>{{
     dateMap[e.date]=dateMap[e.date]||{{}};
-    (e.problem_spaces||[]).forEach(ps=>{{if(topSpaces.includes(ps)) dateMap[e.date][ps]=(dateMap[e.date][ps]||0)+1;}});
+    (e.problem_spaces||[]).forEach(ps=>{{if(topSpaces.includes(ps))dateMap[e.date][ps]=(dateMap[e.date][ps]||0)+1;}});
   }});
   const dates=Object.keys(dateMap).sort().slice(-60);
-  const colors=['#1a1a1a','#555','#888','#aaa','#ccc','#e0e0e0'];
-  if(dates.length&&topSpaces.length) {{
+  const colors=['#1a1a1a','#555','#888','#aaa','#bbb','#ddd'];
+  if(dates.length&&topSpaces.length){{
     new Chart(document.getElementById('riverMain'),{{type:'line',
       data:{{labels:dates,datasets:topSpaces.map((sp,i)=>{{
         const rgb=i===0?'26,26,26':i===1?'85,85,85':i===2?'136,136,136':'170,170,170';
@@ -849,14 +794,11 @@ function renderVelocity() {{
     }});
   }}
 }}
-
-// ── INVESTORS ─────────────────────────────────────────────────────────────────
-function renderInvestors() {{
+function renderInvestors(){{
   const invDeals=DB.metrics.investor_activity?.by_deals||{{}};
   const coInvest=DB.metrics.investor_activity?.co_investments||[];
   const entries=Object.entries(invDeals).slice(0,20);
   const maxD=entries[0]?.[1]||1;
-
   document.getElementById('tab-investors').innerHTML=`
     <div class="grid-2">
       <div class="card">
@@ -874,10 +816,9 @@ function renderInvestors() {{
         <canvas id="netCanvas"></canvas>
       </div>
     </div>`;
-
   const canvas=document.getElementById('netCanvas');
   const ctx=canvas.getContext('2d');
-  canvas.width=canvas.offsetWidth||400; canvas.height=380;
+  canvas.width=canvas.offsetWidth||400;canvas.height=380;
   const W=canvas.width,H=canvas.height;
   const nodeSet=new Set();
   coInvest.slice(0,40).forEach(d=>{{nodeSet.add(d.pair[0]);nodeSet.add(d.pair[1]);}});
@@ -908,9 +849,7 @@ function renderInvestors() {{
   }}
   sim();
 }}
-
-// ── EXITS ─────────────────────────────────────────────────────────────────────
-function renderExits() {{
+function renderExits(){{
   const exits=DB.metrics.exits||[];
   const bySector={{}};
   exits.forEach(e=>{{const s=e.industry_vertical||'Other';if(!bySector[s])bySector[s]=[];bySector[s].push(e);}});
@@ -925,11 +864,8 @@ function renderExits() {{
       </div>`).join('')}`).join('')||'<div style="color:#999">No exits tracked yet.</div>'}}
   </div>`;
 }}
-
-// ── CATEGORIES ────────────────────────────────────────────────────────────────
-function renderCategories() {{
+function renderCategories(){{
   const cats=DB.metrics.categories||{{}};
-  const invActivity=DB.metrics.investor_activity?.co_investments||[];
   document.getElementById('tab-categories').innerHTML=`
     <div class="cat-grid">${{Object.entries(cats).map(([v,d])=>`
       <div class="cat-card" onclick="showCat('${{v.replace(/'/g,"\\\\'")}}')">
@@ -939,8 +875,7 @@ function renderCategories() {{
       </div>`).join('')}}</div>
     <div id="catdetail"></div>`;
 }}
-
-function showCat(vertical) {{
+function showCat(vertical){{
   const cats=DB.metrics.categories||{{}};
   const data=cats[vertical]||{{}};
   const companies=data.companies||[];
@@ -950,7 +885,6 @@ function showCat(vertical) {{
   companies.forEach(n=>{{const c=DB.companies[n]||{{}};(c.funding_rounds||[]).forEach(r=>(r.investors||[]).forEach(inv=>{{vertInv[inv]=(vertInv[inv]||0)+1;}}));}});
   const topInv=Object.entries(vertInv).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const relatedSpaces=Object.entries(nv30).filter(([s])=>s.toLowerCase().includes(vertical.toLowerCase().split(' ')[0])).slice(0,3);
-
   document.getElementById('catdetail').innerHTML=`
     <div class="card" style="margin-top:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
@@ -981,30 +915,26 @@ function showCat(vertical) {{
     </div>`;
   document.getElementById('catdetail').scrollIntoView({{behavior:'smooth'}});
 }}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-function initAll() {{
+function initAll(){{
   renderDashboard();
   renderBriefings();
   renderCompanies();
   renderDealflow();
+  renderVelocity();
   renderInvestors();
   renderExits();
   renderCategories();
-  if(window.location.hash) {{
+  if(window.location.hash){{
     const el=document.querySelector(window.location.hash);
-    if(el) setTimeout(()=>el.scrollIntoView({{behavior:'smooth'}}),300);
+    if(el)setTimeout(()=>el.scrollIntoView({{behavior:'smooth'}}),300);
   }}
 }}
-
 loadData();
 </script>
 </body></html>"""
 
     with open(WEBSITE_F, "w") as f:
         f.write(html)
-
-# ── EMAIL ─────────────────────────────────────────────────────────────────────
 
 def build_email(news, substack, connections, flags, date_str):
     def fmt(text):
@@ -1029,7 +959,7 @@ def build_email(news, substack, connections, flags, date_str):
     if connections:
         parsed = parse_connections(connections)
         if parsed:
-            items = "".join(f"""<div class="conn-card" style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa">
+            items = "".join(f"""<div style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa">
               <div style="font-size:12px;font-weight:600;margin-bottom:8px">{c.get('CONNECTION','')}</div>
               <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Then:</strong> {c.get('THEN','')}</div>
               <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Now:</strong> {c.get('NOW','')}</div>
@@ -1068,41 +998,31 @@ def send_email(subject, html):
         s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
         s.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
 
-# ── MAIN ──────────────────────────────────────────────────────────────────────
-
 def main():
     print(f"Running — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     briefings = load(BRIEFINGS_F, [])
     companies = load(COMPANIES_F, {})
-
     print("  Web search briefing...")
     news = sonnet_search(news_prompt())
-
     print("  Substacks...")
     posts = fetch_substacks()
     sub = haiku(substack_prompt(posts), 1000) if posts else None
     print(f"    {len(posts)} posts")
-
     print("  Extracting data...")
     structured = extract(news)
-
     print("  Updating companies...")
     hg_new = []
     companies = update_companies(companies, structured.get("companies",[]), hg_new)
     companies = fetch_prices(companies)
     save(COMPANIES_F, companies)
-
     print("  Connections scan...")
     connections = find_connections(structured, briefings)
-
     print("  Computing metrics...")
     metrics = compute_metrics(briefings, companies)
     metrics["total_briefings"] = len(briefings) + 1
     metrics["high_growth_new_today"] = hg_new
     save(METRICS_F, metrics)
-
     flags = build_flags(metrics)
-
     briefings.append({
         "date": TODAY_ISO, "date_display": TODAY,
         "companies": structured.get("companies",[]),
@@ -1111,10 +1031,8 @@ def main():
         "full_briefing": news,
     })
     save(BRIEFINGS_F, briefings)
-
     print("  Generating website...")
     generate_website(briefings, companies, metrics)
-
     print("  Sending email...")
     html = build_email(news, sub, connections, flags, datetime.now().strftime("%A, %B %d, %Y"))
     send_email(f"Morning Briefing — {datetime.now().strftime('%A, %B %d, %Y')}", html)
