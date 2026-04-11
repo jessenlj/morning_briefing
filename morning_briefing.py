@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-import os
-import re
-import json
-import smtplib
-import calendar
-import feedparser
+import os, re, json, smtplib, calendar, feedparser
+from collections import Counter, defaultdict
 from datetime import datetime, timezone, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import anthropic
+
+try:
+    import yfinance as yf
+    YFINANCE = True
+except ImportError:
+    YFINANCE = False
 
 ANTHROPIC_API_KEY  = os.environ.get("ANTHROPIC_API_KEY", "")
 GMAIL_ADDRESS      = os.environ.get("GMAIL_ADDRESS", "")
@@ -17,12 +19,15 @@ RECIPIENT_EMAIL    = os.environ.get("RECIPIENT_EMAIL", "jessenlj40@gmail.com")
 GITHUB_USERNAME    = os.environ.get("GITHUB_USERNAME", "jessenlj")
 REPO_NAME          = os.environ.get("REPO_NAME", "morning_briefing")
 
-TODAY         = datetime.now().strftime("%A, %B %d, %Y")
-TODAY_ISO     = datetime.now().strftime("%Y-%m-%d")
-DB_PATH       = "data/briefings.json"
-WEBSITE_PATH  = "docs/index.html"
-SITE_BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
-LOOKBACK_DAYS = 7
+TODAY        = datetime.now().strftime("%A, %B %d, %Y")
+TODAY_ISO    = datetime.now().strftime("%Y-%m-%d")
+SITE         = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
+DATA_DIR     = "docs/data"
+BRIEFINGS_F  = f"{DATA_DIR}/briefings.json"
+COMPANIES_F  = f"{DATA_DIR}/companies.json"
+METRICS_F    = f"{DATA_DIR}/metrics.json"
+WEBSITE_F    = "docs/index.html"
+LOOKBACK     = 7
 
 SUBSTACKS = {
     "Not Boring (Packy McCormick)":    "https://www.notboring.co/feed",
@@ -35,531 +40,1085 @@ SUBSTACKS = {
     "The Diff (Byrne Hobart)":         "https://diff.substack.com/feed",
 }
 
+# ── I/O ───────────────────────────────────────────────────────────────────────
 
-# ── DATABASE ──────────────────────────────────────────────────────────────────
-
-def load_database():
-    if os.path.exists(DB_PATH):
-        with open(DB_PATH, "r") as f:
+def load(path, default):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    if os.path.exists(path):
+        with open(path) as f:
             return json.load(f)
-    return []
+    return default
 
-
-def save_database(db):
-    os.makedirs("data", exist_ok=True)
-    with open(DB_PATH, "w") as f:
-        json.dump(db, f, indent=2)
-
+def save(path, data):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
 
 # ── SUBSTACK ──────────────────────────────────────────────────────────────────
 
 def fetch_substacks():
-    cutoff = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
-    posts  = []
+    cutoff = datetime.now(timezone.utc) - timedelta(days=LOOKBACK)
+    posts = []
     for name, url in SUBSTACKS.items():
         try:
             feed = feedparser.parse(url)
-            for entry in feed.entries[:3]:
-                published = None
-                if hasattr(entry, "published_parsed") and entry.published_parsed:
-                    published = datetime.fromtimestamp(
-                        calendar.timegm(entry.published_parsed), tz=timezone.utc
-                    )
-                if published is None or published >= cutoff:
-                    posts.append({
-                        "author":  name,
-                        "title":   entry.get("title", ""),
-                        "summary": entry.get("summary", entry.get("description", ""))[:600],
-                        "link":    entry.get("link", ""),
-                        "date":    published.strftime("%b %d") if published else "recent",
-                    })
-        except Exception as e:
-            print(f"  [Substack error] {name}: {e}")
+            for e in feed.entries[:3]:
+                pub = None
+                if hasattr(e, "published_parsed") and e.published_parsed:
+                    pub = datetime.fromtimestamp(calendar.timegm(e.published_parsed), tz=timezone.utc)
+                if pub is None or pub >= cutoff:
+                    posts.append({"author": name, "title": e.get("title",""),
+                        "summary": e.get("summary", e.get("description",""))[:600],
+                        "link": e.get("link",""), "date": pub.strftime("%b %d") if pub else "recent"})
+        except Exception as ex:
+            print(f"  [Substack] {name}: {ex}")
     return posts
-
 
 # ── PROMPTS ───────────────────────────────────────────────────────────────────
 
-def build_news_prompt():
-    return f"""Today is {TODAY}. Search the web for today's most important news in VC/startup funding, AI, and tech.
+def news_prompt():
+    return f"""Today is {TODAY}. Search the web for today's most important VC/startup/AI/tech news.
 
-For EVERY company or startup you mention, embed the following analysis directly underneath it before moving to the next story:
+For EVERY company mentioned, embed this directly underneath before moving on:
 
   PROBLEM THEY'RE SOLVING
-  What specific pain point does this company exist to fix? Who feels it most acutely and how are they currently dealing with it?
+  Specific pain point, who feels it, how they currently cope.
 
   DIRECT COMPETITORS
-  Every company attacking the same problem — what they do, how far along, and how they differ.
+  Every company attacking the same problem — stage, differentiation.
 
   ADJACENT PROBLEMS
-  Related problems nearby and the companies working on each. Are they upstream, downstream, or parallel?
+  Related problems and the companies working on each.
 
   WHAT HAPPENS IF THEY WIN
-  Investor lens: what does winning look like, what are the risks, who could kill them even if the product works?
-  Founder lens: what opportunities open up in the world they're building toward? What would need to exist that doesn't yet?
+  Investor lens: winning scenario, risks, who could kill them.
+  Founder lens: what opportunities open up in the world they create?
 
-Only use URLs from actual search results. No fabricated links.
+Only use URLs from actual search results.
 
 ## TOP STORIES
-[Each story with full inline company analysis. Source URL at end of each story.]
+[Each story + full inline analysis. Source URL at end.]
 
 ## VC & FUNDING
-[Each deal: company name, what they do, founded year, deal size, lead investor, why it matters, source URL. Full inline analysis for each company.]
+[Each deal: company, what they do, founded year, ALL investors in round, amount, why it matters, URL. Full inline analysis.]
 
 ## AI DEVELOPMENTS
-[Each item: what was announced, company context, early reactions, source URL. Full inline analysis.]
+[What was announced, company context, reactions, URL. Full inline analysis.]
 
 ## HACKER NEWS SIGNAL
-[What the technical community is debating today — no company analysis needed, just sentiment and key arguments.]
+[What the technical community is debating — sentiment and key arguments only.]
 
 ## ONE LINE TO REMEMBER
-[The single most important thing from today.]
+[Single most important thing today.]
 
-Write for a 19-year-old asking simultaneously "should I invest?" and "could I build something here?" No filler."""
+Write for a 19-year-old asking "should I invest?" and "could I build something here?" No filler."""
 
-
-def build_substack_prompt(posts):
-    if not posts:
-        return None
-    raw = "".join(
-        f"\nAUTHOR: {p['author']}\nDATE: {p['date']}\nTITLE: {p['title']}\nSUMMARY: {p['summary']}\nURL: {p['link']}\n---"
-        for p in posts
-    )
-    return f"""Today is {TODAY}. Recent posts from the best VC/startup/AI newsletters:
-
+def substack_prompt(posts):
+    raw = "".join(f"\nAUTHOR: {p['author']}\nDATE: {p['date']}\nTITLE: {p['title']}\nSUMMARY: {p['summary']}\nURL: {p['link']}\n---" for p in posts)
+    return f"""Today is {TODAY}. Recent posts from top VC/startup/AI Substack newsletters:
 {raw}
+Write SUBSTACK THIS WEEK: pick 3-4 most forward-looking pieces, one sentence on what the author argues, one on why it's worth reading. Flag contrarian predictions. End with one sentence on any shared theme. Smart friend tone, not summary bot."""
 
-Write a SUBSTACK THIS WEEK section:
-- Pick 3-4 most forward-looking pieces
-- For each: one sentence on what the author argues, one on why it's worth reading
-- Flag any contrarian or unusually specific predictions about where things are headed
-- End with one sentence on any theme running across multiple posts this week
+def extraction_prompt(text):
+    return f"""Extract structured data from this briefing. Return ONLY valid JSON, nothing else.
 
-Read like a smart friend, not a summary bot."""
-
-
-def build_extraction_prompt(briefing_text):
-    return f"""Extract structured data from this briefing. Return valid JSON only — no other text, no markdown fences.
-
-{briefing_text}
+{text}
 
 {{
-  "companies": [
-    {{
-      "name": "company name",
-      "what_they_do": "one sentence",
-      "event": "what happened today",
-      "event_type": "funding|launch|acquisition|release|other",
-      "sector": "primary sector",
-      "problem_space": "core problem they solve"
-    }}
-  ],
-  "problem_spaces": ["distinct problem areas covered today"],
-  "predictions": [
-    {{
-      "source": "newsletter or person",
-      "text": "the specific prediction or thesis",
-      "type": "prediction|thesis|warning"
-    }}
-  ]
+  "companies": [{{
+    "name": "string",
+    "what_they_do": "string",
+    "industry_vertical": "string",
+    "tech_layer": "string",
+    "event": "string",
+    "event_type": "funding|launch|acquisition|ipo|release|other",
+    "stage": "pre-seed|seed|series-a|series-b|series-c|growth|public",
+    "amount_m": 0,
+    "investors": ["string"],
+    "founded_year": 0,
+    "location": "string",
+    "founder_backgrounds": ["string"],
+    "problem_space": "string",
+    "is_exit": false,
+    "exit_type": null,
+    "potential_high_growth": true
+  }}],
+  "problem_spaces": ["string"],
+  "predictions": [{{"source":"string","text":"string","type":"prediction|thesis|warning"}}]
 }}"""
 
+def high_growth_prompt(c):
+    return f"""Evaluate for high-growth potential. Return ONLY JSON.
+{json.dumps(c)}
+{{"is_high_growth": true, "confidence": "high|medium|low", "reasoning": "2-3 sentences on market size, timing, team signals, competitive position"}}"""
 
-def build_connections_prompt(today_data, history):
-    history_text = ""
-    for entry in history[-180:]:
-        history_text += f"\nDATE: {entry['date']} ({entry['date_display']})\n"
-        for c in entry.get("companies", []):
-            history_text += f"  COMPANY: {c['name']} | EVENT: {c['event']} | DOES: {c['what_they_do']} | SPACE: {c['problem_space']}\n"
-        for ps in entry.get("problem_spaces", []):
-            history_text += f"  PROBLEM SPACE: {ps}\n"
-        for pred in entry.get("predictions", []):
-            history_text += f"  PREDICTION ({pred['source']}): {pred['text']}\n"
+def connections_prompt(today_data, history):
+    hist = ""
+    for e in history[-180:]:
+        hist += f"\nDATE: {e['date']}\n"
+        for c in e.get("companies", []):
+            hist += f"  COMPANY: {c.get('name','')} | EVENT: {c.get('event','')} | SPACE: {c.get('problem_space','')}\n"
+        for ps in e.get("problem_spaces", []):
+            hist += f"  SPACE: {ps}\n"
+        for p in e.get("predictions", []):
+            hist += f"  PREDICTION ({p.get('source','')}): {p.get('text','')}\n"
+    return f"""Find meaningful connections between today's news and the historical database.
 
-    return f"""Scan this historical briefing database for meaningful connections to today's news.
+TODAY: {json.dumps(today_data, indent=2)}
+HISTORY: {hist}
 
-TODAY:
-{json.dumps(today_data, indent=2)}
-
-HISTORY:
-{history_text}
-
-Find every meaningful connection. Look for:
-1. Same company appearing again — what changed since we last saw them?
-2. Same problem space with a new player — who else was working on this and when?
-3. A past prediction or thesis that today's news confirms, contradicts, or advances
-
-Use EXACTLY this format for each connection:
-
-CONNECTION: [short descriptive title]
-THEN: [what happened in the past, with date]
-NOW: [what's happening today and how it relates]
-SIGNIFICANCE: [why this matters — investor or founder angle, be specific]
+For each connection:
+CONNECTION: [title]
+THEN: [what happened, with date]
+NOW: [today's related event]
+SIGNIFICANCE: [investor or founder angle]
 PAST_DATE: [YYYY-MM-DD]
 
-Separate multiple connections with ---
+Separate with ---
+If none: respond exactly NONE"""
 
-If no meaningful connections exist, respond with exactly: NONE"""
+# ── API ───────────────────────────────────────────────────────────────────────
 
-
-# ── API CALLS ─────────────────────────────────────────────────────────────────
-
-def run_with_search(prompt, max_tokens=6000):
-    client   = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+def sonnet_search(prompt, max_tokens=6000):
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     messages = [{"role": "user", "content": prompt}]
-    result   = ""
+    result = ""
     for _ in range(10):
-        response = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=max_tokens,
-            tools=[{"type": "web_search_20250305", "name": "web_search"}],
-            messages=messages,
-        )
-        texts = [b.text for b in response.content if hasattr(b, "text")]
+        r = client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
+            tools=[{"type": "web_search_20250305", "name": "web_search"}], messages=messages)
+        texts = [b.text for b in r.content if hasattr(b, "text")]
         if texts:
             result = "\n".join(texts)
-        if response.stop_reason == "end_turn":
+        if r.stop_reason == "end_turn":
             break
-        elif response.stop_reason == "tool_use":
-            messages.append({"role": "assistant", "content": response.content})
+        elif r.stop_reason == "tool_use":
+            messages.append({"role": "assistant", "content": r.content})
         else:
             break
     return result
 
+def haiku(prompt, max_tokens=1500):
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    return client.messages.create(model="claude-haiku-4-5-20251001", max_tokens=max_tokens,
+        messages=[{"role": "user", "content": prompt}]).content[0].text
 
-def run_haiku(prompt, max_tokens=2000):
-    client   = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=max_tokens,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return response.content[0].text
+def sonnet(prompt, max_tokens=2000):
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    return client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
+        messages=[{"role": "user", "content": prompt}]).content[0].text
 
+# ── EXTRACTION ────────────────────────────────────────────────────────────────
 
-def run_sonnet(prompt, max_tokens=2000):
-    client   = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=max_tokens,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return response.content[0].text
-
-
-# ── EXTRACTION & CONNECTIONS ──────────────────────────────────────────────────
-
-def extract_structured_data(briefing_text):
-    text = run_haiku(build_extraction_prompt(briefing_text), max_tokens=2000)
-    text = re.sub(r"^```json\s*", "", text.strip())
-    text = re.sub(r"\s*```$", "", text)
+def extract(text):
+    raw = haiku(extraction_prompt(text), 2000)
+    raw = re.sub(r"^```json\s*", "", raw.strip())
+    raw = re.sub(r"\s*```$", "", raw)
     try:
-        return json.loads(text)
-    except Exception:
+        return json.loads(raw)
+    except:
         return {"companies": [], "problem_spaces": [], "predictions": []}
 
+def detect_high_growth(c):
+    raw = haiku(high_growth_prompt(c), 300)
+    raw = re.sub(r"^```json\s*", "", raw.strip())
+    raw = re.sub(r"\s*```$", "", raw)
+    try:
+        r = json.loads(raw)
+        return r.get("is_high_growth", False), r.get("reasoning", "")
+    except:
+        return c.get("potential_high_growth", False), ""
 
 def find_connections(today_data, history):
     if not history:
         return None
-    result = run_sonnet(build_connections_prompt(today_data, history), max_tokens=2000)
-    return None if result.strip() == "NONE" else result.strip()
+    r = sonnet(connections_prompt(today_data, history), 2000)
+    return None if r.strip() == "NONE" else r.strip()
 
-
-def parse_connections(connections_text):
-    """Parse connection blocks into list of dicts for HTML rendering."""
-    if not connections_text:
+def parse_connections(text):
+    if not text:
         return []
-    blocks  = connections_text.split("---")
-    parsed  = []
-    for block in blocks:
+    parsed = []
+    for block in text.split("---"):
         block = block.strip()
         if not block:
             continue
         fields = {}
         for line in block.split("\n"):
-            for key in ["CONNECTION", "THEN", "NOW", "SIGNIFICANCE", "PAST_DATE"]:
-                if line.startswith(f"{key}:"):
-                    fields[key] = line[len(key)+1:].strip()
+            for k in ["CONNECTION","THEN","NOW","SIGNIFICANCE","PAST_DATE"]:
+                if line.startswith(f"{k}:"):
+                    fields[k] = line[len(k)+1:].strip()
         if "CONNECTION" in fields:
             parsed.append(fields)
     return parsed
 
+# ── STOCK PRICES ──────────────────────────────────────────────────────────────
+
+def fetch_prices(companies):
+    if not YFINANCE:
+        return companies
+    for name, c in companies.items():
+        ticker = c.get("ticker")
+        if ticker and c.get("status") == "public":
+            try:
+                stock = yf.Ticker(ticker)
+                hist = stock.history(period="2d")
+                if len(hist) >= 1:
+                    cur = float(hist["Close"].iloc[-1])
+                    prev = float(hist["Close"].iloc[-2]) if len(hist) >= 2 else cur
+                    today_pct = ((cur - prev) / prev * 100) if prev else 0
+                    ipo_price = c.get("ipo_price")
+                    since_ipo = ((cur - ipo_price) / ipo_price * 100) if ipo_price else None
+                    c.update({"current_price": round(cur, 2),
+                        "price_change_today_pct": round(today_pct, 2),
+                        "price_change_since_ipo_pct": round(since_ipo, 1) if since_ipo is not None else None,
+                        "price_updated": TODAY_ISO})
+            except Exception as ex:
+                print(f"    [Stock] {name}: {ex}")
+    return companies
+
+# ── COMPANY UPDATE ────────────────────────────────────────────────────────────
+
+def update_companies(companies, extracted, hg_new):
+    for c in extracted:
+        name = c.get("name", "")
+        if not name:
+            continue
+        is_new = name not in companies
+        if is_new:
+            is_hg, reasoning = detect_high_growth(c)
+            companies[name] = {
+                "name": name, "what_they_do": c.get("what_they_do",""),
+                "industry_vertical": c.get("industry_vertical","Other"),
+                "tech_layer": c.get("tech_layer","Other"),
+                "founded": c.get("founded_year"), "location": c.get("location",""),
+                "status": "public" if c.get("event_type") == "ipo" else "private",
+                "ticker": None, "ipo_date": None, "ipo_price": None,
+                "high_growth": is_hg, "high_growth_reasoning": reasoning,
+                "founder_backgrounds": c.get("founder_backgrounds",[]),
+                "funding_rounds": [], "current_price": None,
+                "price_change_today_pct": None, "price_change_since_ipo_pct": None,
+                "first_seen_in_briefing": TODAY_ISO, "last_updated": TODAY_ISO, "appearances": [TODAY_ISO],
+            }
+            if is_hg:
+                hg_new.append(name)
+        else:
+            companies[name]["last_updated"] = TODAY_ISO
+            if TODAY_ISO not in companies[name].get("appearances", []):
+                companies[name].setdefault("appearances", []).append(TODAY_ISO)
+
+        if c.get("event_type") == "funding" and c.get("amount_m"):
+            rnd = {"date": TODAY_ISO[:7], "stage": c.get("stage","Unknown"),
+                "amount_m": c.get("amount_m"), "investors": c.get("investors",[]), "source": ""}
+            existing = companies[name].get("funding_rounds", [])
+            if not any(r.get("date") == rnd["date"] and r.get("stage") == rnd["stage"] for r in existing):
+                companies[name].setdefault("funding_rounds",[]).append(rnd)
+
+        if c.get("is_exit") and c.get("exit_type") == "ipo":
+            companies[name].update({"status": "public", "ipo_date": TODAY_ISO[:7]})
+
+    return companies
+
+# ── METRICS ───────────────────────────────────────────────────────────────────
+
+def compute_metrics(briefings, companies):
+    now = datetime.now(timezone.utc)
+    c30, c90 = now - timedelta(days=30), now - timedelta(days=90)
+    s30, s90 = Counter(), Counter()
+    timeline = defaultdict(list)
+
+    for e in briefings:
+        try:
+            ed = datetime.fromisoformat(e["date"]).replace(tzinfo=timezone.utc)
+        except:
+            continue
+        for ps in e.get("problem_spaces", []):
+            if ed >= c90:
+                s90[ps] += 1
+            if ed >= c30:
+                s30[ps] += 1
+            timeline[ps].append(e["date"])
+
+    inv_deals = defaultdict(list)
+    inv_pairs = Counter()
+    deal_flow = defaultdict(list)
+    exits = []
+
+    for name, co in companies.items():
+        for rnd in co.get("funding_rounds", []):
+            invs = rnd.get("investors", [])
+            stage = rnd.get("stage", "Unknown")
+            for inv in invs:
+                if inv:
+                    inv_deals[inv].append({"company": name, "stage": stage, "date": rnd.get("date","")})
+            for i in range(len(invs)):
+                for j in range(i+1, len(invs)):
+                    if invs[i] and invs[j]:
+                        pair = tuple(sorted([invs[i], invs[j]]))
+                        inv_pairs[pair] += 1
+            deal_flow[stage].append({"company": name, "what_they_do": co.get("what_they_do",""),
+                "amount_m": rnd.get("amount_m"), "valuation_b": rnd.get("valuation_b"),
+                "investors": invs, "date": rnd.get("date",""),
+                "industry_vertical": co.get("industry_vertical","")})
+
+        if co.get("status") in ["public","acquired"]:
+            exits.append({"company": name,
+                "exit_type": "IPO" if co.get("status") == "public" else "Acquisition",
+                "industry_vertical": co.get("industry_vertical",""),
+                "tech_layer": co.get("tech_layer",""),
+                "date": co.get("ipo_date") or co.get("acquisition_date",""),
+                "ticker": co.get("ticker")})
+
+    categories = defaultdict(lambda: {"companies": [], "tech_layers": defaultdict(list)})
+    for name, co in companies.items():
+        v = co.get("industry_vertical","Other")
+        t = co.get("tech_layer","Other")
+        categories[v]["companies"].append(name)
+        categories[v]["tech_layers"][t].append(name)
+
+    geo = Counter(co.get("location","") for co in companies.values() if co.get("location"))
+    founder_patterns = defaultdict(Counter)
+    for co in companies.values():
+        v = co.get("industry_vertical","Other")
+        for bg in co.get("founder_backgrounds",[]):
+            founder_patterns[v][bg] += 1
+
+    # Acceleration flags
+    accelerating = []
+    for space, cnt30 in s30.most_common(20):
+        cnt90 = s90.get(space, 0)
+        expected = cnt90 / 3 if cnt90 > 0 else 0.1
+        if cnt30 > expected * 1.4 and cnt30 >= 2:
+            pct = int((cnt30 / expected - 1) * 100)
+            accelerating.append({"space": space, "count_30": cnt30, "count_90": cnt90, "accel_pct": pct})
+
+    return {
+        "narrative_velocity": {
+            "30_day": dict(s30.most_common(20)),
+            "90_day": dict(s90.most_common(20)),
+            "timeline": {k: v[-60:] for k, v in timeline.items()},
+            "accelerating": accelerating[:5],
+        },
+        "investor_activity": {
+            "by_deals": dict(Counter({inv: len(d) for inv, d in inv_deals.items()}).most_common(30)),
+            "co_investments": [{"pair": list(p), "count": c} for p, c in inv_pairs.most_common(50)],
+        },
+        "deal_flow": dict(deal_flow),
+        "exits": sorted(exits, key=lambda x: x.get("date",""), reverse=True),
+        "categories": {v: {"companies": d["companies"], "tech_layers": dict(d["tech_layers"])} for v, d in categories.items()},
+        "high_growth": [n for n, c in companies.items() if c.get("high_growth")],
+        "geo": dict(geo.most_common(20)),
+        "founder_patterns": {v: dict(c) for v, c in founder_patterns.items()},
+        "total_companies": len(companies),
+        "computed_at": datetime.now().isoformat(),
+    }
+
+def build_flags(metrics):
+    flags = []
+    for a in metrics.get("narrative_velocity",{}).get("accelerating",[])[:2]:
+        flags.append(f"Narrative velocity: <strong>{a['space']}</strong> up {a['accel_pct']}% vs 90-day baseline")
+    hg_new = metrics.get("high_growth_new_today",[])
+    if hg_new:
+        flags.append(f"High-growth additions: <strong>{', '.join(hg_new[:3])}</strong>")
+    recent_exits = [e for e in metrics.get("exits",[]) if e.get("date","") >= (datetime.now()-timedelta(days=7)).strftime("%Y-%m")]
+    if recent_exits:
+        flags.append(f"Exit signals: <strong>{', '.join(e['company'] for e in recent_exits[:2])}</strong>")
+    top_inv = list(metrics.get("investor_activity",{}).get("by_deals",{}).keys())[:3]
+    if top_inv:
+        flags.append(f"Most active investors in database: {', '.join(top_inv)}")
+    return flags
 
 # ── WEBSITE ───────────────────────────────────────────────────────────────────
 
-def generate_website(db):
+def generate_website(briefings, companies, metrics):
     os.makedirs("docs", exist_ok=True)
-
-    entries_html = ""
-    for entry in reversed(db):
-        companies     = entry.get("companies", [])
-        problem_spaces = entry.get("problem_spaces", [])
-        briefing      = entry.get("full_briefing", "")
-
-        company_tags = "".join(f'<span class="tag">{c["name"]}</span>' for c in companies)
-        space_tags   = "".join(f'<span class="tag space">{ps}</span>' for ps in problem_spaces)
-
-        fmt = briefing.replace("\n\n", "</p><p>").replace("\n", "<br>")
-        fmt = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", fmt)
-        fmt = re.sub(r"^## (.+)$", r"<h4>\1</h4>", fmt, flags=re.MULTILINE)
-        fmt = re.sub(
-            r"^\s*(PROBLEM THEY'S SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$",
-            r'<div class="subhead">\1</div>', fmt, flags=re.MULTILINE
-        )
-        fmt = re.sub(r"(https?://[^\s<)\]]+)", r'<a href="\1">\1</a>', fmt)
-
-        entries_html += f"""
-        <article id="{entry['date']}" class="entry">
-          <div class="entry-header">
-            <h2 class="entry-date">{entry['date_display']}</h2>
-            <a href="#{entry['date']}" class="permalink">#</a>
-          </div>
-          <div class="tags">{company_tags}{space_tags}</div>
-          <div class="entry-body"><p>{fmt}</p></div>
-        </article>"""
-
-    company_index = {}
-    for entry in db:
-        for c in entry.get("companies", []):
-            name = c["name"]
-            if name not in company_index:
-                company_index[name] = []
-            company_index[name].append({
-                "date":         entry["date"],
-                "date_display": entry["date_display"],
-                "event":        c.get("event", ""),
-            })
-
-    company_rows = "".join(
-        f'<div class="company-row"><strong>{name}</strong> — '
-        + " · ".join(f'<a href="#{a["date"]}">{a["date_display"]}</a> ({a["event"]})' for a in apps)
-        + "</div>"
-        for name, apps in sorted(company_index.items())
-    )
+    # Write data files (fetched by JS)
+    save(BRIEFINGS_F, briefings)
+    save(COMPANIES_F, companies)
+    save(METRICS_F, metrics)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morning Briefing Archive</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morning Briefing</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f9f9f7;color:#1a1a1a;font-size:15px;line-height:1.75}}
-.header{{background:#1a1a1a;color:white;padding:32px 40px}}
-.header h1{{font-size:22px;font-weight:600}}
-.header p{{font-size:13px;color:#888;margin-top:4px}}
-.nav{{display:flex;border-bottom:1px solid #e5e5e5;background:white;position:sticky;top:0;z-index:10}}
-.nav button{{padding:14px 24px;border:none;background:none;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent}}
-.nav button.active{{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}}
-.container{{max-width:780px;margin:0 auto;padding:32px 24px}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f3;color:#1a1a1a;font-size:14px;line-height:1.6}}
+.site-header{{background:#1a1a1a;color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center}}
+.site-header h1{{font-size:18px;font-weight:600}}
+.site-header p{{font-size:12px;color:#888;margin-top:2px}}
+.nav{{background:#fff;border-bottom:1px solid #e5e5e5;display:flex;overflow-x:auto;position:sticky;top:0;z-index:100;gap:0}}
+.nav button{{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent;white-space:nowrap}}
+.nav button:hover{{color:#1a1a1a}}.nav button.active{{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}}
+.container{{max-width:1200px;margin:0 auto;padding:24px 20px}}
 .panel{{display:none}}.panel.active{{display:block}}
-.entry{{background:white;border:1px solid #e5e5e5;border-radius:8px;padding:28px 32px;margin-bottom:24px}}
-.entry-header{{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}}
-.entry-date{{font-size:18px;font-weight:600}}
-.permalink{{font-size:12px;color:#aaa;text-decoration:none}}
-.permalink:hover{{color:#1a1a1a}}
-.tags{{margin-bottom:16px;display:flex;flex-wrap:wrap;gap:6px}}
-.tag{{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0f0ee;color:#555}}
-.tag.space{{background:#e8f0fe;color:#1a56db}}
-.entry-body h4{{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin:24px 0 8px;padding-bottom:4px;border-bottom:1px solid #eee}}
-.entry-body p{{margin-bottom:12px}}
-.entry-body a{{color:#0066cc}}
-.subhead{{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee}}
-.search-bar{{width:100%;padding:12px 16px;border:1px solid #e5e5e5;border-radius:8px;font-size:15px;margin-bottom:24px;outline:none}}
+.card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:20px 24px;margin-bottom:16px}}
+.card-sm{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:12px 16px}}
+.grid-2{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
+.grid-3{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}
+.grid-4{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}}
+@media(max-width:768px){{.grid-2,.grid-3,.grid-4{{grid-template-columns:1fr}}}}
+.metric{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;text-align:center}}
+.metric-val{{font-size:28px;font-weight:600}}.metric-label{{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}}
+.metric-sub{{font-size:12px;color:#666;margin-top:4px}}
+.tag{{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin:2px;background:#f0f0ee;color:#555}}
+.tag.v{{background:#e8f4fd;color:#1a6bb5}}.tag.t{{background:#f0fdf4;color:#166534}}
+.tag.hg{{background:#fef3c7;color:#92400e}}.tag.f{{background:#f3f4f6;color:#374151}}
+.section-title{{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee}}
+.search-bar{{width:100%;padding:10px 16px;border:1px solid #e5e5e5;border-radius:8px;font-size:14px;margin-bottom:16px;outline:none;background:#fff}}
 .search-bar:focus{{border-color:#1a1a1a}}
-.company-row{{padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px}}
-.company-row a{{color:#0066cc;text-decoration:none}}
-.company-row a:hover{{text-decoration:underline}}
-.count{{font-size:13px;color:#888;margin-bottom:20px}}
+.filter-bar{{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}}
+.pill{{padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;background:#fff;font-size:12px;cursor:pointer}}
+.pill:hover{{border-color:#999}}.pill.active{{background:#1a1a1a;color:#fff;border-color:#1a1a1a}}
+.company-card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}}
+.company-card:hover{{border-color:#999}}
+.company-card .detail{{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0}}
+.company-card.open .detail{{display:block}}
+.round{{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f8f8f8}}
+.round:last-child{{border:none}}
+.round-stage{{font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;background:#f0f0ee;white-space:nowrap;flex-shrink:0}}
+.up{{color:#16a34a;font-weight:500}}.down{{color:#dc2626;font-weight:500}}
+.investor-row{{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5f5f5}}
+.investor-row:last-child{{border:none}}
+.bar-track{{height:4px;background:#f0f0f0;border-radius:2px;margin-top:4px;flex:1}}
+.bar-fill{{height:100%;background:#1a1a1a;border-radius:2px}}
+.momentum-row{{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f5f5f5}}
+.momentum-row:last-child{{border:none}}
+.exit-row{{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f5f5f5}}
+.exit-row:last-child{{border:none}}
+.exit-ipo{{background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}}
+.exit-acq{{background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}}
+.briefing-text h4{{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid #eee}}
+.briefing-text .subh{{font-size:10px;font-weight:600;text-transform:uppercase;color:#ccc;margin:12px 0 4px;padding-left:10px;border-left:2px solid #eee;letter-spacing:.08em}}
+.briefing-text p{{margin-bottom:10px;line-height:1.75}}.briefing-text a{{color:#0066cc}}
+.briefing-text .bul{{display:flex;gap:8px;margin-bottom:6px;padding-left:10px}}
+.briefing-text .dash{{color:#ccc;flex-shrink:0}}
+.conn-card{{border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa;border-radius:0 6px 6px 0}}
+.cat-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}}
+.cat-card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s}}
+.cat-card:hover{{border-color:#999}}
+.chart-h{{position:relative;height:320px;margin:12px 0}}
+.chart-h-lg{{position:relative;height:400px;margin:12px 0}}
+#netCanvas{{width:100%;height:380px;border:1px solid #e5e5e5;border-radius:8px;background:#fafafa}}
+.loading{{color:#999;font-size:14px;padding:40px;text-align:center}}
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>Morning Briefing Archive</h1>
-  <p>{len(db)} briefings · updated daily</p>
+<div class="site-header">
+  <div><h1>Morning Briefing</h1><p id="hdr-stats">Loading...</p></div>
+  <div style="font-size:12px;color:#666">Updated daily at 8 AM MDT</div>
 </div>
 <div class="nav">
-  <button class="active" onclick="show('briefings',this)">Briefings</button>
-  <button onclick="show('companies',this)">Companies</button>
+  <button class="active" onclick="tab('dashboard',this)">Dashboard</button>
+  <button onclick="tab('briefings',this)">Briefings</button>
+  <button onclick="tab('companies',this)">Companies</button>
+  <button onclick="tab('dealflow',this)">Deal Flow</button>
+  <button onclick="tab('velocity',this)">Narrative Velocity</button>
+  <button onclick="tab('investors',this)">Investors</button>
+  <button onclick="tab('exits',this)">Exits</button>
+  <button onclick="tab('categories',this)">Categories</button>
 </div>
 <div class="container">
-  <div id="briefings" class="panel active">
-    <input class="search-bar" type="text" placeholder="Search briefings..." oninput="searchBriefings(this.value)">
-    <div id="briefings-list">{entries_html}</div>
-  </div>
-  <div id="companies" class="panel">
-    <input class="search-bar" type="text" placeholder="Search companies..." oninput="searchCompanies(this.value)">
-    <p class="count">{len(company_index)} companies tracked</p>
-    <div id="companies-list">{company_rows}</div>
-  </div>
+  <div id="tab-dashboard" class="panel active"><div class="loading">Loading dashboard...</div></div>
+  <div id="tab-briefings" class="panel"><div class="loading">Loading briefings...</div></div>
+  <div id="tab-companies" class="panel"><div class="loading">Loading companies...</div></div>
+  <div id="tab-dealflow" class="panel"><div class="loading">Loading deal flow...</div></div>
+  <div id="tab-velocity" class="panel"><div class="loading">Loading charts...</div></div>
+  <div id="tab-investors" class="panel"><div class="loading">Loading investors...</div></div>
+  <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
+  <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
 </div>
+
 <script>
-function show(panel,btn){{
+const BASE = '{SITE}';
+let DB = {{}}, charts = {{}};
+
+async function loadData() {{
+  const [b, c, m] = await Promise.all([
+    fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({{}})),
+    fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({{}})),
+  ]);
+  DB.briefings = b; DB.companies = c; DB.metrics = m;
+  initAll();
+}}
+
+function tab(id, btn) {{
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById(panel).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }}
-function searchBriefings(q){{
+
+function pct(v) {{
+  if(v==null) return '—';
+  const s=v>=0?'+':'', cls=v>=0?'up':'down';
+  return `<span class="${{cls}}">${{s}}${{v.toFixed(1)}}%</span>`;
+}}
+
+function fmt(text) {{
+  if(!text) return '';
+  text = text.replace(/## (.+)/gm,'<h4>$1</h4>');
+  text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  text = text.replace(/^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$/gm,'<div class="subh">$1</div>');
+  text = text.replace(/^[-*] (.+)/gm,'<div class="bul"><span class="dash">—</span><span>$1</span></div>');
+  text = text.replace(/(https?:\/\/[^\s<)\]]+)/g,'<a href="$1">$1</a>');
+  text = text.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>');
+  return '<p>'+text+'</p>';
+}}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+function renderDashboard() {{
+  const {{briefings,companies,metrics}} = DB;
+  const cos = Object.values(companies);
+  const hg = metrics.high_growth||[];
+  const nv30 = metrics.narrative_velocity?.['30_day']||{{}};
+  const nv90 = metrics.narrative_velocity?.['90_day']||{{}};
+  const invDeals = metrics.investor_activity?.by_deals||{{}};
+  const exits = metrics.exits||[];
+  const accel = metrics.narrative_velocity?.accelerating||[];
+
+  document.getElementById('hdr-stats').textContent =
+    `${{briefings.length}} briefings · ${{cos.length}} companies · ${{hg.length}} high-growth`;
+
+  const spaces = [...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,8);
+  const invEntries = Object.entries(invDeals).slice(0,8);
+  const maxInv = invEntries[0]?.[1]||1;
+  const momentumEntries = Object.entries(nv30).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max30 = momentumEntries[0]?.[1]||1;
+
+  document.getElementById('tab-dashboard').innerHTML = `
+    <div class="grid-4" style="margin-bottom:20px">
+      ${{[['Total Companies',cos.length,''],['Briefings',briefings.length,''],['High-Growth',hg.length,'flagged'],['Exits',exits.length,'tracked']].map(([l,v,s])=>`
+      <div class="metric"><div class="metric-val">${{v}}</div><div class="metric-label">${{l}}</div>${{s?`<div class="metric-sub">${{s}}</div>`:''}}</div>`).join('')}}
+    </div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card">
+        <div class="section-title" style="margin-top:0">Sector radar — 30-day vs 90-day</div>
+        <div class="chart-h"><canvas id="radarMain"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="margin-top:0">30-day momentum</div>
+        ${{momentumEntries.map(([sp,cnt])=>{{
+          const cnt90=nv90[sp]||0, exp=cnt90/3||0.1;
+          const acc=Math.round((cnt/exp-1)*100);
+          return `<div class="momentum-row">
+            <div style="flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${{sp}}</div>
+            <div class="bar-track" style="flex:2"><div class="bar-fill" style="width:${{(cnt/max30*100).toFixed(0)}}%"></div></div>
+            <div style="font-size:12px;color:#666;min-width:40px;text-align:right">${{cnt}}${{acc>20?' <span style="color:#16a34a;font-size:10px">↑</span>':''}}</div>
+          </div>`;
+        }}).join('')}}
+      </div>
+    </div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card">
+        <div class="section-title" style="margin-top:0">Top investors</div>
+        ${{invEntries.map(([inv,cnt])=>`
+        <div class="investor-row">
+          <div style="flex:1"><div style="font-weight:500">${{inv}}</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track"><div class="bar-fill" style="width:${{(cnt/maxInv*100).toFixed(0)}}%"></div></div></div></div>
+          <div style="font-weight:500;margin-left:12px">${{cnt}}</div>
+        </div>`).join('')}}
+      </div>
+      <div class="card">
+        <div class="section-title" style="margin-top:0">High-growth watchlist</div>
+        ${{hg.slice(0,6).map(n=>{{const c=companies[n]||{{}};return `
+        <div style="padding:8px 0;border-bottom:1px solid #f5f5f5">
+          <div style="font-weight:500;font-size:13px">${{n}}</div>
+          <div style="font-size:12px;color:#666">${{c.what_they_do||''}}</div>
+          <div style="margin-top:4px">${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}</div>
+        </div>`;}}).join('')||'<div style="color:#999;font-size:13px">No companies flagged yet.</div>'}}
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-top:0">Recent exits</div>
+      ${{exits.slice(0,5).map(e=>`
+      <div class="exit-row">
+        <span class="${{e.exit_type==='IPO'?'exit-ipo':'exit-acq'}}">${{e.exit_type}}</span>
+        <div><div style="font-weight:500">${{e.company}}${{e.ticker?` (${{e.ticker}})`:''}}</div>
+        <div style="font-size:12px;color:#666">${{e.industry_vertical||''}}${{e.date?' · '+e.date:''}}</div></div>
+      </div>`).join('')||'<div style="color:#999;font-size:13px">No exits yet.</div>'}}
+    </div>`;
+
+  if(spaces.length) {{
+    const ctx = document.getElementById('radarMain');
+    if(ctx) new Chart(ctx,{{
+      type:'radar',
+      data:{{
+        labels:spaces.map(s=>s.length>20?s.slice(0,18)+'…':s),
+        datasets:[
+          {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.1)',pointRadius:3}},
+          {{label:'90d (÷3)',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#ccc',backgroundColor:'rgba(200,200,200,0.1)',pointRadius:3,borderDash:[4,4]}},
+        ]
+      }},
+      options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},scales:{{r:{{ticks:{{stepSize:1,font:{{size:10}}}},pointLabels:{{font:{{size:10}}}}}}}}}}
+    }});
+  }}
+}}
+
+// ── BRIEFINGS ─────────────────────────────────────────────────────────────────
+function renderBriefings() {{
+  document.getElementById('tab-briefings').innerHTML = `
+    <input class="search-bar" placeholder="Search briefings..." oninput="filterBriefings(this.value)">
+    <div id="blist"></div>`;
+  document.getElementById('blist').innerHTML = DB.briefings.slice().reverse().map(e=>`
+    <div class="card" id="${{e.date}}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:16px;font-weight:600">${{e.date_display||e.date}}</div>
+        <a href="#{{{e.date}}}" style="font-size:12px;color:#aaa;text-decoration:none">#</a>
+      </div>
+      <div style="margin-bottom:10px">${{(e.companies||[]).map(c=>`<span class="tag">${{c.name}}</span>`).join('')}}</div>
+      <div class="briefing-text">${{fmt(e.full_briefing)}}</div>
+    </div>`).join('');
+}}
+function filterBriefings(q) {{
   q=q.toLowerCase();
-  document.querySelectorAll('.entry').forEach(el=>{{
-    el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';
+  document.querySelectorAll('#blist .card').forEach(el=>{{el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';}});
+}}
+
+// ── COMPANIES ─────────────────────────────────────────────────────────────────
+let activeV = null;
+function renderCompanies() {{
+  const cos = Object.entries(DB.companies);
+  const verticals = [...new Set(cos.map(([,c])=>c.industry_vertical).filter(Boolean))].sort();
+  document.getElementById('tab-companies').innerHTML = `
+    <input class="search-bar" placeholder="Search companies..." oninput="filterCos(this.value)" id="cosearch">
+    <div class="filter-bar"><button class="pill active" onclick="filterV(null,this)">All</button>${{verticals.map(v=>`<button class="pill" onclick="filterV('${{v.replace(/'/g,"\\\\'")}}',this)">${{v}}</button>`).join('')}}</div>
+    <div id="coslist"></div>`;
+  renderCoslist(cos);
+}}
+function filterV(v,btn) {{
+  activeV=v;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  filterCos(document.getElementById('cosearch').value);
+}}
+function filterCos(q) {{
+  q=(q||'').toLowerCase();
+  const cos=Object.entries(DB.companies).filter(([n,c])=>{{
+    const mq=!q||n.toLowerCase().includes(q)||(c.what_they_do||'').toLowerCase().includes(q);
+    const mv=!activeV||c.industry_vertical===activeV;
+    return mq&&mv;
   }});
+  renderCoslist(cos);
 }}
-function searchCompanies(q){{
-  q=q.toLowerCase();
-  document.querySelectorAll('.company-row').forEach(el=>{{
-    el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';
+function renderCoslist(cos) {{
+  const el=document.getElementById('coslist');
+  if(!el) return;
+  el.innerHTML=cos.sort((a,b)=>((b[1].last_updated||'')).localeCompare(a[1].last_updated||'')).map(([n,c])=>{{
+    const rounds=c.funding_rounds||[];
+    const total=rounds.reduce((s,r)=>s+(r.amount_m||0),0);
+    const last=rounds.length?rounds[rounds.length-1]:null;
+    return `<div class="company-card" onclick="this.classList.toggle('open')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-weight:500;font-size:15px;margin-bottom:3px">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HIGH GROWTH</span>':''}}${{c.status==='public'?' <span class="tag t" style="font-size:10px">PUBLIC</span>':''}}</div>
+          <div style="font-size:13px;color:#666;margin-bottom:6px">${{c.what_they_do||''}}</div>
+          <div>${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}${{c.location?`<span class="tag">${{c.location}}</span>`:''}}${{(c.founder_backgrounds||[]).map(b=>`<span class="tag f">${{b}}</span>`).join('')}}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:12px">
+          ${{total>0?`<div style="font-weight:500">$${{total>=1000?(total/1000).toFixed(1)+'B':total+'M'}}</div>`:''}}
+          ${{last?`<div style="font-size:11px;color:#aaa">${{last.stage||''}} · ${{last.date||''}}</div>`:''}}
+        </div>
+      </div>
+      <div class="detail">
+        <div class="section-title" style="margin-top:0">Funding history</div>
+        ${{rounds.length?rounds.map(r=>`<div class="round"><span class="round-stage">${{r.stage||''}}</span><div><div style="font-weight:500">${{r.amount_m?'$${{r.amount_m}}M':''}}${{r.valuation_b?' · $${{r.valuation_b}}B val':''}}</div><div style="font-size:12px;color:#666">${{(r.investors||[]).join(', ')||'—'}}</div></div><div style="font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap">${{r.date||''}}</div></div>`).join(''):'<div style="color:#999;font-size:13px">No rounds tracked</div>'}}
+        ${{c.high_growth&&c.high_growth_reasoning?`<div style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:6px;font-size:12px;color:#92400e"><strong>High-growth signal:</strong> ${{c.high_growth_reasoning}}</div>`:''}}
+      </div>
+    </div>`;
+  }}).join('');
+}}
+
+// ── DEAL FLOW ─────────────────────────────────────────────────────────────────
+function renderDealflow() {{
+  const cos = Object.entries(DB.companies);
+  const stageOrder = ['Pre-Seed','Seed','Series A','Series B','Series C','Series D','Growth','Unknown'];
+  const byStage = {{}};
+  cos.filter(([,c])=>c.status!=='public').forEach(([n,c])=>{{
+    (c.funding_rounds||[]).forEach(r=>{{
+      const s=r.stage||'Unknown';
+      if(!byStage[s]) byStage[s]=[];
+      byStage[s].push({{n,c,r}});
+    }});
   }});
+
+  let privateHtml='';
+  stageOrder.forEach(stage=>{{
+    if(!byStage[stage]?.length) return;
+    const sorted=byStage[stage].sort((a,b)=>(b.r.date||'').localeCompare(a.r.date||''));
+    privateHtml+=`<div class="section-title">${{stage}}</div>`;
+    privateHtml+=sorted.map(({{{n,c,r}}})=>`
+      <div class="card-sm" style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-weight:500">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':''}}</div>
+            <div style="font-size:12px;color:#666;margin:2px 0">${{c.what_they_do||''}}</div>
+            <div style="font-size:12px;color:#555">Investors: ${{(r.investors||[]).join(', ')||'—'}}</div>
+            <div style="margin-top:4px">${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;margin-left:12px">
+            ${{r.amount_m?`<div style="font-weight:600">$${{r.amount_m}}M</div>`:''}}
+            ${{r.valuation_b?`<div style="font-size:12px;color:#666">$${{r.valuation_b}}B val</div>`:''}}
+            <div style="font-size:11px;color:#aaa">${{r.date||''}}</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }});
+
+  const publicCos = cos.filter(([,c])=>c.status==='public');
+  const publicHtml = publicCos.length ?
+    `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
+      <thead><tr style="border-bottom:2px solid #e5e5e5">
+        ${{['Company','Ticker','Current Price','Today','Since IPO','IPO Date'].map(h=>`<th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em">${{h}}</th>`).join('')}}
+      </tr></thead><tbody>
+      ${{publicCos.map(([n,c])=>`<tr style="border-bottom:1px solid #f5f5f5">
+        <td style="padding:10px 12px;font-weight:500">${{n}}</td>
+        <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ticker||'—'}}</td>
+        <td style="padding:10px 12px">${{c.current_price?'$'+c.current_price:'—'}}</td>
+        <td style="padding:10px 12px">${{pct(c.price_change_today_pct)}}</td>
+        <td style="padding:10px 12px">${{pct(c.price_change_since_ipo_pct)}}</td>
+        <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ipo_date||'—'}}</td>
+      </tr>`).join('')}}
+      </tbody></table></div>` : '<div style="color:#999">No public companies tracked yet.</div>';
+
+  document.getElementById('tab-dealflow').innerHTML =
+    `<div class="section-title" style="margin-top:0">Private — all funding rounds</div>${{privateHtml}}
+     <div class="section-title" style="margin-top:32px">Gone public</div>${{publicHtml}}`;
 }}
-if(window.location.hash){{
-  const el=document.querySelector(window.location.hash);
-  if(el)setTimeout(()=>el.scrollIntoView({{behavior:'smooth'}}),100);
+
+// ── NARRATIVE VELOCITY ────────────────────────────────────────────────────────
+function renderVelocity() {{
+  const nv30=DB.metrics.narrative_velocity?.['30_day']||{{}};
+  const nv90=DB.metrics.narrative_velocity?.['90_day']||{{}};
+  const timeline=DB.metrics.narrative_velocity?.timeline||{{}};
+  const spaces=[...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,10);
+  const topSpaces=Object.entries(nv90).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([s])=>s);
+
+  document.getElementById('tab-velocity').innerHTML=`
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card"><div class="section-title" style="margin-top:0">Sector radar — 30-day vs 90-day</div><div class="chart-h-lg"><canvas id="radarFull"></canvas></div></div>
+      <div class="card"><div class="section-title" style="margin-top:0">Bubble — size=90d total, position=30d count vs acceleration</div><div class="chart-h-lg"><canvas id="bubbleMain"></canvas></div></div>
+    </div>
+    <div class="card"><div class="section-title" style="margin-top:0">Activity stream — top problem spaces over time</div><div class="chart-h-lg"><canvas id="riverMain"></canvas></div></div>`;
+
+  if(spaces.length) {{
+    new Chart(document.getElementById('radarFull'),{{type:'radar',data:{{
+      labels:spaces.map(s=>s.length>22?s.slice(0,20)+'…':s),
+      datasets:[
+        {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.15)',pointRadius:4}},
+        {{label:'90d normalized',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#999',backgroundColor:'rgba(150,150,150,0.1)',pointRadius:4,borderDash:[5,5]}},
+      ]
+    }},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom'}}}},scales:{{r:{{ticks:{{stepSize:1}},pointLabels:{{font:{{size:11}}}}}}}}}}
+    }});
+  }}
+
+  const bData=Object.entries(nv30).map(([sp,c30])=>{{
+    const c90=nv90[sp]||0,exp=c90/3||0.5,acc=(c30/exp)-1;
+    return {{x:c30,y:acc,r:Math.min(Math.sqrt(c90)*4+4,30),label:sp}};
+  }}).filter(d=>d.x>0);
+  if(bData.length) {{
+    new Chart(document.getElementById('bubbleMain'),{{type:'bubble',
+      data:{{datasets:[{{label:'Problem spaces',data:bData,backgroundColor:'rgba(26,26,26,0.6)',borderColor:'#1a1a1a'}}]}},
+      options:{{responsive:true,maintainAspectRatio:false,
+        plugins:{{legend:{{display:false}},tooltip:{{callbacks:{{label:ctx=>`${{ctx.raw.label}}: ${{ctx.raw.x}} mentions, ${{(ctx.raw.y*100).toFixed(0)}}% accel`}}}}}},
+        scales:{{x:{{title:{{display:true,text:'30-day mentions'}}}},y:{{title:{{display:true,text:'Acceleration vs baseline'}},ticks:{{callback:v=>(v*100).toFixed(0)+'%'}}}}}}
+      }}
+    }});
+  }}
+
+  const dateMap={{}};
+  DB.briefings.forEach(e=>{{
+    dateMap[e.date]=dateMap[e.date]||{{}};
+    (e.problem_spaces||[]).forEach(ps=>{{if(topSpaces.includes(ps)) dateMap[e.date][ps]=(dateMap[e.date][ps]||0)+1;}});
+  }});
+  const dates=Object.keys(dateMap).sort().slice(-60);
+  const colors=['#1a1a1a','#555','#888','#aaa','#ccc','#e0e0e0'];
+  if(dates.length&&topSpaces.length) {{
+    new Chart(document.getElementById('riverMain'),{{type:'line',
+      data:{{labels:dates,datasets:topSpaces.map((sp,i)=>{{
+        const rgb=i===0?'26,26,26':i===1?'85,85,85':i===2?'136,136,136':'170,170,170';
+        return {{label:sp,data:dates.map(d=>dateMap[d]?.[sp]||0),fill:true,
+          borderColor:colors[i],backgroundColor:`rgba(${{rgb}},0.25)`,tension:0.4,pointRadius:0}};
+      }})}},
+      options:{{responsive:true,maintainAspectRatio:false,
+        plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},
+        scales:{{x:{{ticks:{{maxTicksLimit:10,font:{{size:10}}}}}},y:{{stacked:false}}}}
+      }}
+    }});
+  }}
 }}
+
+// ── INVESTORS ─────────────────────────────────────────────────────────────────
+function renderInvestors() {{
+  const invDeals=DB.metrics.investor_activity?.by_deals||{{}};
+  const coInvest=DB.metrics.investor_activity?.co_investments||[];
+  const entries=Object.entries(invDeals).slice(0,20);
+  const maxD=entries[0]?.[1]||1;
+
+  document.getElementById('tab-investors').innerHTML=`
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-title" style="margin-top:0">Most active investors</div>
+        ${{entries.map(([inv,cnt])=>`
+        <div class="investor-row">
+          <div style="flex:1"><div style="font-weight:500">${{inv}}</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track" style="flex:1"><div class="bar-fill" style="width:${{(cnt/maxD*100).toFixed(0)}}%"></div></div></div>
+          </div>
+          <div style="font-weight:500;margin-left:12px">${{cnt}}</div>
+        </div>`).join('')}}
+      </div>
+      <div class="card">
+        <div class="section-title" style="margin-top:0">Co-investment network</div>
+        <canvas id="netCanvas"></canvas>
+      </div>
+    </div>`;
+
+  const canvas=document.getElementById('netCanvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth||400; canvas.height=380;
+  const W=canvas.width,H=canvas.height;
+  const nodeSet=new Set();
+  coInvest.slice(0,40).forEach(d=>{{nodeSet.add(d.pair[0]);nodeSet.add(d.pair[1]);}});
+  const nodes=[...nodeSet].slice(0,25).map((id,i)=>{{
+    const a=i/25*Math.PI*2;
+    return {{id,x:W/2+Math.cos(a)*(W*0.35),y:H/2+Math.sin(a)*(H*0.38),vx:0,vy:0,r:6}};
+  }});
+  const nIdx=Object.fromEntries(nodes.map(n=>[n.id,n]));
+  const edges=coInvest.slice(0,40).filter(d=>nIdx[d.pair[0]]&&nIdx[d.pair[1]]);
+  if(!nodes.length){{ctx.fillStyle='#999';ctx.font='13px Arial';ctx.fillText('Not enough data yet.',W/2-80,H/2);return;}}
+  let tick=0;
+  function draw(){{
+    ctx.clearRect(0,0,W,H);
+    edges.forEach(e=>{{const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]];
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=`rgba(0,0,0,${{Math.min(e.count/6,0.35)}})`;ctx.lineWidth=Math.min(e.count,3);ctx.stroke();}});
+    nodes.forEach(n=>{{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='#1a1a1a';ctx.fill();
+      ctx.font='10px Arial';ctx.fillStyle='#444';ctx.textAlign='center';
+      ctx.fillText(n.id.length>14?n.id.slice(0,12)+'…':n.id,n.x,n.y+n.r+11);}});
+  }}
+  function sim(){{
+    if(tick++>250){{draw();return;}}
+    nodes.forEach(n=>{{nodes.forEach(m=>{{if(n===m)return;const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=250/(d*d);n.vx+=dx*f;n.vy+=dy*f;}});}});
+    edges.forEach(e=>{{const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]],dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=(d-80)*0.05;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;}});
+    nodes.forEach(n=>{{n.vx=(n.vx+(W/2-n.x)*0.01)*0.85;n.vy=(n.vy+(H/2-n.y)*0.01)*0.85;
+      n.x=Math.max(20,Math.min(W-20,n.x+n.vx));n.y=Math.max(20,Math.min(H-20,n.y+n.vy));}});
+    draw();requestAnimationFrame(sim);
+  }}
+  sim();
+}}
+
+// ── EXITS ─────────────────────────────────────────────────────────────────────
+function renderExits() {{
+  const exits=DB.metrics.exits||[];
+  const bySector={{}};
+  exits.forEach(e=>{{const s=e.industry_vertical||'Other';if(!bySector[s])bySector[s]=[];bySector[s].push(e);}});
+  document.getElementById('tab-exits').innerHTML=`<div class="card">
+    <div class="section-title" style="margin-top:0">All exits by sector</div>
+    ${{Object.entries(bySector).map(([sector,items])=>`
+      <div class="section-title">${{sector}}</div>
+      ${{items.map(e=>`<div class="exit-row">
+        <span class="${{e.exit_type==='IPO'?'exit-ipo':'exit-acq'}}">${{e.exit_type}}</span>
+        <div><div style="font-weight:500">${{e.company}}${{e.ticker?` (${{e.ticker}})`:''}}</div>
+        <div style="font-size:12px;color:#666">${{e.tech_layer||''}}${{e.date?' · '+e.date:''}}</div></div>
+      </div>`).join('')}`).join('')||'<div style="color:#999">No exits tracked yet.</div>'}}
+  </div>`;
+}}
+
+// ── CATEGORIES ────────────────────────────────────────────────────────────────
+function renderCategories() {{
+  const cats=DB.metrics.categories||{{}};
+  const invActivity=DB.metrics.investor_activity?.co_investments||[];
+  document.getElementById('tab-categories').innerHTML=`
+    <div class="cat-grid">${{Object.entries(cats).map(([v,d])=>`
+      <div class="cat-card" onclick="showCat('${{v.replace(/'/g,"\\\\'")}}')">
+        <div style="font-weight:500;font-size:14px;margin-bottom:4px">${{v}}</div>
+        <div style="font-size:12px;color:#999;margin-bottom:8px">${{(d.companies||[]).length}} companies</div>
+        <div>${{Object.keys(d.tech_layers||{{}}).map(tl=>`<span class="tag t" style="font-size:10px">${{tl}}</span>`).join('')}}</div>
+      </div>`).join('')}}</div>
+    <div id="catdetail"></div>`;
+}}
+
+function showCat(vertical) {{
+  const cats=DB.metrics.categories||{{}};
+  const data=cats[vertical]||{{}};
+  const companies=data.companies||[];
+  const techLayers=data.tech_layers||{{}};
+  const nv30=DB.metrics.narrative_velocity?.['30_day']||{{}};
+  const vertInv={{}};
+  companies.forEach(n=>{{const c=DB.companies[n]||{{}};(c.funding_rounds||[]).forEach(r=>(r.investors||[]).forEach(inv=>{{vertInv[inv]=(vertInv[inv]||0)+1;}}));}});
+  const topInv=Object.entries(vertInv).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const relatedSpaces=Object.entries(nv30).filter(([s])=>s.toLowerCase().includes(vertical.toLowerCase().split(' ')[0])).slice(0,3);
+
+  document.getElementById('catdetail').innerHTML=`
+    <div class="card" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div style="font-size:18px;font-weight:600">${{vertical}}</div>
+        <button onclick="document.getElementById('catdetail').innerHTML=''" style="font-size:12px;color:#999;background:none;border:none;cursor:pointer">✕ close</button>
+      </div>
+      <div class="grid-3" style="margin-bottom:20px">
+        <div class="card-sm"><div class="metric-val">${{companies.length}}</div><div class="metric-label">Companies</div></div>
+        <div class="card-sm"><div class="metric-val">${{Object.keys(techLayers).length}}</div><div class="metric-label">Tech Layers</div></div>
+        <div class="card-sm"><div class="metric-val">${{topInv.length}}</div><div class="metric-label">Active Investors</div></div>
+      </div>
+      ${{topInv.length?`<div class="section-title">Key investors</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">${{topInv.map(([inv,cnt])=>`<span class="tag">${{inv}} (${{cnt}})</span>`).join('')}}</div>`:''}}
+      ${{relatedSpaces.length?`<div class="section-title">Related problem spaces (30-day)</div><div style="margin-bottom:16px">${{relatedSpaces.map(([s,c])=>`<span class="tag" style="margin:3px">${{s}} (${{c}})</span>`).join('')}}</div>`:''}}
+      <div class="section-title">Companies by tech layer</div>
+      ${{Object.entries(techLayers).map(([tl,cos])=>`
+        <div style="margin-bottom:16px">
+          <span class="tag t" style="margin-bottom:8px;display:inline-block">${{tl}}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+            ${{cos.map(n=>{{const c=DB.companies[n]||{{}};return `
+              <div class="card-sm" style="min-width:200px;flex:1">
+                <div style="font-weight:500;font-size:13px">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':''}}</div>
+                <div style="font-size:11px;color:#666;margin-top:2px">${{c.what_they_do||''}}</div>
+                <div style="font-size:11px;color:#999;margin-top:2px">${{c.location||''}}${{c.founded?' · est. '+c.founded:''}}</div>
+              </div>`;
+            }}).join('')}}
+          </div>
+        </div>`).join('')}}
+    </div>`;
+  document.getElementById('catdetail').scrollIntoView({{behavior:'smooth'}});
+}}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function initAll() {{
+  renderDashboard();
+  renderBriefings();
+  renderCompanies();
+  renderDealflow();
+  renderInvestors();
+  renderExits();
+  renderCategories();
+  if(window.location.hash) {{
+    const el=document.querySelector(window.location.hash);
+    if(el) setTimeout(()=>el.scrollIntoView({{behavior:'smooth'}}),300);
+  }}
+}}
+
+loadData();
 </script>
-</body>
-</html>"""
+</body></html>"""
 
-    with open(WEBSITE_PATH, "w") as f:
+    with open(WEBSITE_F, "w") as f:
         f.write(html)
-
 
 # ── EMAIL ─────────────────────────────────────────────────────────────────────
 
-def build_html(news_briefing, substack_section, connections, date_str):
+def build_email(news, substack, connections, flags, date_str):
     def fmt(text):
-        text = re.sub(
-            r"^## (.+)$",
-            r'<h3 style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee;">\1</h3>',
-            text, flags=re.MULTILINE,
-        )
-        text = re.sub(
-            r"^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$",
-            r'<div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee;">\1</div>',
-            text, flags=re.MULTILINE,
-        )
-        text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
-        text = re.sub(
-            r"^[-*] (.+)$",
-            r'<div style="display:flex;gap:10px;margin-bottom:8px;padding-left:12px;"><span style="color:#ccc;flex-shrink:0;margin-top:2px;">—</span><span>\1</span></div>',
-            text, flags=re.MULTILINE,
-        )
-        text = re.sub(
-            r"(https?://[^\s<)\]]+)",
-            r'<a href="\1" style="color:#0066cc;text-decoration:none;word-break:break-all;">\1</a>',
-            text,
-        )
-        text = re.sub(r"\n\n+", "</p><p>", text)
-        text = text.replace("\n", "<br>")
-        return f"<p>{text}</p>"
+        if not text:
+            return ''
+        text = re.sub(r'^## (.+)$', r'<h3 style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee;">\1</h3>', text, flags=re.MULTILINE)
+        text = re.sub(r"^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$", r'<div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee;">\1</div>', text, flags=re.MULTILINE)
+        text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+        text = re.sub(r'^[-*] (.+)$', r'<div style="display:flex;gap:10px;margin-bottom:8px;padding-left:12px;"><span style="color:#ccc;flex-shrink:0;">—</span><span>\1</span></div>', text, flags=re.MULTILINE)
+        text = re.sub(r'(https?://[^\s<)\]]+)', r'<a href="\1" style="color:#0066cc;text-decoration:none;word-break:break-all;">\1</a>', text)
+        text = re.sub(r'\n\n+', '</p><p>', text)
+        return f'<p>{text.replace(chr(10), "<br>")}</p>'
 
-    connections_html = ""
+    flags_html = ""
+    if flags:
+        flags_html = f"""<div style="margin-bottom:24px;padding:14px 18px;background:#f9f9f7;border-radius:8px;border:1px solid #eee">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:10px">Today's signals</div>
+          {"".join(f'<div style="font-size:13px;margin-bottom:6px;color:#555">→ {f} &nbsp;<a href="{SITE}" style="color:#0066cc;font-size:12px">view dashboard</a></div>' for f in flags)}
+        </div>"""
+
+    conn_html = ""
     if connections:
         parsed = parse_connections(connections)
         if parsed:
-            items_html = ""
-            for c in parsed:
-                past_date  = c.get("PAST_DATE", "")
-                archive_url = f"{SITE_BASE_URL}/#{past_date}" if past_date else SITE_BASE_URL
-                items_html += f"""
-                <div style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:16px;background:#fafafa;">
-                  <div style="font-size:12px;font-weight:600;margin-bottom:8px;">{c.get('CONNECTION','')}</div>
-                  <div style="font-size:13px;color:#555;margin-bottom:4px;"><strong>Then:</strong> {c.get('THEN','')}</div>
-                  <div style="font-size:13px;color:#555;margin-bottom:4px;"><strong>Now:</strong> {c.get('NOW','')}</div>
-                  <div style="font-size:13px;color:#555;margin-bottom:8px;"><strong>Why it matters:</strong> {c.get('SIGNIFICANCE','')}</div>
-                  <a href="{archive_url}" style="font-size:12px;color:#0066cc;text-decoration:none;">View original briefing →</a>
-                </div>"""
-            connections_html = f"""
-            <div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a;">
-              <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:16px;">Connections to the Past</div>
-              {items_html}
-            </div>"""
+            items = "".join(f"""<div class="conn-card" style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa">
+              <div style="font-size:12px;font-weight:600;margin-bottom:8px">{c.get('CONNECTION','')}</div>
+              <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Then:</strong> {c.get('THEN','')}</div>
+              <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Now:</strong> {c.get('NOW','')}</div>
+              <div style="font-size:13px;color:#555;margin-bottom:8px"><strong>Why it matters:</strong> {c.get('SIGNIFICANCE','')}</div>
+              <a href="{SITE}/#{c.get('PAST_DATE','')}" style="font-size:12px;color:#0066cc;text-decoration:none">View original briefing →</a>
+            </div>""" for c in parsed)
+            conn_html = f"""<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Connections to the past</div>
+              {items}</div>"""
 
-    substack_html = ""
-    if substack_section:
-        substack_html = f"""
-        <div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a;">
-          <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:16px;">Substack This Week</div>
-          <div style="line-height:1.75;">{fmt(substack_section)}</div>
-        </div>"""
+    sub_html = f"""<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Substack this week</div>
+      <div style="line-height:1.75">{fmt(substack)}</div></div>""" if substack else ""
 
-    return f"""
-<html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;max-width:700px;margin:0 auto;padding:32px 24px;color:#1a1a1a;font-size:15px;line-height:1.8;">
-  <div style="border-bottom:2px solid #1a1a1a;margin-bottom:28px;padding-bottom:14px;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:4px;">Morning Briefing</div>
-    <div style="font-size:22px;font-weight:600;">{date_str}</div>
-    <a href="{SITE_BASE_URL}" style="font-size:12px;color:#0066cc;text-decoration:none;">View archive →</a>
+    return f"""<html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;max-width:700px;margin:0 auto;padding:32px 24px;color:#1a1a1a;font-size:15px;line-height:1.8">
+  <div style="border-bottom:2px solid #1a1a1a;margin-bottom:24px;padding-bottom:14px">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:4px">Morning Briefing</div>
+    <div style="font-size:22px;font-weight:600">{date_str}</div>
+    <a href="{SITE}" style="font-size:12px;color:#0066cc;text-decoration:none">View archive & dashboard →</a>
   </div>
-  <div>{fmt(news_briefing)}</div>
-  {connections_html}
-  {substack_html}
-  <div style="border-top:1px solid #eee;margin-top:48px;padding-top:12px;font-size:11px;color:#bbb;">
-    Generated daily · <a href="{SITE_BASE_URL}/#{TODAY_ISO}" style="color:#bbb;">View today in archive →</a>
-  </div>
-</body></html>"""
+  {flags_html}
+  <div>{fmt(news)}</div>
+  {conn_html}
+  {sub_html}
+  <div style="border-top:1px solid #eee;margin-top:48px;padding-top:12px;font-size:11px;color:#bbb">
+    Generated daily · <a href="{SITE}/#{TODAY_ISO}" style="color:#bbb">View today in archive →</a>
+  </div></body></html>"""
 
-
-def send_email(subject, html_body):
+def send_email(subject, html):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"]    = GMAIL_ADDRESS
-    msg["To"]      = RECIPIENT_EMAIL
-    msg.attach(MIMEText(html_body, "html"))
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
-        server.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
-
+    msg["From"] = GMAIL_ADDRESS
+    msg["To"] = RECIPIENT_EMAIL
+    msg.attach(MIMEText(html, "html"))
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
+        s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
+        s.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
     print(f"Running — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    briefings = load(BRIEFINGS_F, [])
+    companies = load(COMPANIES_F, {})
 
-    print("  Loading database...")
-    db = load_database()
+    print("  Web search briefing...")
+    news = sonnet_search(news_prompt())
 
-    print("  Running web search briefing...")
-    news = run_with_search(build_news_prompt())
+    print("  Substacks...")
+    posts = fetch_substacks()
+    sub = haiku(substack_prompt(posts), 1000) if posts else None
+    print(f"    {len(posts)} posts")
 
-    print("  Fetching Substack feeds...")
-    posts    = fetch_substacks()
-    substack = None
-    if posts:
-        print(f"    {len(posts)} posts — summarizing...")
-        substack = run_haiku(build_substack_prompt(posts), max_tokens=1000)
+    print("  Extracting data...")
+    structured = extract(news)
 
-    print("  Extracting structured data...")
-    structured = extract_structured_data(news)
+    print("  Updating companies...")
+    hg_new = []
+    companies = update_companies(companies, structured.get("companies",[]), hg_new)
+    companies = fetch_prices(companies)
+    save(COMPANIES_F, companies)
 
-    print("  Scanning for historical connections...")
-    connections = find_connections(structured, db)
-    if connections:
-        print(f"    Found connections")
-    else:
-        print("    No connections yet")
+    print("  Connections scan...")
+    connections = find_connections(structured, briefings)
 
-    print("  Saving to database...")
-    db.append({
-        "date":          TODAY_ISO,
-        "date_display":  TODAY,
-        "companies":     structured.get("companies", []),
-        "problem_spaces": structured.get("problem_spaces", []),
-        "predictions":   structured.get("predictions", []),
+    print("  Computing metrics...")
+    metrics = compute_metrics(briefings, companies)
+    metrics["total_briefings"] = len(briefings) + 1
+    metrics["high_growth_new_today"] = hg_new
+    save(METRICS_F, metrics)
+
+    flags = build_flags(metrics)
+
+    briefings.append({
+        "date": TODAY_ISO, "date_display": TODAY,
+        "companies": structured.get("companies",[]),
+        "problem_spaces": structured.get("problem_spaces",[]),
+        "predictions": structured.get("predictions",[]),
         "full_briefing": news,
     })
-    save_database(db)
+    save(BRIEFINGS_F, briefings)
 
-    print("  Regenerating website...")
-    generate_website(db)
+    print("  Generating website...")
+    generate_website(briefings, companies, metrics)
 
     print("  Sending email...")
-    date_str = datetime.now().strftime("%A, %B %d, %Y")
-    html     = build_html(news, substack, connections, date_str)
-    send_email(f"Morning Briefing — {date_str}", html)
-    print(f"  Done. Sent to {RECIPIENT_EMAIL}")
-
+    html = build_email(news, sub, connections, flags, datetime.now().strftime("%A, %B %d, %Y"))
+    send_email(f"Morning Briefing — {datetime.now().strftime('%A, %B %d, %Y')}", html)
+    print("  Done.")
 
 if __name__ == "__main__":
     main()
