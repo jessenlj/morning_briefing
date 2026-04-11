@@ -149,3 +149,5 @@ def main():
         time.sleep(30)
 
     print(f"\nDone. {len(companies)} companies in docs/data/companies.json")
+    if __name__ == "__main__":
+    main()
