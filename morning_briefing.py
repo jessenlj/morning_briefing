@@ -2,10 +2,7 @@
 import os
 import re
 import smtplib
-import calendar
-import feedparser
-import requests
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import anthropic
@@ -14,120 +11,92 @@ ANTHROPIC_API_KEY  = os.environ.get("ANTHROPIC_API_KEY", "")
 GMAIL_ADDRESS      = os.environ.get("GMAIL_ADDRESS", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 RECIPIENT_EMAIL    = os.environ.get("RECIPIENT_EMAIL", "jessenlj40@gmail.com")
-MAX_ITEMS_PER_SOURCE = 5
-LOOKBACK_HOURS     = 24
 
-RSS_FEEDS = {
-    "TechCrunch":          "https://techcrunch.com/feed/",
-    "TechCrunch Startups": "https://techcrunch.com/category/startups/feed/",
-    "VentureBeat AI":      "https://venturebeat.com/ai/feed/",
-    "Axios":               "https://api.axios.com/feed/",
-    "The Rundown AI":      "https://www.therundown.ai/rss",
-    "Ars Technica":        "https://feeds.arstechnica.com/arstechnica/technology-lab",
-}
+TODAY = datetime.now().strftime("%A, %B %d, %Y")
 
-def fetch_rss(name, url):
-    try:
-        feed   = feedparser.parse(url)
-        cutoff = datetime.now(timezone.utc) - timedelta(hours=LOOKBACK_HOURS)
-        items  = []
-        for entry in feed.entries[:20]:
-            published = None
-            if hasattr(entry, "published_parsed") and entry.published_parsed:
-                published = datetime.fromtimestamp(
-                    calendar.timegm(entry.published_parsed), tz=timezone.utc
-                )
-            if published is None or published >= cutoff:
-                items.append({
-                    "source":  name,
-                    "title":   entry.get("title", ""),
-                    "summary": entry.get("summary", entry.get("description", ""))[:500],
-                    "link":    entry.get("link", ""),
-                })
-            if len(items) >= MAX_ITEMS_PER_SOURCE:
-                break
-        return items
-    except Exception as e:
-        print(f"  [RSS ERROR] {name}: {e}")
-        return []
+PROMPT = f"""Today is {TODAY}. Search the web for today's most important news in VC/startup funding, AI, and tech.
 
-def fetch_hacker_news(n=15):
-    try:
-        top_ids = requests.get(
-            "https://hacker-news.firebaseio.com/v0/topstories.json", timeout=10
-        ).json()[:n]
-        items = []
-        for sid in top_ids:
-            story = requests.get(
-                f"https://hacker-news.firebaseio.com/v0/item/{sid}.json", timeout=5
-            ).json()
-            if story and story.get("type") == "story":
-                items.append({
-                    "source":  "Hacker News",
-                    "title":   story.get("title", ""),
-                    "summary": story.get("text", "")[:300] if story.get("text") else "",
-                    "link":    story.get("url", f"https://news.ycombinator.com/item?id={sid}"),
-                })
-        return items
-    except Exception as e:
-        print(f"  [HN ERROR] {e}")
-        return []
+CRITICAL RULE: For every single company or startup you mention, you must include:
+- What the company actually sells or does (one plain sentence)
+- When it was founded / how old it is
+- Why it is relevant right now
 
-def build_prompt(items):
-    stories = ""
-    for item in items:
-        stories += (
-            f"\nSOURCE: {item['source']}\n"
-            f"TITLE: {item['title']}\n"
-            f"SUMMARY: {item['summary']}\n"
-            f"URL: {item['link']}\n---"
-        )
-    return f"""You are writing a morning briefing for a finance student and entrepreneur tracking VC, startups, and AI. Be analytical, skip boilerplate. 3-minute read.
+Also for every story, include how the market, investors, or online community is responding — not just what happened.
 
-RAW HEADLINES:
-{stories}
+Only use URLs you actually found in search results. Do not fabricate links.
 
-Structure your response exactly like this:
+Write the briefing in exactly this structure:
 
-**TOP STORIES**
-[3-4 most important items with 2-3 sentence analysis each, include URL]
+## TOP STORIES
+[3-4 stories. For each: what happened + analysis, company context (what they do / age / relevance), how people are responding, source URL]
 
-**VC & FUNDING**
-[Notable rounds, exits, investor moves — tight bullet points]
+## VC & FUNDING
+[For each deal: company name + what they do + founded year, deal size + lead investor, why this round matters, source URL]
 
-**AI DEVELOPMENTS**
-[Model releases, research, product launches — tight bullet points]
+## AI DEVELOPMENTS
+[For each item: what was announced, who built it + brief company context, why it matters + early reactions, source URL]
 
-**HACKER NEWS SIGNAL**
-[What the technical community is discussing — bullet points]
+## HACKER NEWS SIGNAL
+[What the technical community is actually debating today, key sentiment]
 
-**ONE LINE TO REMEMBER**
-[Single most important takeaway from today]"""
+## ONE LINE TO REMEMBER
+[The single most important thing from today]
 
-def summarize_with_claude(items):
+Write for a sharp 19-year-old finance student who doesn't know every startup by name. Be analytical. No filler."""
+
+
+def run_briefing():
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    msg = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=1500,
-        messages=[{"role": "user", "content": build_prompt(items)}],
-    )
-    return msg.content[0].text
+    messages = [{"role": "user", "content": PROMPT}]
+    result = ""
+
+    for _ in range(8):
+        response = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=4000,
+            tools=[{"type": "web_search_20250305", "name": "web_search"}],
+            messages=messages
+        )
+
+        texts = [b.text for b in response.content if hasattr(b, "text")]
+        if texts:
+            result = "\n".join(texts)
+
+        if response.stop_reason == "end_turn":
+            break
+        elif response.stop_reason == "tool_use":
+            messages.append({"role": "assistant", "content": response.content})
+        else:
+            break
+
+    return result
+
 
 def build_html(briefing, date_str):
-    body = briefing.replace("\n\n", "</p><p>").replace("\n", "<br>")
-    body = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", body)
-    body = re.sub(r"(https?://[^\s<]+)", r'<a href="\1" style="color:#0066cc;">\1</a>', body)
+    body = briefing
+    body = re.sub(r'^## (.+)$',
+        r'<h3 style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid #eee;">\1</h3>',
+        body, flags=re.MULTILINE)
+    body = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', body)
+    body = re.sub(r'^[-*] (.+)$',
+        r'<div style="display:flex;gap:10px;margin-bottom:8px;"><span style="color:#ccc;flex-shrink:0;margin-top:2px;">—</span><span>\1</span></div>',
+        body, flags=re.MULTILINE)
+    body = re.sub(r'(https?://[^\s<)\]]+)', r'<a href="\1" style="color:#0066cc;text-decoration:none;word-break:break-all;">\1</a>', body)
+    body = re.sub(r'\n\n+', '</p><p>', body)
+    body = body.replace('\n', '<br>')
+
     return f"""
-<html><body style="font-family:Georgia,serif;max-width:680px;margin:0 auto;padding:24px;color:#1a1a1a;">
-  <div style="border-bottom:2px solid #1a1a1a;margin-bottom:20px;padding-bottom:12px;">
-    <h2 style="margin:0;font-size:16px;letter-spacing:3px;text-transform:uppercase;">Morning Briefing</h2>
-    <p style="margin:4px 0 0;color:#888;font-size:12px;">{date_str}</p>
+<html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;max-width:680px;margin:0 auto;padding:32px 24px;color:#1a1a1a;font-size:15px;line-height:1.75;">
+  <div style="border-bottom:2px solid #1a1a1a;margin-bottom:24px;padding-bottom:14px;">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:4px;">Morning Briefing</div>
+    <div style="font-size:22px;font-weight:600;">{date_str}</div>
   </div>
-  <div style="line-height:1.75;font-size:15px;"><p>{body}</p></div>
-  <div style="border-top:1px solid #eee;margin-top:30px;padding-top:10px;font-size:11px;color:#aaa;">
-    Sources: TechCrunch · VentureBeat · Axios · Hacker News · Ars Technica
+  <div><p>{body}</p></div>
+  <div style="border-top:1px solid #eee;margin-top:40px;padding-top:12px;font-size:11px;color:#bbb;">
+    Generated daily via Claude + live web search
   </div>
 </body></html>"""
+
 
 def send_email(subject, html_body):
     msg = MIMEMultipart("alternative")
@@ -139,19 +108,15 @@ def send_email(subject, html_body):
         server.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
         server.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
 
+
 def main():
     print(f"Running — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    all_items = []
-    for name, url in RSS_FEEDS.items():
-        print(f"  Fetching {name}...")
-        all_items.extend(fetch_rss(name, url))
-    print("  Fetching Hacker News...")
-    all_items.extend(fetch_hacker_news())
-    print(f"  Total: {len(all_items)} items — summarizing...")
-    briefing = summarize_with_claude(all_items)
+    print("  Searching and writing briefing...")
+    briefing = run_briefing()
     date_str = datetime.now().strftime("%A, %B %d, %Y")
     send_email(f"Morning Briefing — {date_str}", build_html(briefing, date_str))
     print(f"  Sent to {RECIPIENT_EMAIL}")
+
 
 if __name__ == "__main__":
     main()
