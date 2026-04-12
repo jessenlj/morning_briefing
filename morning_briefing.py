@@ -79,7 +79,7 @@ For EVERY company mentioned, embed this directly underneath before moving on:
   Specific pain point, who feels it, how they currently cope.
 
   DIRECT COMPETITORS
-  Every company attacking the same problem — stage, differentiation.
+  Every company attacking the same problem - stage, differentiation.
 
   ADJACENT PROBLEMS
   Related problems and the companies working on each.
@@ -100,12 +100,12 @@ Only use URLs from actual search results.
 [What was announced, company context, reactions, URL. Full inline analysis.]
 
 ## HACKER NEWS SIGNAL
-[What the technical community is debating — sentiment and key arguments only.]
+[What the technical community is debating - sentiment and key arguments only.]
 
 ## ONE LINE TO REMEMBER
 [Single most important thing today.]
 
-Write for a 19-year-old asking "should I invest?" and "could I build something here?" No filler."""
+Write for a 19-year-old asking should I invest and could I build something here. No filler."""
 
 def substack_prompt(posts):
     raw = "".join(f"\nAUTHOR: {p['author']}\nDATE: {p['date']}\nTITLE: {p['title']}\nSUMMARY: {p['summary']}\nURL: {p['link']}\n---" for p in posts)
@@ -416,70 +416,70 @@ def generate_website(briefings, companies, metrics):
     save(COMPANIES_F, companies)
     save(METRICS_F, metrics)
 
-    html = f"""<!DOCTYPE html>
+    html = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Morning Briefing</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-*{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f3;color:#1a1a1a;font-size:14px;line-height:1.6}}
-.site-header{{background:#1a1a1a;color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center}}
-.site-header h1{{font-size:18px;font-weight:600}}
-.site-header p{{font-size:12px;color:#888;margin-top:2px}}
-.nav{{background:#fff;border-bottom:1px solid #e5e5e5;display:flex;overflow-x:auto;position:sticky;top:0;z-index:100}}
-.nav button{{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent;white-space:nowrap}}
-.nav button:hover{{color:#1a1a1a}}.nav button.active{{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}}
-.container{{max-width:1200px;margin:0 auto;padding:24px 20px}}
-.panel{{display:none}}.panel.active{{display:block}}
-.card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:20px 24px;margin-bottom:16px}}
-.card-sm{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:12px 16px}}
-.grid-2{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
-.grid-3{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}
-.grid-4{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}}
-@media(max-width:768px){{.grid-2,.grid-3,.grid-4{{grid-template-columns:1fr}}}}
-.metric{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;text-align:center}}
-.metric-val{{font-size:28px;font-weight:600}}.metric-label{{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}}
-.tag{{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin:2px;background:#f0f0ee;color:#555}}
-.tag.v{{background:#e8f4fd;color:#1a6bb5}}.tag.t{{background:#f0fdf4;color:#166534}}
-.tag.hg{{background:#fef3c7;color:#92400e}}.tag.f{{background:#f3f4f6;color:#374151}}
-.section-title{{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee}}
-.search-bar{{width:100%;padding:10px 16px;border:1px solid #e5e5e5;border-radius:8px;font-size:14px;margin-bottom:16px;outline:none;background:#fff}}
-.search-bar:focus{{border-color:#1a1a1a}}
-.filter-bar{{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}}
-.pill{{padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;background:#fff;font-size:12px;cursor:pointer}}
-.pill:hover{{border-color:#999}}.pill.active{{background:#1a1a1a;color:#fff;border-color:#1a1a1a}}
-.company-card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}}
-.company-card:hover{{border-color:#999}}
-.company-card .detail{{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0}}
-.company-card.open .detail{{display:block}}
-.round{{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f8f8f8}}
-.round:last-child{{border:none}}
-.round-stage{{font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;background:#f0f0ee;white-space:nowrap;flex-shrink:0}}
-.up{{color:#16a34a;font-weight:500}}.down{{color:#dc2626;font-weight:500}}
-.investor-row{{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5f5f5}}
-.investor-row:last-child{{border:none}}
-.bar-track{{height:4px;background:#f0f0f0;border-radius:2px;margin-top:4px;flex:1}}
-.bar-fill{{height:100%;background:#1a1a1a;border-radius:2px}}
-.momentum-row{{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f5f5f5}}
-.momentum-row:last-child{{border:none}}
-.exit-row{{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f5f5f5}}
-.exit-row:last-child{{border:none}}
-.exit-ipo{{background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}}
-.exit-acq{{background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}}
-.briefing-text h4{{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid #eee}}
-.briefing-text .subh{{font-size:10px;font-weight:600;text-transform:uppercase;color:#ccc;margin:12px 0 4px;padding-left:10px;border-left:2px solid #eee;letter-spacing:.08em}}
-.briefing-text p{{margin-bottom:10px;line-height:1.75}}.briefing-text a{{color:#0066cc}}
-.briefing-text .bul{{display:flex;gap:8px;margin-bottom:6px;padding-left:10px}}
-.briefing-text .dash{{color:#ccc;flex-shrink:0}}
-.cat-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}}
-.cat-card{{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s}}
-.cat-card:hover{{border-color:#999}}
-.chart-h{{position:relative;height:320px;margin:12px 0}}
-.chart-h-lg{{position:relative;height:400px;margin:12px 0}}
-#netCanvas{{width:100%;height:380px;border:1px solid #e5e5e5;border-radius:8px;background:#fafafa}}
-.loading{{color:#999;font-size:14px;padding:40px;text-align:center}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f3;color:#1a1a1a;font-size:14px;line-height:1.6}
+.site-header{background:#1a1a1a;color:#fff;padding:20px 32px;display:flex;justify-content:space-between;align-items:center}
+.site-header h1{font-size:18px;font-weight:600}
+.site-header p{font-size:12px;color:#888;margin-top:2px}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;display:flex;overflow-x:auto;position:sticky;top:0;z-index:100}
+.nav button{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent;white-space:nowrap}
+.nav button:hover{color:#1a1a1a}.nav button.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
+.container{max-width:1200px;margin:0 auto;padding:24px 20px}
+.panel{display:none}.panel.active{display:block}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:20px 24px;margin-bottom:16px}
+.card-sm{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:12px 16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.metric{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;text-align:center}
+.metric-val{font-size:28px;font-weight:600}.metric-label{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin:2px;background:#f0f0ee;color:#555}
+.tag.v{background:#e8f4fd;color:#1a6bb5}.tag.t{background:#f0fdf4;color:#166534}
+.tag.hg{background:#fef3c7;color:#92400e}.tag.f{background:#f3f4f6;color:#374151}
+.section-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee}
+.search-bar{width:100%;padding:10px 16px;border:1px solid #e5e5e5;border-radius:8px;font-size:14px;margin-bottom:16px;outline:none;background:#fff}
+.search-bar:focus{border-color:#1a1a1a}
+.filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.pill{padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;background:#fff;font-size:12px;cursor:pointer}
+.pill:hover{border-color:#999}.pill.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.company-card{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}
+.company-card:hover{border-color:#999}
+.company-card .detail{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0}
+.company-card.open .detail{display:block}
+.round{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f8f8f8}
+.round:last-child{border:none}
+.round-stage{font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;background:#f0f0ee;white-space:nowrap;flex-shrink:0}
+.up{color:#16a34a;font-weight:500}.down{color:#dc2626;font-weight:500}
+.investor-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5f5f5}
+.investor-row:last-child{border:none}
+.bar-track{height:4px;background:#f0f0f0;border-radius:2px;margin-top:4px;flex:1}
+.bar-fill{height:100%;background:#1a1a1a;border-radius:2px}
+.momentum-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f5f5f5}
+.momentum-row:last-child{border:none}
+.exit-row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f5f5f5}
+.exit-row:last-child{border:none}
+.exit-ipo{background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.exit-acq{background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.briefing-text h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid #eee}
+.briefing-text .subh{font-size:10px;font-weight:600;text-transform:uppercase;color:#ccc;margin:12px 0 4px;padding-left:10px;border-left:2px solid #eee;letter-spacing:.08em}
+.briefing-text p{margin-bottom:10px;line-height:1.75}.briefing-text a{color:#0066cc}
+.briefing-text .bul{display:flex;gap:8px;margin-bottom:6px;padding-left:10px}
+.briefing-text .dash{color:#ccc;flex-shrink:0}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.cat-card{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s}
+.cat-card:hover{border-color:#999}
+.chart-h{position:relative;height:320px;margin:12px 0}
+.chart-h-lg{position:relative;height:400px;margin:12px 0}
+#netCanvas{width:100%;height:380px;border:1px solid #e5e5e5;border-radius:8px;background:#fafafa}
+.loading{color:#999;font-size:14px;padding:40px;text-align:center}
 </style>
 </head>
 <body>
@@ -508,414 +508,347 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;b
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
 </div>
 <script>
-const BASE='{SITE}';
-let DB={{}},charts={{}};
-async function loadData(){{
+const BASE='__SITE__';
+let DB={},charts={};
+async function loadData(){
   const [b,c,m]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
-    fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({{}})),
-    fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({{}})),
+    fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({})),
+    fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({})),
   ]);
   DB.briefings=b;DB.companies=c;DB.metrics=m;
   initAll();
-}}
-function tab(id,btn){{
+}
+function tab(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
-}}
-function pct(v){{
-  if(v==null)return '—';
+}
+function pct(v){
+  if(v==null)return '-';
   const s=v>=0?'+':'',cls=v>=0?'up':'down';
-  return `<span class="${{cls}}">${{s}}${{v.toFixed(1)}}%</span>`;
-}}
-function fmt(text){{
+  return '<span class="'+cls+'">'+s+v.toFixed(1)+'%</span>';
+}
+function fmt(text){
   if(!text)return '';
   text=text.replace(/## (.+)/gm,'<h4>$1</h4>');
   text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
   text=text.replace(/^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$/gm,'<div class="subh">$1</div>');
-  text=text.replace(/^[-*] (.+)/gm,'<div class="bul"><span class="dash">—</span><span>$1</span></div>');
+  text=text.replace(/^[-*] (.+)/gm,'<div class="bul"><span class="dash">-</span><span>$1</span></div>');
   text=text.replace(/(https?:\/\/[^\s<)\]]+)/g,'<a href="$1">$1</a>');
   text=text.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>');
   return '<p>'+text+'</p>';
-}}
-function renderDashboard(){{
-  const {{briefings,companies,metrics}}=DB;
+}
+function renderDashboard(){
+  const {briefings,companies,metrics}=DB;
   const cos=Object.values(companies);
   const hg=metrics.high_growth||[];
-  const nv30=metrics.narrative_velocity?.['30_day']||{{}};
-  const nv90=metrics.narrative_velocity?.['90_day']||{{}};
-  const invDeals=metrics.investor_activity?.by_deals||{{}};
+  const nv30=metrics.narrative_velocity&&metrics.narrative_velocity['30_day']||{};
+  const nv90=metrics.narrative_velocity&&metrics.narrative_velocity['90_day']||{};
+  const invDeals=metrics.investor_activity&&metrics.investor_activity.by_deals||{};
   const exits=metrics.exits||[];
   const spaces=[...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,8);
   const invEntries=Object.entries(invDeals).slice(0,8);
-  const maxInv=invEntries[0]?.[1]||1;
+  const maxInv=invEntries[0]?invEntries[0][1]:1;
   const momentumEntries=Object.entries(nv30).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  const max30=momentumEntries[0]?.[1]||1;
-  document.getElementById('hdr-stats').textContent=`${{briefings.length}} briefings · ${{cos.length}} companies · ${{hg.length}} high-growth`;
-  document.getElementById('tab-dashboard').innerHTML=`
-    <div class="grid-4" style="margin-bottom:20px">
-      ${{[['Total Companies',cos.length,''],['Briefings',briefings.length,''],['High-Growth',hg.length,'flagged'],['Exits',exits.length,'tracked']].map(([l,v,s])=>`
-      <div class="metric"><div class="metric-val">${{v}}</div><div class="metric-label">${{l}}</div>${{s?`<div style="font-size:12px;color:#999">${{s}}</div>`:''}}</div>`).join('')}}
-    </div>
-    <div class="grid-2" style="margin-bottom:16px">
-      <div class="card">
-        <div class="section-title" style="margin-top:0">Sector radar — 30d vs 90d</div>
-        <div class="chart-h"><canvas id="radarMain"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="section-title" style="margin-top:0">30-day momentum</div>
-        ${{momentumEntries.map(([sp,cnt])=>{{
-          const cnt90=nv90[sp]||0,exp=cnt90/3||0.1,acc=Math.round((cnt/exp-1)*100);
-          return `<div class="momentum-row">
-            <div style="flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${{sp}}</div>
-            <div class="bar-track" style="flex:2"><div class="bar-fill" style="width:${{(cnt/max30*100).toFixed(0)}}%"></div></div>
-            <div style="font-size:12px;color:#666;min-width:40px;text-align:right">${{cnt}}${{acc>20?' <span style="color:#16a34a;font-size:10px">↑</span>':''}}</div>
-          </div>`;
-        }}).join('')}}
-      </div>
-    </div>
-    <div class="grid-2" style="margin-bottom:16px">
-      <div class="card">
-        <div class="section-title" style="margin-top:0">Top investors</div>
-        ${{invEntries.map(([inv,cnt])=>`
-        <div class="investor-row">
-          <div style="flex:1"><div style="font-weight:500">${{inv}}</div>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track"><div class="bar-fill" style="width:${{(cnt/maxInv*100).toFixed(0)}}%"></div></div></div></div>
-          <div style="font-weight:500;margin-left:12px">${{cnt}}</div>
-        </div>`).join('')}}
-      </div>
-      <div class="card">
-        <div class="section-title" style="margin-top:0">High-growth watchlist</div>
-        ${{hg.slice(0,6).map(n=>{{const c=companies[n]||{{}};return `
-        <div style="padding:8px 0;border-bottom:1px solid #f5f5f5">
-          <div style="font-weight:500;font-size:13px">${{n}}</div>
-          <div style="font-size:12px;color:#666">${{c.what_they_do||''}}</div>
-          <div style="margin-top:4px">${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}</div>
-        </div>`;}}).join('')||'<div style="color:#999;font-size:13px">No companies flagged yet.</div>'}}
-      </div>
-    </div>
-    <div class="card">
-      <div class="section-title" style="margin-top:0">Recent exits</div>
-      ${{exits.slice(0,5).map(e=>`
-      <div class="exit-row">
-        <span class="${{e.exit_type==='IPO'?'exit-ipo':'exit-acq'}}">${{e.exit_type}}</span>
-        <div><div style="font-weight:500">${{e.company}}${{e.ticker?` (${{e.ticker}})`:''}}</div>
-        <div style="font-size:12px;color:#666">${{e.industry_vertical||''}}${{e.date?' · '+e.date:''}}</div></div>
-      </div>`).join('')||'<div style="color:#999;font-size:13px">No exits yet.</div>'}}
-    </div>`;
-  if(spaces.length){{
+  const max30=momentumEntries[0]?momentumEntries[0][1]:1;
+  document.getElementById('hdr-stats').textContent=briefings.length+' briefings - '+cos.length+' companies - '+hg.length+' high-growth';
+  let metricsHtml='<div class="grid-4" style="margin-bottom:20px">';
+  [['Total Companies',cos.length,''],['Briefings',briefings.length,''],['High-Growth',hg.length,'flagged'],['Exits',exits.length,'tracked']].forEach(function(item){
+    metricsHtml+='<div class="metric"><div class="metric-val">'+item[1]+'</div><div class="metric-label">'+item[0]+'</div>'+(item[2]?'<div style="font-size:12px;color:#999">'+item[2]+'</div>':'')+'</div>';
+  });
+  metricsHtml+='</div>';
+  let momentumHtml='';
+  momentumEntries.forEach(function(entry){
+    const sp=entry[0],cnt=entry[1];
+    const cnt90=nv90[sp]||0,exp=cnt90/3||0.1,acc=Math.round((cnt/exp-1)*100);
+    momentumHtml+='<div class="momentum-row"><div style="flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+sp+'</div><div class="bar-track" style="flex:2"><div class="bar-fill" style="width:'+Math.round(cnt/max30*100)+'%"></div></div><div style="font-size:12px;color:#666;min-width:40px;text-align:right">'+cnt+(acc>20?' <span style="color:#16a34a;font-size:10px">up</span>':'')+'</div></div>';
+  });
+  let invHtml='';
+  invEntries.forEach(function(entry){
+    const inv=entry[0],cnt=entry[1];
+    invHtml+='<div class="investor-row"><div style="flex:1"><div style="font-weight:500">'+inv+'</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(cnt/maxInv*100)+'%"></div></div></div></div><div style="font-weight:500;margin-left:12px">'+cnt+'</div></div>';
+  });
+  let hgHtml='';
+  hg.slice(0,6).forEach(function(n){
+    const c=companies[n]||{};
+    hgHtml+='<div style="padding:8px 0;border-bottom:1px solid #f5f5f5"><div style="font-weight:500;font-size:13px">'+n+'</div><div style="font-size:12px;color:#666">'+(c.what_they_do||'')+'</div><div style="margin-top:4px">'+(c.industry_vertical?'<span class="tag v">'+c.industry_vertical+'</span>':'')+(c.tech_layer?'<span class="tag t">'+c.tech_layer+'</span>':'')+'</div></div>';
+  });
+  if(!hgHtml) hgHtml='<div style="color:#999;font-size:13px">No companies flagged yet.</div>';
+  let exitsHtml='';
+  exits.slice(0,5).forEach(function(e){
+    exitsHtml+='<div class="exit-row"><span class="'+(e.exit_type==='IPO'?'exit-ipo':'exit-acq')+'">'+e.exit_type+'</span><div><div style="font-weight:500">'+e.company+(e.ticker?' ('+e.ticker+')':'')+'</div><div style="font-size:12px;color:#666">'+(e.industry_vertical||'')+(e.date?' - '+e.date:'')+'</div></div></div>';
+  });
+  if(!exitsHtml) exitsHtml='<div style="color:#999;font-size:13px">No exits yet.</div>';
+  document.getElementById('tab-dashboard').innerHTML=metricsHtml+'<div class="grid-2" style="margin-bottom:16px"><div class="card"><div class="section-title" style="margin-top:0">Sector radar - 30d vs 90d</div><div class="chart-h"><canvas id="radarMain"></canvas></div></div><div class="card"><div class="section-title" style="margin-top:0">30-day momentum</div>'+momentumHtml+'</div></div><div class="grid-2" style="margin-bottom:16px"><div class="card"><div class="section-title" style="margin-top:0">Top investors</div>'+invHtml+'</div><div class="card"><div class="section-title" style="margin-top:0">High-growth watchlist</div>'+hgHtml+'</div></div><div class="card"><div class="section-title" style="margin-top:0">Recent exits</div>'+exitsHtml+'</div>';
+  if(spaces.length){
     const ctx=document.getElementById('radarMain');
-    if(ctx)new Chart(ctx,{{type:'radar',data:{{
-      labels:spaces.map(s=>s.length>20?s.slice(0,18)+'…':s),
-      datasets:[
-        {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.1)',pointRadius:3}},
-        {{label:'90d (÷3)',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#ccc',backgroundColor:'rgba(200,200,200,0.1)',pointRadius:3,borderDash:[4,4]}},
-      ]
-    }},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},scales:{{r:{{ticks:{{stepSize:1,font:{{size:10}}}},pointLabels:{{font:{{size:10}}}}}}}}}}
-    }});
-  }}
-}}
-function renderBriefings(){{
-  document.getElementById('tab-briefings').innerHTML=`
-    <input class="search-bar" placeholder="Search briefings..." oninput="filterBriefings(this.value)">
-    <div id="blist"></div>`;
-  document.getElementById('blist').innerHTML=DB.briefings.slice().reverse().map(e=>`
-    <div class="card" id="${{e.date}}">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-size:16px;font-weight:600">${{e.date_display||e.date}}</div>
-        <a href="#{{{e.date}}}" style="font-size:12px;color:#aaa;text-decoration:none">#</a>
-      </div>
-      <div style="margin-bottom:10px">${{(e.companies||[]).map(c=>`<span class="tag">${{c.name}}</span>`).join('')}}</div>
-      <div class="briefing-text">${{fmt(e.full_briefing)}}</div>
-    </div>`).join('');
-}}
-function filterBriefings(q){{
+    if(ctx) new Chart(ctx,{type:'radar',data:{labels:spaces.map(function(s){return s.length>20?s.slice(0,18)+'...':s;}),datasets:[{label:'30 days',data:spaces.map(function(s){return nv30[s]||0;}),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.1)',pointRadius:3},{label:'90d div3',data:spaces.map(function(s){return (nv90[s]||0)/3;}),borderColor:'#ccc',backgroundColor:'rgba(200,200,200,0.1)',pointRadius:3,borderDash:[4,4]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{r:{ticks:{stepSize:1,font:{size:10}},pointLabels:{font:{size:10}}}}}});
+  }
+}
+function renderBriefings(){
+  document.getElementById('tab-briefings').innerHTML='<input class="search-bar" placeholder="Search briefings..." oninput="filterBriefings(this.value)"><div id="blist"></div>';
+  let html='';
+  DB.briefings.slice().reverse().forEach(function(e){
+    html+='<div class="card" id="'+e.date+'"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:16px;font-weight:600">'+(e.date_display||e.date)+'</div><a href="#'+e.date+'" style="font-size:12px;color:#aaa;text-decoration:none">#</a></div><div style="margin-bottom:10px">';
+    (e.companies||[]).forEach(function(c){html+='<span class="tag">'+c.name+'</span>';});
+    html+='</div><div class="briefing-text">'+fmt(e.full_briefing)+'</div></div>';
+  });
+  document.getElementById('blist').innerHTML=html;
+}
+function filterBriefings(q){
   q=q.toLowerCase();
-  document.querySelectorAll('#blist .card').forEach(el=>{{el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';}});
-}}
+  document.querySelectorAll('#blist .card').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+}
 let activeV=null;
-function renderCompanies(){{
+function renderCompanies(){
   const cos=Object.entries(DB.companies);
-  const verticals=[...new Set(cos.map(([,c])=>c.industry_vertical).filter(Boolean))].sort();
-  document.getElementById('tab-companies').innerHTML=`
-    <input class="search-bar" placeholder="Search companies..." oninput="filterCos(this.value)" id="cosearch">
-    <div class="filter-bar"><button class="pill active" onclick="filterV(null,this)">All</button>${{verticals.map(v=>`<button class="pill" onclick="filterV('${{v.replace(/'/g,"\\\\'")}}',this)">${{v}}</button>`).join('')}}</div>
-    <div id="coslist"></div>`;
+  const verticals=[...new Set(cos.map(function(x){return x[1].industry_vertical;}).filter(Boolean))].sort();
+  let pillsHtml='<button class="pill active" onclick="filterV(null,this)">All</button>';
+  verticals.forEach(function(v){pillsHtml+='<button class="pill" onclick="filterV(this.dataset.v,this)" data-v="'+v+'">'+v+'</button>';});
+  document.getElementById('tab-companies').innerHTML='<input class="search-bar" placeholder="Search companies..." oninput="filterCos(this.value)" id="cosearch"><div class="filter-bar">'+pillsHtml+'</div><div id="coslist"></div>';
   renderCoslist(cos);
-}}
-function filterV(v,btn){{
+}
+function filterV(v,btn){
   activeV=v;
-  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('active');});
   btn.classList.add('active');
   filterCos(document.getElementById('cosearch').value);
-}}
-function filterCos(q){{
+}
+function filterCos(q){
   q=(q||'').toLowerCase();
-  const cos=Object.entries(DB.companies).filter(([n,c])=>{{
+  const cos=Object.entries(DB.companies).filter(function(x){
+    const n=x[0],c=x[1];
     const mq=!q||n.toLowerCase().includes(q)||(c.what_they_do||'').toLowerCase().includes(q);
     const mv=!activeV||c.industry_vertical===activeV;
     return mq&&mv;
-  }});
+  });
   renderCoslist(cos);
-}}
-function renderCoslist(cos){{
+}
+function renderCoslist(cos){
   const el=document.getElementById('coslist');
   if(!el)return;
-  el.innerHTML=cos.sort((a,b)=>((b[1].last_updated||'')).localeCompare(a[1].last_updated||'')).map(([n,c])=>{{
+  let html='';
+  cos.sort(function(a,b){return (b[1].last_updated||'').localeCompare(a[1].last_updated||'');}).forEach(function(x){
+    const n=x[0],c=x[1];
     const rounds=c.funding_rounds||[];
-    const total=rounds.reduce((s,r)=>s+(r.amount_m||0),0);
+    const total=rounds.reduce(function(s,r){return s+(r.amount_m||0);},0);
     const last=rounds.length?rounds[rounds.length-1]:null;
-    return `<div class="company-card" onclick="this.classList.toggle('open')">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div style="font-weight:500;font-size:15px;margin-bottom:3px">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HIGH GROWTH</span>':''}}${{c.status==='public'?' <span class="tag t" style="font-size:10px">PUBLIC</span>':''}}</div>
-          <div style="font-size:13px;color:#666;margin-bottom:6px">${{c.what_they_do||''}}</div>
-          <div>${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}${{c.location?`<span class="tag">${{c.location}}</span>`:''}}${{(c.founder_backgrounds||[]).map(b=>`<span class="tag f">${{b}}</span>`).join('')}}</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;margin-left:12px">
-          ${{total>0?`<div style="font-weight:500">$${{total>=1000?(total/1000).toFixed(1)+'B':total+'M'}}</div>`:''}}
-          ${{last?`<div style="font-size:11px;color:#aaa">${{last.stage||''}} · ${{last.date||''}}</div>`:''}}
-        </div>
-      </div>
-      <div class="detail">
-        <div class="section-title" style="margin-top:0">Funding history</div>
-        ${{rounds.length?rounds.map(r=>`<div class="round"><span class="round-stage">${{r.stage||''}}</span><div><div style="font-weight:500">${{r.amount_m?'$'+r.amount_m+'M':''}}${{r.valuation_b?' · $'+r.valuation_b+'B val':''}}</div><div style="font-size:12px;color:#666">${{(r.investors||[]).join(', ')||'—'}}</div></div><div style="font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap">${{r.date||''}}</div></div>`).join(''):'<div style="color:#999;font-size:13px">No rounds tracked</div>'}}
-        ${{c.high_growth&&c.high_growth_reasoning?`<div style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:6px;font-size:12px;color:#92400e"><strong>High-growth signal:</strong> ${{c.high_growth_reasoning}}</div>`:''}}
-      </div>
-    </div>`;
-  }}).join('');
-}}
-function renderDealflow(){{
+    let roundsHtml='';
+    if(rounds.length){
+      rounds.forEach(function(r){
+        roundsHtml+='<div class="round"><span class="round-stage">'+(r.stage||'')+'</span><div><div style="font-weight:500">'+(r.amount_m?'$'+r.amount_m+'M':'')+(r.valuation_b?' - $'+r.valuation_b+'B val':'')+'</div><div style="font-size:12px;color:#666">'+((r.investors||[]).join(', ')||'-')+'</div></div><div style="font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap">'+(r.date||'')+'</div></div>';
+      });
+    } else {
+      roundsHtml='<div style="color:#999;font-size:13px">No rounds tracked</div>';
+    }
+    html+='<div class="company-card" onclick="this.classList.toggle(\'open\')"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-weight:500;font-size:15px;margin-bottom:3px">'+n+(c.high_growth?' <span class="tag hg" style="font-size:10px">HIGH GROWTH</span>':'')+(c.status==='public'?' <span class="tag t" style="font-size:10px">PUBLIC</span>':'')+'</div><div style="font-size:13px;color:#666;margin-bottom:6px">'+(c.what_they_do||'')+'</div><div>'+(c.industry_vertical?'<span class="tag v">'+c.industry_vertical+'</span>':'')+(c.tech_layer?'<span class="tag t">'+c.tech_layer+'</span>':'')+(c.location?'<span class="tag">'+c.location+'</span>':'')+((c.founder_backgrounds||[]).map(function(b){return '<span class="tag f">'+b+'</span>';}).join(''))+'</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px">'+(total>0?'<div style="font-weight:500">$'+(total>=1000?(total/1000).toFixed(1)+'B':total+'M')+'</div>':'')+(last?'<div style="font-size:11px;color:#aaa">'+(last.stage||'')+' - '+(last.date||'')+'</div>':'')+'</div></div><div class="detail"><div class="section-title" style="margin-top:0">Funding history</div>'+roundsHtml+(c.high_growth&&c.high_growth_reasoning?'<div style="margin-top:12px;padding:10px;background:#fffbeb;border-radius:6px;font-size:12px;color:#92400e"><strong>High-growth signal:</strong> '+c.high_growth_reasoning+'</div>':'')+'</div></div>';
+  });
+  el.innerHTML=html;
+}
+function renderDealflow(){
   const cos=Object.entries(DB.companies);
   const stageOrder=['Pre-Seed','Seed','Series A','Series B','Series C','Series D','Growth','Unknown'];
-  const byStage={{}};
-  cos.filter(([,c])=>c.status!=='public').forEach(([n,c])=>{{
-    (c.funding_rounds||[]).forEach(r=>{{
+  const byStage={};
+  cos.filter(function(x){return x[1].status!=='public';}).forEach(function(x){
+    const n=x[0],c=x[1];
+    (c.funding_rounds||[]).forEach(function(r){
       const s=r.stage||'Unknown';
       if(!byStage[s])byStage[s]=[];
-      byStage[s].push({{n,c,r}});
-    }});
-  }});
+      byStage[s].push({n:n,c:c,r:r});
+    });
+  });
   let privateHtml='';
-  stageOrder.forEach(stage=>{{
-    if(!byStage[stage]?.length)return;
-    const sorted=byStage[stage].sort((a,b)=>(b.r.date||'').localeCompare(a.r.date||''));
-    privateHtml+=`<div class="section-title">${{stage}}</div>`;
-    privateHtml+=sorted.map(({{{n,c,r}}})=>`
-      <div class="card-sm" style="margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div style="font-weight:500">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':''}}</div>
-            <div style="font-size:12px;color:#666;margin:2px 0">${{c.what_they_do||''}}</div>
-            <div style="font-size:12px;color:#555">Investors: ${{(r.investors||[]).join(', ')||'—'}}</div>
-            <div style="margin-top:4px">${{c.industry_vertical?`<span class="tag v">${{c.industry_vertical}}</span>`:''}}${{c.tech_layer?`<span class="tag t">${{c.tech_layer}}</span>`:''}}</div>
-          </div>
-          <div style="text-align:right;flex-shrink:0;margin-left:12px">
-            ${{r.amount_m?`<div style="font-weight:600">$${{r.amount_m}}M</div>`:''}}
-            ${{r.valuation_b?`<div style="font-size:12px;color:#666">$${{r.valuation_b}}B val</div>`:''}}
-            <div style="font-size:11px;color:#aaa">${{r.date||''}}</div>
-          </div>
-        </div>
-      </div>`).join('');
-  }});
-  const publicCos=cos.filter(([,c])=>c.status==='public');
-  const publicHtml=publicCos.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
-    <thead><tr style="border-bottom:2px solid #e5e5e5">
-      ${{['Company','Ticker','Price','Today','Since IPO','IPO Date'].map(h=>`<th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em">${{h}}</th>`).join('')}}
-    </tr></thead><tbody>
-    ${{publicCos.map(([n,c])=>`<tr style="border-bottom:1px solid #f5f5f5">
-      <td style="padding:10px 12px;font-weight:500">${{n}}</td>
-      <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ticker||'—'}}</td>
-      <td style="padding:10px 12px">${{c.current_price?'$'+c.current_price:'—'}}</td>
-      <td style="padding:10px 12px">${{pct(c.price_change_today_pct)}}</td>
-      <td style="padding:10px 12px">${{pct(c.price_change_since_ipo_pct)}}</td>
-      <td style="padding:10px 12px;font-size:12px;color:#666">${{c.ipo_date||'—'}}</td>
-    </tr>`).join('')}}
-    </tbody></table></div>`:'<div style="color:#999">No public companies tracked yet.</div>';
-  document.getElementById('tab-dealflow').innerHTML=
-    `<div class="section-title" style="margin-top:0">Private — all funding rounds</div>${{privateHtml}}
-     <div class="section-title" style="margin-top:32px">Gone public</div>${{publicHtml}}`;
-}}
-function renderVelocity(){{
-  const nv30=DB.metrics.narrative_velocity?.['30_day']||{{}};
-  const nv90=DB.metrics.narrative_velocity?.['90_day']||{{}};
-  const timeline=DB.metrics.narrative_velocity?.timeline||{{}};
+  stageOrder.forEach(function(stage){
+    if(!byStage[stage]||!byStage[stage].length)return;
+    const sorted=byStage[stage].sort(function(a,b){return (b.r.date||'').localeCompare(a.r.date||'');});
+    privateHtml+='<div class="section-title">'+stage+'</div>';
+    sorted.forEach(function(item){
+      const n=item.n,c=item.c,r=item.r;
+      privateHtml+='<div class="card-sm" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-weight:500">'+n+(c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':'')+'</div><div style="font-size:12px;color:#666;margin:2px 0">'+(c.what_they_do||'')+'</div><div style="font-size:12px;color:#555">Investors: '+((r.investors||[]).join(', ')||'-')+'</div><div style="margin-top:4px">'+(c.industry_vertical?'<span class="tag v">'+c.industry_vertical+'</span>':'')+(c.tech_layer?'<span class="tag t">'+c.tech_layer+'</span>':'')+'</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px">'+(r.amount_m?'<div style="font-weight:600">$'+r.amount_m+'M</div>':'')+(r.valuation_b?'<div style="font-size:12px;color:#666">$'+r.valuation_b+'B val</div>':'')+'<div style="font-size:11px;color:#aaa">'+(r.date||'')+'</div></div></div></div>';
+    });
+  });
+  const publicCos=cos.filter(function(x){return x[1].status==='public';});
+  let publicHtml='';
+  if(publicCos.length){
+    publicHtml='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr style="border-bottom:2px solid #e5e5e5"><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">Company</th><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">Ticker</th><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">Price</th><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">Today</th><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">Since IPO</th><th style="text-align:left;padding:8px 12px;font-size:11px;color:#999;text-transform:uppercase">IPO Date</th></tr></thead><tbody>';
+    publicCos.forEach(function(x){
+      const n=x[0],c=x[1];
+      publicHtml+='<tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px;font-weight:500">'+n+'</td><td style="padding:10px 12px;font-size:12px;color:#666">'+(c.ticker||'-')+'</td><td style="padding:10px 12px">'+(c.current_price?'$'+c.current_price:'-')+'</td><td style="padding:10px 12px">'+pct(c.price_change_today_pct)+'</td><td style="padding:10px 12px">'+pct(c.price_change_since_ipo_pct)+'</td><td style="padding:10px 12px;font-size:12px;color:#666">'+(c.ipo_date||'-')+'</td></tr>';
+    });
+    publicHtml+='</tbody></table></div>';
+  } else {
+    publicHtml='<div style="color:#999">No public companies tracked yet.</div>';
+  }
+  document.getElementById('tab-dealflow').innerHTML='<div class="section-title" style="margin-top:0">Private - all funding rounds</div>'+privateHtml+'<div class="section-title" style="margin-top:32px">Gone public</div>'+publicHtml;
+}
+function renderVelocity(){
+  const nv30=DB.metrics.narrative_velocity&&DB.metrics.narrative_velocity['30_day']||{};
+  const nv90=DB.metrics.narrative_velocity&&DB.metrics.narrative_velocity['90_day']||{};
   const spaces=[...new Set([...Object.keys(nv30),...Object.keys(nv90)])].slice(0,10);
-  const topSpaces=Object.entries(nv90).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([s])=>s);
-  document.getElementById('tab-velocity').innerHTML=`
-    <div class="grid-2" style="margin-bottom:16px">
-      <div class="card"><div class="section-title" style="margin-top:0">Sector radar — 30d vs 90d</div><div class="chart-h-lg"><canvas id="radarFull"></canvas></div></div>
-      <div class="card"><div class="section-title" style="margin-top:0">Bubble — size=total mentions, position=acceleration</div><div class="chart-h-lg"><canvas id="bubbleMain"></canvas></div></div>
-    </div>
-    <div class="card"><div class="section-title" style="margin-top:0">Activity stream — top problem spaces over time</div><div class="chart-h-lg"><canvas id="riverMain"></canvas></div></div>`;
-  if(spaces.length){{
-    new Chart(document.getElementById('radarFull'),{{type:'radar',data:{{
-      labels:spaces.map(s=>s.length>22?s.slice(0,20)+'…':s),
-      datasets:[
-        {{label:'30 days',data:spaces.map(s=>nv30[s]||0),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.15)',pointRadius:4}},
-        {{label:'90d normalized',data:spaces.map(s=>(nv90[s]||0)/3),borderColor:'#999',backgroundColor:'rgba(150,150,150,0.1)',pointRadius:4,borderDash:[5,5]}},
-      ]
-    }},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'bottom'}}}},scales:{{r:{{ticks:{{stepSize:1}},pointLabels:{{font:{{size:11}}}}}}}}}}
-    }});
-  }}
-  const bData=Object.entries(nv30).map(([sp,c30])=>{{
+  const topSpaces=Object.entries(nv90).sort(function(a,b){return b[1]-a[1];}).slice(0,6).map(function(x){return x[0];});
+  document.getElementById('tab-velocity').innerHTML='<div class="grid-2" style="margin-bottom:16px"><div class="card"><div class="section-title" style="margin-top:0">Sector radar - 30d vs 90d</div><div class="chart-h-lg"><canvas id="radarFull"></canvas></div></div><div class="card"><div class="section-title" style="margin-top:0">Bubble - size=total mentions, position=acceleration</div><div class="chart-h-lg"><canvas id="bubbleMain"></canvas></div></div></div><div class="card"><div class="section-title" style="margin-top:0">Activity stream - top problem spaces over time</div><div class="chart-h-lg"><canvas id="riverMain"></canvas></div></div>';
+  if(spaces.length){
+    new Chart(document.getElementById('radarFull'),{type:'radar',data:{labels:spaces.map(function(s){return s.length>22?s.slice(0,20)+'...':s;}),datasets:[{label:'30 days',data:spaces.map(function(s){return nv30[s]||0;}),borderColor:'#1a1a1a',backgroundColor:'rgba(26,26,26,0.15)',pointRadius:4},{label:'90d normalized',data:spaces.map(function(s){return (nv90[s]||0)/3;}),borderColor:'#999',backgroundColor:'rgba(150,150,150,0.1)',pointRadius:4,borderDash:[5,5]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{r:{ticks:{stepSize:1},pointLabels:{font:{size:11}}}}}});
+  }
+  const bData=Object.entries(nv30).map(function(x){
+    const sp=x[0],c30=x[1];
     const c90=nv90[sp]||0,exp=c90/3||0.5,acc=(c30/exp)-1;
-    return {{x:c30,y:acc,r:Math.min(Math.sqrt(c90)*4+4,30),label:sp}};
-  }}).filter(d=>d.x>0);
-  if(bData.length){{
-    new Chart(document.getElementById('bubbleMain'),{{type:'bubble',
-      data:{{datasets:[{{label:'Problem spaces',data:bData,backgroundColor:'rgba(26,26,26,0.6)',borderColor:'#1a1a1a'}}]}},
-      options:{{responsive:true,maintainAspectRatio:false,
-        plugins:{{legend:{{display:false}},tooltip:{{callbacks:{{label:ctx=>`${{ctx.raw.label}}: ${{ctx.raw.x}} mentions, ${{(ctx.raw.y*100).toFixed(0)}}% accel`}}}}}},
-        scales:{{x:{{title:{{display:true,text:'30-day mentions'}}}},y:{{title:{{display:true,text:'Acceleration vs baseline'}},ticks:{{callback:v=>(v*100).toFixed(0)+'%'}}}}}}
-      }}
-    }});
-  }}
-  const dateMap={{}};
-  DB.briefings.forEach(e=>{{
-    dateMap[e.date]=dateMap[e.date]||{{}};
-    (e.problem_spaces||[]).forEach(ps=>{{if(topSpaces.includes(ps))dateMap[e.date][ps]=(dateMap[e.date][ps]||0)+1;}});
-  }});
+    return {x:c30,y:acc,r:Math.min(Math.sqrt(c90)*4+4,30),label:sp};
+  }).filter(function(d){return d.x>0;});
+  if(bData.length){
+    new Chart(document.getElementById('bubbleMain'),{type:'bubble',data:{datasets:[{label:'Problem spaces',data:bData,backgroundColor:'rgba(26,26,26,0.6)',borderColor:'#1a1a1a'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw.label+': '+ctx.raw.x+' mentions, '+(ctx.raw.y*100).toFixed(0)+'% accel';}}}},scales:{x:{title:{display:true,text:'30-day mentions'}},y:{title:{display:true,text:'Acceleration vs baseline'},ticks:{callback:function(v){return (v*100).toFixed(0)+'%';}}}}}});
+  }
+  const dateMap={};
+  DB.briefings.forEach(function(e){
+    dateMap[e.date]=dateMap[e.date]||{};
+    (e.problem_spaces||[]).forEach(function(ps){if(topSpaces.includes(ps))dateMap[e.date][ps]=(dateMap[e.date][ps]||0)+1;});
+  });
   const dates=Object.keys(dateMap).sort().slice(-60);
   const colors=['#1a1a1a','#555','#888','#aaa','#bbb','#ddd'];
-  if(dates.length&&topSpaces.length){{
-    new Chart(document.getElementById('riverMain'),{{type:'line',
-      data:{{labels:dates,datasets:topSpaces.map((sp,i)=>{{
-        const rgb=i===0?'26,26,26':i===1?'85,85,85':i===2?'136,136,136':'170,170,170';
-        return {{label:sp,data:dates.map(d=>dateMap[d]?.[sp]||0),fill:true,
-          borderColor:colors[i],backgroundColor:`rgba(${{rgb}},0.25)`,tension:0.4,pointRadius:0}};
-      }})}},
-      options:{{responsive:true,maintainAspectRatio:false,
-        plugins:{{legend:{{position:'bottom',labels:{{font:{{size:11}}}}}}}},
-        scales:{{x:{{ticks:{{maxTicksLimit:10,font:{{size:10}}}}}},y:{{stacked:false}}}}
-      }}
-    }});
-  }}
-}}
-function renderInvestors(){{
-  const invDeals=DB.metrics.investor_activity?.by_deals||{{}};
-  const coInvest=DB.metrics.investor_activity?.co_investments||[];
+  if(dates.length&&topSpaces.length){
+    new Chart(document.getElementById('riverMain'),{type:'line',data:{labels:dates,datasets:topSpaces.map(function(sp,i){
+      const rgb=i===0?'26,26,26':i===1?'85,85,85':i===2?'136,136,136':'170,170,170';
+      return {label:sp,data:dates.map(function(d){return dateMap[d]&&dateMap[d][sp]||0;}),fill:true,borderColor:colors[i],backgroundColor:'rgba('+rgb+',0.25)',tension:0.4,pointRadius:0};
+    })},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{x:{ticks:{maxTicksLimit:10,font:{size:10}}},y:{stacked:false}}}});
+  }
+}
+function renderInvestors(){
+  const invDeals=DB.metrics.investor_activity&&DB.metrics.investor_activity.by_deals||{};
+  const coInvest=DB.metrics.investor_activity&&DB.metrics.investor_activity.co_investments||[];
   const entries=Object.entries(invDeals).slice(0,20);
-  const maxD=entries[0]?.[1]||1;
-  document.getElementById('tab-investors').innerHTML=`
-    <div class="grid-2">
-      <div class="card">
-        <div class="section-title" style="margin-top:0">Most active investors</div>
-        ${{entries.map(([inv,cnt])=>`
-        <div class="investor-row">
-          <div style="flex:1"><div style="font-weight:500">${{inv}}</div>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track" style="flex:1"><div class="bar-fill" style="width:${{(cnt/maxD*100).toFixed(0)}}%"></div></div></div>
-          </div>
-          <div style="font-weight:500;margin-left:12px">${{cnt}}</div>
-        </div>`).join('')}}
-      </div>
-      <div class="card">
-        <div class="section-title" style="margin-top:0">Co-investment network</div>
-        <canvas id="netCanvas"></canvas>
-      </div>
-    </div>`;
+  const maxD=entries[0]?entries[0][1]:1;
+  let invHtml='';
+  entries.forEach(function(x){
+    const inv=x[0],cnt=x[1];
+    invHtml+='<div class="investor-row"><div style="flex:1"><div style="font-weight:500">'+inv+'</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-track" style="flex:1"><div class="bar-fill" style="width:'+Math.round(cnt/maxD*100)+'%"></div></div></div></div><div style="font-weight:500;margin-left:12px">'+cnt+'</div></div>';
+  });
+  document.getElementById('tab-investors').innerHTML='<div class="grid-2"><div class="card"><div class="section-title" style="margin-top:0">Most active investors</div>'+invHtml+'</div><div class="card"><div class="section-title" style="margin-top:0">Co-investment network</div><canvas id="netCanvas"></canvas></div></div>';
   const canvas=document.getElementById('netCanvas');
   const ctx=canvas.getContext('2d');
   canvas.width=canvas.offsetWidth||400;canvas.height=380;
   const W=canvas.width,H=canvas.height;
   const nodeSet=new Set();
-  coInvest.slice(0,40).forEach(d=>{{nodeSet.add(d.pair[0]);nodeSet.add(d.pair[1]);}});
-  const nodes=[...nodeSet].slice(0,25).map((id,i)=>{{
+  coInvest.slice(0,40).forEach(function(d){nodeSet.add(d.pair[0]);nodeSet.add(d.pair[1]);});
+  const nodes=[...nodeSet].slice(0,25).map(function(id,i){
     const a=i/25*Math.PI*2;
-    return {{id,x:W/2+Math.cos(a)*(W*0.35),y:H/2+Math.sin(a)*(H*0.38),vx:0,vy:0,r:6}};
-  }});
-  const nIdx=Object.fromEntries(nodes.map(n=>[n.id,n]));
-  const edges=coInvest.slice(0,40).filter(d=>nIdx[d.pair[0]]&&nIdx[d.pair[1]]);
-  if(!nodes.length){{ctx.fillStyle='#999';ctx.font='13px Arial';ctx.fillText('Not enough data yet.',W/2-80,H/2);return;}}
+    return {id:id,x:W/2+Math.cos(a)*(W*0.35),y:H/2+Math.sin(a)*(H*0.38),vx:0,vy:0,r:6};
+  });
+  const nIdx={};
+  nodes.forEach(function(n){nIdx[n.id]=n;});
+  const edges=coInvest.slice(0,40).filter(function(d){return nIdx[d.pair[0]]&&nIdx[d.pair[1]];});
+  if(!nodes.length){ctx.fillStyle='#999';ctx.font='13px Arial';ctx.fillText('Not enough data yet.',W/2-80,H/2);return;}
   let tick=0;
-  function draw(){{
+  function draw(){
     ctx.clearRect(0,0,W,H);
-    edges.forEach(e=>{{const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]];
+    edges.forEach(function(e){
+      const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]];
       ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-      ctx.strokeStyle=`rgba(0,0,0,${{Math.min(e.count/6,0.35)}})`;ctx.lineWidth=Math.min(e.count,3);ctx.stroke();}});
-    nodes.forEach(n=>{{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='#1a1a1a';ctx.fill();
+      ctx.strokeStyle='rgba(0,0,0,'+Math.min(e.count/6,0.35)+')';ctx.lineWidth=Math.min(e.count,3);ctx.stroke();
+    });
+    nodes.forEach(function(n){
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='#1a1a1a';ctx.fill();
       ctx.font='10px Arial';ctx.fillStyle='#444';ctx.textAlign='center';
-      ctx.fillText(n.id.length>14?n.id.slice(0,12)+'…':n.id,n.x,n.y+n.r+11);}});
-  }}
-  function sim(){{
-    if(tick++>250){{draw();return;}}
-    nodes.forEach(n=>{{nodes.forEach(m=>{{if(n===m)return;const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=250/(d*d);n.vx+=dx*f;n.vy+=dy*f;}});}});
-    edges.forEach(e=>{{const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]],dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=(d-80)*0.05;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;}});
-    nodes.forEach(n=>{{n.vx=(n.vx+(W/2-n.x)*0.01)*0.85;n.vy=(n.vy+(H/2-n.y)*0.01)*0.85;
-      n.x=Math.max(20,Math.min(W-20,n.x+n.vx));n.y=Math.max(20,Math.min(H-20,n.y+n.vy));}});
+      ctx.fillText(n.id.length>14?n.id.slice(0,12)+'...':n.id,n.x,n.y+n.r+11);
+    });
+  }
+  function sim(){
+    if(tick++>250){draw();return;}
+    nodes.forEach(function(n){
+      nodes.forEach(function(m){
+        if(n===m)return;
+        const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=250/(d*d);
+        n.vx+=dx*f;n.vy+=dy*f;
+      });
+    });
+    edges.forEach(function(e){
+      const a=nIdx[e.pair[0]],b=nIdx[e.pair[1]],dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=(d-80)*0.05;
+      a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;
+    });
+    nodes.forEach(function(n){
+      n.vx=(n.vx+(W/2-n.x)*0.01)*0.85;n.vy=(n.vy+(H/2-n.y)*0.01)*0.85;
+      n.x=Math.max(20,Math.min(W-20,n.x+n.vx));n.y=Math.max(20,Math.min(H-20,n.y+n.vy));
+    });
     draw();requestAnimationFrame(sim);
-  }}
+  }
   sim();
-}}
-function renderExits(){{
+}
+function renderExits(){
   const exits=DB.metrics.exits||[];
-  const bySector={{}};
-  exits.forEach(e=>{{const s=e.industry_vertical||'Other';if(!bySector[s])bySector[s]=[];bySector[s].push(e);}});
-  document.getElementById('tab-exits').innerHTML=`<div class="card">
-    <div class="section-title" style="margin-top:0">All exits by sector</div>
-    ${{Object.entries(bySector).map(([sector,items])=>`
-      <div class="section-title">${{sector}}</div>
-      ${{items.map(e=>`<div class="exit-row">
-        <span class="${{e.exit_type==='IPO'?'exit-ipo':'exit-acq'}}">${{e.exit_type}}</span>
-        <div><div style="font-weight:500">${{e.company}}${{e.ticker?` (${{e.ticker}})`:''}}</div>
-        <div style="font-size:12px;color:#666">${{e.tech_layer||''}}${{e.date?' · '+e.date:''}}</div></div>
-      </div>`).join('')}`).join('')||'<div style="color:#999">No exits tracked yet.</div>'}}
-  </div>`;
-}}
-function renderCategories(){{
-  const cats=DB.metrics.categories||{{}};
-  document.getElementById('tab-categories').innerHTML=`
-    <div class="cat-grid">${{Object.entries(cats).map(([v,d])=>`
-      <div class="cat-card" onclick="showCat('${{v.replace(/'/g,"\\\\'")}}')">
-        <div style="font-weight:500;font-size:14px;margin-bottom:4px">${{v}}</div>
-        <div style="font-size:12px;color:#999;margin-bottom:8px">${{(d.companies||[]).length}} companies</div>
-        <div>${{Object.keys(d.tech_layers||{{}}).map(tl=>`<span class="tag t" style="font-size:10px">${{tl}}</span>`).join('')}}</div>
-      </div>`).join('')}}</div>
-    <div id="catdetail"></div>`;
-}}
-function showCat(vertical){{
-  const cats=DB.metrics.categories||{{}};
-  const data=cats[vertical]||{{}};
+  const bySector={};
+  exits.forEach(function(e){const s=e.industry_vertical||'Other';if(!bySector[s])bySector[s]=[];bySector[s].push(e);});
+  let html='<div class="card"><div class="section-title" style="margin-top:0">All exits by sector</div>';
+  const sectors=Object.keys(bySector);
+  if(sectors.length){
+    sectors.forEach(function(sector){
+      html+='<div class="section-title">'+sector+'</div>';
+      bySector[sector].forEach(function(e){
+        html+='<div class="exit-row"><span class="'+(e.exit_type==='IPO'?'exit-ipo':'exit-acq')+'">'+e.exit_type+'</span><div><div style="font-weight:500">'+e.company+(e.ticker?' ('+e.ticker+')':'')+'</div><div style="font-size:12px;color:#666">'+(e.tech_layer||'')+(e.date?' - '+e.date:'')+'</div></div></div>';
+      });
+    });
+  } else {
+    html+='<div style="color:#999">No exits tracked yet.</div>';
+  }
+  html+='</div>';
+  document.getElementById('tab-exits').innerHTML=html;
+}
+function renderCategories(){
+  const cats=DB.metrics.categories||{};
+  let html='<div class="cat-grid">';
+  Object.entries(cats).forEach(function(x){
+    const v=x[0],d=x[1];
+    html+='<div class="cat-card" onclick="showCat(\''+v.replace(/'/g,"\\'")+'\')">';
+    html+='<div style="font-weight:500;font-size:14px;margin-bottom:4px">'+v+'</div>';
+    html+='<div style="font-size:12px;color:#999;margin-bottom:8px">'+((d.companies||[]).length)+' companies</div>';
+    html+='<div>'+Object.keys(d.tech_layers||{}).map(function(tl){return '<span class="tag t" style="font-size:10px">'+tl+'</span>';}).join('')+'</div>';
+    html+='</div>';
+  });
+  html+='</div><div id="catdetail"></div>';
+  document.getElementById('tab-categories').innerHTML=html;
+}
+function showCat(vertical){
+  const cats=DB.metrics.categories||{};
+  const data=cats[vertical]||{};
   const companies=data.companies||[];
-  const techLayers=data.tech_layers||{{}};
-  const nv30=DB.metrics.narrative_velocity?.['30_day']||{{}};
-  const vertInv={{}};
-  companies.forEach(n=>{{const c=DB.companies[n]||{{}};(c.funding_rounds||[]).forEach(r=>(r.investors||[]).forEach(inv=>{{vertInv[inv]=(vertInv[inv]||0)+1;}}));}});
-  const topInv=Object.entries(vertInv).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const relatedSpaces=Object.entries(nv30).filter(([s])=>s.toLowerCase().includes(vertical.toLowerCase().split(' ')[0])).slice(0,3);
-  document.getElementById('catdetail').innerHTML=`
-    <div class="card" style="margin-top:16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-        <div style="font-size:18px;font-weight:600">${{vertical}}</div>
-        <button onclick="document.getElementById('catdetail').innerHTML=''" style="font-size:12px;color:#999;background:none;border:none;cursor:pointer">✕ close</button>
-      </div>
-      <div class="grid-3" style="margin-bottom:20px">
-        <div class="card-sm"><div class="metric-val">${{companies.length}}</div><div class="metric-label">Companies</div></div>
-        <div class="card-sm"><div class="metric-val">${{Object.keys(techLayers).length}}</div><div class="metric-label">Tech Layers</div></div>
-        <div class="card-sm"><div class="metric-val">${{topInv.length}}</div><div class="metric-label">Active Investors</div></div>
-      </div>
-      ${{topInv.length?`<div class="section-title">Key investors</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">${{topInv.map(([inv,cnt])=>`<span class="tag">${{inv}} (${{cnt}})</span>`).join('')}}</div>`:''}}
-      ${{relatedSpaces.length?`<div class="section-title">Related problem spaces (30-day)</div><div style="margin-bottom:16px">${{relatedSpaces.map(([s,c])=>`<span class="tag" style="margin:3px">${{s}} (${{c}})</span>`).join('')}}</div>`:''}}
-      <div class="section-title">Companies by tech layer</div>
-      ${{Object.entries(techLayers).map(([tl,cos])=>`
-        <div style="margin-bottom:16px">
-          <span class="tag t" style="margin-bottom:8px;display:inline-block">${{tl}}</span>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
-            ${{cos.map(n=>{{const c=DB.companies[n]||{{}};return `
-              <div class="card-sm" style="min-width:200px;flex:1">
-                <div style="font-weight:500;font-size:13px">${{n}}${{c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':''}}</div>
-                <div style="font-size:11px;color:#666;margin-top:2px">${{c.what_they_do||''}}</div>
-                <div style="font-size:11px;color:#999;margin-top:2px">${{c.location||''}}${{c.founded?' · est. '+c.founded:''}}</div>
-              </div>`;
-            }}).join('')}}
-          </div>
-        </div>`).join('')}}
-    </div>`;
-  document.getElementById('catdetail').scrollIntoView({{behavior:'smooth'}});
-}}
-function initAll(){{
+  const techLayers=data.tech_layers||{};
+  const nv30=DB.metrics.narrative_velocity&&DB.metrics.narrative_velocity['30_day']||{};
+  const vertInv={};
+  companies.forEach(function(n){
+    const c=DB.companies[n]||{};
+    (c.funding_rounds||[]).forEach(function(r){
+      (r.investors||[]).forEach(function(inv){vertInv[inv]=(vertInv[inv]||0)+1;});
+    });
+  });
+  const topInv=Object.entries(vertInv).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  const relatedSpaces=Object.entries(nv30).filter(function(x){return x[0].toLowerCase().includes(vertical.toLowerCase().split(' ')[0]);}).slice(0,3);
+  let html='<div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><div style="font-size:18px;font-weight:600">'+vertical+'</div><button onclick="document.getElementById(\'catdetail\').innerHTML=\'\'" style="font-size:12px;color:#999;background:none;border:none;cursor:pointer">close</button></div>';
+  html+='<div class="grid-3" style="margin-bottom:20px"><div class="card-sm"><div class="metric-val">'+companies.length+'</div><div class="metric-label">Companies</div></div><div class="card-sm"><div class="metric-val">'+Object.keys(techLayers).length+'</div><div class="metric-label">Tech Layers</div></div><div class="card-sm"><div class="metric-val">'+topInv.length+'</div><div class="metric-label">Active Investors</div></div></div>';
+  if(topInv.length){
+    html+='<div class="section-title">Key investors</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">';
+    topInv.forEach(function(x){html+='<span class="tag">'+x[0]+' ('+x[1]+')</span>';});
+    html+='</div>';
+  }
+  if(relatedSpaces.length){
+    html+='<div class="section-title">Related problem spaces (30-day)</div><div style="margin-bottom:16px">';
+    relatedSpaces.forEach(function(x){html+='<span class="tag" style="margin:3px">'+x[0]+' ('+x[1]+')</span>';});
+    html+='</div>';
+  }
+  html+='<div class="section-title">Companies by tech layer</div>';
+  Object.entries(techLayers).forEach(function(x){
+    const tl=x[0],cos=x[1];
+    html+='<div style="margin-bottom:16px"><span class="tag t" style="margin-bottom:8px;display:inline-block">'+tl+'</span><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">';
+    cos.forEach(function(n){
+      const c=DB.companies[n]||{};
+      html+='<div class="card-sm" style="min-width:200px;flex:1"><div style="font-weight:500;font-size:13px">'+n+(c.high_growth?' <span class="tag hg" style="font-size:10px">HG</span>':'')+'</div><div style="font-size:11px;color:#666;margin-top:2px">'+(c.what_they_do||'')+'</div><div style="font-size:11px;color:#999;margin-top:2px">'+(c.location||'')+(c.founded?' - est. '+c.founded:'')+'</div></div>';
+    });
+    html+='</div></div>';
+  });
+  html+='</div>';
+  document.getElementById('catdetail').innerHTML=html;
+  document.getElementById('catdetail').scrollIntoView({behavior:'smooth'});
+}
+function initAll(){
   renderDashboard();
   renderBriefings();
   renderCompanies();
@@ -924,17 +857,20 @@ function initAll(){{
   renderInvestors();
   renderExits();
   renderCategories();
-  if(window.location.hash){{
+  if(window.location.hash){
     const el=document.querySelector(window.location.hash);
-    if(el)setTimeout(()=>el.scrollIntoView({{behavior:'smooth'}}),300);
-  }}
-}}
+    if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth'});},300);
+  }
+}
 loadData();
 </script>
 </body></html>"""
 
+    html = html.replace("__SITE__", SITE)
+
     with open(WEBSITE_F, "w") as f:
         f.write(html)
+
 
 def build_email(news, substack, connections, flags, date_str):
     def fmt(text):
@@ -943,50 +879,41 @@ def build_email(news, substack, connections, flags, date_str):
         text = re.sub(r'^## (.+)$', r'<h3 style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee;">\1</h3>', text, flags=re.MULTILINE)
         text = re.sub(r"^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$", r'<div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee;">\1</div>', text, flags=re.MULTILINE)
         text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-        text = re.sub(r'^[-*] (.+)$', r'<div style="display:flex;gap:10px;margin-bottom:8px;padding-left:12px;"><span style="color:#ccc;flex-shrink:0;">—</span><span>\1</span></div>', text, flags=re.MULTILINE)
+        text = re.sub(r'^[-*] (.+)$', r'<div style="display:flex;gap:10px;margin-bottom:8px;padding-left:12px;"><span style="color:#ccc;flex-shrink:0;">-</span><span>\1</span></div>', text, flags=re.MULTILINE)
         text = re.sub(r'(https?://[^\s<)\]]+)', r'<a href="\1" style="color:#0066cc;text-decoration:none;word-break:break-all;">\1</a>', text)
         text = re.sub(r'\n\n+', '</p><p>', text)
         return f'<p>{text.replace(chr(10), "<br>")}</p>'
 
     flags_html = ""
     if flags:
-        flags_html = f"""<div style="margin-bottom:24px;padding:14px 18px;background:#f9f9f7;border-radius:8px;border:1px solid #eee">
-          <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:10px">Today's signals</div>
-          {"".join(f'<div style="font-size:13px;margin-bottom:6px;color:#555">→ {f} &nbsp;<a href="{SITE}" style="color:#0066cc;font-size:12px">view dashboard</a></div>' for f in flags)}
-        </div>"""
+        items = "".join(f'<div style="font-size:13px;margin-bottom:6px;color:#555">-> {f} &nbsp;<a href="{SITE}" style="color:#0066cc;font-size:12px">view dashboard</a></div>' for f in flags)
+        flags_html = f'<div style="margin-bottom:24px;padding:14px 18px;background:#f9f9f7;border-radius:8px;border:1px solid #eee"><div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:10px">Today\'s signals</div>{items}</div>'
 
     conn_html = ""
     if connections:
         parsed = parse_connections(connections)
         if parsed:
-            items = "".join(f"""<div style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa">
-              <div style="font-size:12px;font-weight:600;margin-bottom:8px">{c.get('CONNECTION','')}</div>
-              <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Then:</strong> {c.get('THEN','')}</div>
-              <div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Now:</strong> {c.get('NOW','')}</div>
-              <div style="font-size:13px;color:#555;margin-bottom:8px"><strong>Why it matters:</strong> {c.get('SIGNIFICANCE','')}</div>
-              <a href="{SITE}/#{c.get('PAST_DATE','')}" style="font-size:12px;color:#0066cc;text-decoration:none">View original briefing →</a>
-            </div>""" for c in parsed)
-            conn_html = f"""<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a">
-              <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Connections to the past</div>
-              {items}</div>"""
+            items = "".join(f'<div style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:12px;background:#fafafa"><div style="font-size:12px;font-weight:600;margin-bottom:8px">{c.get("CONNECTION","")}</div><div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Then:</strong> {c.get("THEN","")}</div><div style="font-size:13px;color:#555;margin-bottom:4px"><strong>Now:</strong> {c.get("NOW","")}</div><div style="font-size:13px;color:#555;margin-bottom:8px"><strong>Why it matters:</strong> {c.get("SIGNIFICANCE","")}</div><a href="{SITE}/#{c.get("PAST_DATE","")}" style="font-size:12px;color:#0066cc;text-decoration:none">View original briefing</a></div>' for c in parsed)
+            conn_html = f'<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a"><div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Connections to the past</div>{items}</div>'
 
-    sub_html = f"""<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a">
-      <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Substack this week</div>
-      <div style="line-height:1.75">{fmt(substack)}</div></div>""" if substack else ""
+    sub_html = ""
+    if substack:
+        sub_html = f'<div style="margin-top:48px;padding-top:24px;border-top:2px solid #1a1a1a"><div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:16px">Substack this week</div><div style="line-height:1.75">{fmt(substack)}</div></div>'
 
     return f"""<html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;max-width:700px;margin:0 auto;padding:32px 24px;color:#1a1a1a;font-size:15px;line-height:1.8">
   <div style="border-bottom:2px solid #1a1a1a;margin-bottom:24px;padding-bottom:14px">
     <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:4px">Morning Briefing</div>
     <div style="font-size:22px;font-weight:600">{date_str}</div>
-    <a href="{SITE}" style="font-size:12px;color:#0066cc;text-decoration:none">View archive & dashboard →</a>
+    <a href="{SITE}" style="font-size:12px;color:#0066cc;text-decoration:none">View archive and dashboard</a>
   </div>
   {flags_html}
   <div>{fmt(news)}</div>
   {conn_html}
   {sub_html}
   <div style="border-top:1px solid #eee;margin-top:48px;padding-top:12px;font-size:11px;color:#bbb">
-    Generated daily · <a href="{SITE}/#{TODAY_ISO}" style="color:#bbb">View today in archive →</a>
+    Generated daily - <a href="{SITE}/#{TODAY_ISO}" style="color:#bbb">View today in archive</a>
   </div></body></html>"""
+
 
 def send_email(subject, html):
     msg = MIMEMultipart("alternative")
@@ -998,8 +925,9 @@ def send_email(subject, html):
         s.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
         s.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
 
+
 def main():
-    print(f"Running — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    print(f"Running - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     briefings = load(BRIEFINGS_F, [])
     companies = load(COMPANIES_F, {})
     print("  Web search briefing...")
@@ -1035,8 +963,9 @@ def main():
     generate_website(briefings, companies, metrics)
     print("  Sending email...")
     html = build_email(news, sub, connections, flags, datetime.now().strftime("%A, %B %d, %Y"))
-    send_email(f"Morning Briefing — {datetime.now().strftime('%A, %B %d, %Y')}", html)
+    send_email(f"Morning Briefing - {datetime.now().strftime('%A, %B %d, %Y')}", html)
     print("  Done.")
+
 
 if __name__ == "__main__":
     main()
