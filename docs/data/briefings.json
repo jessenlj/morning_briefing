@@ -1,0 +1,217 @@
+[
+  {
+    "date": "2026-04-12",
+    "date_display": "Sunday, April 12, 2026",
+    "companies": [
+      {
+        "name": "OpenAI",
+        "what_they_do": "Conversational AI platform and foundation models",
+        "industry_vertical": "AI/Foundation Models",
+        "tech_layer": "Large Language Models",
+        "event": "Series funding round closing",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 122000,
+        "investors": [
+          "Amazon",
+          "Nvidia",
+          "SoftBank"
+        ],
+        "founded_year": 2015,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Making AI accessible through conversational interfaces",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "Eclipse Ventures",
+        "what_they_do": "VC fund backing physical AI companies",
+        "industry_vertical": "Venture Capital",
+        "tech_layer": "Physical AI Infrastructure",
+        "event": "Fund raise",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 1300,
+        "investors": [],
+        "founded_year": null,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Bridging AI from software into physical world applications",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "Shield AI",
+        "what_they_do": "Autonomous military aircraft and Hivemind autonomous pilot platform",
+        "industry_vertical": "Defense Tech",
+        "tech_layer": "Autonomous Systems",
+        "event": "Series G funding",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 1500,
+        "investors": [
+          "Founders Fund",
+          "Blackbird",
+          "DCVC",
+          "BOND",
+          "Bessemer Venture Partners"
+        ],
+        "founded_year": 2015,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Autonomous military aircraft for contested environments",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "OpenEvidence",
+        "what_they_do": "Medical AI clinical decision-support platform",
+        "industry_vertical": "Healthcare AI",
+        "tech_layer": "Medical AI",
+        "event": "Series D funding",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 250,
+        "investors": [
+          "Valor Equity Partners",
+          "Fidelity",
+          "Qatar Investment Authority"
+        ],
+        "founded_year": 2019,
+        "location": "Unknown",
+        "founder_backgrounds": [],
+        "problem_space": "Helping doctors keep up with medical literature and evidence-based guidance",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "Anysphere (Cursor)",
+        "what_they_do": "AI-powered code editor and developer tool",
+        "industry_vertical": "Developer Tools",
+        "tech_layer": "AI/Code Generation",
+        "event": "Series D funding",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 2300,
+        "investors": [
+          "Accel",
+          "Coatue",
+          "Thrive Capital",
+          "Andreessen Horowitz",
+          "DST Global",
+          "NVIDIA",
+          "Google"
+        ],
+        "founded_year": 2019,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Making software development conversational and automating tedious coding tasks",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "Halter",
+        "what_they_do": "Smart collars for livestock management",
+        "industry_vertical": "AgriTech",
+        "tech_layer": "IoT/Hardware",
+        "event": "Series E funding",
+        "event_type": "funding",
+        "stage": "growth",
+        "amount_m": 220,
+        "investors": [],
+        "founded_year": 2016,
+        "location": "New Zealand",
+        "founder_backgrounds": [],
+        "problem_space": "Efficient herd management and automated grazing optimization",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      },
+      {
+        "name": "Microsoft",
+        "what_they_do": "Cloud computing and AI infrastructure",
+        "industry_vertical": "Cloud Computing",
+        "tech_layer": "Infrastructure",
+        "event": "Japan investment announcement",
+        "event_type": "other",
+        "stage": "public",
+        "amount_m": 10000,
+        "investors": [],
+        "founded_year": null,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Sovereign AI infrastructure and developer training",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": false
+      },
+      {
+        "name": "xAI",
+        "what_they_do": "Foundation models and AI systems",
+        "industry_vertical": "AI/Foundation Models",
+        "tech_layer": "Large Language Models",
+        "event": "Merger with SpaceX interests",
+        "event_type": "other",
+        "stage": "growth",
+        "amount_m": 20000,
+        "investors": [],
+        "founded_year": null,
+        "location": "United States",
+        "founder_backgrounds": [],
+        "problem_space": "Building general-purpose AI foundation models",
+        "is_exit": false,
+        "exit_type": null,
+        "potential_high_growth": true
+      }
+    ],
+    "problem_spaces": [
+      "AI accessibility and conversational interfaces",
+      "Physical AI and robotics",
+      "Autonomous systems and defense tech",
+      "Medical AI and clinical decision support",
+      "Developer tools and code automation",
+      "Agriculture technology and IoT",
+      "Sovereign AI infrastructure",
+      "Enterprise AI workforce augmentation"
+    ],
+    "predictions": [
+      {
+        "source": "Briefing analysis",
+        "text": "Q1 2026 venture investment ($300B) represents 70% of all 2025 VC spending, showing fastest capital deployment in history concentrated in AI mega-rounds",
+        "type": "thesis"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "Physical AI era emerging as capital flows into autonomous vehicles, robotics, and manufacturing automation beyond pure software",
+        "type": "prediction"
+      },
+      {
+        "source": "Hacker News signal",
+        "text": "2026 is fundamentals-first year where capital rewards revenue growth and efficiency, punishing AI veneer on old ideas",
+        "type": "thesis"
+      },
+      {
+        "source": "Hacker News signal",
+        "text": "AI security concerns dominating technical community discourse around supply chain attacks and remote access vulnerabilities",
+        "type": "warning"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "OpenAI targeting IPO with near-$1 trillion valuation in Q4 2026, positioning for first trillion-dollar AI company",
+        "type": "prediction"
+      },
+      {
+        "source": "Briefing analysis",
+        "text": "Opportunity exists in applying AI to unsexy industries that incumbents are ignoring rather than building AI wrappers",
+        "type": "thesis"
+      }
+    ],
+    "full_briefing": "Based on my search results, here's today's most important VC/startup/AI/tech news with comprehensive analysis for each company:\n\n## TOP STORIES\n\n**Q1 2026 Breaks All Venture Records: \n$300 billion poured into 6,000 startups globally\n**\n\n\nThis marks an all-time high for global venture investment not approached by any other quarter on record\n. The massive funding surge was driven primarily by AI mega-rounds, with \nQ1's startup investment largely going to AI startups and disproportionately to a handful of U.S.-based companies in record-setting deals\n.\n\n**Physical AI Era Emerges: Eclipse Raises $1.3B Fund**\n\n\nEclipse raised $1.3 billion in fresh capital \u2014 split between a $591 million early-stage incubation fund and one more oriented toward growth startups\n to back \"physical AI\" companies. \nAI and the physical world have collided, propelled by a confluence of talent, technological advancements, demand, and policy\n.\n\n**ECLIPSE VENTURES**\nPROBLEM THEY'RE SOLVING: Bridging AI from pure software into physical world applications. Traditional VCs fund software; few understand hardware deployment at scale.\n\nDIRECT COMPETITORS: Andreessen Horowitz (a16z) has hardware investments but less focus. GV (Google Ventures) backs physical tech sporadically. Founders Fund has defense tech but narrower scope.\n\nADJACENT PROBLEMS: Defense tech (Anduril, Palantir), autonomous vehicles (Waymo, Cruise), robotics (Boston Dynamics), manufacturing automation (various).\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Creates new asset class worth hundreds of billions. Risk: long development cycles, regulatory hurdles, capital intensity. Could be killed by Big Tech acquiring portfolio companies.\nFounder lens: Unlocks manufacturing renaissance, autonomous everything, climate solutions at unprecedented scale.\n\n[Source](https://techcrunch.com/2026/04/07/vc-eclipse-has-a-new-1-3b-to-back-and-build-physical-ai-startups/)\n\n## VC & FUNDING\n\n**OpenAI Closes Historic $122B Round - Founded 2015**\n\nOpenAI closed what is now the single largest private venture round in history at $122 billion, pushing its post-money valuation to an extraordinary $852 billion\n. \nAmazon was named the exclusive third-party cloud partner as part of its $50B commitment\n. ALL INVESTORS: Amazon ($50B), Nvidia, SoftBank, plus existing investors. \nWith 900 million weekly active users and over $20 billion in annualized revenue, the company is actively preparing for an IPO targeting a near-$1 trillion valuation in Q4 2026\n.\n\n**OPENAI**\nPROBLEM THEY'RE SOLVING: Making AI accessible to everyone through conversational interfaces. Before ChatGPT, AI was locked in research labs - now your grandma uses it daily.\n\nDIRECT COMPETITORS: Anthropic ($30B raised, Claude), Google (Gemini, infinite resources), xAI ($20B raised, Grok), Meta (Llama, open source strategy).\n\nADJACENT PROBLEMS: Enterprise AI (Microsoft Copilot), coding AI (GitHub Copilot, Cursor), search (Perplexity), image generation (Midjourney, Runway).\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Creates first trillion-dollar AI company. Risk: regulation, compute costs, competitor catching up. Google could kill them by restricting model training data.\nFounder lens: Every software job becomes AI-assisted. New economy built on natural language interfaces. Human-AI collaboration becomes default work mode.\n\n**Shield AI Raises $1.5B Series G - Founded 2015**\n\nShield AI secured $1.5 billion in Series G funding, part of a broader $2.25 billion capital package, valuing the company at $12.7 billion, up 140% in just one year\n. \nThe startup builds the Hivemind autonomous pilot platform, which was selected by the U.S. Air Force for its Collaborative Combat Aircraft program\n. ALL INVESTORS: Led by Founders Fund (Peter Thiel), with participation from Blackbird, DCVC, BOND, and Bessemer Venture Partners. \nThe company projects $540M+ in 2026 revenue, representing 80% year-over-year growth\n.\n\n**SHIELD AI**\nPROBLEM THEY'RE SOLVING: Autonomous military aircraft that don't need human pilots. Military wants unmanned systems that can operate in contested environments where GPS/communications are jammed.\n\nDIRECT COMPETITORS: Anduril (defense tech unicorn), Palantir (data/defense), traditional defense contractors (Lockheed, Raytheon moving slowly), Skydio (commercial drones).\n\nADJACENT PROBLEMS: Autonomous vehicles (Waymo, Tesla), delivery drones (Wing, Amazon), surveillance systems (various defense contractors).\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Defense tech becomes massive new category. Risk: government contracts, export restrictions, ethical concerns. Could be killed by policy changes or traditional contractors consolidating.\nFounder lens: Autonomous warfare becomes reality. Massive implications for geopolitics, ethics of AI weapons, reshaping of military industrial complex.\n\n**OpenEvidence Raises $250M Series D - Founded 2019**\n\nOpenEvidence raised $250 million in a Series D round, valuing the medical AI platform at $12 billion\n. \nThe product is used by over 700,000 physicians as a trusted clinical decision-support tool, offering evidence-based, real-time medical guidance at the point of care\n. ALL INVESTORS: Valor Equity Partners, Fidelity, Qatar Investment Authority, and other venture and strategic investors.\n\n**OPENEVIDENCE**\nPROBLEM THEY'RE SOLVING: Doctors can't keep up with medical literature - 4,000+ papers published daily. They rely on outdated knowledge, leading to misdiagnoses and suboptimal care.\n\nDIRECT COMPETITORS: UpToDate (Wolters Kluwer), IBM Watson Health (failed), Meditech, Epic's AI tools, Google's Med-PaLM, emerging startups like Glass Health.\n\nADJACENT PROBLEMS: Medical coding (various AI startups), drug discovery (Recursion, others), medical imaging (PathAI, others), clinical trials (various platforms).\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Healthcare AI becomes standard of care. Massive TAM but regulatory risks. Could be killed by Epic/electronic health record integration or Google's healthcare push.\nFounder lens: Democratizes world-class medical expertise. Reduces healthcare disparities. Every doctor becomes augmented by AI, improving patient outcomes globally.\n\n**Anysphere (Cursor) Raises $2.3B Series D - Founded 2019**\n\nAnysphere raised a massive $2.3 billion Series D round, nearly tripling its valuation to $29.3 billion in just five months\n. \nThe company's flagship product, Cursor, has become a dominant tool in the software engineering world, recently surpassing $1 billion in annualized revenue\n. ALL INVESTORS: Co-led by Accel and Coatue, with participation from Thrive Capital, Andreessen Horowitz, DST Global, NVIDIA, and Google.\n\n**ANYSPHERE (CURSOR)**\nPROBLEM THEY'RE SOLVING: Writing code is still manual, tedious work. Developers spend hours debugging, searching Stack Overflow, copy-pasting boilerplate. Cursor makes coding conversational.\n\nDIRECT COMPETITORS: GitHub Copilot (Microsoft-owned, massive distribution), Replit (collaborative coding), JetBrains AI, Tabnine, Sourcegraph Cody, Claude/ChatGPT for coding.\n\nADJACENT PROBLEMS: Code review (CodeRabbit, others), testing (various AI startups), deployment (DevOps automation), no-code platforms (Webflow, Bubble).\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Every developer becomes 10x more productive. Risk: Microsoft could crush them with Copilot integration. GitHub's distribution advantage massive.\nFounder lens: Programming becomes accessible to millions more people. Software development speed increases dramatically. New class of AI-native applications emerge.\n\n**Halter Raises $220M Series E - Founded 2016**\n\nHalter raised $220 million in a Series E round at a $2 billion valuation, the largest VC raise in New Zealand's history, nearly doubling its $1 billion valuation from just nine months prior\n. Company builds smart collars for livestock management.\n\n**HALTER**\nPROBLEM THEY'RE SOLVING: Farmers struggle to manage large herds efficiently. Traditional fencing is expensive, labor-intensive. Cows need to be moved frequently for optimal grazing.\n\nDIRECT COMPETITORS: Traditional fencing companies, other livestock tech startups (few at scale), farm management software companies, IoT agriculture solutions.\n\nADJACENT PROBLEMS: Precision agriculture (John Deere, others), farm robotics (various startups), livestock health monitoring, supply chain tracking.\n\nWHAT HAPPENS IF THEY WIN:\nInvestor lens: Agriculture tech becomes massive market. Risk: farmer adoption slow, harsh conditions for hardware. Could be killed by John Deere or other ag giants.\nFounder lens: Transforms global farming. More efficient land use, better animal welfare, sustainable agriculture at scale.\n\n[Sources: Various Crunchbase and funding news outlets]\n\n## AI DEVELOPMENTS\n\n**Microsoft Announces $10B Japan Investment**\n\nMicrosoft announced a $10 billion investment in Japan spanning 2026 through 2029, expanding AI data center infrastructure in partnership with SoftBank and Sakura Internet, and commits to training one million engineers and developers by 2030\n. \nThe move is positioned as the foundation of Japan's \"Sovereign AI\" strategy, ensuring sensitive data and AI processing remain within domestic borders\n.\n\n**xAI-SpaceX Merger Implications**\n\nIn early 2026, xAI effectively merged its interests with SpaceX. As a result, the highly anticipated SpaceX IPO, expected in mid- to late-2026, will now be the primary vehicle for public investors to gain exposure to xAI's foundational models\n.\n\n**Physical AI Investment Surge**\n\nUnlike the cloud and mobile era, this cycle is also being built in the physical world, with massive capital flowing not just into software, but infrastructure, autonomous vehicles, robotics and manufacturing\n.\n\n## HACKER NEWS SIGNAL\n\nBased on the search results, the technical community is focused on:\n\n**Security Concerns Dominating**: \nAI collapsed human response window and turned remote access into fastest path to breach\n. Major discussions around WordPress plugin compromises and supply chain attacks.\n\n**Infrastructure vs Features Debate**: Community discussing whether we're in another bubble or genuine infrastructure build-out phase. Strong sentiment that \n2026 is a fundamentals-first year where capital rewards revenue growth, efficiency and real AI advantage, and punishes anything that is AI veneer on old ideas\n.\n\n**Job Market Anxiety**: \nMultiple enterprise VCs said AI will have a big impact on the enterprise workforce in 2026, with uncertainty about whether it leads to more layoffs, higher productivity, or augmentation of existing labor\n.\n\n## ONE LINE TO REMEMBER\n\n**\nStartup investment in the first quarter of 2026 alone totaled close to 70% of all venture capital spending in 2025\n - we're witnessing the fastest capital deployment in history, but it's going to just a handful of AI giants.**\n\nFor a 19-year-old: The money is there but concentrated at the top. Build something that solves a real problem for real people, not another AI wrapper. The opportunity is in applying AI to unsexy industries that incumbents are ignoring."
+  }
+]

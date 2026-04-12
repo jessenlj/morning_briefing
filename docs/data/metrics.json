@@ -1,0 +1,475 @@
+{
+  "narrative_velocity": {
+    "30_day": {},
+    "90_day": {},
+    "timeline": {},
+    "accelerating": []
+  },
+  "investor_activity": {
+    "by_deals": {
+      "Amazon": 1,
+      "Nvidia": 1,
+      "SoftBank": 1,
+      "Founders Fund": 1,
+      "Blackbird": 1,
+      "DCVC": 1,
+      "BOND": 1,
+      "Bessemer Venture Partners": 1,
+      "Valor Equity Partners": 1,
+      "Fidelity": 1,
+      "Qatar Investment Authority": 1,
+      "Accel": 1,
+      "Coatue": 1,
+      "Thrive Capital": 1,
+      "Andreessen Horowitz": 1,
+      "DST Global": 1,
+      "NVIDIA": 1,
+      "Google": 1
+    },
+    "co_investments": [
+      {
+        "pair": [
+          "Amazon",
+          "Nvidia"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Amazon",
+          "SoftBank"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Nvidia",
+          "SoftBank"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Blackbird",
+          "Founders Fund"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "DCVC",
+          "Founders Fund"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "BOND",
+          "Founders Fund"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Bessemer Venture Partners",
+          "Founders Fund"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Blackbird",
+          "DCVC"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "BOND",
+          "Blackbird"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Bessemer Venture Partners",
+          "Blackbird"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "BOND",
+          "DCVC"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Bessemer Venture Partners",
+          "DCVC"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "BOND",
+          "Bessemer Venture Partners"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Fidelity",
+          "Valor Equity Partners"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Qatar Investment Authority",
+          "Valor Equity Partners"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Fidelity",
+          "Qatar Investment Authority"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "Coatue"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "Andreessen Horowitz"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "DST Global"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "NVIDIA"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Accel",
+          "Google"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Coatue",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Andreessen Horowitz",
+          "Coatue"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Coatue",
+          "DST Global"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Coatue",
+          "NVIDIA"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Coatue",
+          "Google"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Andreessen Horowitz",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "DST Global",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "NVIDIA",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Google",
+          "Thrive Capital"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Andreessen Horowitz",
+          "DST Global"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Andreessen Horowitz",
+          "NVIDIA"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Andreessen Horowitz",
+          "Google"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "DST Global",
+          "NVIDIA"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "DST Global",
+          "Google"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Google",
+          "NVIDIA"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  "deal_flow": {
+    "growth": [
+      {
+        "company": "OpenAI",
+        "what_they_do": "Conversational AI platform and foundation models",
+        "amount_m": 122000,
+        "valuation_b": null,
+        "investors": [
+          "Amazon",
+          "Nvidia",
+          "SoftBank"
+        ],
+        "date": "2026-04",
+        "industry_vertical": "AI/Foundation Models"
+      },
+      {
+        "company": "Eclipse Ventures",
+        "what_they_do": "VC fund backing physical AI companies",
+        "amount_m": 1300,
+        "valuation_b": null,
+        "investors": [],
+        "date": "2026-04",
+        "industry_vertical": "Venture Capital"
+      },
+      {
+        "company": "Shield AI",
+        "what_they_do": "Autonomous military aircraft and Hivemind autonomous pilot platform",
+        "amount_m": 1500,
+        "valuation_b": null,
+        "investors": [
+          "Founders Fund",
+          "Blackbird",
+          "DCVC",
+          "BOND",
+          "Bessemer Venture Partners"
+        ],
+        "date": "2026-04",
+        "industry_vertical": "Defense Tech"
+      },
+      {
+        "company": "OpenEvidence",
+        "what_they_do": "Medical AI clinical decision-support platform",
+        "amount_m": 250,
+        "valuation_b": null,
+        "investors": [
+          "Valor Equity Partners",
+          "Fidelity",
+          "Qatar Investment Authority"
+        ],
+        "date": "2026-04",
+        "industry_vertical": "Healthcare AI"
+      },
+      {
+        "company": "Anysphere (Cursor)",
+        "what_they_do": "AI-powered code editor and developer tool",
+        "amount_m": 2300,
+        "valuation_b": null,
+        "investors": [
+          "Accel",
+          "Coatue",
+          "Thrive Capital",
+          "Andreessen Horowitz",
+          "DST Global",
+          "NVIDIA",
+          "Google"
+        ],
+        "date": "2026-04",
+        "industry_vertical": "Developer Tools"
+      },
+      {
+        "company": "Halter",
+        "what_they_do": "Smart collars for livestock management",
+        "amount_m": 220,
+        "valuation_b": null,
+        "investors": [],
+        "date": "2026-04",
+        "industry_vertical": "AgriTech"
+      }
+    ]
+  },
+  "exits": [],
+  "categories": {
+    "AI/Foundation Models": {
+      "companies": [
+        "OpenAI",
+        "xAI"
+      ],
+      "tech_layers": {
+        "Large Language Models": [
+          "OpenAI",
+          "xAI"
+        ]
+      }
+    },
+    "Venture Capital": {
+      "companies": [
+        "Eclipse Ventures"
+      ],
+      "tech_layers": {
+        "Physical AI Infrastructure": [
+          "Eclipse Ventures"
+        ]
+      }
+    },
+    "Defense Tech": {
+      "companies": [
+        "Shield AI"
+      ],
+      "tech_layers": {
+        "Autonomous Systems": [
+          "Shield AI"
+        ]
+      }
+    },
+    "Healthcare AI": {
+      "companies": [
+        "OpenEvidence"
+      ],
+      "tech_layers": {
+        "Medical AI": [
+          "OpenEvidence"
+        ]
+      }
+    },
+    "Developer Tools": {
+      "companies": [
+        "Anysphere (Cursor)"
+      ],
+      "tech_layers": {
+        "AI/Code Generation": [
+          "Anysphere (Cursor)"
+        ]
+      }
+    },
+    "AgriTech": {
+      "companies": [
+        "Halter"
+      ],
+      "tech_layers": {
+        "IoT/Hardware": [
+          "Halter"
+        ]
+      }
+    },
+    "Cloud Computing": {
+      "companies": [
+        "Microsoft"
+      ],
+      "tech_layers": {
+        "Infrastructure": [
+          "Microsoft"
+        ]
+      }
+    }
+  },
+  "high_growth": [
+    "OpenAI",
+    "Eclipse Ventures",
+    "Shield AI",
+    "OpenEvidence",
+    "Anysphere (Cursor)",
+    "Halter",
+    "Microsoft",
+    "xAI"
+  ],
+  "geo": {
+    "United States": 6,
+    "Unknown": 1,
+    "New Zealand": 1
+  },
+  "founder_patterns": {},
+  "total_companies": 8,
+  "computed_at": "2026-04-12T00:25:15.218275",
+  "total_briefings": 1,
+  "high_growth_new_today": [
+    "OpenAI",
+    "Eclipse Ventures",
+    "Shield AI",
+    "OpenEvidence",
+    "Anysphere (Cursor)",
+    "Halter",
+    "Microsoft",
+    "xAI"
+  ]
+}

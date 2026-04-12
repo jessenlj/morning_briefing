@@ -1,1 +1,264 @@
-{}
+{
+  "OpenAI": {
+    "name": "OpenAI",
+    "what_they_do": "Conversational AI platform and foundation models",
+    "industry_vertical": "AI/Foundation Models",
+    "tech_layer": "Large Language Models",
+    "founded": 2015,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "OpenAI operates in the massive and rapidly expanding AI/LLM market with proven product-market fit (ChatGPT) and exceptional investor backing from tier-1 tech companies (Amazon, Nvidia, SoftBank), indicating strong confidence in their competitive moat. The $122B valuation reflects the strategic importance of foundation models in AI infrastructure, with timing aligned to explosive enterprise AI adoption. Dominant market position in conversational AI with continuous innovation in model capabilities provides clear pathway to sustained high growth.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 122000,
+        "investors": [
+          "Amazon",
+          "Nvidia",
+          "SoftBank"
+        ],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Eclipse Ventures": {
+    "name": "Eclipse Ventures",
+    "what_they_do": "VC fund backing physical AI companies",
+    "industry_vertical": "Venture Capital",
+    "tech_layer": "Physical AI Infrastructure",
+    "founded": null,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Physical AI is a massive emerging market with TAM expanding as robotics, autonomous systems, and hardware automation mature\u2014Eclipse's $1.3B fund size signals strong LP conviction in this thesis. The timing is optimal as GPU availability improves and foundation models become applicable to physical world problems, creating a rare window for early infrastructure plays. As a VC fund in a capital-intensive, long-duration category, Eclipse is positioned to capture outsized returns by backing founders solving the hardware-software integration bottleneck before competition intensifies.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 1300,
+        "investors": [],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Shield AI": {
+    "name": "Shield AI",
+    "what_they_do": "Autonomous military aircraft and Hivemind autonomous pilot platform",
+    "industry_vertical": "Defense Tech",
+    "tech_layer": "Autonomous Systems",
+    "founded": 2015,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Defense tech experiencing unprecedented government spending with autonomous systems as a strategic priority, evidenced by $1.5B Series G from tier-1 VCs (Founders Fund, Bessemer) and defense-focused investors (DCVC, BOND). Shield AI's focus on contested environment autonomy addresses a critical capability gap with massive TAM in military modernization, and 9-year operational history with institutional backing signals strong product-market fit and execution credibility.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 1500,
+        "investors": [
+          "Founders Fund",
+          "Blackbird",
+          "DCVC",
+          "BOND",
+          "Bessemer Venture Partners"
+        ],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "OpenEvidence": {
+    "name": "OpenEvidence",
+    "what_they_do": "Medical AI clinical decision-support platform",
+    "industry_vertical": "Healthcare AI",
+    "tech_layer": "Medical AI",
+    "founded": 2019,
+    "location": "Unknown",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "OpenEvidence operates in the massive healthcare AI market with a critical pain point (evidence-based clinical decision support), evidenced by strong Series D funding ($250M) from tier-1 investors (Valor, Fidelity, QIA) signaling institutional conviction. The company's focus on solving physician information overload in a highly regulated, sticky market with high switching costs positions it well for sustained growth, though lack of publicly available founder background and location details create minor verification gaps.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 250,
+        "investors": [
+          "Valor Equity Partners",
+          "Fidelity",
+          "Qatar Investment Authority"
+        ],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Anysphere (Cursor)": {
+    "name": "Anysphere (Cursor)",
+    "what_they_do": "AI-powered code editor and developer tool",
+    "industry_vertical": "Developer Tools",
+    "tech_layer": "AI/Code Generation",
+    "founded": 2019,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Cursor operates in the massive and rapidly expanding AI-assisted development tools market with proven product-market fit, evidenced by substantial Series D funding of $2.3B from tier-1 investors including Accel, Andreessen Horowitz, and strategic backers like NVIDIA and Google. The company addresses a critical pain point in software development automation with strong competitive positioning against GitHub Copilot, benefiting from accelerating enterprise adoption of AI coding assistants and the secular shift toward AI-augmented developer workflows. The investor syndicate's depth and diversity\u2014combining leading venture firms with strategic tech giants\u2014signals exceptional confidence in market timing, defensibility, and execution capability.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 2300,
+        "investors": [
+          "Accel",
+          "Coatue",
+          "Thrive Capital",
+          "Andreessen Horowitz",
+          "DST Global",
+          "NVIDIA",
+          "Google"
+        ],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Halter": {
+    "name": "Halter",
+    "what_they_do": "Smart collars for livestock management",
+    "industry_vertical": "AgriTech",
+    "tech_layer": "IoT/Hardware",
+    "founded": 2016,
+    "location": "New Zealand",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Series E funding of $220M signals strong investor confidence and proven product-market fit in a massive global livestock market (1.3B+ cattle). The company has achieved significant scale from 2016 founding to growth stage, indicating successful technology adoption and recurring revenue model. Smart grazing optimization addresses critical pain points in sustainable agriculture and herd efficiency, positioning Halter well in the accelerating AgriTech transition driven by climate concerns and labor shortages.",
+    "founder_backgrounds": [],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "growth",
+        "amount_m": 220,
+        "investors": [],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Microsoft": {
+    "name": "Microsoft",
+    "what_they_do": "Cloud computing and AI infrastructure",
+    "industry_vertical": "Cloud Computing",
+    "tech_layer": "Infrastructure",
+    "founded": null,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Microsoft's $10B Japan investment targets sovereign AI infrastructure and developer training in a massive market facing geopolitical AI independence pressures, positioning them to capture significant share in a multi-trillion dollar AI ecosystem expansion. The timing aligns perfectly with accelerating enterprise AI adoption and government initiatives to build domestic AI capabilities, creating a multi-decade growth runway. As an established tech leader with proven execution, Azure's infrastructure dominance, and AI leadership through partnerships, Microsoft is well-positioned to scale rapidly in this strategic market segment.",
+    "founder_backgrounds": [],
+    "funding_rounds": [],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "xAI": {
+    "name": "xAI",
+    "what_they_do": "Foundation models and AI systems",
+    "industry_vertical": "AI/Foundation Models",
+    "tech_layer": "Large Language Models",
+    "founded": null,
+    "location": "United States",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Foundation models represent a massive and rapidly expanding market with billions in enterprise and consumer demand, and xAI's $20B funding round signals extraordinary investor conviction and resources to compete in this winner-take-most landscape. The integration with SpaceX's infrastructure and resources provides unique competitive advantages in compute, data, and distribution that few other AI startups can match. The growth stage positioning with such massive capital infusion indicates xAI is well-positioned to achieve substantial scale quickly in the AI foundation model space.",
+    "founder_backgrounds": [],
+    "funding_rounds": [],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  }
+}
