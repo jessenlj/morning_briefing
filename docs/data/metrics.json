@@ -1,8 +1,51 @@
 {
   "narrative_velocity": {
-    "30_day": {},
-    "90_day": {},
-    "timeline": {},
+    "30_day": {
+      "AI accessibility and conversational interfaces": 1,
+      "Physical AI and robotics": 1,
+      "Autonomous systems and defense tech": 1,
+      "Medical AI and clinical decision support": 1,
+      "Developer tools and code automation": 1,
+      "Agriculture technology and IoT": 1,
+      "Sovereign AI infrastructure": 1,
+      "Enterprise AI workforce augmentation": 1
+    },
+    "90_day": {
+      "AI accessibility and conversational interfaces": 1,
+      "Physical AI and robotics": 1,
+      "Autonomous systems and defense tech": 1,
+      "Medical AI and clinical decision support": 1,
+      "Developer tools and code automation": 1,
+      "Agriculture technology and IoT": 1,
+      "Sovereign AI infrastructure": 1,
+      "Enterprise AI workforce augmentation": 1
+    },
+    "timeline": {
+      "AI accessibility and conversational interfaces": [
+        "2026-04-12"
+      ],
+      "Physical AI and robotics": [
+        "2026-04-12"
+      ],
+      "Autonomous systems and defense tech": [
+        "2026-04-12"
+      ],
+      "Medical AI and clinical decision support": [
+        "2026-04-12"
+      ],
+      "Developer tools and code automation": [
+        "2026-04-12"
+      ],
+      "Agriculture technology and IoT": [
+        "2026-04-12"
+      ],
+      "Sovereign AI infrastructure": [
+        "2026-04-12"
+      ],
+      "Enterprise AI workforce augmentation": [
+        "2026-04-12"
+      ]
+    },
     "accelerating": []
   },
   "investor_activity": {
@@ -460,16 +503,7 @@
   },
   "founder_patterns": {},
   "total_companies": 8,
-  "computed_at": "2026-04-12T00:25:15.218275",
-  "total_briefings": 1,
-  "high_growth_new_today": [
-    "OpenAI",
-    "Eclipse Ventures",
-    "Shield AI",
-    "OpenEvidence",
-    "Anysphere (Cursor)",
-    "Halter",
-    "Microsoft",
-    "xAI"
-  ]
+  "computed_at": "2026-04-12T00:37:48.746491",
+  "total_briefings": 2,
+  "high_growth_new_today": []
 }
