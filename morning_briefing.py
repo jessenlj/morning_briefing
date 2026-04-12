@@ -75,7 +75,7 @@ def news_prompt():
 
 For EVERY company mentioned, embed this directly underneath before moving on:
 
-  PROBLEM THEY'RE SOLVING
+  PROBLEM THEY ARE SOLVING
   Specific pain point, who feels it, how they currently cope.
 
   DIRECT COMPETITORS
@@ -877,7 +877,7 @@ def build_email(news, substack, connections, flags, date_str):
         if not text:
             return ''
         text = re.sub(r'^## (.+)$', r'<h3 style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#999;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid #eee;">\1</h3>', text, flags=re.MULTILINE)
-        text = re.sub(r"^\s*(PROBLEM THEY'RE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$", r'<div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee;">\1</div>', text, flags=re.MULTILINE)
+        text = re.sub(r"^\s*(PROBLEM THEY ARE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$", r'<div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin:16px 0 6px;padding-left:12px;border-left:2px solid #eee;">\1</div>', text, flags=re.MULTILINE)
         text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
         text = re.sub(r'^[-*] (.+)$', r'<div style="display:flex;gap:10px;margin-bottom:8px;padding-left:12px;"><span style="color:#ccc;flex-shrink:0;">-</span><span>\1</span></div>', text, flags=re.MULTILINE)
         text = re.sub(r'(https?://[^\s<)\]]+)', r'<a href="\1" style="color:#0066cc;text-decoration:none;word-break:break-all;">\1</a>', text)
