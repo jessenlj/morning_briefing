@@ -67,7 +67,17 @@
       "Andreessen Horowitz": 1,
       "DST Global": 1,
       "NVIDIA": 1,
-      "Google": 1
+      "Google": 1,
+      "Capricorn Investment Group": 1,
+      "Khosla Ventures": 1,
+      "Leitmotif": 1,
+      "Matter Venture Partners": 1,
+      "Mayfield": 1,
+      "Premji Invest": 1,
+      "Prelude Ventures": 1,
+      "Temasek": 1,
+      "Xora": 1,
+      "John Doerr": 1
     },
     "co_investments": [
       {
@@ -328,6 +338,97 @@
           "NVIDIA"
         ],
         "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Khosla Ventures"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Leitmotif"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Matter Venture Partners"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Mayfield"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Premji Invest"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Prelude Ventures"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Temasek"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "Xora"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Capricorn Investment Group",
+          "John Doerr"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Khosla Ventures",
+          "Leitmotif"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Khosla Ventures",
+          "Matter Venture Partners"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Khosla Ventures",
+          "Mayfield"
+        ],
+        "count": 1
+      },
+      {
+        "pair": [
+          "Khosla Ventures",
+          "Premji Invest"
+        ],
+        "count": 1
       }
     ]
   },
@@ -409,6 +510,39 @@
         "date": "2026-04",
         "industry_vertical": "AgriTech"
       }
+    ],
+    "series-c": [
+      {
+        "company": "OpenEvidence",
+        "what_they_do": "Medical AI clinical decision-support platform",
+        "amount_m": 250,
+        "valuation_b": null,
+        "investors": [],
+        "date": "2026-04",
+        "industry_vertical": "Healthcare AI"
+      }
+    ],
+    "series-a": [
+      {
+        "company": "Rhoda AI",
+        "what_they_do": "Video-trained robots for dynamic manufacturing using foundation model FutureVision",
+        "amount_m": 450,
+        "valuation_b": null,
+        "investors": [
+          "Capricorn Investment Group",
+          "Khosla Ventures",
+          "Leitmotif",
+          "Matter Venture Partners",
+          "Mayfield",
+          "Premji Invest",
+          "Prelude Ventures",
+          "Temasek",
+          "Xora",
+          "John Doerr"
+        ],
+        "date": "2026-04",
+        "industry_vertical": "Manufacturing, Robotics"
+      }
     ]
   },
   "exits": [],
@@ -484,6 +618,26 @@
           "Microsoft"
         ]
       }
+    },
+    "Manufacturing, Robotics": {
+      "companies": [
+        "Rhoda AI"
+      ],
+      "tech_layers": {
+        "Physical AI, Foundation Models": [
+          "Rhoda AI"
+        ]
+      }
+    },
+    "Venture Capital, Physical AI": {
+      "companies": [
+        "Eclipse (Physical AI Fund)"
+      ],
+      "tech_layers": {
+        "Physical AI": [
+          "Eclipse (Physical AI Fund)"
+        ]
+      }
     }
   },
   "high_growth": [
@@ -494,16 +648,25 @@
     "Anysphere (Cursor)",
     "Halter",
     "Microsoft",
-    "xAI"
+    "xAI",
+    "Rhoda AI",
+    "Eclipse (Physical AI Fund)"
   ],
   "geo": {
     "United States": 6,
-    "Unknown": 1,
+    "Unknown": 3,
     "New Zealand": 1
   },
-  "founder_patterns": {},
-  "total_companies": 8,
-  "computed_at": "2026-04-12T21:05:17.040128",
-  "total_briefings": 5,
-  "high_growth_new_today": []
+  "founder_patterns": {
+    "Manufacturing, Robotics": {
+      "Jagdeep Singh (CEO)": 1
+    }
+  },
+  "total_companies": 10,
+  "computed_at": "2026-04-12T21:35:21.850659",
+  "total_briefings": 6,
+  "high_growth_new_today": [
+    "Rhoda AI",
+    "Eclipse (Physical AI Fund)"
+  ]
 }

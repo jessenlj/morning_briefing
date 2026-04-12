@@ -130,6 +130,13 @@
           "Qatar Investment Authority"
         ],
         "source": ""
+      },
+      {
+        "date": "2026-04",
+        "stage": "series-c",
+        "amount_m": 250,
+        "investors": [],
+        "source": ""
       }
     ],
     "current_price": null,
@@ -250,6 +257,75 @@
     "ipo_price": null,
     "high_growth": true,
     "high_growth_reasoning": "Foundation models represent a massive and rapidly expanding market with billions in enterprise and consumer demand, and xAI's $20B funding round signals extraordinary investor conviction and resources to compete in this winner-take-most landscape. The integration with SpaceX's infrastructure and resources provides unique competitive advantages in compute, data, and distribution that few other AI startups can match. The growth stage positioning with such massive capital infusion indicates xAI is well-positioned to achieve substantial scale quickly in the AI foundation model space.",
+    "founder_backgrounds": [],
+    "funding_rounds": [],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Rhoda AI": {
+    "name": "Rhoda AI",
+    "what_they_do": "Video-trained robots for dynamic manufacturing using foundation model FutureVision",
+    "industry_vertical": "Manufacturing, Robotics",
+    "tech_layer": "Physical AI, Foundation Models",
+    "founded": 2024,
+    "location": "Unknown",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Rhoda AI addresses a massive $500B+ manufacturing automation market with a novel foundation model approach (FutureVision) that solves a critical pain point\u2014robot adaptability to variable real-world conditions. The $450M Series A at $1.7B valuation from top-tier investors (Khosla, Mayfield, Temasek, John Doerr) signals strong conviction in the team and technology, while the recently founded status (2024) positions them early in capturing the shift from rigid to adaptive robotics as manufacturers face labor constraints and efficiency demands.",
+    "founder_backgrounds": [
+      "Jagdeep Singh (CEO)"
+    ],
+    "funding_rounds": [
+      {
+        "date": "2026-04",
+        "stage": "series-a",
+        "amount_m": 450,
+        "investors": [
+          "Capricorn Investment Group",
+          "Khosla Ventures",
+          "Leitmotif",
+          "Matter Venture Partners",
+          "Mayfield",
+          "Premji Invest",
+          "Prelude Ventures",
+          "Temasek",
+          "Xora",
+          "John Doerr"
+        ],
+        "source": ""
+      }
+    ],
+    "current_price": null,
+    "price_change_today_pct": null,
+    "price_change_since_ipo_pct": null,
+    "first_seen_in_briefing": "2026-04-12",
+    "last_updated": "2026-04-12",
+    "appearances": [
+      "2026-04-12"
+    ]
+  },
+  "Eclipse (Physical AI Fund)": {
+    "name": "Eclipse (Physical AI Fund)",
+    "what_they_do": "Venture fund focused on physical AI startups in infrastructure, autonomous vehicles, robotics, and manufacturing",
+    "industry_vertical": "Venture Capital, Physical AI",
+    "tech_layer": "Physical AI",
+    "founded": 2026,
+    "location": "Unknown",
+    "status": "private",
+    "ticker": null,
+    "ipo_date": null,
+    "ipo_price": null,
+    "high_growth": true,
+    "high_growth_reasoning": "Physical AI is a massive emerging market with TAM exceeding $1T across infrastructure, autonomous vehicles, and robotics\u2014areas experiencing accelerating adoption and investment. The $1.3B fund size positions Eclipse to deploy capital at a critical inflection point (2026) when physical AI transitions from R&D to commercial deployment, enabling them to back winners across fragmented verticals. The fund's focus on capital-intensive, hardware-enabled AI solves a genuine market gap where traditional software VCs struggle, creating strong LP returns potential if portfolio companies achieve scale in high-margin infrastructure and automation markets.",
     "founder_backgrounds": [],
     "funding_rounds": [],
     "current_price": null,
