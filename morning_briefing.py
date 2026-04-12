@@ -547,7 +547,7 @@ function fmt(text){
   text=text.replace(/^\s*(PROBLEM THEY ARE SOLVING|DIRECT COMPETITORS|ADJACENT PROBLEMS|WHAT HAPPENS IF THEY WIN)\s*$/gm,'<div class="subh">$1</div>');
   text=text.replace(/^[-*] (.+$)/gm,'<div class="bul"><span class="dash">-</span><span>$1</span></div>');
   text=text.replace(/(https?:\/\/[^\s<)\]]+)/g,'<a href="$1">$1</a>');
-  text=text.replace(/\\n\\n+/g,'</p><p>').replace(/\\n/g,'<br>');
+  text=text.split('\n\n').join('</p><p>');text=text.split('\n').join('<br>');
   return '<p>'+text+'</p>';
 }
 function renderDashboard(){
