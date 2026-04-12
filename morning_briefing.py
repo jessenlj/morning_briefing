@@ -196,8 +196,18 @@ def haiku(prompt, max_tokens=1500):
 
 def sonnet(prompt, max_tokens=2000):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    return client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
-        messages=[{"role": "user", "content": prompt}]).content[0].text
+    for attempt in range(3):
+        try:
+            return client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}]).content[0].text
+        except Exception as e:
+            if "rate_limit" in str(e).lower() or "429" in str(e):
+                wait = 60 * (attempt + 1)
+                print(f"    Rate limited. Waiting {wait}s...")
+                time.sleep(wait)
+            else:
+                raise
+    return ""
 
 def extract(text):
     raw = haiku(extraction_prompt(text), 2000)
