@@ -176,7 +176,7 @@ def sonnet_search(prompt, max_tokens=6000):
     messages = [{"role": "user", "content": prompt}]
     result = ""
     for _ in range(10):
-        r = client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
+        r = client.messages.create(model="claude-sonnet-4-6", max_tokens=max_tokens,
             tools=[{"type": "web_search_20250305", "name": "web_search"}], messages=messages)
         texts = [b.text for b in r.content if hasattr(b, "text")]
         if texts:
@@ -198,7 +198,7 @@ def sonnet(prompt, max_tokens=2000):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     for attempt in range(3):
         try:
-            return client.messages.create(model="claude-sonnet-4-20250514", max_tokens=max_tokens,
+            return client.messages.create(model="claude-sonnet-4-6", max_tokens=max_tokens,
                 messages=[{"role": "user", "content": prompt}]).content[0].text
         except Exception as e:
             if "rate_limit" in str(e).lower() or "429" in str(e):
