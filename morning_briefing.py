@@ -958,12 +958,6 @@ def main():
     save(COMPANIES_F, companies)
     print("  Connections scan...")
     connections = find_connections(structured, briefings)
-    print("  Computing metrics...")
-    metrics = compute_metrics(briefings, companies)
-    metrics["total_briefings"] = len(briefings) + 1
-    metrics["high_growth_new_today"] = hg_new
-    save(METRICS_F, metrics)
-    flags = build_flags(metrics)
     briefings.append({
         "date": TODAY_ISO, "date_display": TODAY,
         "companies": structured.get("companies",[]),
@@ -972,6 +966,12 @@ def main():
         "full_briefing": news,
     })
     save(BRIEFINGS_F, briefings)
+    print("  Computing metrics...")
+    metrics = compute_metrics(briefings, companies)
+    metrics["total_briefings"] = len(briefings)
+    metrics["high_growth_new_today"] = hg_new
+    save(METRICS_F, metrics)
+    flags = build_flags(metrics)
     print("  Generating website...")
     generate_website(briefings, companies, metrics)
     print("  Sending email...")
