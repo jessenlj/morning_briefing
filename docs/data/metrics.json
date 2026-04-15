@@ -1,34 +1,24 @@
 {
   "narrative_velocity": {
     "30_day": {
-      "Medical AI and clinical decision support": 2,
-      "Sovereign AI infrastructure": 2,
       "AI accessibility and conversational interfaces": 1,
       "Physical AI and robotics": 1,
       "Autonomous systems and defense tech": 1,
+      "Medical AI and clinical decision support": 1,
       "Developer tools and code automation": 1,
       "Agriculture technology and IoT": 1,
-      "Enterprise AI workforce augmentation": 1,
-      "Physical AI and robotics in manufacturing": 1,
-      "Autonomous military systems and defense": 1,
-      "Foundation model development and licensing": 1,
-      "AI security and safety": 1,
-      "Physical world automation": 1
+      "Sovereign AI infrastructure": 1,
+      "Enterprise AI workforce augmentation": 1
     },
     "90_day": {
-      "Medical AI and clinical decision support": 2,
-      "Sovereign AI infrastructure": 2,
       "AI accessibility and conversational interfaces": 1,
       "Physical AI and robotics": 1,
       "Autonomous systems and defense tech": 1,
+      "Medical AI and clinical decision support": 1,
       "Developer tools and code automation": 1,
       "Agriculture technology and IoT": 1,
-      "Enterprise AI workforce augmentation": 1,
-      "Physical AI and robotics in manufacturing": 1,
-      "Autonomous military systems and defense": 1,
-      "Foundation model development and licensing": 1,
-      "AI security and safety": 1,
-      "Physical world automation": 1
+      "Sovereign AI infrastructure": 1,
+      "Enterprise AI workforce augmentation": 1
     },
     "timeline": {
       "AI accessibility and conversational interfaces": [
@@ -41,7 +31,6 @@
         "2026-04-12"
       ],
       "Medical AI and clinical decision support": [
-        "2026-04-12",
         "2026-04-12"
       ],
       "Developer tools and code automation": [
@@ -51,42 +40,13 @@
         "2026-04-12"
       ],
       "Sovereign AI infrastructure": [
-        "2026-04-12",
         "2026-04-12"
       ],
       "Enterprise AI workforce augmentation": [
         "2026-04-12"
-      ],
-      "Physical AI and robotics in manufacturing": [
-        "2026-04-12"
-      ],
-      "Autonomous military systems and defense": [
-        "2026-04-12"
-      ],
-      "Foundation model development and licensing": [
-        "2026-04-12"
-      ],
-      "AI security and safety": [
-        "2026-04-12"
-      ],
-      "Physical world automation": [
-        "2026-04-12"
       ]
     },
-    "accelerating": [
-      {
-        "space": "Medical AI and clinical decision support",
-        "count_30": 2,
-        "count_90": 2,
-        "accel_pct": 200
-      },
-      {
-        "space": "Sovereign AI infrastructure",
-        "count_30": 2,
-        "count_90": 2,
-        "accel_pct": 200
-      }
-    ]
+    "accelerating": []
   },
   "investor_activity": {
     "by_deals": {
@@ -703,7 +663,7 @@
     }
   },
   "total_companies": 10,
-  "computed_at": "2026-04-15T15:07:08.781269",
-  "total_briefings": 8,
+  "computed_at": "2026-04-15T15:27:40.803333",
+  "total_briefings": 2,
   "high_growth_new_today": []
 }

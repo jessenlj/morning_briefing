@@ -947,10 +947,33 @@ def send_email(subject, html):
         s.sendmail(GMAIL_ADDRESS, RECIPIENT_EMAIL, msg.as_string())
 
 
+def dedupe_briefings(briefings):
+    """Keep one entry per date — the one with the most company tags, then longest text."""
+    by_date = {}
+    for e in briefings:
+        date = e.get("date", "")
+        if not date:
+            continue
+        existing = by_date.get(date)
+        if existing is None:
+            by_date[date] = e
+        else:
+            e_score = (len(e.get("companies", [])), len(e.get("full_briefing", "")))
+            ex_score = (len(existing.get("companies", [])), len(existing.get("full_briefing", "")))
+            if e_score > ex_score:
+                by_date[date] = e
+    return [by_date[d] for d in sorted(by_date)]
+
+
 def main():
     print(f"Running - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     briefings = load(BRIEFINGS_F, [])
+    briefings = dedupe_briefings(briefings)
     companies = load(COMPANIES_F, {})
+
+    if any(e.get("date") == TODAY_ISO for e in briefings):
+        print(f"  Briefing for {TODAY_ISO} already exists. Skipping.")
+        return
     print("  Web search briefing...")
     news = sonnet_search(news_prompt())
     print("  Substacks...")
