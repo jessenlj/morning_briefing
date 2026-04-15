@@ -466,6 +466,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 .company-card:hover{border-color:#999}
 .company-card .detail{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0}
 .company-card.open .detail{display:block}
+.briefing-card{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}
+.briefing-card:hover{border-color:#999}
+.briefing-card .detail{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0}
+.briefing-card.open .detail{display:block}
 .round{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f8f8f8}
 .round:last-child{border:none}
 .round-stage{font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;background:#f0f0ee;white-space:nowrap;flex-shrink:0}
@@ -604,15 +608,19 @@ function renderBriefings(){
   document.getElementById('tab-briefings').innerHTML='<input class="search-bar" placeholder="Search briefings..." oninput="filterBriefings(this.value)"><div id="blist"></div>';
   let html='';
   DB.briefings.slice().reverse().forEach(function(e){
-    html+='<div class="card" id="'+e.date+'"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:16px;font-weight:600">'+(e.date_display||e.date)+'</div><a href="#'+e.date+'" style="font-size:12px;color:#aaa;text-decoration:none">#</a></div><div style="margin-bottom:10px">';
+    html+='<div class="briefing-card" id="'+e.date+'" onclick="this.classList.toggle(&quot;open&quot;)">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+(e.date_display||e.date)+'</div><span style="font-size:12px;color:#aaa;user-select:none">&#8250;</span></div>';
+    html+='<div>';
     (e.companies||[]).forEach(function(c){html+='<span class="tag">'+c.name+'</span>';});
-    html+='</div><div class="briefing-text">'+fmt(e.full_briefing)+'</div></div>';
+    html+='</div>';
+    html+='<div class="detail"><div class="briefing-text">'+fmt(e.full_briefing)+'</div></div>';
+    html+='</div>';
   });
   document.getElementById('blist').innerHTML=html;
 }
 function filterBriefings(q){
   q=q.toLowerCase();
-  document.querySelectorAll('#blist .card').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+  document.querySelectorAll('#blist .briefing-card').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
 }
 let activeV=null;
 function renderCompanies(){
