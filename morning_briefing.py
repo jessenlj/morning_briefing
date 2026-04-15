@@ -422,9 +422,169 @@ def build_flags(metrics):
         flags.append(f"Most active investors in database: {', '.join(top_inv)}")
     return flags
 
-TECH_INDUSTRY_GROUPS = {"Computers", "Telecommunications", "Other Technology"}
+# Industries to skip outright — clearly not tech startups
+NOISE_INDUSTRIES = {
+    "Pooled Investment Fund", "Other Real Estate", "Residential", "Commercial",
+    "Investing", "Other Banking and Financial Services", "Commercial Banking",
+    "Investment Banking", "REITS and Finance", "Restaurants", "Agriculture",
+}
 
-def fetch_sec_form_d(min_amount=500_000, max_results=40):
+# Keywords that suggest a tech/software/AI company
+TECH_KEYWORDS = frozenset([
+    "software", "platform", "saas", "api", "cloud", "app", "application",
+    "ai", "artificial intelligence", "machine learning", "deep learning",
+    "data", "analytics", "algorithm", "automation", "robotics",
+    "cybersecurity", "security", "developer", "tech", "technology",
+    "digital", "mobile", "startup", "neural", "infrastructure",
+    "fintech", "healthtech", "biotech", "semiconductor", "sensor",
+    "workflow", "compute", "model", "inference", "intelligence",
+    "open source", "dashboard", "hardware", "firmware", "embedded",
+])
+
+
+# Sites that aggregate company/phone data but aren't the company itself
+DDG_SKIP_DOMAINS = {
+    "whitepages.com", "spokeo.com", "truepeoplesearch.com", "yellowpages.com",
+    "bbb.org", "yelp.com", "linkedin.com", "facebook.com", "twitter.com",
+    "x.com", "instagram.com", "crunchbase.com", "pitchbook.com",
+    "bloomberg.com", "reuters.com", "techcrunch.com", "businesswire.com",
+    "prnewswire.com", "sec.gov", "opencorporates.com", "bizapedia.com",
+}
+
+
+def ddg_search(query):
+    """Search DuckDuckGo HTML and return (url, snippet) for top organic result,
+    skipping known directory and aggregator sites."""
+    time.sleep(1.5)
+    try:
+        from bs4 import BeautifulSoup
+        from urllib.parse import unquote
+        r = requests.get(
+            "https://html.duckduckgo.com/html/",
+            params={"q": query},
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"},
+            timeout=10)
+        if r.status_code != 200:
+            return None, ""
+        soup = BeautifulSoup(r.text, "html.parser")
+        for result in soup.select(".result"):
+            link    = result.select_one(".result__a")
+            snip_el = result.select_one(".result__snippet")
+            if not link:
+                continue
+            href = link.get("href", "")
+            if "uddg=" in href:
+                url = unquote(href.split("uddg=")[1].split("&")[0])
+            elif href.startswith("http"):
+                url = href
+            else:
+                continue
+            if "duckduckgo.com" in url:
+                continue
+            if any(d in url for d in DDG_SKIP_DOMAINS):
+                continue
+            return url, (snip_el.get_text(strip=True) if snip_el else "")
+    except Exception:
+        pass
+    return None, ""
+
+
+def safe_scrape(url, max_bytes=50_000):
+    """Fetch a URL safely — hard timeout, size cap, HTML only."""
+    try:
+        from bs4 import BeautifulSoup
+        r = requests.get(url,
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"},
+            timeout=10, stream=True, verify=True)
+        if "text/html" not in r.headers.get("content-type", ""):
+            return ""
+        chunks, size = [], 0
+        for chunk in r.iter_content(chunk_size=4096):
+            chunks.append(chunk)
+            size += len(chunk)
+            if size >= max_bytes:
+                break
+        soup = BeautifulSoup(b"".join(chunks).decode("utf-8", errors="ignore"), "html.parser")
+        for tag in soup(["script", "style", "nav", "footer", "header"]):
+            tag.decompose()
+        meta     = soup.find("meta", attrs={"name": "description"})
+        meta_desc = meta.get("content", "") if meta else ""
+        body     = re.sub(r"\s+", " ", soup.get_text(separator=" ", strip=True))
+        return (meta_desc + " " + body[:2000]).strip()
+    except Exception:
+        return ""
+
+
+def is_tech(text, name=""):
+    """Return True if text + name contain at least 2 tech keywords."""
+    combined = (text + " " + name).lower()
+    return sum(1 for kw in TECH_KEYWORDS if kw in combined) >= 2
+
+
+def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
+    """Find website via DuckDuckGo, scrape it, confirm it's a tech company.
+    Returns {'website': ..., 'what_they_do': ...} or None if not tech."""
+    EXPLICIT_TECH = {"Computers", "Telecommunications", "Other Technology"}
+    sec_hdrs = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
+    website, snippet, page_text = "", "", ""
+
+    # Step 1: Check EDGAR submissions for a registered website
+    try:
+        time.sleep(0.1)
+        sr = requests.get(f"https://data.sec.gov/submissions/CIK{cik_str}.json",
+                          headers=sec_hdrs, timeout=10)
+        if sr.status_code == 200:
+            website = sr.json().get("website", "") or ""
+    except Exception:
+        pass
+
+    # Step 2: DuckDuckGo — search by company name + city
+    if not website:
+        url, snippet = ddg_search(f'"{entity}" {city} {state}')
+        if url:
+            website = url
+
+    # Step 3: DuckDuckGo — search by phone number + company name
+    if not website and phone:
+        url, snip2 = ddg_search(f'"{phone}" "{entity}"')
+        if url:
+            website = url
+            if not snippet:
+                snippet = snip2
+
+    # Step 4: Scrape the website if we found one
+    if website:
+        page_text = safe_scrape(website)
+
+    # Step 5: Tech check
+    if website or snippet:
+        # We have content — require 2+ tech keywords
+        if not is_tech(page_text + " " + snippet, entity):
+            return None
+    else:
+        # No web presence at all — keep if name signals tech OR SEC explicitly labeled it tech
+        name_lower = entity.lower()
+        name_is_tech = any(kw in name_lower for kw in TECH_KEYWORDS)
+        sec_says_tech = industry in EXPLICIT_TECH
+        if not name_is_tech and not sec_says_tech:
+            return None
+        return {"website": "", "what_they_do": "No web presence found — flag for review"}
+
+    # Step 6: Best available description
+    description = ""
+    if page_text:
+        first = page_text.split(".")[0].strip()
+        if 15 < len(first) < 300:
+            description = first + "."
+    if not description and snippet:
+        description = snippet[:300]
+
+    return {"website": website, "what_they_do": description}
+
+
+def fetch_sec_form_d(min_amount=500_000, max_enrich=50):
     """Fetch all of today's tech Form D filings from SEC EDGAR, enrich with descriptions."""
     hdrs  = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
     today = datetime.now().strftime("%Y-%m-%d")
@@ -458,24 +618,22 @@ def fetch_sec_form_d(min_amount=500_000, max_results=40):
 
     print(f"    [SEC] {len(hits)} total filings today")
 
+    enriched_count = 0
     results = []
     for hit in hits:
-        if len(results) >= max_results:
-            break
         src       = hit.get("_source", {})
-        accession = src.get("adsh", "")          # e.g. "0001234567-26-000123"
+        accession = src.get("adsh", "")
         ciks      = src.get("ciks", [])
-        names     = src.get("display_names", []) # e.g. ["Acme AI (CIK 0001234567)"]
+        names     = src.get("display_names", [])
         file_date = src.get("file_date", "")
         if not accession or not ciks or not names:
             continue
 
-        cik_str    = ciks[0]                     # "0001234567"
+        cik_str    = ciks[0]
         cik_int    = int(cik_str)
         acc_nodash = accession.replace("-", "")
-        # Strip the " (CIK XXXXXXXXXX)" suffix from display name
-        entity = re.sub(r'\s*\(CIK\s*\d+\)\s*$', '', names[0]).strip()
-        xml_url      = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_nodash}/primary_doc.xml"
+        entity     = re.sub(r'\s*\(CIK\s*\d+\)\s*$', '', names[0]).strip()
+        xml_url    = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_nodash}/primary_doc.xml"
 
         try:
             time.sleep(0.15)
@@ -490,8 +648,9 @@ def fetch_sec_form_d(min_amount=500_000, max_results=40):
             el = root.find(f".//{tag}")
             return el.text.strip() if el is not None and el.text else ""
 
+        # Skip obvious non-tech industries upfront
         industry = gtext("industryGroupType")
-        if industry not in TECH_INDUSTRY_GROUPS:
+        if industry in NOISE_INDUSTRIES:
             continue
 
         try:
@@ -504,57 +663,32 @@ def fetch_sec_form_d(min_amount=500_000, max_results=40):
         city    = gtext("city")
         state   = gtext("stateOrCountry")
         founded = gtext("yearOfInc")
+        phone   = gtext("issuerPhoneNumber")
 
-        # Try to get website from EDGAR submissions API
-        website = ""
-        website_text = ""
-        try:
-            time.sleep(0.1)
-            sr = requests.get(
-                f"https://data.sec.gov/submissions/CIK{cik_str}.json",
-                headers=hdrs, timeout=10)
-            if sr.status_code == 200:
-                website = sr.json().get("website", "") or ""
-        except Exception:
-            pass
+        if enriched_count >= max_enrich:
+            print(f"    [SEC] Enrichment cap ({max_enrich}) reached — stopping early")
+            break
 
-        if website and website.startswith("http"):
-            try:
-                time.sleep(0.1)
-                wr = requests.get(website,
-                    headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
-                if wr.status_code == 200:
-                    text = re.sub(r'<[^>]+>', ' ', wr.text)
-                    website_text = re.sub(r'\s+', ' ', text).strip()[:1500]
-            except Exception:
-                pass
+        enriched = enrich_sec_company(entity, city, state, phone, cik_str, industry)
+        enriched_count += 1
 
-        context = (f"Company: {entity}\nLocation: {city}, {state}"
-                   f"\nAmount raised: ${amount/1e6:.1f}M\nIndustry: {industry}")
-        if website_text:
-            context += f"\nWebsite: {website_text}"
-
-        prompt = (f"Based only on the information below, write ONE sentence describing "
-                  f"what this startup builds and who their customer is. "
-                  f"If unclear, write 'Early-stage tech company.'\n\n{context}\n\n"
-                  f"Return only the sentence, nothing else.")
-        try:
-            description = haiku(prompt, 150)
-        except Exception:
-            description = ""
+        if enriched is None:
+            print(f"    [SEC] skip (not tech): {entity}")
+            continue
 
         results.append({
-            "date_filed": file_date,
-            "company":    entity,
-            "amount_m":   round(amount / 1e6, 2),
-            "city":       city,
-            "state":      state,
-            "founded":    founded,
-            "cik":        cik_str,
-            "what_they_do": description,
-            "website":    website,
+            "date_filed":   file_date,
+            "company":      entity,
+            "amount_m":     round(amount / 1e6, 2),
+            "city":         city,
+            "state":        state,
+            "founded":      founded,
+            "cik":          cik_str,
+            "industry":     industry,
+            "what_they_do": enriched["what_they_do"],
+            "website":      enriched["website"],
         })
-        print(f"    [SEC] {entity} — ${amount/1e6:.1f}M ({city}, {state})")
+        print(f"    [SEC] + {entity} — ${amount/1e6:.1f}M ({city}, {state})")
 
     return results
 
@@ -1031,7 +1165,8 @@ function renderSEC(){
     filings.forEach(function(f){
       html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
       html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
-      html+='<div style="font-size:12px;color:#666;margin:4px 0">'+(f.what_they_do||'')+'</div>';
+      const isFlag=f.what_they_do&&f.what_they_do.includes('flag for review');
+      html+='<div style="font-size:12px;color:'+(isFlag?'#b45309':'#666')+';margin:4px 0">'+(f.what_they_do||'')+'</div>';
       html+='<div style="margin-top:4px">';
       if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
       if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';

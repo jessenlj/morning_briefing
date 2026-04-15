@@ -451,7 +451,8 @@ function renderSEC(){
     filings.forEach(function(f){
       html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
       html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
-      html+='<div style="font-size:12px;color:#666;margin:4px 0">'+(f.what_they_do||'')+'</div>';
+      const isFlag=f.what_they_do&&f.what_they_do.includes('flag for review');
+      html+='<div style="font-size:12px;color:'+(isFlag?'#b45309':'#666')+';margin:4px 0">'+(f.what_they_do||'')+'</div>';
       html+='<div style="margin-top:4px">';
       if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
       if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';
