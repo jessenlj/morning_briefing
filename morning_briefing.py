@@ -443,51 +443,22 @@ TECH_KEYWORDS = frozenset([
 
 
 # Sites that aggregate company/phone data but aren't the company itself
-DDG_SKIP_DOMAINS = {
-    "whitepages.com", "spokeo.com", "truepeoplesearch.com", "yellowpages.com",
-    "bbb.org", "yelp.com", "linkedin.com", "facebook.com", "twitter.com",
-    "x.com", "instagram.com", "crunchbase.com", "pitchbook.com",
-    "bloomberg.com", "reuters.com", "techcrunch.com", "businesswire.com",
-    "prnewswire.com", "sec.gov", "opencorporates.com", "bizapedia.com",
-}
-
-
-def ddg_search(query):
-    """Search DuckDuckGo HTML and return (url, snippet) for top organic result,
-    skipping known directory and aggregator sites."""
-    time.sleep(1.5)
+def clearbit_lookup(company_name):
+    """Look up a company via Clearbit Autocomplete API (free, no key required).
+    Returns the domain string (e.g. 'acme.com') or None if not found."""
     try:
-        from bs4 import BeautifulSoup
-        from urllib.parse import unquote
         r = requests.get(
-            "https://html.duckduckgo.com/html/",
-            params={"q": query},
-            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"},
+            "https://autocomplete.clearbit.com/v1/companies/suggest",
+            params={"query": company_name},
+            headers={"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"},
             timeout=10)
-        if r.status_code != 200:
-            return None, ""
-        soup = BeautifulSoup(r.text, "html.parser")
-        for result in soup.select(".result"):
-            link    = result.select_one(".result__a")
-            snip_el = result.select_one(".result__snippet")
-            if not link:
-                continue
-            href = link.get("href", "")
-            if "uddg=" in href:
-                url = unquote(href.split("uddg=")[1].split("&")[0])
-            elif href.startswith("http"):
-                url = href
-            else:
-                continue
-            if "duckduckgo.com" in url:
-                continue
-            if any(d in url for d in DDG_SKIP_DOMAINS):
-                continue
-            return url, (snip_el.get_text(strip=True) if snip_el else "")
+        if r.status_code == 200:
+            results = r.json()
+            if results:
+                return results[0].get("domain", "")
     except Exception:
         pass
-    return None, ""
+    return None
 
 
 def safe_scrape(url, max_bytes=50_000):
@@ -524,11 +495,11 @@ def is_tech(text, name=""):
 
 
 def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
-    """Find website via DuckDuckGo, scrape it, confirm it's a tech company.
+    """Find website via Clearbit, scrape it, confirm it's a tech company.
     Returns {'website': ..., 'what_they_do': ...} or None if not tech."""
     EXPLICIT_TECH = {"Computers", "Telecommunications", "Other Technology"}
     sec_hdrs = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
-    website, snippet, page_text = "", "", ""
+    website, page_text = "", ""
 
     # Step 1: Check EDGAR submissions for a registered website
     try:
@@ -540,28 +511,24 @@ def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
     except Exception:
         pass
 
-    # Step 2: DuckDuckGo — search by company name + city
+    # Step 2: Clearbit Autocomplete — look up company domain by name
+    # Strip common legal suffixes so Clearbit can match the brand name
     if not website:
-        url, snippet = ddg_search(f'"{entity}" {city} {state}')
-        if url:
-            website = url
+        clean_name = re.sub(
+            r',?\s*(Inc\.?|LLC\.?|L\.P\.?|Corp\.?|Co\.?|Ltd\.?|PBC|Holdings?|Group)\s*$',
+            '', entity, flags=re.IGNORECASE).strip()
+        domain = clearbit_lookup(clean_name) or clearbit_lookup(entity)
+        if domain:
+            website = f"https://{domain}"
 
-    # Step 3: DuckDuckGo — search by phone number + company name
-    if not website and phone:
-        url, snip2 = ddg_search(f'"{phone}" "{entity}"')
-        if url:
-            website = url
-            if not snippet:
-                snippet = snip2
-
-    # Step 4: Scrape the website if we found one
+    # Step 3: Scrape the website if we found one
     if website:
         page_text = safe_scrape(website)
 
-    # Step 5: Tech check
-    if website or snippet:
-        # We have content — require 2+ tech keywords
-        if not is_tech(page_text + " " + snippet, entity):
+    # Step 4: Tech check
+    if website:
+        # We have a website — require 2+ tech keywords in scraped content + name
+        if not is_tech(page_text, entity):
             return None
     else:
         # No web presence at all — keep if name signals tech OR SEC explicitly labeled it tech
@@ -572,14 +539,14 @@ def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
             return None
         return {"website": "", "what_they_do": "No web presence found — flag for review"}
 
-    # Step 6: Best available description
+    # Step 5: Best available description from scraped page
     description = ""
     if page_text:
         first = page_text.split(".")[0].strip()
         if 15 < len(first) < 300:
             description = first + "."
-    if not description and snippet:
-        description = snippet[:300]
+    if not description:
+        description = page_text[:200].strip() if page_text else ""
 
     return {"website": website, "what_they_do": description}
 
