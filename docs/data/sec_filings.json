@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "date_filed": "2026-04-15",
+    "company": "Precision Fermentation, Inc.",
+    "amount_m": 10.0,
+    "city": "DURHAM",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001807191",
+    "industry": "Other Technology",
+    "category": "Energy / Climate",
+    "what_they_do": "Fermentation monitoring solutions for the craft beer industry.",
+    "website": "https://precisionfermentation.com"
+  },
+  {
+    "date_filed": "2026-04-15",
+    "company": "Alloy Therapeutics, Inc.",
+    "amount_m": 30.02,
+    "city": "WALTHAM",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001851943",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Alloy Therapeutics democratizes access to antibody discovery and biologics discovery technology to enable and advance drug discovery in antibodies and TCRs.",
+    "website": "https://alloytx.com"
+  },
+  {
+    "date_filed": "2026-04-15",
+    "company": "Beacon Biosignals, Inc.",
+    "amount_m": 103.28,
+    "city": "BOSTON",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001765647",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Building the future of brain health with AI-driven neurotechnology.",
+    "website": "https://beacon.bio"
+  },
+  {
+    "date_filed": "2026-04-15",
+    "company": "Folio Photonics Inc.",
+    "amount_m": 5.97,
+    "city": "SOLON",
+    "state": "OH",
+    "founded": "",
+    "cik": "0001699248",
+    "industry": "Computers",
+    "category": "Hardware",
+    "what_they_do": "Folio Photonics produces multi-layer nanophotonic mediums disruptive in cost, capacity, and longevity.",
+    "website": "https://foliophotonics.com"
+  },
+  {
+    "date_filed": "2026-04-15",
+    "company": "Trayt Health Inc.",
+    "amount_m": 7.17,
+    "city": "WOODSIDE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001641961",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "Streamline behavioral health with data, insights & workflows.",
+    "website": "https://trayt.health"
+  }
+]

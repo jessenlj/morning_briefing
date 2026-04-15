@@ -83,6 +83,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <button onclick="tab('exits',this)">Exits</button>
   <button onclick="tab('categories',this)">Categories</button>
   <button onclick="tab('sec',this)">SEC Filings</button>
+  <button onclick="tab('unverified',this)">Unverified</button>
 </div>
 <div class="container">
   <div id="tab-dashboard" class="panel active"><div class="loading">Loading dashboard...</div></div>
@@ -94,18 +95,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
   <div id="tab-sec" class="panel"><div class="loading">Loading SEC filings...</div></div>
+  <div id="tab-unverified" class="panel"><div class="loading">Loading unverified...</div></div>
 </div>
 <script>
 const BASE='https://jessenlj.github.io/morning_briefing';
 let DB={},charts={};
 async function loadData(){
-  const [b,c,m,s]=await Promise.all([
+  const [b,c,m,s,u]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/sec_filings.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE+'/data/sec_unverified.json').then(r=>r.json()).catch(()=>[]),
   ]);
-  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;
+  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;DB.unverified=u;
   initAll();
 }
 function tab(id,btn){
@@ -444,32 +447,91 @@ function showCat(vertical){
 }
 function renderSEC(){
   const filings=DB.sec||[];
-  let html='<input class="search-bar" placeholder="Search SEC filings..." oninput="filterSEC(this.value)"><div style="font-size:12px;color:#999;margin-bottom:16px">Form D filings — tech companies — $500k+ raised. Updated daily.</div><div id="seclist">';
-  if(!filings.length){
+  // Group by date
+  const byDate={};
+  filings.forEach(function(f){
+    const d=f.date_filed||'unknown';
+    if(!byDate[d])byDate[d]=[];
+    byDate[d].push(f);
+  });
+  const dates=Object.keys(byDate).sort().reverse();
+  let html='<div id="seclist">';
+  if(!dates.length){
     html+='<div style="color:#999;padding:20px">No SEC Form D filings collected yet. Will populate on next pipeline run.</div>';
   } else {
-    filings.forEach(function(f){
-      html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
-      html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
-      const isFlag=f.what_they_do&&f.what_they_do.includes('flag for review');
-      html+='<div style="font-size:12px;color:'+(isFlag?'#b45309':'#666')+';margin:4px 0">'+(f.what_they_do||'')+'</div>';
-      html+='<div style="margin-top:4px">';
-      if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
-      if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';
+    dates.forEach(function(date,idx){
+      const dayFilings=byDate[date];
+      const isToday=(idx===0);
+      const label=isToday?'Today\'s Funding':date;
+      const totalM=dayFilings.reduce(function(s,f){return s+(f.amount_m||0);},0);
+      // Group by category within the day
+      const byCat={};
+      dayFilings.forEach(function(f){
+        const cat=f.category||'Other Tech';
+        if(!byCat[cat])byCat[cat]=[];
+        byCat[cat].push(f);
+      });
+      Object.keys(byCat).forEach(function(cat){
+        byCat[cat].sort(function(a,b){return (b.amount_m||0)-(a.amount_m||0);});
+      });
+      html+='<div class="briefing-card'+(isToday?' open':'')+'" onclick="this.classList.toggle(\'open\')">';
+      // Header row
+      html+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      html+='<div style="font-size:16px;font-weight:600">'+label+'</div>';
+      html+='<div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:#666">$'+totalM.toFixed(1)+'M raised &middot; '+dayFilings.length+' co.</span><span style="font-size:12px;color:#aaa;user-select:none">&#8250;</span></div>';
+      html+='</div>';
+      // Company name tags (always visible)
+      html+='<div style="margin-top:8px">';
+      dayFilings.forEach(function(f){html+='<span class="tag">'+f.company+'</span>';});
+      html+='</div>';
+      // Expanded detail
+      html+='<div class="detail">';
+      Object.keys(byCat).sort().forEach(function(cat){
+        html+='<div class="section-title">'+cat+'</div>';
+        byCat[cat].forEach(function(f){
+          html+='<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f5f5f5">';
+          html+='<div style="flex:1;margin-right:16px">';
+          html+='<div style="font-weight:500;font-size:13px">'+f.company+'</div>';
+          if(f.what_they_do)html+='<div style="font-size:12px;color:#555;margin:3px 0">'+f.what_they_do+'</div>';
+          html+='<div style="margin-top:4px">';
+          if(f.city||f.state)html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
+          if(f.founded)html+='<span class="tag">Est. '+f.founded+'</span>';
+          html+='</div></div>';
+          html+='<div style="text-align:right;flex-shrink:0">';
+          html+='<div style="font-weight:600;font-size:14px">$'+f.amount_m+'M</div>';
+          if(f.website)html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank" onclick="event.stopPropagation()">website ↗</a></div>';
+          html+='</div></div>';
+        });
+      });
       html+='</div></div>';
-      html+='<div style="text-align:right;flex-shrink:0;margin-left:16px">';
-      html+='<div style="font-weight:600;font-size:15px">$'+f.amount_m+'M</div>';
-      html+='<div style="font-size:11px;color:#aaa;margin-top:2px">'+f.date_filed+'</div>';
-      if(f.website) html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank">website ↗</a></div>';
-      html+='</div></div></div>';
     });
   }
   html+='</div>';
   document.getElementById('tab-sec').innerHTML=html;
 }
-function filterSEC(q){
-  q=q.toLowerCase();
-  document.querySelectorAll('#seclist .card-sm').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+function renderUnverified(){
+  const entries=DB.unverified||[];
+  let html='<div style="font-size:12px;color:#999;margin-bottom:16px">Companies from SEC Form D filings with no confirmed website. Checked daily — a dot appears when one is found.</div>';
+  if(!entries.length){
+    html+='<div style="color:#999;padding:20px">No unverified companies yet.</div>';
+  } else {
+    html+='<div>';
+    entries.forEach(function(f){
+      const isNew=f.newly_found;
+      html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0">';
+      html+='<div>';
+      if(isNew)html+='<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
+      html+='<span style="font-weight:500;font-size:13px">'+f.company+'</span>';
+      html+='<div style="font-size:11px;color:#999;margin-top:2px">';
+      if(f.city||f.state)html+=[f.city,f.state].filter(Boolean).join(', ')+' &middot; ';
+      html+='Added '+f.date_added+'</div>';
+      html+='</div>';
+      html+='<div style="text-align:right;font-size:13px;font-weight:600">$'+f.amount_m+'M</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+  document.getElementById('tab-unverified').innerHTML=html;
 }
 function initAll(){
   renderDashboard();
@@ -481,6 +543,7 @@ function initAll(){
   renderExits();
   renderCategories();
   renderSEC();
+  renderUnverified();
   if(window.location.hash){
     const el=document.querySelector(window.location.hash);
     if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth'});},300);
