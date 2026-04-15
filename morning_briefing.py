@@ -422,37 +422,59 @@ def build_flags(metrics):
         flags.append(f"Most active investors in database: {', '.join(top_inv)}")
     return flags
 
-TECH_INDUSTRY_GROUPS = {"Technology"}
+TECH_INDUSTRY_GROUPS = {"Computers", "Telecommunications", "Other Technology"}
 
-def fetch_sec_form_d(lookback_days=2, min_amount=500_000, max_results=40):
-    """Fetch recent tech Form D filings from SEC EDGAR, enrich with descriptions."""
-    hdrs = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
-    start = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
-    end   = datetime.now().strftime("%Y-%m-%d")
+def fetch_sec_form_d(min_amount=500_000, max_results=40):
+    """Fetch all of today's tech Form D filings from SEC EDGAR, enrich with descriptions."""
+    hdrs  = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    # First call to find out the total number of results
     try:
         r = requests.get(
             f"https://efts.sec.gov/LATEST/search-index?q=&forms=D"
-            f"&dateRange=custom&startdt={start}&enddt={end}",
+            f"&dateRange=custom&startdt={today}&enddt={today}&from=0&size=1",
             headers=hdrs, timeout=30)
-        hits = r.json().get("hits", {}).get("hits", [])
+        total = r.json().get("hits", {}).get("total", {}).get("value", 0)
     except Exception as e:
         print(f"    [SEC] Search failed: {e}")
         return []
+
+    # Page through all results in batches of 100
+    hits = []
+    batch = 100
+    for offset in range(0, total, batch):
+        try:
+            time.sleep(0.2)
+            r = requests.get(
+                f"https://efts.sec.gov/LATEST/search-index?q=&forms=D"
+                f"&dateRange=custom&startdt={today}&enddt={today}"
+                f"&from={offset}&size={batch}",
+                headers=hdrs, timeout=30)
+            hits.extend(r.json().get("hits", {}).get("hits", []))
+        except Exception as e:
+            print(f"    [SEC] Page {offset} failed: {e}")
+            break
+
+    print(f"    [SEC] {len(hits)} total filings today")
 
     results = []
     for hit in hits:
         if len(results) >= max_results:
             break
-        accession = hit.get("_id", "")          # e.g. "0001234567-26-000123"
-        src        = hit.get("_source", {})
-        entity     = src.get("entity_name", "")
-        file_date  = src.get("file_date", "")
-        if not accession or not entity:
+        src       = hit.get("_source", {})
+        accession = src.get("adsh", "")          # e.g. "0001234567-26-000123"
+        ciks      = src.get("ciks", [])
+        names     = src.get("display_names", []) # e.g. ["Acme AI (CIK 0001234567)"]
+        file_date = src.get("file_date", "")
+        if not accession or not ciks or not names:
             continue
 
-        cik_str      = accession.split("-")[0]   # "0001234567"
-        cik_int      = int(cik_str)
-        acc_nodash   = accession.replace("-", "")
+        cik_str    = ciks[0]                     # "0001234567"
+        cik_int    = int(cik_str)
+        acc_nodash = accession.replace("-", "")
+        # Strip the " (CIK XXXXXXXXXX)" suffix from display name
+        entity = re.sub(r'\s*\(CIK\s*\d+\)\s*$', '', names[0]).strip()
         xml_url      = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_nodash}/primary_doc.xml"
 
         try:
@@ -1165,7 +1187,7 @@ def main():
     flags = build_flags(metrics)
     print("  Fetching SEC Form D filings...")
     sec_filings = load(SEC_F, [])
-    new_sec = fetch_sec_form_d()
+    new_sec = fetch_sec_form_d(min_amount=500_000)
     sec_filings = update_sec_filings(sec_filings, new_sec)
     print(f"    {len(new_sec)} new filings, {len(sec_filings)} total")
     print("  Generating website...")
