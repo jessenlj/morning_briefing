@@ -27,7 +27,8 @@ DATA_DIR     = "docs/data"
 BRIEFINGS_F  = f"{DATA_DIR}/briefings.json"
 COMPANIES_F  = f"{DATA_DIR}/companies.json"
 METRICS_F    = f"{DATA_DIR}/metrics.json"
-SEC_F        = f"{DATA_DIR}/sec_filings.json"
+SEC_F            = f"{DATA_DIR}/sec_filings.json"
+SEC_UNVERIFIED_F = f"{DATA_DIR}/sec_unverified.json"
 WEBSITE_F    = "docs/index.html"
 LOOKBACK     = 7
 
@@ -431,18 +432,50 @@ NOISE_INDUSTRIES = {
 
 # Keywords that suggest a tech/software/AI company
 TECH_KEYWORDS = frozenset([
+    # Software & cloud
     "software", "platform", "saas", "api", "cloud", "app", "application",
+    "open source", "dashboard", "database", "integration", "pipeline",
+    "devops", "developer", "sdk", "plugin", "microservice", "serverless",
+    # AI & data
     "ai", "artificial intelligence", "machine learning", "deep learning",
-    "data", "analytics", "algorithm", "automation", "robotics",
-    "cybersecurity", "security", "developer", "tech", "technology",
-    "digital", "mobile", "startup", "neural", "infrastructure",
-    "fintech", "healthtech", "biotech", "semiconductor", "sensor",
-    "workflow", "compute", "model", "inference", "intelligence",
-    "open source", "dashboard", "hardware", "firmware", "embedded",
+    "data", "analytics", "algorithm", "automation", "neural", "inference",
+    "model", "compute", "intelligence", "llm", "generative", "nlp",
+    "computer vision", "prediction", "training", "dataset",
+    # Infrastructure & hardware
+    "infrastructure", "hardware", "firmware", "embedded", "semiconductor",
+    "sensor", "chip", "processor", "network", "protocol", "satellite",
+    "drone", "robotics", "photonic", "quantum", "battery", "energy storage",
+    # Security & identity
+    "cybersecurity", "security", "encryption", "authentication", "identity",
+    "compliance", "privacy", "firewall", "threat",
+    # Industry verticals
+    "fintech", "healthtech", "biotech", "edtech", "proptech", "insurtech",
+    "legaltech", "agtech", "climatetech", "medtech",
+    # General signals
+    "tech", "technology", "digital", "mobile", "startup", "workflow",
+    "marketplace", "network", "monitoring", "simulation", "optimization",
+    "visualization", "interface", "engine", "system", "solution",
 ])
 
 
-# Sites that aggregate company/phone data but aren't the company itself
+SEC_CATEGORIES = [
+    ("AI / ML",           ["ai", "machine learning", "deep learning", "neural", "llm", "generative", "nlp", "computer vision", "artificial intelligence", "large language"]),
+    ("Biotech / Health",  ["bio", "health", "therapeut", "pharma", "medic", "clinical", "drug", "genomic", "protein", "biosignal", "diagnostic", "brain", "neuro", "cell"]),
+    ("Fintech",           ["fintech", "payment", "banking", "finance", "financial", "lending", "credit", "trading", "wealth", "insurance", "invest"]),
+    ("Hardware",          ["hardware", "semiconductor", "chip", "photon", "sensor", "drone", "robotic", "quantum", "satellite", "firmware", "embedded", "battery", "storage"]),
+    ("Energy / Climate",  ["energy", "climate", "solar", "wind", "carbon", "emission", "clean", "sustainable", "grid", "nuclear", "fusion", "ferment"]),
+    ("Cybersecurity",     ["security", "cyber", "encryption", "firewall", "threat", "authentication", "privacy", "identity", "compliance"]),
+]
+
+def categorize_sec_company(name, industry, what_they_do):
+    """Assign a display category based on keywords in name + industry + description."""
+    text = (name + " " + industry + " " + what_they_do).lower()
+    for cat, keywords in SEC_CATEGORIES:
+        if any(kw in text for kw in keywords):
+            return cat
+    return "Other Tech"
+
+
 def clearbit_lookup(company_name):
     """Look up a company via Clearbit Autocomplete API (free, no key required).
     Returns the domain string (e.g. 'acme.com') or None if not found."""
@@ -489,9 +522,9 @@ def safe_scrape(url, max_bytes=50_000):
 
 
 def is_tech(text, name=""):
-    """Return True if text + name contain at least 2 tech keywords."""
+    """Return True if text + name contain at least 1 tech keyword."""
     combined = (text + " " + name).lower()
-    return sum(1 for kw in TECH_KEYWORDS if kw in combined) >= 2
+    return any(kw in combined for kw in TECH_KEYWORDS)
 
 
 def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
@@ -519,7 +552,14 @@ def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
             '', entity, flags=re.IGNORECASE).strip()
         domain = clearbit_lookup(clean_name) or clearbit_lookup(entity)
         if domain:
-            website = f"https://{domain}"
+            # Sanity check: at least one word from the brand name should appear in the domain
+            brand_words = [w.lower() for w in re.split(r'\s+', clean_name) if len(w) > 3]
+            domain_lower = domain.lower().split(".")[0]  # just the SLD, no TLD
+            # If no long-enough brand words, or none match the domain, reject
+            if not brand_words or not any(w in domain_lower for w in brand_words):
+                domain = None  # Clearbit matched a different company
+            if domain:
+                website = f"https://{domain}"
 
     # Step 3: Scrape the website if we found one
     if website:
@@ -551,7 +591,46 @@ def enrich_sec_company(entity, city, state, phone, cik_str, industry=""):
     return {"website": website, "what_they_do": description}
 
 
-def fetch_sec_form_d(min_amount=500_000, max_enrich=50):
+def check_unverified(unverified):
+    """Re-check unverified companies for a website. Returns (updated_unverified, newly_found)."""
+    PRUNE_DAYS = 60
+    cutoff = (datetime.now() - timedelta(days=PRUNE_DAYS)).strftime("%Y-%m-%d")
+    newly_found = []
+    still_unverified = []
+    for entry in unverified:
+        # Prune old entries
+        if entry.get("date_added", "9999") < cutoff:
+            print(f"    [Unverified] pruning old entry: {entry['company']}")
+            continue
+        domain = None
+        clean_name = re.sub(
+            r',?\s*(Inc\.?|LLC\.?|L\.P\.?|Corp\.?|Co\.?|Ltd\.?|PBC|Holdings?|Group)\s*$',
+            '', entry["company"], flags=re.IGNORECASE).strip()
+        domain = clearbit_lookup(clean_name) or clearbit_lookup(entry["company"])
+        if domain:
+            website = f"https://{domain}"
+            page_text = safe_scrape(website)
+            if is_tech(page_text, entry["company"]):
+                description = ""
+                if page_text:
+                    first = page_text.split(".")[0].strip()
+                    description = (first + ".") if 15 < len(first) < 300 else page_text[:200].strip()
+                category = categorize_sec_company(entry["company"], entry.get("industry", ""), description)
+                found = dict(entry)
+                found.update({
+                    "website": website,
+                    "what_they_do": description,
+                    "category": category,
+                    "newly_found": True,
+                })
+                newly_found.append(found)
+                print(f"    [Unverified] found: {entry['company']} -> {website}")
+                continue
+        still_unverified.append(entry)
+    return still_unverified, newly_found
+
+
+def fetch_sec_form_d(min_amount=99_000, max_enrich=50):
     """Fetch all of today's tech Form D filings from SEC EDGAR, enrich with descriptions."""
     hdrs  = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
     today = datetime.now().strftime("%Y-%m-%d")
@@ -587,6 +666,7 @@ def fetch_sec_form_d(min_amount=500_000, max_enrich=50):
 
     enriched_count = 0
     results = []
+    unverified = []
     for hit in hits:
         src       = hit.get("_source", {})
         accession = src.get("adsh", "")
@@ -643,7 +723,9 @@ def fetch_sec_form_d(min_amount=500_000, max_enrich=50):
             print(f"    [SEC] skip (not tech): {entity}")
             continue
 
-        results.append({
+        is_unverified = "flag for review" in enriched["what_they_do"]
+        category = categorize_sec_company(entity, industry, enriched["what_they_do"])
+        record = {
             "date_filed":   file_date,
             "company":      entity,
             "amount_m":     round(amount / 1e6, 2),
@@ -652,16 +734,23 @@ def fetch_sec_form_d(min_amount=500_000, max_enrich=50):
             "founded":      founded,
             "cik":          cik_str,
             "industry":     industry,
+            "category":     category,
             "what_they_do": enriched["what_they_do"],
             "website":      enriched["website"],
-        })
-        print(f"    [SEC] + {entity} — ${amount/1e6:.1f}M ({city}, {state})")
+        }
+        if is_unverified:
+            record["date_added"] = file_date
+            unverified.append(record)
+            print(f"    [SEC] ? {entity} — ${amount/1e6:.1f}M (unverified)")
+        else:
+            results.append(record)
+            print(f"    [SEC] + {entity} — ${amount/1e6:.1f}M ({city}, {state})")
 
-    return results
+    return results, unverified
 
 
 def update_sec_filings(existing, new_filings):
-    """Merge new filings into existing list, deduplicated by CIK."""
+    """Merge new verified filings into existing list, deduplicated by CIK."""
     by_cik = {e["cik"]: e for e in existing}
     for f in new_filings:
         cik = f["cik"]
@@ -670,12 +759,23 @@ def update_sec_filings(existing, new_filings):
     return sorted(by_cik.values(), key=lambda x: x["date_filed"], reverse=True)
 
 
-def generate_website(briefings, companies, metrics, sec_filings=None):
+def update_unverified(existing, new_unverified, newly_found):
+    """Merge new unverified entries; remove any that were just found."""
+    found_ciks = {e["cik"] for e in newly_found}
+    by_cik = {e["cik"]: e for e in existing if e["cik"] not in found_ciks}
+    for f in new_unverified:
+        if f["cik"] not in by_cik:
+            by_cik[f["cik"]] = f
+    return sorted(by_cik.values(), key=lambda x: x.get("date_added", ""), reverse=True)
+
+
+def generate_website(briefings, companies, metrics, sec_filings=None, sec_unverified=None):
     os.makedirs("docs", exist_ok=True)
     save(BRIEFINGS_F, briefings)
     save(COMPANIES_F, companies)
     save(METRICS_F, metrics)
     save(SEC_F, sec_filings or [])
+    save(SEC_UNVERIFIED_F, sec_unverified or [])
 
     # Build the HTML using a list to avoid Python escape issues with the JS template
     parts = []
@@ -764,6 +864,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <button onclick="tab('exits',this)">Exits</button>
   <button onclick="tab('categories',this)">Categories</button>
   <button onclick="tab('sec',this)">SEC Filings</button>
+  <button onclick="tab('unverified',this)">Unverified</button>
 </div>
 <div class="container">
   <div id="tab-dashboard" class="panel active"><div class="loading">Loading dashboard...</div></div>
@@ -775,18 +876,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
   <div id="tab-sec" class="panel"><div class="loading">Loading SEC filings...</div></div>
+  <div id="tab-unverified" class="panel"><div class="loading">Loading unverified...</div></div>
 </div>
 <script>
 const BASE='SITE_PLACEHOLDER';
 let DB={},charts={};
 async function loadData(){
-  const [b,c,m,s]=await Promise.all([
+  const [b,c,m,s,u]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/sec_filings.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE+'/data/sec_unverified.json').then(r=>r.json()).catch(()=>[]),
   ]);
-  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;
+  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;DB.unverified=u;
   initAll();
 }
 function tab(id,btn){
@@ -1125,32 +1228,91 @@ function showCat(vertical){
 }
 function renderSEC(){
   const filings=DB.sec||[];
-  let html='<input class="search-bar" placeholder="Search SEC filings..." oninput="filterSEC(this.value)"><div style="font-size:12px;color:#999;margin-bottom:16px">Form D filings — tech companies — $500k+ raised. Updated daily.</div><div id="seclist">';
-  if(!filings.length){
+  // Group by date
+  const byDate={};
+  filings.forEach(function(f){
+    const d=f.date_filed||'unknown';
+    if(!byDate[d])byDate[d]=[];
+    byDate[d].push(f);
+  });
+  const dates=Object.keys(byDate).sort().reverse();
+  let html='<div id="seclist">';
+  if(!dates.length){
     html+='<div style="color:#999;padding:20px">No SEC Form D filings collected yet. Will populate on next pipeline run.</div>';
   } else {
-    filings.forEach(function(f){
-      html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
-      html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
-      const isFlag=f.what_they_do&&f.what_they_do.includes('flag for review');
-      html+='<div style="font-size:12px;color:'+(isFlag?'#b45309':'#666')+';margin:4px 0">'+(f.what_they_do||'')+'</div>';
-      html+='<div style="margin-top:4px">';
-      if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
-      if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';
+    dates.forEach(function(date,idx){
+      const dayFilings=byDate[date];
+      const isToday=(idx===0);
+      const label=isToday?'Today\'s Funding':date;
+      const totalM=dayFilings.reduce(function(s,f){return s+(f.amount_m||0);},0);
+      // Group by category within the day
+      const byCat={};
+      dayFilings.forEach(function(f){
+        const cat=f.category||'Other Tech';
+        if(!byCat[cat])byCat[cat]=[];
+        byCat[cat].push(f);
+      });
+      Object.keys(byCat).forEach(function(cat){
+        byCat[cat].sort(function(a,b){return (b.amount_m||0)-(a.amount_m||0);});
+      });
+      html+='<div class="briefing-card'+(isToday?' open':'')+'" onclick="this.classList.toggle(\'open\')">';
+      // Header row
+      html+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      html+='<div style="font-size:16px;font-weight:600">'+label+'</div>';
+      html+='<div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:#666">$'+totalM.toFixed(1)+'M raised &middot; '+dayFilings.length+' co.</span><span style="font-size:12px;color:#aaa;user-select:none">&#8250;</span></div>';
+      html+='</div>';
+      // Company name tags (always visible)
+      html+='<div style="margin-top:8px">';
+      dayFilings.forEach(function(f){html+='<span class="tag">'+f.company+'</span>';});
+      html+='</div>';
+      // Expanded detail
+      html+='<div class="detail">';
+      Object.keys(byCat).sort().forEach(function(cat){
+        html+='<div class="section-title">'+cat+'</div>';
+        byCat[cat].forEach(function(f){
+          html+='<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f5f5f5">';
+          html+='<div style="flex:1;margin-right:16px">';
+          html+='<div style="font-weight:500;font-size:13px">'+f.company+'</div>';
+          if(f.what_they_do)html+='<div style="font-size:12px;color:#555;margin:3px 0">'+f.what_they_do+'</div>';
+          html+='<div style="margin-top:4px">';
+          if(f.city||f.state)html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
+          if(f.founded)html+='<span class="tag">Est. '+f.founded+'</span>';
+          html+='</div></div>';
+          html+='<div style="text-align:right;flex-shrink:0">';
+          html+='<div style="font-weight:600;font-size:14px">$'+f.amount_m+'M</div>';
+          if(f.website)html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank" onclick="event.stopPropagation()">website ↗</a></div>';
+          html+='</div></div>';
+        });
+      });
       html+='</div></div>';
-      html+='<div style="text-align:right;flex-shrink:0;margin-left:16px">';
-      html+='<div style="font-weight:600;font-size:15px">$'+f.amount_m+'M</div>';
-      html+='<div style="font-size:11px;color:#aaa;margin-top:2px">'+f.date_filed+'</div>';
-      if(f.website) html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank">website ↗</a></div>';
-      html+='</div></div></div>';
     });
   }
   html+='</div>';
   document.getElementById('tab-sec').innerHTML=html;
 }
-function filterSEC(q){
-  q=q.toLowerCase();
-  document.querySelectorAll('#seclist .card-sm').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+function renderUnverified(){
+  const entries=DB.unverified||[];
+  let html='<div style="font-size:12px;color:#999;margin-bottom:16px">Companies from SEC Form D filings with no confirmed website. Checked daily — a dot appears when one is found.</div>';
+  if(!entries.length){
+    html+='<div style="color:#999;padding:20px">No unverified companies yet.</div>';
+  } else {
+    html+='<div>';
+    entries.forEach(function(f){
+      const isNew=f.newly_found;
+      html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0">';
+      html+='<div>';
+      if(isNew)html+='<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
+      html+='<span style="font-weight:500;font-size:13px">'+f.company+'</span>';
+      html+='<div style="font-size:11px;color:#999;margin-top:2px">';
+      if(f.city||f.state)html+=[f.city,f.state].filter(Boolean).join(', ')+' &middot; ';
+      html+='Added '+f.date_added+'</div>';
+      html+='</div>';
+      html+='<div style="text-align:right;font-size:13px;font-weight:600">$'+f.amount_m+'M</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+  document.getElementById('tab-unverified').innerHTML=html;
 }
 function initAll(){
   renderDashboard();
@@ -1162,6 +1324,7 @@ function initAll(){
   renderExits();
   renderCategories();
   renderSEC();
+  renderUnverified();
   if(window.location.hash){
     const el=document.querySelector(window.location.hash);
     if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth'});},300);
@@ -1288,12 +1451,21 @@ def main():
     save(METRICS_F, metrics)
     flags = build_flags(metrics)
     print("  Fetching SEC Form D filings...")
-    sec_filings = load(SEC_F, [])
-    new_sec = fetch_sec_form_d(min_amount=500_000)
-    sec_filings = update_sec_filings(sec_filings, new_sec)
-    print(f"    {len(new_sec)} new filings, {len(sec_filings)} total")
+    sec_filings   = load(SEC_F, [])
+    sec_unverified = load(SEC_UNVERIFIED_F, [])
+    # Re-check previously unverified companies for newly found websites
+    print(f"    Checking {len(sec_unverified)} unverified companies...")
+    sec_unverified, newly_found = check_unverified(sec_unverified)
+    if newly_found:
+        print(f"    {len(newly_found)} companies newly found — moving to verified")
+        sec_filings = update_sec_filings(sec_filings, newly_found)
+    # Fetch today's new filings
+    new_verified, new_unverified = fetch_sec_form_d(min_amount=99_000)
+    sec_filings   = update_sec_filings(sec_filings, new_verified)
+    sec_unverified = update_unverified(sec_unverified, new_unverified, newly_found)
+    print(f"    {len(new_verified)} new verified, {len(new_unverified)} new unverified, {len(sec_filings)} total verified")
     print("  Generating website...")
-    generate_website(briefings, companies, metrics, sec_filings)
+    generate_website(briefings, companies, metrics, sec_filings, sec_unverified)
     print("  Sending email...")
     html = build_email(news, sub, connections, flags, datetime.now().strftime("%A, %B %d, %Y"))
     send_email(f"Morning Briefing - {datetime.now().strftime('%A, %B %d, %Y')}", html)
