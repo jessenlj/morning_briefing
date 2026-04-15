@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import os, re, json, smtplib, calendar, feedparser, time
+import os, re, json, smtplib, calendar, feedparser, time, xml.etree.ElementTree as ET
+import requests
 from collections import Counter, defaultdict
 from datetime import datetime, timezone, timedelta
 from email.mime.multipart import MIMEMultipart
@@ -26,6 +27,7 @@ DATA_DIR     = "docs/data"
 BRIEFINGS_F  = f"{DATA_DIR}/briefings.json"
 COMPANIES_F  = f"{DATA_DIR}/companies.json"
 METRICS_F    = f"{DATA_DIR}/metrics.json"
+SEC_F        = f"{DATA_DIR}/sec_filings.json"
 WEBSITE_F    = "docs/index.html"
 LOOKBACK     = 7
 
@@ -420,11 +422,137 @@ def build_flags(metrics):
         flags.append(f"Most active investors in database: {', '.join(top_inv)}")
     return flags
 
-def generate_website(briefings, companies, metrics):
+TECH_INDUSTRY_GROUPS = {"Technology"}
+
+def fetch_sec_form_d(lookback_days=2, min_amount=500_000, max_results=40):
+    """Fetch recent tech Form D filings from SEC EDGAR, enrich with descriptions."""
+    hdrs = {"User-Agent": f"MorningBriefing/1.0 {RECIPIENT_EMAIL}"}
+    start = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+    end   = datetime.now().strftime("%Y-%m-%d")
+    try:
+        r = requests.get(
+            f"https://efts.sec.gov/LATEST/search-index?q=&forms=D"
+            f"&dateRange=custom&startdt={start}&enddt={end}",
+            headers=hdrs, timeout=30)
+        hits = r.json().get("hits", {}).get("hits", [])
+    except Exception as e:
+        print(f"    [SEC] Search failed: {e}")
+        return []
+
+    results = []
+    for hit in hits:
+        if len(results) >= max_results:
+            break
+        accession = hit.get("_id", "")          # e.g. "0001234567-26-000123"
+        src        = hit.get("_source", {})
+        entity     = src.get("entity_name", "")
+        file_date  = src.get("file_date", "")
+        if not accession or not entity:
+            continue
+
+        cik_str      = accession.split("-")[0]   # "0001234567"
+        cik_int      = int(cik_str)
+        acc_nodash   = accession.replace("-", "")
+        xml_url      = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_nodash}/primary_doc.xml"
+
+        try:
+            time.sleep(0.15)
+            xr = requests.get(xml_url, headers=hdrs, timeout=15)
+            if xr.status_code != 200:
+                continue
+            root = ET.fromstring(xr.text)
+        except Exception:
+            continue
+
+        def gtext(tag):
+            el = root.find(f".//{tag}")
+            return el.text.strip() if el is not None and el.text else ""
+
+        industry = gtext("industryGroupType")
+        if industry not in TECH_INDUSTRY_GROUPS:
+            continue
+
+        try:
+            amount = float(gtext("totalAmountSold") or 0)
+        except ValueError:
+            amount = 0
+        if amount < min_amount:
+            continue
+
+        city    = gtext("city")
+        state   = gtext("stateOrCountry")
+        founded = gtext("yearOfInc")
+
+        # Try to get website from EDGAR submissions API
+        website = ""
+        website_text = ""
+        try:
+            time.sleep(0.1)
+            sr = requests.get(
+                f"https://data.sec.gov/submissions/CIK{cik_str}.json",
+                headers=hdrs, timeout=10)
+            if sr.status_code == 200:
+                website = sr.json().get("website", "") or ""
+        except Exception:
+            pass
+
+        if website and website.startswith("http"):
+            try:
+                time.sleep(0.1)
+                wr = requests.get(website,
+                    headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+                if wr.status_code == 200:
+                    text = re.sub(r'<[^>]+>', ' ', wr.text)
+                    website_text = re.sub(r'\s+', ' ', text).strip()[:1500]
+            except Exception:
+                pass
+
+        context = (f"Company: {entity}\nLocation: {city}, {state}"
+                   f"\nAmount raised: ${amount/1e6:.1f}M\nIndustry: {industry}")
+        if website_text:
+            context += f"\nWebsite: {website_text}"
+
+        prompt = (f"Based only on the information below, write ONE sentence describing "
+                  f"what this startup builds and who their customer is. "
+                  f"If unclear, write 'Early-stage tech company.'\n\n{context}\n\n"
+                  f"Return only the sentence, nothing else.")
+        try:
+            description = haiku(prompt, 150)
+        except Exception:
+            description = ""
+
+        results.append({
+            "date_filed": file_date,
+            "company":    entity,
+            "amount_m":   round(amount / 1e6, 2),
+            "city":       city,
+            "state":      state,
+            "founded":    founded,
+            "cik":        cik_str,
+            "what_they_do": description,
+            "website":    website,
+        })
+        print(f"    [SEC] {entity} — ${amount/1e6:.1f}M ({city}, {state})")
+
+    return results
+
+
+def update_sec_filings(existing, new_filings):
+    """Merge new filings into existing list, deduplicated by CIK."""
+    by_cik = {e["cik"]: e for e in existing}
+    for f in new_filings:
+        cik = f["cik"]
+        if cik not in by_cik or f["date_filed"] >= by_cik[cik]["date_filed"]:
+            by_cik[cik] = f
+    return sorted(by_cik.values(), key=lambda x: x["date_filed"], reverse=True)
+
+
+def generate_website(briefings, companies, metrics, sec_filings=None):
     os.makedirs("docs", exist_ok=True)
     save(BRIEFINGS_F, briefings)
     save(COMPANIES_F, companies)
     save(METRICS_F, metrics)
+    save(SEC_F, sec_filings or [])
 
     # Build the HTML using a list to avoid Python escape issues with the JS template
     parts = []
@@ -512,6 +640,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <button onclick="tab('investors',this)">Investors</button>
   <button onclick="tab('exits',this)">Exits</button>
   <button onclick="tab('categories',this)">Categories</button>
+  <button onclick="tab('sec',this)">SEC Filings</button>
 </div>
 <div class="container">
   <div id="tab-dashboard" class="panel active"><div class="loading">Loading dashboard...</div></div>
@@ -522,17 +651,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div id="tab-investors" class="panel"><div class="loading">Loading investors...</div></div>
   <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
+  <div id="tab-sec" class="panel"><div class="loading">Loading SEC filings...</div></div>
 </div>
 <script>
 const BASE='SITE_PLACEHOLDER';
 let DB={},charts={};
 async function loadData(){
-  const [b,c,m]=await Promise.all([
+  const [b,c,m,s]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({})),
+    fetch(BASE+'/data/sec_filings.json').then(r=>r.json()).catch(()=>[]),
   ]);
-  DB.briefings=b;DB.companies=c;DB.metrics=m;
+  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;
   initAll();
 }
 function tab(id,btn){
@@ -869,6 +1000,34 @@ function showCat(vertical){
   document.getElementById('catdetail').innerHTML=html;
   document.getElementById('catdetail').scrollIntoView({behavior:'smooth'});
 }
+function renderSEC(){
+  const filings=DB.sec||[];
+  let html='<input class="search-bar" placeholder="Search SEC filings..." oninput="filterSEC(this.value)"><div style="font-size:12px;color:#999;margin-bottom:16px">Form D filings — tech companies — $500k+ raised. Updated daily.</div><div id="seclist">';
+  if(!filings.length){
+    html+='<div style="color:#999;padding:20px">No SEC Form D filings collected yet. Will populate on next pipeline run.</div>';
+  } else {
+    filings.forEach(function(f){
+      html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
+      html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
+      html+='<div style="font-size:12px;color:#666;margin:4px 0">'+(f.what_they_do||'')+'</div>';
+      html+='<div style="margin-top:4px">';
+      if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
+      if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';
+      html+='</div></div>';
+      html+='<div style="text-align:right;flex-shrink:0;margin-left:16px">';
+      html+='<div style="font-weight:600;font-size:15px">$'+f.amount_m+'M</div>';
+      html+='<div style="font-size:11px;color:#aaa;margin-top:2px">'+f.date_filed+'</div>';
+      if(f.website) html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank">website ↗</a></div>';
+      html+='</div></div></div>';
+    });
+  }
+  html+='</div>';
+  document.getElementById('tab-sec').innerHTML=html;
+}
+function filterSEC(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('#seclist .card-sm').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+}
 function initAll(){
   renderDashboard();
   renderBriefings();
@@ -878,6 +1037,7 @@ function initAll(){
   renderInvestors();
   renderExits();
   renderCategories();
+  renderSEC();
   if(window.location.hash){
     const el=document.querySelector(window.location.hash);
     if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth'});},300);
@@ -1003,8 +1163,13 @@ def main():
     metrics["high_growth_new_today"] = hg_new
     save(METRICS_F, metrics)
     flags = build_flags(metrics)
+    print("  Fetching SEC Form D filings...")
+    sec_filings = load(SEC_F, [])
+    new_sec = fetch_sec_form_d()
+    sec_filings = update_sec_filings(sec_filings, new_sec)
+    print(f"    {len(new_sec)} new filings, {len(sec_filings)} total")
     print("  Generating website...")
-    generate_website(briefings, companies, metrics)
+    generate_website(briefings, companies, metrics, sec_filings)
     print("  Sending email...")
     html = build_email(news, sub, connections, flags, datetime.now().strftime("%A, %B %d, %Y"))
     send_email(f"Morning Briefing - {datetime.now().strftime('%A, %B %d, %Y')}", html)

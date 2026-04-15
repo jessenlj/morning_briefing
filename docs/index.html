@@ -82,6 +82,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <button onclick="tab('investors',this)">Investors</button>
   <button onclick="tab('exits',this)">Exits</button>
   <button onclick="tab('categories',this)">Categories</button>
+  <button onclick="tab('sec',this)">SEC Filings</button>
 </div>
 <div class="container">
   <div id="tab-dashboard" class="panel active"><div class="loading">Loading dashboard...</div></div>
@@ -92,17 +93,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div id="tab-investors" class="panel"><div class="loading">Loading investors...</div></div>
   <div id="tab-exits" class="panel"><div class="loading">Loading exits...</div></div>
   <div id="tab-categories" class="panel"><div class="loading">Loading categories...</div></div>
+  <div id="tab-sec" class="panel"><div class="loading">Loading SEC filings...</div></div>
 </div>
 <script>
 const BASE='https://jessenlj.github.io/morning_briefing';
 let DB={},charts={};
 async function loadData(){
-  const [b,c,m]=await Promise.all([
+  const [b,c,m,s]=await Promise.all([
     fetch(BASE+'/data/briefings.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE+'/data/companies.json').then(r=>r.json()).catch(()=>({})),
     fetch(BASE+'/data/metrics.json').then(r=>r.json()).catch(()=>({})),
+    fetch(BASE+'/data/sec_filings.json').then(r=>r.json()).catch(()=>[]),
   ]);
-  DB.briefings=b;DB.companies=c;DB.metrics=m;
+  DB.briefings=b;DB.companies=c;DB.metrics=m;DB.sec=s;
   initAll();
 }
 function tab(id,btn){
@@ -439,6 +442,34 @@ function showCat(vertical){
   document.getElementById('catdetail').innerHTML=html;
   document.getElementById('catdetail').scrollIntoView({behavior:'smooth'});
 }
+function renderSEC(){
+  const filings=DB.sec||[];
+  let html='<input class="search-bar" placeholder="Search SEC filings..." oninput="filterSEC(this.value)"><div style="font-size:12px;color:#999;margin-bottom:16px">Form D filings — tech companies — $500k+ raised. Updated daily.</div><div id="seclist">';
+  if(!filings.length){
+    html+='<div style="color:#999;padding:20px">No SEC Form D filings collected yet. Will populate on next pipeline run.</div>';
+  } else {
+    filings.forEach(function(f){
+      html+='<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start">';
+      html+='<div style="flex:1"><div style="font-weight:500;font-size:14px">'+f.company+'</div>';
+      html+='<div style="font-size:12px;color:#666;margin:4px 0">'+(f.what_they_do||'')+'</div>';
+      html+='<div style="margin-top:4px">';
+      if(f.city||f.state) html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
+      if(f.founded) html+='<span class="tag">Est. '+f.founded+'</span>';
+      html+='</div></div>';
+      html+='<div style="text-align:right;flex-shrink:0;margin-left:16px">';
+      html+='<div style="font-weight:600;font-size:15px">$'+f.amount_m+'M</div>';
+      html+='<div style="font-size:11px;color:#aaa;margin-top:2px">'+f.date_filed+'</div>';
+      if(f.website) html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank">website ↗</a></div>';
+      html+='</div></div></div>';
+    });
+  }
+  html+='</div>';
+  document.getElementById('tab-sec').innerHTML=html;
+}
+function filterSEC(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('#seclist .card-sm').forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});
+}
 function initAll(){
   renderDashboard();
   renderBriefings();
@@ -448,6 +479,7 @@ function initAll(){
   renderInvestors();
   renderExits();
   renderCategories();
+  renderSEC();
   if(window.location.hash){
     const el=document.querySelector(window.location.hash);
     if(el)setTimeout(function(){el.scrollIntoView({behavior:'smooth'});},300);
