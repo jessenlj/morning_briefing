@@ -63,5 +63,20 @@
     "category": "Biotech / Health",
     "what_they_do": "Streamline behavioral health with data, insights & workflows.",
     "website": "https://trayt.health"
+  },
+  {
+    "date_filed": "2026-04-15",
+    "company": "TYTL Corp",
+    "amount_m": 3.6,
+    "city": "NEWPORT",
+    "state": "RI",
+    "founded": "",
+    "cik": "0002113410",
+    "industry": "Other Technology",
+    "category": "Hardware",
+    "what_they_do": "Improve your warehouse efficiency with customised storage and racking solutions from a trusted provider in Singapore.",
+    "website": "https://tytcorp.com.sg",
+    "date_added": "2026-04-15",
+    "newly_found": true
   }
 ]
