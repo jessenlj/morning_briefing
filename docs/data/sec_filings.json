@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-04-17",
+    "company": "Global Gardens LLC",
+    "amount_m": 4.99,
+    "city": "BRANDON",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002129812",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Global Gardens grows, produces and sells award-winning organic olive oils, balsamic vinegars, organic mustards, snacks, gift baskets & California food gifts Global Gardens: California Grown Olive Oil",
+    "website": "https://globalgardensonline.com"
+  },
+  {
+    "date_filed": "2026-04-17",
+    "company": "5280 Waste Group, LLC",
+    "amount_m": 6.6,
+    "city": "SEWICKLEY",
+    "state": "PA",
+    "founded": "",
+    "cik": "0002064879",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Wastegroup \u2013 Waste Management & Recycling Home About Us Services LANDFILL SITES WASTE MANAGEMENT SERVICES RECYCLING SERVICES LANDFILL MANAGEMENT SERVICES Media NEWS GALLERY Contact Us 086 show number",
+    "website": "https://wastegroup.co.za"
+  },
+  {
     "date_filed": "2026-04-15",
     "company": "Precision Fermentation, Inc.",
     "amount_m": 10.0,

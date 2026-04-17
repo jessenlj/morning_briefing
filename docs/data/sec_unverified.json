@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-04-17",
+    "company": "CompleteFarmer Technologies, Inc.",
+    "amount_m": 2.5,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001990641",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-17"
+  },
+  {
+    "date_filed": "2026-04-17",
+    "company": "Second Sight Data Discovery, Inc.",
+    "amount_m": 11.68,
+    "city": "BLOOMINGTON",
+    "state": "IN",
+    "founded": "",
+    "cik": "0002129883",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-17"
+  },
+  {
     "date_filed": "2026-04-16",
     "company": "Hiro Capital III SCSp",
     "amount_m": 1.64,
