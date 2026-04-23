@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-04-23",
+    "company": "Aaru, Inc.",
+    "amount_m": 7.96,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002111770",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Association of Arab Universities Association of Arab Universities Aaru Journal News Strategic Plan Monthly Magazine Join AARU Arab Ranking for Universities WELCOME MESSAGE Secretary General Prof.",
+    "website": "https://aaru.edu.jo"
+  },
+  {
+    "date_filed": "2026-04-23",
+    "company": "Torngat Metals Ltd",
+    "amount_m": 32.44,
+    "city": "MONTREAL",
+    "state": "A8",
+    "founded": "",
+    "cik": "0002090827",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "We are a company dedicated to developing the Strange Lake rare earth project in northern Quebec.",
+    "website": "https://torngatmetals.com"
+  },
+  {
+    "date_filed": "2026-04-23",
+    "company": "Beni, Inc.",
+    "amount_m": 0.81,
+    "city": "BROOKLYN",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002131305",
+    "industry": "Business Services",
+    "category": "Other Tech",
+    "what_they_do": "An unforgettable, immersive dining experience.",
+    "website": "https://benihana.com"
+  },
+  {
     "date_filed": "2026-04-20",
     "company": "Outsquare MD, INC",
     "amount_m": 0.11,

@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-04-23",
+    "company": "Pumpcade, Inc.",
+    "amount_m": 5.0,
+    "city": "NEWARK",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002128036",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-23"
+  },
+  {
+    "date_filed": "2026-04-23",
+    "company": "Hand Technologies, Inc. /DE/",
+    "amount_m": 0.69,
+    "city": "STARKVILLE",
+    "state": "MS",
+    "founded": "",
+    "cik": "0002131042",
+    "industry": "Manufacturing",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-23"
+  },
+  {
+    "date_filed": "2026-04-23",
+    "company": "SOCKET MOBILE, INC.  (SCKT)",
+    "amount_m": 0.5,
+    "city": "FREMONT",
+    "state": "CA",
+    "founded": "",
+    "cik": "0000944075",
+    "industry": "Manufacturing",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-23"
+  },
+  {
     "date_filed": "2026-04-20",
     "company": "Sanctuary Cognitive Systems Corp",
     "amount_m": 1.55,
