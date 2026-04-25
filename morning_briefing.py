@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-import os, re, json, smtplib, calendar, feedparser, time, xml.etree.ElementTree as ET
+import os, re, json, smtplib, calendar, feedparser, time
 import requests
 from datetime import datetime, timezone, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import anthropic
+
+try:
+    from defusedxml import ElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
 
 ANTHROPIC_API_KEY  = os.environ.get("ANTHROPIC_API_KEY", "")
 GMAIL_ADDRESS      = os.environ.get("GMAIL_ADDRESS", "")
@@ -558,6 +563,15 @@ function tab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
+function esc(s){
+  if(!s)return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function safeHref(url){
+  if(!url)return '';
+  const u=String(url).trim();
+  return (u.startsWith('https://')||u.startsWith('http://'))?u:'';
+}
 function fmt(text){
   if(!text)return '';
   text=text.replace(/## (.+)/gm,'<h4>$1</h4>');
@@ -624,24 +638,25 @@ function renderSEC(){
       html+='</div>';
       // Company name tags (always visible)
       html+='<div style="margin-top:8px">';
-      dayFilings.forEach(function(f){html+='<span class="tag">'+f.company+'</span>';});
+      dayFilings.forEach(function(f){html+='<span class="tag">'+esc(f.company)+'</span>';});
       html+='</div>';
       // Expanded detail
       html+='<div class="detail">';
       Object.keys(byCat).sort().forEach(function(cat){
-        html+='<div class="section-title">'+cat+'</div>';
+        html+='<div class="section-title">'+esc(cat)+'</div>';
         byCat[cat].forEach(function(f){
           html+='<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f5f5f5">';
           html+='<div style="flex:1;margin-right:16px">';
-          html+='<div style="font-weight:500;font-size:13px">'+f.company+'</div>';
-          if(f.what_they_do)html+='<div style="font-size:12px;color:#555;margin:3px 0">'+f.what_they_do+'</div>';
+          html+='<div style="font-weight:500;font-size:13px">'+esc(f.company)+'</div>';
+          if(f.what_they_do)html+='<div style="font-size:12px;color:#555;margin:3px 0">'+esc(f.what_they_do)+'</div>';
           html+='<div style="margin-top:4px">';
-          if(f.city||f.state)html+='<span class="tag">'+[f.city,f.state].filter(Boolean).join(', ')+'</span>';
-          if(f.founded)html+='<span class="tag">Est. '+f.founded+'</span>';
+          if(f.city||f.state)html+='<span class="tag">'+esc([f.city,f.state].filter(Boolean).join(', '))+'</span>';
+          if(f.founded)html+='<span class="tag">Est. '+esc(f.founded)+'</span>';
           html+='</div></div>';
           html+='<div style="text-align:right;flex-shrink:0">';
-          html+='<div style="font-weight:600;font-size:14px">$'+f.amount_m+'M</div>';
-          if(f.website)html+='<div style="margin-top:4px"><a href="'+f.website+'" style="font-size:11px;color:#0066cc" target="_blank" onclick="event.stopPropagation()">website ↗</a></div>';
+          html+='<div style="font-weight:600;font-size:14px">$'+esc(f.amount_m)+'M</div>';
+          const ws=safeHref(f.website);
+          if(ws)html+='<div style="margin-top:4px"><a href="'+ws+'" style="font-size:11px;color:#0066cc" target="_blank" onclick="event.stopPropagation()">website ↗</a></div>';
           html+='</div></div>';
         });
       });
@@ -663,10 +678,10 @@ function renderUnverified(){
       html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0">';
       html+='<div>';
       if(isNew)html+='<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
-      html+='<span style="font-weight:500;font-size:13px">'+f.company+'</span>';
+      html+='<span style="font-weight:500;font-size:13px">'+esc(f.company)+'</span>';
       html+='<div style="font-size:11px;color:#999;margin-top:2px">';
-      if(f.city||f.state)html+=[f.city,f.state].filter(Boolean).join(', ')+' &middot; ';
-      html+='Added '+f.date_added+'</div>';
+      if(f.city||f.state)html+=esc([f.city,f.state].filter(Boolean).join(', '))+' &middot; ';
+      html+='Added '+esc(f.date_added)+'</div>';
       html+='</div>';
       html+='<div style="text-align:right;font-size:13px;font-weight:600">$'+f.amount_m+'M</div>';
       html+='</div>';
@@ -753,6 +768,9 @@ def dedupe_briefings(briefings):
 
 
 def main():
+    missing = [v for v in ["ANTHROPIC_API_KEY", "GMAIL_ADDRESS", "GMAIL_APP_PASSWORD"] if not os.environ.get(v)]
+    if missing:
+        raise EnvironmentError(f"Missing required environment variables: {', '.join(missing)}")
     print(f"Running - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     briefings = load(BRIEFINGS_F, [])
     briefings = dedupe_briefings(briefings)
