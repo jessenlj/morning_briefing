@@ -39,6 +39,36 @@
     "website": "https://openorigins.com"
   },
   {
+    "date_filed": "2026-04-24",
+    "company": "Rad Technologies Inc.",
+    "amount_m": 0.1,
+    "city": "VENICE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001810055",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "We keep your seasons enjoyable Our unique designs and expertise makes us the leader in winter equipment and other solutions for your seasonal maintenance and landscaping needs.",
+    "website": "https://radtech.ca",
+    "date_added": "2026-04-24",
+    "newly_found": true
+  },
+  {
+    "date_filed": "2026-04-24",
+    "company": "Lyssn.io, Inc.",
+    "amount_m": 3.2,
+    "city": "SEATTLE",
+    "state": "WA",
+    "founded": "",
+    "cik": "0001952121",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Lyssn \u2014 Training & Quality Improvement AI Solutions for HHS Skip to content Raise the standard of practice to achieve life-changing outcomes.",
+    "website": "https://lyssn.io",
+    "date_added": "2026-04-24",
+    "newly_found": true
+  },
+  {
     "date_filed": "2026-04-23",
     "company": "Aaru, Inc.",
     "amount_m": 7.96,
