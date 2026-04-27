@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-04-27",
+    "company": "Land & Carbon, Inc.",
+    "amount_m": 1.54,
+    "city": "JACKSON",
+    "state": "WY",
+    "founded": "",
+    "cik": "0002105968",
+    "industry": "Other",
+    "category": "Energy / Climate",
+    "what_they_do": "Convened by World Resources Institute and the Bezos Earth Fund Homepage\u2014 Land & Carbon Lab Unlocking Universal Access to Climate and Nature Monitoring Convened by World Resources Institute and the Bez",
+    "website": "https://landcarbonlab.org"
+  },
+  {
+    "date_filed": "2026-04-27",
+    "company": "SKAI INNOVATIONS INC.",
+    "amount_m": 0.15,
+    "city": "SCOTTSDALE",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0002130869",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "High-resolution imagery.",
+    "website": "https://skaiinnovations.com"
+  },
+  {
     "date_filed": "2026-04-24",
     "company": "Concept Medical, Inc.",
     "amount_m": 0.6,
