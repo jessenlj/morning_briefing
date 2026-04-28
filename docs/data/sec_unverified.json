@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-04-28",
+    "company": "ARBIS.AI, Inc.",
+    "amount_m": 0.38,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002127452",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-28"
+  },
+  {
+    "date_filed": "2026-04-28",
+    "company": "Wearable Devices Ltd.  (WLDS, WLDSW)",
+    "amount_m": 5.02,
+    "city": "YOKNE'AM ILLIT",
+    "state": "L3",
+    "founded": "",
+    "cik": "0001887673",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-04-28"
+  },
+  {
     "date_filed": "2026-04-27",
     "company": "Gaingels Reliable Robotics LLC",
     "amount_m": 1.76,

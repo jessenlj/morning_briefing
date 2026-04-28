@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-04-28",
+    "company": "Marble, Inc.",
+    "amount_m": 14.41,
+    "city": "Cambridge",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002132009",
+    "industry": "Other Technology",
+    "category": "Fintech",
+    "what_they_do": "Marble actively monitors your insurance and shops for lower rates so you don\u2019t have to.",
+    "website": "https://marblepay.com"
+  },
+  {
+    "date_filed": "2026-04-28",
+    "company": "Retirable Inc.",
+    "amount_m": 3.78,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001802330",
+    "industry": "Other",
+    "category": "Fintech",
+    "what_they_do": "Retirable is the first-of-its-kind retirement planning, investing and spending solution with the ongoing care of a fiduciary advisor.",
+    "website": "https://retirable.com"
+  },
+  {
+    "date_filed": "2026-04-28",
+    "company": "Rockland Resources Ltd.",
+    "amount_m": 0.16,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0002105174",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Rockland Resources is committed to unlocking value through focused mineral exploration and discovery.",
+    "website": "https://rocklandresources.com"
+  },
+  {
     "date_filed": "2026-04-27",
     "company": "Land & Carbon, Inc.",
     "amount_m": 1.54,
