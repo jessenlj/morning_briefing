@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-05-05",
+    "company": "Parthion, LLC",
+    "amount_m": 0.3,
+    "city": "POMPTON PLAINS",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0002130818",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-05"
+  },
+  {
+    "date_filed": "2026-05-05",
+    "company": "Aviator Capital Fund VI US Feeder, LP",
+    "amount_m": 104.5,
+    "city": "AVENTURA",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002093224",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-05"
+  },
+  {
+    "date_filed": "2026-05-05",
+    "company": "Battery Mineral Resources Corp.",
+    "amount_m": 0.33,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0001997773",
+    "industry": "Other",
+    "category": "Hardware",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-05"
+  },
+  {
     "date_filed": "2026-05-04",
     "company": "Qaimera Technologies, Inc.",
     "amount_m": 0.36,
