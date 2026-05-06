@@ -13,6 +13,21 @@
     "website": "https://intramotev.com"
   },
   {
+    "date_filed": "2026-05-05",
+    "company": "Battery Mineral Resources Corp.",
+    "amount_m": 0.33,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0001997773",
+    "industry": "Other",
+    "category": "Hardware",
+    "what_they_do": "Battery Mineral Resources is a multi-commodity battery materials provider focused on the development and integration of minerals critical to the rechargeable battery market and energy storage sector.",
+    "website": "https://bmrcorp.com",
+    "date_added": "2026-05-05",
+    "newly_found": true
+  },
+  {
     "date_filed": "2026-04-30",
     "company": "EarliTec Diagnostics, Inc.",
     "amount_m": 3.5,

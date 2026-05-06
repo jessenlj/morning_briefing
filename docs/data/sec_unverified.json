@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-05-06",
+    "company": "RE Equity Labs, Inc",
+    "amount_m": 1.9,
+    "city": "Reno",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002128656",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-06"
+  },
+  {
+    "date_filed": "2026-05-06",
+    "company": "Venchrz, Inc.",
+    "amount_m": 3.87,
+    "city": "BRENTWOOD",
+    "state": "TN",
+    "founded": "",
+    "cik": "0002003753",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-06"
+  },
+  {
+    "date_filed": "2026-05-06",
+    "company": "CXI Holdings Inc.",
+    "amount_m": 39.16,
+    "city": "WASHINGTON",
+    "state": "DC",
+    "founded": "",
+    "cik": "0002133305",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-06"
+  },
+  {
     "date_filed": "2026-05-05",
     "company": "Parthion, LLC",
     "amount_m": 0.3,
@@ -23,20 +65,6 @@
     "cik": "0002093224",
     "industry": "Other",
     "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-05"
-  },
-  {
-    "date_filed": "2026-05-05",
-    "company": "Battery Mineral Resources Corp.",
-    "amount_m": 0.33,
-    "city": "VANCOUVER",
-    "state": "A1",
-    "founded": "",
-    "cik": "0001997773",
-    "industry": "Other",
-    "category": "Hardware",
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-05-05"
