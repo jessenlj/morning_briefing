@@ -1,4 +1,4 @@
-name: Morning Briefing
+name: Form D Briefing
 
 on:
   schedule:
@@ -19,14 +19,11 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic feedparser requests yfinance
+        run: pip install requests defusedxml beautifulsoup4
 
       - name: Run briefing
         run: python morning_briefing.py
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           RECIPIENT_EMAIL: jessenlj40@gmail.com
           GITHUB_USERNAME: jessenlj
           REPO_NAME: morning_briefing
