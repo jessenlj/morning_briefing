@@ -37,7 +37,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 </div>
 <script>
 const BASE='https://jessenlj.github.io/morning_briefing';
-let DB={},charts={};
+let DB={};
 async function loadData(){
   const [s,u]=await Promise.all([
     fetch(BASE+'/data/sec_filings.json').then(r=>r.json()).catch(()=>[]),
