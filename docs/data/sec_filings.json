@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-05-14",
+    "company": "STUDENT FIRST, INC.",
+    "amount_m": 5.18,
+    "city": "PALM BEACH",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002134108",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "We help you improve the health and wellbeing of all your students and staff.",
+    "website": "https://studentfirstaid.com.au"
+  },
+  {
+    "date_filed": "2026-05-14",
+    "company": "Squad Technologies LLC",
+    "amount_m": 6.09,
+    "city": "PHOENIXVILLE",
+    "state": "PA",
+    "founded": "",
+    "cik": "0001887456",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "India based web design company offering professional web applications & software solution at affordable prices.",
+    "website": "https://squadtechnologies.com"
+  },
+  {
     "date_filed": "2026-05-13",
     "company": "Austelle, Inc.",
     "amount_m": 0.15,
