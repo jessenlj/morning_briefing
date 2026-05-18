@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-05-18",
+    "company": "Cloudsmith Inc.",
+    "amount_m": 50.0,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002061926",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Get better DevOps with secure software delivery for: Alpine, Cargo, CocoaPods, Composer, Conan, Conda, CRAN, Dart, Debian, Docker, Generic, Go, Helm, Hex, HuggingFace, LuaRocks, Maven, MCP, npm, NuGet",
+    "website": "https://cloudsmith.io"
+  },
+  {
+    "date_filed": "2026-05-18",
+    "company": "StreamLayer Inc.",
+    "amount_m": 1.75,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0001750143",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "StreamLayer's SGAI platform for live moment ads and pause ads, powered by Moment Intelligence\u2122 \u2014 great for all content, but especially powerful for live sports.",
+    "website": "https://streamlayer.io"
+  },
+  {
+    "date_filed": "2026-05-18",
+    "company": "Shape Memory Medical Inc.",
+    "amount_m": 17.0,
+    "city": "SAN JOSE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001630786",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Smart polymer. Smart embolization. Smart choice. Reshaping your view of clinical success through the science of smart polymer. Home - Shape Memory Medical Smart choice Reshaping your view of clinical",
+    "website": "https://shapemem.com"
+  },
+  {
+    "date_filed": "2026-05-18",
+    "company": "Neuraville Inc",
+    "amount_m": 0.14,
+    "city": "PITTSBURGH",
+    "state": "PA",
+    "founded": "",
+    "cik": "0002135438",
+    "industry": "Computers",
+    "category": "Other Tech",
+    "what_they_do": "At Neuraville, we\u2019re pioneering embodied intelligence.",
+    "website": "https://neuraville.com"
+  },
+  {
     "date_filed": "2026-05-15",
     "company": "Global Gardens LLC",
     "amount_m": 4.33,
