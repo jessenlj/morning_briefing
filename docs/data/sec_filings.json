@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-05-19",
+    "company": "Secon",
+    "amount_m": 0.2,
+    "city": "BIRMINGHAM",
+    "state": "AL",
+    "founded": "",
+    "cik": "0002129311",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Second Life's official website.",
+    "website": "https://secondlife.com"
+  },
+  {
+    "date_filed": "2026-05-19",
+    "company": "E DRAY 20/20, LLC",
+    "amount_m": 3.0,
+    "city": "CHARLOTTE",
+    "state": "NC",
+    "founded": "",
+    "cik": "0002135299",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "EDRAY manages coordination with origin providers for seamless handoff from overseas vendors to North American destination operations EDRAY Home Skip to content Your browser does not support the video tag.",
+    "website": "https://edray.com"
+  },
+  {
+    "date_filed": "2026-05-19",
+    "company": "Lirio, Inc.",
+    "amount_m": 1.6,
+    "city": "KNOXVILLE",
+    "state": "TN",
+    "founded": "",
+    "cik": "0001696371",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "The personalization engine for digital health, using behavioral science & AI to power hyper-personalized health experiences changing outcomes Lirio | The Personalization Engine for Digital Health.",
+    "website": "https://lirio.com"
+  },
+  {
+    "date_filed": "2026-05-19",
+    "company": "1080 Network, Inc.",
+    "amount_m": 5.61,
+    "city": "Bee Cave",
+    "state": "TX",
+    "founded": "",
+    "cik": "0001913197",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Cloudflare Captcha Page | Web.",
+    "website": "https://networksolutions.com"
+  },
+  {
     "date_filed": "2026-05-18",
     "company": "Cloudsmith Inc.",
     "amount_m": 50.0,
