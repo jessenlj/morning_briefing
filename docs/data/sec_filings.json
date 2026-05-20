@@ -1,5 +1,70 @@
 [
   {
+    "date_filed": "2026-05-20",
+    "company": "TireTutor, Inc.",
+    "amount_m": 0.35,
+    "city": "BROOKLINE",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001806164",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "From estimates to checkout, tire sourcing to CRM, we have the all-in-one, AI-driven platform for tires and repair.",
+    "website": "https://tiretutor.com"
+  },
+  {
+    "date_filed": "2026-05-20",
+    "company": "Switched Source Inc.",
+    "amount_m": 10.0,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002032880",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Welcome to Switched Source The next generation of electric distribution automation Learn What We Do Automation Reduce OPEX, improve system efficiency and VVO efficacy Learn More Reliability Increase r",
+    "website": "https://switchedsource.com"
+  },
+  {
+    "date_filed": "2026-05-20",
+    "company": "OxyDial Inc",
+    "amount_m": 0.7,
+    "city": "Philadelphia",
+    "state": "PA",
+    "founded": "",
+    "cik": "0002126739",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "OxyDial Inc Pioneering a New Age of Oxygen Equilibrium As your team ventures into groundbreaking research, patient care enhancement, or redefining the boundaries of the human body's capabilities, OxyD",
+    "website": "https://oxydial.com"
+  },
+  {
+    "date_filed": "2026-05-20",
+    "company": "BRANCHLAB INC.",
+    "amount_m": 28.78,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002017708",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "BranchLabs is a technology studio building tools at the intersection of commerce and AI.",
+    "website": "https://branchlabs.com"
+  },
+  {
+    "date_filed": "2026-05-20",
+    "company": "Loliware Inc.",
+    "amount_m": 3.04,
+    "city": "SAN JOSE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002135726",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "LOLIWARE is rewriting the story of destructive packaging.",
+    "website": "https://loliware.com"
+  },
+  {
     "date_filed": "2026-05-19",
     "company": "Secon",
     "amount_m": 0.2,
@@ -50,6 +115,21 @@
     "category": "Other Tech",
     "what_they_do": "Cloudflare Captcha Page | Web.",
     "website": "https://networksolutions.com"
+  },
+  {
+    "date_filed": "2026-05-19",
+    "company": "FirstParty, Inc.",
+    "amount_m": 0.5,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002135538",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Don\u2019t let your SEO and ad spend go to waste.",
+    "website": "https://breadbutter.io",
+    "date_added": "2026-05-19",
+    "newly_found": true
   },
   {
     "date_filed": "2026-05-18",

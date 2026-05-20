@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-05-20",
+    "company": "Series 76-3 a series of StartEngine Private LLC",
+    "amount_m": 0.5,
+    "city": "BURBANK",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002127655",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-20"
+  },
+  {
+    "date_filed": "2026-05-20",
+    "company": "Beyond Data Centers LLC",
+    "amount_m": 4.71,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002132701",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-20"
+  },
+  {
     "date_filed": "2026-05-19",
     "company": "DaisyChain Energy Inc.",
     "amount_m": 5.35,
@@ -37,20 +65,6 @@
     "cik": "0002135142",
     "industry": "Other",
     "category": "AI / ML",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-19"
-  },
-  {
-    "date_filed": "2026-05-19",
-    "company": "FirstParty, Inc.",
-    "amount_m": 0.5,
-    "city": "NEW YORK",
-    "state": "NY",
-    "founded": "",
-    "cik": "0002135538",
-    "industry": "Other Technology",
-    "category": "Other Tech",
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-05-19"
