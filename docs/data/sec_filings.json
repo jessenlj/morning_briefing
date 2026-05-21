@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-05-21",
+    "company": "TALENT SOURCE SOLUTIONS CORP.",
+    "amount_m": 7.42,
+    "city": "MIAMI",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002135289",
+    "industry": "Business Services",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://talentsourcesolutions.com"
+  },
+  {
+    "date_filed": "2026-05-21",
+    "company": "VillaFact, Inc.",
+    "amount_m": 0.25,
+    "city": "PORTLAND",
+    "state": "OR",
+    "founded": "",
+    "cik": "0002135196",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Situ\u00e9 sur les hauteurs de Fort-de-France, La Villa Factory Restaurant vous accueille dans un d\u00e9cor moderne et sobre.",
+    "website": "https://villafactoryrestaurant.com"
+  },
+  {
     "date_filed": "2026-05-20",
     "company": "TireTutor, Inc.",
     "amount_m": 0.35,
@@ -208,19 +234,6 @@
     "category": "AI / ML",
     "what_they_do": "Home - Athos Therapeutics Skip to content Developing Artificial Intelligence-based Precision Therapeutics for Patients with Autoimmune Diseases Learn More.",
     "website": "https://athostx.com"
-  },
-  {
-    "date_filed": "2026-05-15",
-    "company": "TALENT SOURCE SOLUTIONS CORP.",
-    "amount_m": 7.55,
-    "city": "MIAMI",
-    "state": "FL",
-    "founded": "",
-    "cik": "0002135289",
-    "industry": "Business Services",
-    "category": "Other Tech",
-    "what_they_do": "",
-    "website": "https://talentsourcesolutions.com"
   },
   {
     "date_filed": "2026-05-15",
