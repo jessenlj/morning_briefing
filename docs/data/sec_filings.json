@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-05-22",
+    "company": "Outer Spaces, Inc.",
+    "amount_m": 8.0,
+    "city": "LOS ANGELES",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002135906",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Outerspace Software makes 3D design software for video, digital signage and TV Outerspace Software | 3D video effects software This website uses cookies and contains YouTube videos We use cookies to personalize content and to analyze our traffic.",
+    "website": "https://outerspace-software.com"
+  },
+  {
+    "date_filed": "2026-05-22",
+    "company": "4L Data Intelligence, Inc.",
+    "amount_m": 1.35,
+    "city": "FORT LAUDERDALE",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001915453",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI-Powered Health Plan Performance & Payment Integrity | 4ldata.",
+    "website": "https://4ldata.com"
+  },
+  {
+    "date_filed": "2026-05-22",
+    "company": "Pitch Aeronautics Inc",
+    "amount_m": 1.92,
+    "city": "BOISE",
+    "state": "ID",
+    "founded": "",
+    "cik": "0001927423",
+    "industry": "Manufacturing",
+    "category": "AI / ML",
+    "what_they_do": "AI-powered weather intelligence and drone-deployable line solutions helping electric utilities boost grid capacity, increase reliability, and reduce wildfire risk.",
+    "website": "https://pitchaero.com"
+  },
+  {
     "date_filed": "2026-05-21",
     "company": "TALENT SOURCE SOLUTIONS CORP.",
     "amount_m": 7.42,
@@ -24,6 +63,21 @@
     "category": "Other Tech",
     "what_they_do": "Situ\u00e9 sur les hauteurs de Fort-de-France, La Villa Factory Restaurant vous accueille dans un d\u00e9cor moderne et sobre.",
     "website": "https://villafactoryrestaurant.com"
+  },
+  {
+    "date_filed": "2026-05-21",
+    "company": "beyondGREEN biotech Inc.",
+    "amount_m": 0.3,
+    "city": "SANTA ANA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001915801",
+    "industry": "Manufacturing",
+    "category": "Biotech / Health",
+    "what_they_do": "Verifying your connection.",
+    "website": "https://byndgrn.com",
+    "date_added": "2026-05-21",
+    "newly_found": true
   },
   {
     "date_filed": "2026-05-20",
