@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-05-26",
+    "company": "Remoasset Corp",
+    "amount_m": 0.1,
+    "city": "AUSTIN",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002128742",
+    "industry": "Computers",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-26"
+  },
+  {
+    "date_filed": "2026-05-26",
+    "company": "Guidelight Technologies, Inc.",
+    "amount_m": 7.99,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002135072",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-26"
+  },
+  {
+    "date_filed": "2026-05-26",
+    "company": "Brand Engagement Network Inc.  (BNAI, BNAIW)",
+    "amount_m": 0.5,
+    "city": "WILMINGTON",
+    "state": "DE",
+    "founded": "",
+    "cik": "0001838163",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-26"
+  },
+  {
     "date_filed": "2026-05-22",
     "company": "Advanced AI Applications, Inc.",
     "amount_m": 0.53,
