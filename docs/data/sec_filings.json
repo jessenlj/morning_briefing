@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-05-27",
+    "company": "Vivamed, Inc.",
+    "amount_m": 3.0,
+    "city": "SANTA MONICA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002066306",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Viva Media is a Toronto video production and marketing agency specializing in commercial, corporate, animation, and social media content.",
+    "website": "https://vivamedia.ca"
+  },
+  {
+    "date_filed": "2026-05-27",
+    "company": "Atomic Technologies, Inc.",
+    "amount_m": 1.1,
+    "city": "NEWARK",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002067474",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://atomictech.in"
+  },
+  {
+    "date_filed": "2026-05-27",
+    "company": "Infinite Outdoors, Inc.",
+    "amount_m": 8.5,
+    "city": "CASPER",
+    "state": "WY",
+    "founded": "",
+    "cik": "0001807739",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The movement that's making private land access more affordable for all.",
+    "website": "https://infiniteoutdoorsusa.com"
+  },
+  {
     "date_filed": "2026-05-26",
     "company": "ShiftUp Inc.",
     "amount_m": 1.2,
