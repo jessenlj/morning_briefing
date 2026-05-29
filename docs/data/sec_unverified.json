@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-05-29",
+    "company": "Gaingels Flipside Crypto LLC",
+    "amount_m": 0.46,
+    "city": "BURLINGTON",
+    "state": "VT",
+    "founded": "",
+    "cik": "0001922701",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-29"
+  },
+  {
+    "date_filed": "2026-05-29",
+    "company": "Alpha Compute Corp  (ALP)",
+    "amount_m": 2.0,
+    "city": "Road Town, Tortola",
+    "state": "D8",
+    "founded": "",
+    "cik": "0001095435",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-05-29"
+  },
+  {
     "date_filed": "2026-05-28",
     "company": "Pipe Force AI, Inc.",
     "amount_m": 0.85,

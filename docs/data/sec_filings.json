@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-05-29",
+    "company": "Verve, Inc.",
+    "amount_m": 12.75,
+    "city": "CAMBRIDGE",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001808966",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Order Coffee Online from Verve Coffee Roasters.",
+    "website": "https://vervecoffee.com"
+  },
+  {
+    "date_filed": "2026-05-29",
+    "company": "HelloCounsel Inc",
+    "amount_m": 3.09,
+    "city": "DOVER",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002136064",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Hello Counsel offers expert legal services across various domains, including corporate law, matrimonial and family law, NRI matters, and more.",
+    "website": "https://hellocounsel.com"
+  },
+  {
     "date_filed": "2026-05-27",
     "company": "Vivamed, Inc.",
     "amount_m": 3.0,
