@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-02",
+    "company": "Throne, Inc.",
+    "amount_m": 16.07,
+    "city": "AUSTIN",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002136127",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Nexters is an international game development company which strives to introduce the joy of core gaming\n        experiences to casual players.",
+    "website": "https://throne-rush.com"
+  },
+  {
+    "date_filed": "2026-06-02",
+    "company": "TEAM PROCURE, INC.",
+    "amount_m": 0.1,
+    "city": "BOISE",
+    "state": "ID",
+    "founded": "",
+    "cik": "0002133949",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Team Procure is a cloud-based procurement suite that helps businesses manage purchase requests, purchase orders, approvals, RFQs, and suppliers.",
+    "website": "https://teamprocure.com"
+  },
+  {
+    "date_filed": "2026-06-02",
+    "company": "Impulse Space, Inc.",
+    "amount_m": 499.83,
+    "city": "Redondo Beach",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001920171",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Accelerating our future beyond Earth Impulse Vehicles Helios Mira Rideshare Company Approach About Careers Mojave Updates Contact Socials LinkedIn X Instagram M o b i l i z i n g S p a c e We're unlocking efficient in-space mobility.",
+    "website": "https://impulsespace.com"
+  },
+  {
     "date_filed": "2026-06-01",
     "company": "Miami Club, LLC",
     "amount_m": 5.4,
