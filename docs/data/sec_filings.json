@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-05",
+    "company": "Memori AI, Inc.",
+    "amount_m": 4.75,
+    "city": "MENLO PARK",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002138441",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Create AI Agents with AIsuru and train your team with AI Academy.",
+    "website": "https://memori.ai"
+  },
+  {
+    "date_filed": "2026-06-05",
+    "company": "Standard Intelligence PBC",
+    "amount_m": 35.61,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002135700",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI-powered marketing consulting to help agencies scale from chaos to profit.",
+    "website": "https://standardintelligence.net"
+  },
+  {
+    "date_filed": "2026-06-05",
+    "company": "Yakuru Inc.",
+    "amount_m": 0.3,
+    "city": "WILMINGTON",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002124356",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Yakuruna Hotel \u2013 HOTEL CAMPESTRE Entre el rio Amazonas y la ciudad 310-802-0538 yakurunaventas@gmail.",
+    "website": "https://yakurunahotel.com"
+  },
+  {
     "date_filed": "2026-06-04",
     "company": "ToolBox OS, Inc.",
     "amount_m": 1.76,
@@ -11,6 +50,21 @@
     "category": "AI / ML",
     "what_they_do": "ToolboxOS \u2013 Market-proof your portfolio Skip to content Get 40% Fixed Returns Per Year in Recurring, Passive Income, Paid to Your Account Every Quarter! Achieve double-digit returns on your capital with promissory notes.",
     "website": "https://toolboxos.com"
+  },
+  {
+    "date_filed": "2026-06-04",
+    "company": "8ALPHA AI, LLC",
+    "amount_m": 0.68,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002137465",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI as a Service (AiAAS), Artificial Intelligence and Machine Learning, Assisting you in developing a prototype from a conceptual level to a developed stage Artificial Intelligence and Machine Learning - Alpha AI.",
+    "website": "https://alphaai.biz",
+    "date_added": "2026-06-04",
+    "newly_found": true
   },
   {
     "date_filed": "2026-06-03",
