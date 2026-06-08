@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-06-08",
+    "company": "Weston AI, Inc.",
+    "amount_m": 0.1,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002134758",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Dublin Weston Airport - Ireland\u2019s Only Dedicated Executive Airport Skip to content.",
+    "website": "https://westonairport.ie"
+  },
+  {
+    "date_filed": "2026-06-08",
+    "company": "Reservble, Inc.",
+    "amount_m": 0.12,
+    "city": "LEWES",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002139386",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Reservble \u0441\u0435\u0440\u0432\u0456\u0441 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443 \u0442\u0430 \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u043d\u043d\u044f \u0441\u0442\u043e\u043b\u0438\u043a\u0456\u0432 \u0443 \u0437\u0430\u043a\u043b\u0430\u0434\u0430\u0445 \u043c\u0456\u0441\u0442\u0430.",
+    "website": "https://reservble.com"
+  },
+  {
+    "date_filed": "2026-06-08",
+    "company": "NV MEDTECH, Inc.",
+    "amount_m": 20.89,
+    "city": "RENO",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002139273",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "\u6613\u500demc(\u4e2d\u56fd)\u5b98\u65b9\u7f51\u7ad9 - \u5851\u9020\u4f53\u80b2\u65b0\u751f\u6001( \u6613\u500demc(\u4e2d\u56fd)\u5b98\u65b9\u7f51\u7ad9 - \u5851\u9020\u4f53\u80b2\u65b0\u751f\u6001 \u6613\u500demc\u5b98\u7f51\u7f51\u9875\u7248 APP\u4e0e\u7f51\u9875\u7248\u5165\u53e3\uff5c\u7545\u4eab\u5168\u7403\u4f53\u80b2\u8d5b\u4e8b\u4e0e\u6570\u636e\u670d\u52a1 \u6b22\u8fce\u8bbf\u95ee \u6613\u500demc\u5b98\u7f51\u7f51\u9875\u7248 \uff0c\u63d0\u4f9b\u5168\u9762\u8986\u76d6\u8db3\u7403\u3001\u7bee\u7403\u3001\u7535\u7ade\u7b49\u9879\u76ee\u7684\u8d5b\u4e8b\u8d44\u8baf\u4e0e\u6570\u636e\u5185\u5bb9\uff0c \u652f\u6301 APP\u4e0b\u8f7d \u4e0e \u7f51\u9875\u4f7f\u7528 \uff0c\u6bcf\u65e5\u540c\u6b65\u66f4\u65b0\u5343\u573a\u6bd4\u8d5b\uff0c\u805a\u7126\u70ed\u95e8\u4f53\u80b2\u5185\u5bb9\uff0c \u52a9\u60a8\u8f7b\u677e\u83b7\u53d6\u8d5b\u4e8b\u52a8\u6001\uff0c\u638c\u63e1\u6bd4\u8d5b\u8282\u594f\u3002 \u624b\u673aApp \u7f51\u9875\u7248 \u5173\u4e8e\u6613",
+    "website": "https://nvmedtech.com"
+  },
+  {
+    "date_filed": "2026-06-08",
+    "company": "palma ai Inc.",
+    "amount_m": 1.35,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002138602",
+    "industry": "Computers",
+    "category": "AI / ML",
+    "what_they_do": "palma-airport.net | 526: Invalid SSL certificate You Browser Working Dallas Cloudflare Working palma-airport.net Host Error What happened? The origin web server does not have a valid SSL certificate.",
+    "website": "https://palma-airport.net"
+  },
+  {
     "date_filed": "2026-06-05",
     "company": "Memori AI, Inc.",
     "amount_m": 4.75,
@@ -78,19 +130,6 @@
     "category": "AI / ML",
     "what_they_do": "The foundational platform for enterprise Physical AI.",
     "website": "https://dexterity.ai"
-  },
-  {
-    "date_filed": "2026-06-03",
-    "company": "Weston AI, Inc.",
-    "amount_m": 0.1,
-    "city": "NEW YORK",
-    "state": "NY",
-    "founded": "",
-    "cik": "0002134758",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "Dublin Weston Airport - Ireland\u2019s Only Dedicated Executive Airport Skip to content.",
-    "website": "https://westonairport.ie"
   },
   {
     "date_filed": "2026-06-03",
