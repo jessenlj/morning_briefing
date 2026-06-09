@@ -52,6 +52,21 @@
     "website": "https://palma-airport.net"
   },
   {
+    "date_filed": "2026-06-08",
+    "company": "4hash Inc.",
+    "amount_m": 0.1,
+    "city": "DOVER",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002139042",
+    "industry": "Computers",
+    "category": "Cybersecurity",
+    "what_they_do": "Vercel Security Checkpoint We're verifying your browser Website owner? Click here to fix Enable JavaScript to continue.",
+    "website": "https://hashicorp.com",
+    "date_added": "2026-06-08",
+    "newly_found": true
+  },
+  {
     "date_filed": "2026-06-05",
     "company": "Memori AI, Inc.",
     "amount_m": 4.75,

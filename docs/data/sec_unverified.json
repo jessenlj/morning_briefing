@@ -1,5 +1,19 @@
 [
   {
+    "date_filed": "2026-06-09",
+    "company": "Sustainable Forest Futures, Inc.",
+    "amount_m": 4.01,
+    "city": "CONCORD",
+    "state": "NH",
+    "founded": "",
+    "cik": "0001715694",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-09"
+  },
+  {
     "date_filed": "2026-06-08",
     "company": "Corgi 3, a series of Capitalize Investments LLC",
     "amount_m": 0.56,
@@ -22,20 +36,6 @@
     "founded": "",
     "cik": "0002139356",
     "industry": "Other",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-08"
-  },
-  {
-    "date_filed": "2026-06-08",
-    "company": "4hash Inc.",
-    "amount_m": 0.1,
-    "city": "DOVER",
-    "state": "DE",
-    "founded": "",
-    "cik": "0002139042",
-    "industry": "Computers",
     "category": "Other Tech",
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
