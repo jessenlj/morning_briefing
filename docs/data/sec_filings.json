@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-12",
+    "company": "Straight A, LLC",
+    "amount_m": 0.93,
+    "city": "BAY HARBOR ISLANDS",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002138907",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Boost your child's learning at Straight A's Education Centre.",
+    "website": "https://straighta.co.nz"
+  },
+  {
+    "date_filed": "2026-06-12",
+    "company": "Huxley Medical, Inc.",
+    "amount_m": 3.0,
+    "city": "ATLANTA",
+    "state": "GA",
+    "founded": "",
+    "cik": "0001869701",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "SANSA\u00ae by Huxley Medical is the only FDA-cleared home sleep apnea test that assesses obstructive sleep apnea, central sleep apnea, and ECG from a single patch.",
+    "website": "https://huxleymed.com"
+  },
+  {
+    "date_filed": "2026-06-12",
+    "company": "1World Online, Inc.",
+    "amount_m": 8.93,
+    "city": "San Francisco",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001595734",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "1WORLD ONLINE \u2014 Get more from online advertising 1WORLD ONLINE \u2014 Get more from online advertising Engagement tools for Media and Travel Unlock the world with 1World.",
+    "website": "https://1worldonline.com"
+  },
+  {
     "date_filed": "2026-06-11",
     "company": "SoFab Inks Inc.",
     "amount_m": 2.93,
