@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-16",
+    "company": "Cargofy Inc.",
+    "amount_m": 6.01,
+    "city": "COVINA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002136182",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI workers that quote, dispatch, track, and close loads.",
+    "website": "https://cargofy.com"
+  },
+  {
+    "date_filed": "2026-06-16",
+    "company": "Trinsic Technologies, Inc.",
+    "amount_m": 1.57,
+    "city": "West Jordan",
+    "state": "UT",
+    "founded": "",
+    "cik": "0001907123",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Home - Trinsic Technologies.",
+    "website": "https://trinsictech.com"
+  },
+  {
+    "date_filed": "2026-06-16",
+    "company": "CND Life Sciences, Inc.",
+    "amount_m": 4.31,
+    "city": "SCOTTSDALE",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0001841099",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "CND advances neurodiagnostics through skin biopsy testing, including the Syn-One Test, for neurodegenerative diseases.",
+    "website": "https://cndlifesciences.com"
+  },
+  {
     "date_filed": "2026-06-15",
     "company": "Albatross Golf, Inc.",
     "amount_m": 2.75,
