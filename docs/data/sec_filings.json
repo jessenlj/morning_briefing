@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-17",
+    "company": "Portage AI Inc.",
+    "amount_m": 3.25,
+    "city": "NEWPORT",
+    "state": "RI",
+    "founded": "",
+    "cik": "0002139767",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Portage Aircraft Specialities is the exclusive Canadian agricultural retail dealership for Air Tractor Inc.",
+    "website": "https://portageaircraft.ca"
+  },
+  {
+    "date_filed": "2026-06-17",
+    "company": "Stella Automotive AI, Inc.",
+    "amount_m": 21.99,
+    "city": "TAMPA",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001980116",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Meet STELLA: The conversational AI voice assistant for automotive dealerships.",
+    "website": "https://stellaautomotive.com"
+  },
+  {
+    "date_filed": "2026-06-17",
+    "company": "Qlaris Bio, Inc.",
+    "amount_m": 3.95,
+    "city": "Dedham",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001786717",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "Qlaris Bio About Us Our Team Board of Directors Scientific Advisory Board Our Approach Focus Areas Collaborations Our Science Our Pipeline QLS-111 Publications & Posters News and Events Careers Contact Us Skip to main content Our science is visionary.",
+    "website": "https://qlaris.bio"
+  },
+  {
     "date_filed": "2026-06-16",
     "company": "Cargofy Inc.",
     "amount_m": 6.01,
