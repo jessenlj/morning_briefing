@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-06-23",
+    "company": "Upstart Power Technologies, Inc.",
+    "amount_m": 4.1,
+    "city": "SOUTHBOROUGH",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002137818",
+    "industry": "Other Energy",
+    "category": "Energy / Climate",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-23"
+  },
+  {
+    "date_filed": "2026-06-23",
+    "company": "AssetBlue Impact Technologies, PBC",
+    "amount_m": 3.0,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002104342",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-23"
+  },
+  {
+    "date_filed": "2026-06-23",
+    "company": "Gaingels Early Stage Fund I LLC",
+    "amount_m": 4.48,
+    "city": "BURLINGTON",
+    "state": "VT",
+    "founded": "",
+    "cik": "0002013710",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-23"
+  },
+  {
     "date_filed": "2026-06-22",
     "company": "GAINGELS YC X26 LLC",
     "amount_m": 0.46,
@@ -2406,47 +2448,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-04-24"
-  },
-  {
-    "date_filed": "2026-04-23",
-    "company": "Pumpcade, Inc.",
-    "amount_m": 5.0,
-    "city": "NEWARK",
-    "state": "DE",
-    "founded": "",
-    "cik": "0002128036",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-04-23"
-  },
-  {
-    "date_filed": "2026-04-23",
-    "company": "Hand Technologies, Inc. /DE/",
-    "amount_m": 0.69,
-    "city": "STARKVILLE",
-    "state": "MS",
-    "founded": "",
-    "cik": "0002131042",
-    "industry": "Manufacturing",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-04-23"
-  },
-  {
-    "date_filed": "2026-04-23",
-    "company": "SOCKET MOBILE, INC.  (SCKT)",
-    "amount_m": 0.5,
-    "city": "FREMONT",
-    "state": "CA",
-    "founded": "",
-    "cik": "0000944075",
-    "industry": "Manufacturing",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-04-23"
   }
 ]
