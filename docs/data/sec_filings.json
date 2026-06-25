@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-25",
+    "company": "Exactics, Inc.",
+    "amount_m": 0.85,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002136792",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "Exactics Tool and Die Exactics tool and die Welcome to Exactics The Ultimate Aim Of Your Business Exactics For The Highest The Key Of Your Success Accuracy Taken to the Extreme.",
+    "website": "https://exactics.com"
+  },
+  {
+    "date_filed": "2026-06-25",
+    "company": "Redo Tech, Inc.",
+    "amount_m": 26.0,
+    "city": "DRAPER",
+    "state": "UT",
+    "founded": "",
+    "cik": "0001938705",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://redotech.co"
+  },
+  {
+    "date_filed": "2026-06-25",
+    "company": "FinCo Services, Inc.",
+    "amount_m": 67.07,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001720840",
+    "industry": "Other Technology",
+    "category": "Energy / Climate",
+    "what_they_do": "Discover best carpet cleaning and handyman services in Santa Barbara with Finco Services.",
+    "website": "https://fincoservices.com"
+  },
+  {
     "date_filed": "2026-06-24",
     "company": "Loopdin Inc.",
     "amount_m": 0.23,
