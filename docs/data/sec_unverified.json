@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-06-26",
+    "company": "Relativity Networks, Inc.",
+    "amount_m": 19.5,
+    "city": "ORLANDO",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002021908",
+    "industry": "Telecommunications",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-26"
+  },
+  {
+    "date_filed": "2026-06-26",
+    "company": "Worlds Enterprises Inc.",
+    "amount_m": 7.33,
+    "city": "Plano",
+    "state": "TX",
+    "founded": "",
+    "cik": "0001959962",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-26"
+  },
+  {
+    "date_filed": "2026-06-26",
+    "company": "Geomorphic AI",
+    "amount_m": 0.34,
+    "city": "LAS VEGAS",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002130165",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-06-26"
+  },
+  {
     "date_filed": "2026-06-25",
     "company": "Adam's & Eve's Health Inc.",
     "amount_m": 0.1,

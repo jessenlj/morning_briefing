@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-06-26",
+    "company": "Datum Technology, Inc.",
+    "amount_m": 0.57,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002053471",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Specialists in the provision of reliable and affordable technology services, including EPoS solutions and disaster recovery planning for retail and business clients.",
+    "website": "https://datumtechnology.com"
+  },
+  {
+    "date_filed": "2026-06-26",
+    "company": "Surgery Center of Wasilla, LLC",
+    "amount_m": 0.41,
+    "city": "WASILLA",
+    "state": "AK",
+    "founded": "",
+    "cik": "0001949180",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "The Surgery Center of Wasilla offers an impressive roster of board-certified specialists.",
+    "website": "https://surgerycenterwasilla.com"
+  },
+  {
+    "date_filed": "2026-06-26",
+    "company": "WitFoo, Inc.",
+    "amount_m": 0.38,
+    "city": "DUNWOODY",
+    "state": "GA",
+    "founded": "",
+    "cik": "0001716974",
+    "industry": "Computers",
+    "category": "Cybersecurity",
+    "what_they_do": "WitFoo decodes raw security signals into clear intelligence.",
+    "website": "https://witfoo.com"
+  },
+  {
     "date_filed": "2026-06-25",
     "company": "Exactics, Inc.",
     "amount_m": 0.85,
