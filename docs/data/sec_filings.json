@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-06-29",
+    "company": "Parallel Loop, Inc.",
+    "amount_m": 4.0,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002142048",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Parallel Loop is the engineering force behind 21-day MVPs, custom software, and AI agents.",
+    "website": "https://parallelloop.io"
+  },
+  {
+    "date_filed": "2026-06-29",
+    "company": "InnoVein LLC",
+    "amount_m": 0.38,
+    "city": "MELBOURNE",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002141285",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "# F Home Welcome to INNOVE INTELLECTS Best Service Provider We believe in quality not quantity Welcome to INNOVE INTELLECTS Best Service Provider Do you have ideas? We help you in filings patent India",
+    "website": "https://innoveintellects.com"
+  },
+  {
+    "date_filed": "2026-06-29",
+    "company": "WIDDYUP, INC.",
+    "amount_m": 0.25,
+    "city": "JACKSON",
+    "state": "WY",
+    "founded": "",
+    "cik": "0001988845",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "WiddyUP - Fun. Video. Fundraising. Fun. Video. Fundraising. RAISE MORE. KEEP MORE. WiddyUP is a fundraising platform where kids create and safely share awesome videos with family and friends in a uniq",
+    "website": "https://widdyup.com"
+  },
+  {
+    "date_filed": "2026-06-29",
+    "company": "Hootsuite Inc.",
+    "amount_m": 2.27,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0001480387",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Hootsuite is a social media management tool that brings scheduling, content creation, analytics, and social listening to one place.",
+    "website": "https://hootsuite.com"
+  },
+  {
     "date_filed": "2026-06-26",
     "company": "Datum Technology, Inc.",
     "amount_m": 0.57,
