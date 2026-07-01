@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-01",
+    "company": "9382-1684 QUEBEC INC",
+    "amount_m": 3.22,
+    "city": "Montreal",
+    "state": "A8",
+    "founded": "",
+    "cik": "0002143102",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Acc\u00e9dez facilement \u00e0 l'information et aux services gouvernementaux.",
+    "website": "https://quebec.ca"
+  },
+  {
+    "date_filed": "2026-07-01",
+    "company": "Gelum Resources Ltd.",
+    "amount_m": 2.04,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0001607139",
+    "industry": "Other",
+    "category": "Fintech",
+    "what_they_do": "Gelum Resources is a company led by seasoned management in the mining and financial sectors.",
+    "website": "https://gelumresources.com"
+  },
+  {
     "date_filed": "2026-06-30",
     "company": "Issio Solutions, Inc.",
     "amount_m": 0.65,
