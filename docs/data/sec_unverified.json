@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-07-08",
+    "company": "Overlord Labs, Inc.",
+    "amount_m": 4.03,
+    "city": "SAN JOSE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002143465",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-08"
+  },
+  {
+    "date_filed": "2026-07-08",
+    "company": "Dynamic Entertainment Myrtle Beach, Inc.",
+    "amount_m": 2.25,
+    "city": "WINTER GARDEN",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002142587",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-08"
+  },
+  {
+    "date_filed": "2026-07-08",
+    "company": "Aline Technologies, Inc.",
+    "amount_m": 3.3,
+    "city": "BERKELEY HEIGHTS",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0002077314",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-08"
+  },
+  {
     "date_filed": "2026-07-01",
     "company": "Kumio Inc.",
     "amount_m": 0.2,

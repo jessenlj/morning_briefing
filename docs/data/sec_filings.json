@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-07-08",
+    "company": "8090 Solutions Inc.",
+    "amount_m": 115.64,
+    "city": "REDWOOD CITY",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002143548",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Just a moment... Checking your browser... This may take a few seconds. Click here if you are not redirected automatically",
+    "website": "https://solutionsreview.com"
+  },
+  {
+    "date_filed": "2026-07-08",
+    "company": "SuiteOp Inc.",
+    "amount_m": 1.5,
+    "city": "CLAYMONT",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002057180",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Discover how SuiteOp streamlines property management through smart device integrations, from locks to thermostats.",
+    "website": "https://suiteop.com"
+  },
+  {
+    "date_filed": "2026-07-08",
+    "company": "Payload, Inc.",
+    "amount_m": 9.08,
+    "city": "CINCINNATI",
+    "state": "OH",
+    "founded": "",
+    "cik": "0001921687",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Join Payloadz, the #1 platform for selling and buying digital downloads.",
+    "website": "https://payloadz.com"
+  },
+  {
+    "date_filed": "2026-07-08",
+    "company": "WALLIT, INC.",
+    "amount_m": 3.38,
+    "city": "LAKEWOOD RANCH",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001728465",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Wallit is the subscription management solution that integrates with publishers\u2019 current models to offer new revenue streams via robust subscription options.",
+    "website": "https://wallit.io"
+  },
+  {
     "date_filed": "2026-07-01",
     "company": "9382-1684 QUEBEC INC",
     "amount_m": 3.22,
