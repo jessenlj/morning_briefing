@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-07-09",
+    "company": "HAI Developments LLC",
+    "amount_m": 25.0,
+    "city": "CARTERSVILLE",
+    "state": "GA",
+    "founded": "",
+    "cik": "0002144316",
+    "industry": "Construction",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-09"
+  },
+  {
+    "date_filed": "2026-07-09",
+    "company": "Athos Holding Company, Inc.",
+    "amount_m": 2.93,
+    "city": "RICHMOND",
+    "state": "VA",
+    "founded": "",
+    "cik": "0002141418",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-09"
+  },
+  {
+    "date_filed": "2026-07-09",
+    "company": "CAPITAL ELEVEN VENTURE FUND III LP",
+    "amount_m": 28.35,
+    "city": "MERIDIAN",
+    "state": "ID",
+    "founded": "",
+    "cik": "0002139545",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-09"
+  },
+  {
     "date_filed": "2026-07-08",
     "company": "Overlord Labs, Inc.",
     "amount_m": 4.03,
