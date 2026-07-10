@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-10",
+    "company": "Navflex Inc.",
+    "amount_m": 5.0,
+    "city": "BROOMFIELD",
+    "state": "CO",
+    "founded": "",
+    "cik": "0001973140",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Our AI-powered AMRs load and unload trailers autonomously, minimizing risk and maximizing dockside efficiency.",
+    "website": "https://navflex.com"
+  },
+  {
+    "date_filed": "2026-07-10",
+    "company": "Verkada Inc.",
+    "amount_m": 41.23,
+    "city": "SAN MATEO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001688873",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "Modern, cloud-managed security cameras, access control, and smart building solutions in a single, fully integrated security system.",
+    "website": "https://verkada.com"
+  },
+  {
     "date_filed": "2026-07-09",
     "company": "Argos Identity Inc.",
     "amount_m": 2.89,
