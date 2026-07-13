@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-13",
+    "company": "Noosphere, Inc.",
+    "amount_m": 0.35,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002015253",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Avec ses d\u00e9partements Marketing, Corporate branding, Photo & Vid\u00e9o, Digital et Impression & Lettrage, NOOSPHERE est un One-Stop-Shop de la communication int\u00e9gr\u00e9e NOOSPHERE Brand Strategy Votre navigateur ne supporte pas la vid\u00e9o HTML5.",
+    "website": "https://noosphere.lu"
+  },
+  {
+    "date_filed": "2026-07-13",
+    "company": "Picogrid, Inc.",
+    "amount_m": 45.0,
+    "city": "EL SEGUNDO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002009439",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Picogrid delivers integrated systems for modern missions, connecting sensors, platforms, and operators across land, sea, air, and space.",
+    "website": "https://picogrid.com"
+  },
+  {
     "date_filed": "2026-07-10",
     "company": "Navflex Inc.",
     "amount_m": 5.0,

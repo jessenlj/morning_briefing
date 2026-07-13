@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-07-13",
+    "company": "Guideway Labs Inc.",
+    "amount_m": 0.2,
+    "city": "MIAMI",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002144894",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-13"
+  },
+  {
+    "date_filed": "2026-07-13",
+    "company": "heyyyyAI Inc.",
+    "amount_m": 0.4,
+    "city": "Vancouver",
+    "state": "A1",
+    "founded": "",
+    "cik": "0002145070",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-13"
+  },
+  {
     "date_filed": "2026-07-10",
     "company": "ARGO GRAPHENE SOLUTIONS CORP.  (ARLSF)",
     "amount_m": 1.04,
