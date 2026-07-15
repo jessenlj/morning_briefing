@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-15",
+    "company": "Reveal Technology, Inc.",
+    "amount_m": 4.6,
+    "city": "BOZEMAN",
+    "state": "MT",
+    "founded": "",
+    "cik": "0002069578",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://revealtechnology.net"
+  },
+  {
+    "date_filed": "2026-07-15",
+    "company": "ZealCare, Inc.",
+    "amount_m": 0.41,
+    "city": "DURHAM",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001840693",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "We partner with accountable care organizations and health systems to offer the next-gen approach to care for your most complex patients.",
+    "website": "https://zealcare.com"
+  },
+  {
     "date_filed": "2026-07-14",
     "company": "LifeBridge Innovations, PBC",
     "amount_m": 3.38,
