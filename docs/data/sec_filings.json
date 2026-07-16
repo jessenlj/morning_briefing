@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-07-16",
+    "company": "Shape Memory Medical Inc.",
+    "amount_m": 6.72,
+    "city": "SAN JOSE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001630786",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Smart polymer. Smart embolization. Smart choice. Reshaping your view of clinical success through the science of smart polymer. Home - Shape Memory Medical Smart choice Reshaping your view of clinical",
+    "website": "https://shapemem.com"
+  },
+  {
+    "date_filed": "2026-07-16",
+    "company": "Auxilia, Inc.",
+    "amount_m": 1.46,
+    "city": "Cleveland",
+    "state": "OH",
+    "founded": "",
+    "cik": "0001866380",
+    "industry": "Business Services",
+    "category": "Other Tech",
+    "what_they_do": "A Auxiliadora Predial oferece os servi\u00e7os de Administra\u00e7\u00e3o de Condom\u00ednios, Aluguel e Im\u00f3veis a Venda.",
+    "website": "https://auxiliadorapredial.com.br"
+  },
+  {
+    "date_filed": "2026-07-16",
+    "company": "VoltServer Inc.",
+    "amount_m": 5.0,
+    "city": "EAST GREENWICH",
+    "state": "RI",
+    "founded": "",
+    "cik": "0001551253",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Powering the Future with Digital Electricity\u00ae - VoltServer\u00ae Skip to the content Contact Menu.",
+    "website": "https://voltserver.com"
+  },
+  {
     "date_filed": "2026-07-15",
     "company": "Reveal Technology, Inc.",
     "amount_m": 4.6,
@@ -24,6 +63,21 @@
     "category": "Biotech / Health",
     "what_they_do": "We partner with accountable care organizations and health systems to offer the next-gen approach to care for your most complex patients.",
     "website": "https://zealcare.com"
+  },
+  {
+    "date_filed": "2026-07-15",
+    "company": "StatStak, Inc.",
+    "amount_m": 6.03,
+    "city": "NASHVILLE",
+    "state": "TN",
+    "founded": "",
+    "cik": "0002144904",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "Vercel Security Checkpoint We're verifying your browser Website owner? Click here to fix Enable JavaScript to continue.",
+    "website": "https://newlevel360.com",
+    "date_added": "2026-07-15",
+    "newly_found": true
   },
   {
     "date_filed": "2026-07-14",
@@ -1451,19 +1505,6 @@
     "category": "AI / ML",
     "what_they_do": "StreamLayer's SGAI platform for live moment ads and pause ads, powered by Moment Intelligence\u2122 \u2014 great for all content, but especially powerful for live sports.",
     "website": "https://streamlayer.io"
-  },
-  {
-    "date_filed": "2026-05-18",
-    "company": "Shape Memory Medical Inc.",
-    "amount_m": 17.0,
-    "city": "SAN JOSE",
-    "state": "CA",
-    "founded": "",
-    "cik": "0001630786",
-    "industry": "Other Health Care",
-    "category": "Biotech / Health",
-    "what_they_do": "Smart polymer. Smart embolization. Smart choice. Reshaping your view of clinical success through the science of smart polymer. Home - Shape Memory Medical Smart choice Reshaping your view of clinical",
-    "website": "https://shapemem.com"
   },
   {
     "date_filed": "2026-05-18",
