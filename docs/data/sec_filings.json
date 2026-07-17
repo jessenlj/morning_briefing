@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-17",
+    "company": "Buildz, LLC",
+    "amount_m": 10.0,
+    "city": "FOREST CITY",
+    "state": "NC",
+    "founded": "",
+    "cik": "0002127806",
+    "industry": "Manufacturing",
+    "category": "Other Tech",
+    "what_they_do": "Save time, money & frustration.",
+    "website": "https://buildzoom.com"
+  },
+  {
+    "date_filed": "2026-07-17",
+    "company": "Hephae Energy Technology Corp",
+    "amount_m": 17.8,
+    "city": "SPRING",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002039556",
+    "industry": "Other Technology",
+    "category": "Energy / Climate",
+    "what_they_do": "403 - Forbidden bg_error_lines circle_dots.",
+    "website": "https://hephaeet.com"
+  },
+  {
     "date_filed": "2026-07-16",
     "company": "Shape Memory Medical Inc.",
     "amount_m": 6.72,
