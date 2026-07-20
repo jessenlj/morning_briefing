@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-07-20",
+    "company": "Subscript, Inc.",
+    "amount_m": 18.33,
+    "city": "CLAYMONT",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002136179",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "SubscriptionFlow is offering best AI Billing & Subscription Management Software of 2026 designed to deliver unrivalled results to companies.",
+    "website": "https://subscriptionflow.com"
+  },
+  {
     "date_filed": "2026-07-17",
     "company": "Buildz, LLC",
     "amount_m": 10.0,
@@ -992,6 +1005,21 @@
     "category": "AI / ML",
     "what_they_do": "Yakuruna Hotel \u2013 HOTEL CAMPESTRE Entre el rio Amazonas y la ciudad 310-802-0538 yakurunaventas@gmail.",
     "website": "https://yakurunahotel.com"
+  },
+  {
+    "date_filed": "2026-06-05",
+    "company": "Devenue Inc.",
+    "amount_m": 10.85,
+    "city": "BENGALURU",
+    "state": "K7",
+    "founded": "",
+    "cik": "0002033518",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Venue Marketing hilft Eventlocations und Hotels beim Wachstum mit Marketing-Trainings, Beratung und einem Podcast.",
+    "website": "https://venuemarketing.de",
+    "date_added": "2026-06-05",
+    "newly_found": true
   },
   {
     "date_filed": "2026-06-04",
