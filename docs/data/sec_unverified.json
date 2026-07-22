@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-07-22",
+    "company": "Driven Ventures, Inc.",
+    "amount_m": 3.26,
+    "city": "PUEBLO",
+    "state": "CO",
+    "founded": "",
+    "cik": "0002146799",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-22"
+  },
+  {
+    "date_filed": "2026-07-22",
+    "company": "Explore, Inc./DE",
+    "amount_m": 0.1,
+    "city": "BETHESDA",
+    "state": "MD",
+    "founded": "",
+    "cik": "0002146185",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-22"
+  },
+  {
     "date_filed": "2026-07-21",
     "company": "Mentium Technologies Inc.",
     "amount_m": 7.53,
@@ -2546,61 +2574,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-05-26"
-  },
-  {
-    "date_filed": "2026-05-22",
-    "company": "Advanced AI Applications, Inc.",
-    "amount_m": 0.53,
-    "city": "WILMINGTON",
-    "state": "DE",
-    "founded": "",
-    "cik": "0002135871",
-    "industry": "Other",
-    "category": "AI / ML",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-22"
-  },
-  {
-    "date_filed": "2026-05-22",
-    "company": "Dhitantra, Inc.",
-    "amount_m": 0.23,
-    "city": "Ashland",
-    "state": "MA",
-    "founded": "",
-    "cik": "0002133887",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-22"
-  },
-  {
-    "date_filed": "2026-05-22",
-    "company": "Stilta IP, Inc.",
-    "amount_m": 10.26,
-    "city": "WILMINGTON",
-    "state": "DE",
-    "founded": "",
-    "cik": "0002135209",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-22"
-  },
-  {
-    "date_filed": "2026-05-22",
-    "company": "Gaingels Speedrun Fund I LLC",
-    "amount_m": 1.17,
-    "city": "BURLINGTON",
-    "state": "VT",
-    "founded": "",
-    "cik": "0002094847",
-    "industry": "Other",
-    "category": "AI / ML",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-22"
   }
 ]
