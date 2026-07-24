@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-07-24",
+    "company": "Groq LLC",
+    "amount_m": 672.16,
+    "city": "San Jose",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001686725",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The Groq LPU delivers inference with the speed and cost developers need.",
+    "website": "https://groq.com"
+  },
+  {
+    "date_filed": "2026-07-24",
+    "company": "AFFINITY BIOSENSORS LLC",
+    "amount_m": 4.0,
+    "city": "SANTA BARBARA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001424288",
+    "industry": "Other",
+    "category": "Biotech / Health",
+    "what_they_do": "Affinity Biosensors\u2019 LifeScale platform delivers rapid, high-throughput phenotypic antimicrobial susceptibility testing in under four hours, empowering clinical labs to make timely antibiotic decisions and combat drug-resistant infections.",
+    "website": "https://affinitybio.com"
+  },
+  {
     "date_filed": "2026-07-23",
     "company": "LIGHTNING VISUALS INC.",
     "amount_m": 0.25,
