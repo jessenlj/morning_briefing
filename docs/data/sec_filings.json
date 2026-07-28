@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-07-28",
+    "company": "MarginEdge Co.",
+    "amount_m": 20.62,
+    "city": "ARLINGTON",
+    "state": "VA",
+    "founded": "",
+    "cik": "0001739613",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "MarginEdge is a restaurant management software that gives you a real-time view into your food costs and helps automate back-office operations.",
+    "website": "https://marginedge.com"
+  },
+  {
     "date_filed": "2026-07-27",
     "company": "SleepRes, Inc.",
     "amount_m": 0.45,
