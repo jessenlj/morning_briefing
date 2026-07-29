@@ -1,5 +1,61 @@
 [
   {
+    "date_filed": "2026-07-29",
+    "company": "Bovo Music, Inc.",
+    "amount_m": 0.95,
+    "city": "CUPERTINO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002147775",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-29"
+  },
+  {
+    "date_filed": "2026-07-29",
+    "company": "IL Battery Fund 1 LLC",
+    "amount_m": 1.01,
+    "city": "Bannockburn",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002147718",
+    "industry": "Other Energy",
+    "category": "Hardware",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-29"
+  },
+  {
+    "date_filed": "2026-07-29",
+    "company": "UNPLUGS HEARING, INC.",
+    "amount_m": 0.1,
+    "city": "BROOKLYN",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002054746",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-29"
+  },
+  {
+    "date_filed": "2026-07-29",
+    "company": "Gorilla Technology Group Inc.  (GRRR, GRRRW)",
+    "amount_m": 125.0,
+    "city": "LONDON",
+    "state": "X0",
+    "founded": "",
+    "cik": "0001903145",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-29"
+  },
+  {
     "date_filed": "2026-07-28",
     "company": "Harbo Capital Credit Income Fund LP",
     "amount_m": 2.2,
@@ -2462,33 +2518,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-06-01"
-  },
-  {
-    "date_filed": "2026-05-29",
-    "company": "Gaingels Flipside Crypto LLC",
-    "amount_m": 0.46,
-    "city": "BURLINGTON",
-    "state": "VT",
-    "founded": "",
-    "cik": "0001922701",
-    "industry": "Other",
-    "category": "AI / ML",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-29"
-  },
-  {
-    "date_filed": "2026-05-29",
-    "company": "Alpha Compute Corp  (ALP)",
-    "amount_m": 2.0,
-    "city": "Road Town, Tortola",
-    "state": "D8",
-    "founded": "",
-    "cik": "0001095435",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-05-29"
   }
 ]
