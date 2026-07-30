@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-07-30",
+    "company": "Inferra Inc.",
+    "amount_m": 19.28,
+    "city": "MENLO PARK",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002142121",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Inferramenta, la ferramenta on-line: Tutto per il fai da te e il giardino.",
+    "website": "https://inferramenta.it"
+  },
+  {
+    "date_filed": "2026-07-30",
+    "company": "Huupe Inc.",
+    "amount_m": 9.63,
+    "city": "PALM HARBOR",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001973387",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "huupe brings you the world\u2019s first smart basketball hoop, providing NBA level workouts, on-demand training, live coaching, data tracking and more.",
+    "website": "https://huupe.com"
+  },
+  {
+    "date_filed": "2026-07-30",
+    "company": "ThreatLocker, Inc.",
+    "amount_m": 189.2,
+    "city": "ORLANDO",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001824320",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "A Zero Trust cybersecurity solutions platform, ThreatLocker delivers world-class enterprise security software and solutions worldwide.",
+    "website": "https://threatlocker.com"
+  },
+  {
     "date_filed": "2026-07-28",
     "company": "MarginEdge Co.",
     "amount_m": 20.62,
