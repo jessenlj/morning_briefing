@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-07-31",
+    "company": "GRAI HOLDCO, LLC",
+    "amount_m": 1.84,
+    "city": "WILMINGTON",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002147606",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-31"
+  },
+  {
+    "date_filed": "2026-07-31",
+    "company": "Advanced Thermovoltaic Systems, Corp.",
+    "amount_m": 4.6,
+    "city": "LOVELAND",
+    "state": "CO",
+    "founded": "",
+    "cik": "0002126585",
+    "industry": "Other Energy",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-31"
+  },
+  {
+    "date_filed": "2026-07-31",
+    "company": "AZURO CAPITAL VENTURES LLC",
+    "amount_m": 2.75,
+    "city": "Jersey City",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0002099698",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-07-31"
+  },
+  {
     "date_filed": "2026-07-30",
     "company": "Recovered Potential, Inc.",
     "amount_m": 0.22,
@@ -93,20 +135,6 @@
     "cik": "0001880160",
     "industry": "Other Technology",
     "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-07-30"
-  },
-  {
-    "date_filed": "2026-07-30",
-    "company": "Trailhead Biosystems Inc.",
-    "amount_m": 40.61,
-    "city": "BEACHWOOD",
-    "state": "OH",
-    "founded": "",
-    "cik": "0001814509",
-    "industry": "Biotechnology",
-    "category": "AI / ML",
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-07-30"

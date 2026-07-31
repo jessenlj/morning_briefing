@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-07-31",
+    "company": "Constrat, Inc.",
+    "amount_m": 0.72,
+    "city": "DETROIT",
+    "state": "MI",
+    "founded": "",
+    "cik": "0002079840",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "ConStrata provides operations and technology strategy for restaurants, hospitality, and retail businesses through consulting & implementation services.",
+    "website": "https://constrata.io"
+  },
+  {
     "date_filed": "2026-07-30",
     "company": "Inferra Inc.",
     "amount_m": 19.28,
@@ -37,6 +50,21 @@
     "category": "Cybersecurity",
     "what_they_do": "A Zero Trust cybersecurity solutions platform, ThreatLocker delivers world-class enterprise security software and solutions worldwide.",
     "website": "https://threatlocker.com"
+  },
+  {
+    "date_filed": "2026-07-30",
+    "company": "Trailhead Biosystems Inc.",
+    "amount_m": 40.61,
+    "city": "BEACHWOOD",
+    "state": "OH",
+    "founded": "",
+    "cik": "0001814509",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "High quality iPSC-derived human cells for drug discovery and cell-based therapies Trailhead Biosystems\u00ae | Biology.",
+    "website": "https://trailbio.com",
+    "date_added": "2026-07-30",
+    "newly_found": true
   },
   {
     "date_filed": "2026-07-28",
