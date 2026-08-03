@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-08-03",
+    "company": "CND Life Sciences, Inc.",
+    "amount_m": 6.32,
+    "city": "SCOTTSDALE",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0001841099",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "CND advances neurodiagnostics through skin biopsy testing, including the Syn-One Test, for neurodegenerative diseases.",
+    "website": "https://cndlifesciences.com"
+  },
+  {
+    "date_filed": "2026-08-03",
+    "company": "AppWizzy, Inc.",
+    "amount_m": 0.1,
+    "city": "San Francisco",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002146998",
+    "industry": "Computers",
+    "category": "AI / ML",
+    "what_they_do": "Build scalable web apps and websites with AI that serve you for years.",
+    "website": "https://appwizzy.com"
+  },
+  {
+    "date_filed": "2026-08-03",
+    "company": "DriveNets Ltd.",
+    "amount_m": 410.25,
+    "city": "RAANANA",
+    "state": "L3",
+    "founded": "",
+    "cik": "0002143497",
+    "industry": "Telecommunications",
+    "category": "AI / ML",
+    "what_they_do": "Full-stack AI networking fabric for GPU clusters \u2014 Ethernet-based with InfiniBand-level performance.",
+    "website": "https://drivenets.com"
+  },
+  {
     "date_filed": "2026-07-31",
     "company": "Constrat, Inc.",
     "amount_m": 0.72,
@@ -994,19 +1033,6 @@
     "category": "Other Tech",
     "what_they_do": "Home - Trinsic Technologies.",
     "website": "https://trinsictech.com"
-  },
-  {
-    "date_filed": "2026-06-16",
-    "company": "CND Life Sciences, Inc.",
-    "amount_m": 4.31,
-    "city": "SCOTTSDALE",
-    "state": "AZ",
-    "founded": "",
-    "cik": "0001841099",
-    "industry": "Biotechnology",
-    "category": "AI / ML",
-    "what_they_do": "CND advances neurodiagnostics through skin biopsy testing, including the Syn-One Test, for neurodegenerative diseases.",
-    "website": "https://cndlifesciences.com"
   },
   {
     "date_filed": "2026-06-15",
