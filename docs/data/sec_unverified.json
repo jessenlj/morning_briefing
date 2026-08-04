@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-08-04",
+    "company": "Glacian Technologies Inc.",
+    "amount_m": 0.15,
+    "city": "STATE COLLEGE",
+    "state": "PA",
+    "founded": "",
+    "cik": "0002148234",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-04"
+  },
+  {
+    "date_filed": "2026-08-04",
+    "company": "Aperon, Inc.",
+    "amount_m": 0.51,
+    "city": "CAMBRIDGE",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002147596",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-04"
+  },
+  {
     "date_filed": "2026-08-03",
     "company": "Mixel Studio, Inc.",
     "amount_m": 0.11,
@@ -2406,61 +2434,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-06-05"
-  },
-  {
-    "date_filed": "2026-06-04",
-    "company": "Cailum Blue, Inc.",
-    "amount_m": 0.5,
-    "city": "MELBOURNE",
-    "state": "FL",
-    "founded": "",
-    "cik": "0002138672",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-04"
-  },
-  {
-    "date_filed": "2026-06-04",
-    "company": "Gravity GTM Inc.",
-    "amount_m": 0.1,
-    "city": "LAFAYETTE",
-    "state": "CO",
-    "founded": "",
-    "cik": "0002103997",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-04"
-  },
-  {
-    "date_filed": "2026-06-04",
-    "company": "Lighthouse Life Capital, LLC",
-    "amount_m": 5.48,
-    "city": "CONSHOHOCKEN",
-    "state": "PA",
-    "founded": "",
-    "cik": "0001824921",
-    "industry": "Insurance",
-    "category": "Fintech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-04"
-  },
-  {
-    "date_filed": "2026-06-04",
-    "company": "Illuminare Biotechnologies Inc",
-    "amount_m": 3.65,
-    "city": "Brooklyn",
-    "state": "NY",
-    "founded": "",
-    "cik": "0001701523",
-    "industry": "Biotechnology",
-    "category": "Biotech / Health",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-04"
   }
 ]
