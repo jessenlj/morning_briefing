@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-08-05",
+    "company": "Synthesis Health Inc.",
+    "amount_m": 23.78,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0002040850",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Synthesis Health Systems.",
+    "website": "https://synthesishs.com"
+  },
+  {
     "date_filed": "2026-08-04",
     "company": "Bear Analytics, Inc.",
     "amount_m": 2.62,
@@ -37,6 +50,21 @@
     "category": "AI / ML",
     "what_they_do": "Dolce Glow self tanning lotions, sprays, and mists inspired by celebrity spray tan artist, Isabel Alysa is infused with organic natural ingredients to help moisturize your skin.",
     "website": "https://dolceglow.com"
+  },
+  {
+    "date_filed": "2026-08-04",
+    "company": "Aperon, Inc.",
+    "amount_m": 0.51,
+    "city": "CAMBRIDGE",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002147596",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Ce site est d\u00e9di\u00e9 \u00e0 l'activit\u00e9 la plus noble qui puisse exister : L'APERO (osons les majuscules).",
+    "website": "https://apero.net",
+    "date_added": "2026-08-04",
+    "newly_found": true
   },
   {
     "date_filed": "2026-08-03",
