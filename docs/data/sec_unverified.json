@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-08-07",
+    "company": "EmulateAI, Inc.",
+    "amount_m": 0.4,
+    "city": "WAYLAND",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002149097",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-07"
+  },
+  {
+    "date_filed": "2026-08-07",
+    "company": "Vectoral I, a series of Capitalize Investments LLC",
+    "amount_m": 0.38,
+    "city": "HENDERSON",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002148482",
+    "industry": "Other",
+    "category": "Fintech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-07"
+  },
+  {
+    "date_filed": "2026-08-07",
+    "company": "Sen-Jam Pharmaceutical V, a series of Capitalize Investments LLC",
+    "amount_m": 0.25,
+    "city": "HENDERSON",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002148481",
+    "industry": "Other",
+    "category": "Biotech / Health",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-07"
+  },
+  {
     "date_filed": "2026-08-05",
     "company": "Malted AI Ltd",
     "amount_m": 3.94,
