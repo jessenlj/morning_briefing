@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-08-12",
+    "company": "60 Decibels, Inc.",
+    "amount_m": 0.72,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001902299",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "60 Decibels is an end-to-end impact measurement company.",
+    "website": "https://60decibels.com"
+  },
+  {
     "date_filed": "2026-08-11",
     "company": "Quick Custom Intelligence, Inc.",
     "amount_m": 13.38,
@@ -11,6 +24,21 @@
     "category": "Other Tech",
     "what_they_do": "The unified operational foundation for the future of casino resorts.",
     "website": "https://quickcustomintelligence.com"
+  },
+  {
+    "date_filed": "2026-08-11",
+    "company": "FuriosaAI, Inc.",
+    "amount_m": 4.15,
+    "city": "SEOUL",
+    "state": "M5",
+    "founded": "",
+    "cik": "0002149195",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "FuriosaAI designs high-performance, power-efficient AI accelerators (NPUs) used in data centers for computer vision, GenAI, LLMs, and demanding workloads.",
+    "website": "https://furiosa.ai",
+    "date_added": "2026-08-11",
+    "newly_found": true
   },
   {
     "date_filed": "2026-08-07",
