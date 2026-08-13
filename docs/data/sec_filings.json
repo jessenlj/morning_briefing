@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-08-13",
+    "company": "Bula Technologies, Inc.",
+    "amount_m": 0.3,
+    "city": "Fort Lauderdale",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001898070",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "\u26f3 \ud83c\udfcc\ufe0f Play with up to 32 golfers.",
+    "website": "https://bulachallenge.com"
+  },
+  {
+    "date_filed": "2026-08-13",
+    "company": "HereNow Help, Inc.",
+    "amount_m": 3.45,
+    "city": "HONEOYE",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001793504",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "The most holistic & personalized platform for total mental health treatment.",
+    "website": "https://herenowhelp.com"
+  },
+  {
     "date_filed": "2026-08-12",
     "company": "60 Decibels, Inc.",
     "amount_m": 0.72,
