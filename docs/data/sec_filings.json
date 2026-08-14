@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-08-14",
+    "company": "Superset Inc.",
+    "amount_m": 11.5,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002150111",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Superset\u2019s virtual campus placement and campus hiring software enables colleges to automate campus placements, helps employers hire young talent Superset | Automate Campus Placement and Campus Recruit",
+    "website": "https://joinsuperset.com"
+  },
+  {
+    "date_filed": "2026-08-14",
+    "company": "SIOX, LLC",
+    "amount_m": 0.34,
+    "city": "Cloverdale",
+    "state": "IN",
+    "founded": "",
+    "cik": "0002083652",
+    "industry": "Manufacturing",
+    "category": "Other Tech",
+    "what_they_do": "Siox \u00e4r ett skalbart system f\u00f6r styrning och \u00f6vervakning av brand- och brandgasspj\u00e4ll, med unik tretr\u00e5dsteknik f\u00f6r enkel installation.",
+    "website": "https://sioxsolutions.se"
+  },
+  {
+    "date_filed": "2026-08-14",
+    "company": "Kinetic Drive, LLC",
+    "amount_m": 0.33,
+    "city": "CLEBURNE",
+    "state": "TX",
+    "founded": "",
+    "cik": "0001966021",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Kinetic Drive \u2013 Advancing Player And Team Development dan@H2TPerformance.",
+    "website": "https://kinetic-drive.com"
+  },
+  {
     "date_filed": "2026-08-13",
     "company": "Bula Technologies, Inc.",
     "amount_m": 0.3,
