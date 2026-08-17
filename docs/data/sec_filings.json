@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-08-17",
+    "company": "Dexterity, Inc.",
+    "amount_m": 104.91,
+    "city": "REDWOOD CITY",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002137857",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "The foundational platform for enterprise Physical AI.",
+    "website": "https://dexterity.ai"
+  },
+  {
+    "date_filed": "2026-08-17",
+    "company": "Notarize, Inc.",
+    "amount_m": 56.4,
+    "city": "BOSTON",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001642006",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Notarize online in under 10 minutes, 24/7.",
+    "website": "https://notarize.com"
+  },
+  {
     "date_filed": "2026-08-14",
     "company": "Superset Inc.",
     "amount_m": 11.5,
@@ -1485,19 +1511,6 @@
     "website": "https://alphaai.biz",
     "date_added": "2026-06-04",
     "newly_found": true
-  },
-  {
-    "date_filed": "2026-06-03",
-    "company": "Dexterity, Inc.",
-    "amount_m": 5.0,
-    "city": "REDWOOD CITY",
-    "state": "CA",
-    "founded": "",
-    "cik": "0002137857",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "The foundational platform for enterprise Physical AI.",
-    "website": "https://dexterity.ai"
   },
   {
     "date_filed": "2026-06-03",
