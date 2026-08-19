@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-08-19",
+    "company": "Domain Intellects, Inc.",
+    "amount_m": 0.12,
+    "city": "SEATTLE",
+    "state": "WA",
+    "founded": "",
+    "cik": "0002150523",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-19"
+  },
+  {
+    "date_filed": "2026-08-19",
+    "company": "Cirata PLC",
+    "amount_m": 3.07,
+    "city": "ST HELIER",
+    "state": "Y9",
+    "founded": "",
+    "cik": "0001690427",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-19"
+  },
+  {
     "date_filed": "2026-08-18",
     "company": "Aerdos Labs, Inc.",
     "amount_m": 6.57,
