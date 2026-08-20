@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-08-20",
+    "company": "Datazip, Inc.",
+    "amount_m": 4.1,
+    "city": "LEWES",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002150842",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No-code scalable full-stack data platform that anyone can run taking away the complexity of managing multiple tools Datazip - Making Data Engineers 10x More Productive You need to enable JavaScript to run this app.",
+    "website": "https://datazip.io"
+  },
+  {
+    "date_filed": "2026-08-20",
+    "company": "Latitude Health, Inc.",
+    "amount_m": 4.0,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002148343",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Home - Latitude Health Home - Latitude Health Turn a setback into a comeback Physiotherapy Clinic in Brampton Book Online DIRECT BILLING Trusted Rehabilitation Therapy in Brampton We offer tailor-made",
+    "website": "https://latitudehealth.ca"
+  },
+  {
     "date_filed": "2026-08-19",
     "company": "Precision AI, CO",
     "amount_m": 0.2,

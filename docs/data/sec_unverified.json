@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-08-20",
+    "company": "Quilt Holdco, Inc.",
+    "amount_m": 2.5,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001879128",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-20"
+  },
+  {
+    "date_filed": "2026-08-20",
+    "company": "Alden Advanced Technologies, Inc.",
+    "amount_m": 1.35,
+    "city": "JACKSONVILLE",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001802998",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-20"
+  },
+  {
     "date_filed": "2026-08-19",
     "company": "Domain Intellects, Inc.",
     "amount_m": 0.12,
