@@ -1,5 +1,33 @@
 [
   {
+    "date_filed": "2026-08-21",
+    "company": "Universal Graphene Products, Inc.",
+    "amount_m": 0.8,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "founded": "",
+    "cik": "0002150321",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-21"
+  },
+  {
+    "date_filed": "2026-08-21",
+    "company": "Mogul Mountain Ventures Corp",
+    "amount_m": 0.78,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0002141493",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-21"
+  },
+  {
     "date_filed": "2026-08-20",
     "company": "Quilt Holdco, Inc.",
     "amount_m": 2.5,
