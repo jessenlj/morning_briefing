@@ -1,5 +1,19 @@
 [
   {
+    "date_filed": "2026-08-24",
+    "company": "Generalist AI, Inc.",
+    "amount_m": 198.22,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002137708",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-08-24"
+  },
+  {
     "date_filed": "2026-08-21",
     "company": "Universal Graphene Products, Inc.",
     "amount_m": 0.8,
@@ -1846,19 +1860,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-06-25"
-  },
-  {
-    "date_filed": "2026-06-24",
-    "company": "Argute Group, Inc.",
-    "amount_m": 0.1,
-    "city": "AUSTIN",
-    "state": "TX",
-    "founded": "",
-    "cik": "0002141958",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-24"
   }
 ]
