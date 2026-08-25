@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-08-25",
+    "company": "Gradient Health, Inc.",
+    "amount_m": 3.0,
+    "city": "DURHAM",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001914365",
+    "industry": "Other Health Care",
+    "category": "AI / ML",
+    "what_they_do": "Access 20M+ de-identified patient journeys via Atlas - Gradient Health's AI healthcare data platform.",
+    "website": "https://gradienthealth.io"
+  },
+  {
+    "date_filed": "2026-08-25",
+    "company": "Empower Local Inc",
+    "amount_m": 2.53,
+    "city": "FRANKLIN",
+    "state": "TN",
+    "founded": "",
+    "cik": "0001810751",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "EmpowerLocal connects advertisers with 1,000+ trusted local publishers across all 50 states through LocalMedia.",
+    "website": "https://empowerlocal.com"
+  },
+  {
+    "date_filed": "2026-08-25",
+    "company": "Microshare, Inc.",
+    "amount_m": 7.71,
+    "city": "PHILADELPHIA",
+    "state": "PA",
+    "founded": "",
+    "cik": "0001577803",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Uncover how Microshare\u00ae is digitizing industries with EverSmart\u2122 solutions, focusing on safety through actionable alerts and insights.",
+    "website": "https://microshare.io"
+  },
+  {
+    "date_filed": "2026-08-25",
+    "company": "MalarVx, Inc.",
+    "amount_m": 0.12,
+    "city": "SEATTLE",
+    "state": "WA",
+    "founded": "",
+    "cik": "0001559688",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "MalarVx, Inc. \u2013 A Malaria Vaccine Company IMAGINE A WORLD WITHOUT MALARIA Every two minutes, a child dies of Malaria. MalarVx has a new approach.",
+    "website": "https://malarvx.com"
+  },
+  {
     "date_filed": "2026-08-24",
     "company": "Neolithics Inc.",
     "amount_m": 0.72,
