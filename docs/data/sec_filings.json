@@ -1,5 +1,70 @@
 [
   {
+    "date_filed": "2026-08-28",
+    "company": "Streamline Glass, Inc.",
+    "amount_m": 0.62,
+    "city": "NEWTON",
+    "state": "NH",
+    "founded": "",
+    "cik": "0002152634",
+    "industry": "Manufacturing",
+    "category": "AI / ML",
+    "what_they_do": "Streamline Auto Glass provides professional glass installation, repair & replacement or vehicles, residential & commercial development, and more.",
+    "website": "https://streamlineglass.com"
+  },
+  {
+    "date_filed": "2026-08-28",
+    "company": "Dynamic Experts, Inc.",
+    "amount_m": 0.91,
+    "city": "BOCA RATON",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002151107",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Dynamic Experts Solution offers reliable and affordable web hosting in Pakistan.",
+    "website": "https://dynamicexperts.net"
+  },
+  {
+    "date_filed": "2026-08-28",
+    "company": "QENTOROS, INC",
+    "amount_m": 0.1,
+    "city": "BLACKSBURG",
+    "state": "VA",
+    "founded": "",
+    "cik": "0002104916",
+    "industry": "Other",
+    "category": "Biotech / Health",
+    "what_they_do": "Qentoros | Peptide-Powered Biologics for Equine Health You need to enable JavaScript to run this app.",
+    "website": "https://qentoros.com"
+  },
+  {
+    "date_filed": "2026-08-28",
+    "company": "LIVEGISTICS, INC.",
+    "amount_m": 1.5,
+    "city": "DETROIT",
+    "state": "MI",
+    "founded": "",
+    "cik": "0001884725",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The operating platform for waste, aggregate, and material logistics.",
+    "website": "https://livegistics.com"
+  },
+  {
+    "date_filed": "2026-08-28",
+    "company": "Aegle Therapeutics Corp",
+    "amount_m": 2.28,
+    "city": "WOBURN",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001797825",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "Aegle Therapeutics is a pioneer in regenerative medicine developing extracellular vesicle (EV) therapy to meaningfully improve the lives of those Harnessing the regenerative, immunomodulatory, and ant",
+    "website": "https://aegletherapeutics.com"
+  },
+  {
     "date_filed": "2026-08-27",
     "company": "Innabox, Inc.",
     "amount_m": 9.8,
@@ -128,6 +193,21 @@
     "category": "Biotech / Health",
     "what_they_do": "Assurance Medication Management \u2013 Assurance Medication Management Skip to content Improve patient care.",
     "website": "https://assurancemedicationmanagement.com"
+  },
+  {
+    "date_filed": "2026-08-27",
+    "company": "Levanta.io Inc.",
+    "amount_m": 22.03,
+    "city": "SEATTLE",
+    "state": "WA",
+    "founded": "",
+    "cik": "0001956774",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Levanta unifies creator and affiliate programs into a single platform to recruit partners, send samples, measure performance, and manage payouts across Amazon, Shopify, and Walmart.",
+    "website": "https://levanta.io",
+    "date_added": "2026-08-27",
+    "newly_found": true
   },
   {
     "date_filed": "2026-08-25",
