@@ -113,20 +113,6 @@
   },
   {
     "date_filed": "2026-08-28",
-    "company": "On3, Inc.",
-    "amount_m": 3.12,
-    "city": "MADISON",
-    "state": "WI",
-    "founded": "",
-    "cik": "0002006730",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-08-28"
-  },
-  {
-    "date_filed": "2026-08-28",
     "company": "DealerCue Automotive Corp.",
     "amount_m": 73.23,
     "city": "KANSAS CITY",
@@ -2028,61 +2014,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-06-30"
-  },
-  {
-    "date_filed": "2026-06-29",
-    "company": "MEDPLEX SYSTEMS, INC",
-    "amount_m": 0.56,
-    "city": "HOUSTON",
-    "state": "TX",
-    "founded": "",
-    "cik": "0002094864",
-    "industry": "Hospitals and Physicians",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-29"
-  },
-  {
-    "date_filed": "2026-06-29",
-    "company": "Harri Topco, Inc.",
-    "amount_m": 3.0,
-    "city": "NEW YORK",
-    "state": "NY",
-    "founded": "",
-    "cik": "0001994670",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-29"
-  },
-  {
-    "date_filed": "2026-06-29",
-    "company": "Colossus Computing, Inc.",
-    "amount_m": 0.18,
-    "city": "OAKLAND",
-    "state": "CA",
-    "founded": "",
-    "cik": "0001943140",
-    "industry": "Computers",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-29"
-  },
-  {
-    "date_filed": "2026-06-29",
-    "company": "UserFirst Software, Inc.",
-    "amount_m": 0.62,
-    "city": "BOISE",
-    "state": "ID",
-    "founded": "",
-    "cik": "0001698513",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-06-29"
   }
 ]
