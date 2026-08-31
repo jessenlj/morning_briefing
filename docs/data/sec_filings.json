@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-08-31",
+    "company": "Blackout Technologies, Inc.",
+    "amount_m": 0.3,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002152031",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The Blackout app regulates iOS and Android devices using APIs, scheduling and beacons.",
+    "website": "https://blackout-technologies.com"
+  },
+  {
+    "date_filed": "2026-08-31",
+    "company": "Florence Corp.",
+    "amount_m": 0.2,
+    "city": "CHARLOTTE",
+    "state": "NC",
+    "founded": "",
+    "cik": "0002149977",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Explore Florence by Mills: trendy fashion combined with natural beauty essentials for every girl.",
+    "website": "https://florencebymills.com"
+  },
+  {
+    "date_filed": "2026-08-31",
+    "company": "Conavi Medical Corp.",
+    "amount_m": 3.53,
+    "city": "TORONTO",
+    "state": "A6",
+    "founded": "",
+    "cik": "0002069519",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Home - Novasight Hybrid System.",
+    "website": "https://conavi.com"
+  },
+  {
     "date_filed": "2026-08-28",
     "company": "Streamline Glass, Inc.",
     "amount_m": 0.62,
