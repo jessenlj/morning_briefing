@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-09-01",
+    "company": "Felix Technologies Inc.",
+    "amount_m": 87.81,
+    "city": "MIAMI",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001945179",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://felixtechnologies.com"
+  },
+  {
+    "date_filed": "2026-09-01",
+    "company": "Language IO, Inc.",
+    "amount_m": 1.5,
+    "city": "CHEYENNE",
+    "state": "WY",
+    "founded": "",
+    "cik": "0001904270",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Powered by AI, Language IO delivers real-time, accurate translations for you and your customers in 150+ languages through seamless integrations with Salesforce, Zendesk, Oracle, ServiceNow, and more.",
+    "website": "https://languageio.com"
+  },
+  {
+    "date_filed": "2026-09-01",
+    "company": "Orthobond Corp",
+    "amount_m": 8.35,
+    "city": "MONMOUTH JUNCTION",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0001329147",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Orthobond Antimicrobial Nanosurface Technology.",
+    "website": "https://orthobond.com"
+  },
+  {
+    "date_filed": "2026-09-01",
+    "company": "BIOVENTRIX, INC.",
+    "amount_m": 2.77,
+    "city": "MANSFIELD",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001283259",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "OUR VISION: Extend Life Span and Improve Quality of Life for Heart Failure Patients         OUR VISION Extending Life Span and Improving Quality of Life for Heart Failure Patients How Revivent Therapy",
+    "website": "https://bioventrix.com"
+  },
+  {
     "date_filed": "2026-08-31",
     "company": "Blackout Technologies, Inc.",
     "amount_m": 0.3,
