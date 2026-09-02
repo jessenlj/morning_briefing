@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-09-02",
+    "company": "Overwatch AI Corp",
+    "amount_m": 1.67,
+    "city": "NEWARK",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002152177",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Overwatch by RescAlert - Welcome to Overwatch by RescAlert.",
+    "website": "https://overwatch.ai"
+  },
+  {
+    "date_filed": "2026-09-02",
+    "company": "Sift Media, Inc.",
+    "amount_m": 0.47,
+    "city": "DURHAM",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001663509",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Sift :: at the intersection of mobile and big data sift /sift/ verb :: examine something thoroughly so as to isolate that which is most important or useful.",
+    "website": "https://sift.co"
+  },
+  {
     "date_filed": "2026-09-01",
     "company": "Felix Technologies Inc.",
     "amount_m": 87.81,
