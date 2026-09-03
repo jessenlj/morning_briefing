@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-09-03",
+    "company": "Tidewater Inn, LLC",
+    "amount_m": 2.46,
+    "city": "Easton",
+    "state": "MD",
+    "founded": "",
+    "cik": "0001473658",
+    "industry": "Lodging and Conventions",
+    "category": "Other Tech",
+    "what_they_do": "Romantic weekend getaways begin here.",
+    "website": "https://thetidewater.com"
+  },
+  {
     "date_filed": "2026-09-02",
     "company": "Overwatch AI Corp",
     "amount_m": 1.67,
