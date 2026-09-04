@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-09-04",
+    "company": "Protocol Labs LLC",
+    "amount_m": 0.2,
+    "city": "Jacksonville Beach",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002153670",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Protocol Labs is an innovation network driving breakthroughs in computing to push humanity forward.",
+    "website": "https://protocol.ai"
+  },
+  {
+    "date_filed": "2026-09-04",
+    "company": "Switchboard Health, Inc.",
+    "amount_m": 5.02,
+    "city": "Boise",
+    "state": "ID",
+    "founded": "",
+    "cik": "0002000431",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI-powered specialty care navigation connecting health plans, employers, and providers to a national virtual specialty network across 20+ specialties.",
+    "website": "https://switchboardhealth.com"
+  },
+  {
+    "date_filed": "2026-09-04",
+    "company": "Live Event Partners, Inc.",
+    "amount_m": 16.72,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002063534",
+    "industry": "Retailing",
+    "category": "AI / ML",
+    "what_they_do": "Live Event Partners: live event, meeting, and video production.",
+    "website": "https://liveeventpartners.com"
+  },
+  {
+    "date_filed": "2026-09-04",
+    "company": "Immunophotonics, Inc.",
+    "amount_m": 10.15,
+    "city": "ST. LOUIS",
+    "state": "MO",
+    "founded": "",
+    "cik": "0001490953",
+    "industry": "Pharmaceuticals",
+    "category": "Biotech / Health",
+    "what_they_do": "Immunophotonics' proprietary glycan polymer enhances antigen capture & immune processes, unlocking platform potential for immunotherapy.",
+    "website": "https://immunophotonics.com"
+  },
+  {
     "date_filed": "2026-09-03",
     "company": "Tidewater Inn, LLC",
     "amount_m": 2.46,
@@ -11,6 +63,21 @@
     "category": "Other Tech",
     "what_they_do": "Romantic weekend getaways begin here.",
     "website": "https://thetidewater.com"
+  },
+  {
+    "date_filed": "2026-09-03",
+    "company": "FuriosaAI, Inc.",
+    "amount_m": 5.12,
+    "city": "SEOUL",
+    "state": "M5",
+    "founded": "",
+    "cik": "0002149195",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "FuriosaAI designs high-performance, power-efficient AI accelerators (NPUs) used in data centers for computer vision, GenAI, LLMs, and demanding workloads.",
+    "website": "https://furiosa.ai",
+    "date_added": "2026-09-03",
+    "newly_found": true
   },
   {
     "date_filed": "2026-09-02",
@@ -600,21 +667,6 @@
     "category": "Other Tech",
     "what_they_do": "The unified operational foundation for the future of casino resorts.",
     "website": "https://quickcustomintelligence.com"
-  },
-  {
-    "date_filed": "2026-08-11",
-    "company": "FuriosaAI, Inc.",
-    "amount_m": 4.15,
-    "city": "SEOUL",
-    "state": "M5",
-    "founded": "",
-    "cik": "0002149195",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "FuriosaAI designs high-performance, power-efficient AI accelerators (NPUs) used in data centers for computer vision, GenAI, LLMs, and demanding workloads.",
-    "website": "https://furiosa.ai",
-    "date_added": "2026-08-11",
-    "newly_found": true
   },
   {
     "date_filed": "2026-08-07",
