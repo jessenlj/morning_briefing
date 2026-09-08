@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-09-08",
+    "company": "Grove SV LLC",
+    "amount_m": 0.65,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002153650",
+    "industry": "Other",
+    "category": "Hardware",
+    "what_they_do": "If your pet needs a wellness exam, surgery, microchipping, or dental care, the expert veterinarians at Groves Veterinary Clinic can help.",
+    "website": "https://grovesvetclinic.com"
+  },
+  {
+    "date_filed": "2026-09-08",
+    "company": "Malcova, Inc",
+    "amount_m": 1.21,
+    "city": "NEWARK",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002152940",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Discover Malcova's advanced, painless Narrow-Beam CT technology designed for precise early detection of breast cancer and stroke, empowering radiologists and improving patient outcomes.",
+    "website": "https://malcova.com"
+  },
+  {
+    "date_filed": "2026-09-08",
+    "company": "Admissions Film LLC",
+    "amount_m": 0.25,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002146038",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Admissions, a short film about what it takes to find lasting peace starring Academy Award nominee James Cromwell, and features an Israeli couple and a Palestinian   Admissions - a Film For Peace, Star",
+    "website": "https://admissionsfilm.com"
+  },
+  {
     "date_filed": "2026-09-04",
     "company": "Protocol Labs LLC",
     "amount_m": 0.2,
