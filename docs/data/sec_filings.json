@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-09-09",
+    "company": "Handraise Inc.",
+    "amount_m": 4.53,
+    "city": "Austin",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002000910",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "With Handraiser, your political campaign identifies, activates and measures the participation of every voter that will help you win elections.",
+    "website": "https://handraiser.com"
+  },
+  {
+    "date_filed": "2026-09-09",
+    "company": "IDmission LLC",
+    "amount_m": 1.0,
+    "city": "Boulder",
+    "state": "CO",
+    "founded": "",
+    "cik": "0001514900",
+    "industry": "Other",
+    "category": "Biotech / Health",
+    "what_they_do": "IDmission is a leading provider of identity verification and biometric security solutions.",
+    "website": "https://idmission.com"
+  },
+  {
+    "date_filed": "2026-09-09",
+    "company": "KURTOSYS SYSTEMS INC",
+    "amount_m": 3.0,
+    "city": "RALEIGH",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001376277",
+    "industry": "Other Technology",
+    "category": "Fintech",
+    "what_they_do": "Digital and reporting solutions for investment managers.",
+    "website": "https://kurtosys.com"
+  },
+  {
     "date_filed": "2026-09-08",
     "company": "Grove SV LLC",
     "amount_m": 0.65,
