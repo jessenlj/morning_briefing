@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-09-11",
+    "company": "Arlington Hotel Group LLC",
+    "amount_m": 1.15,
+    "city": "GERMANTOWN",
+    "state": "TN",
+    "founded": "",
+    "cik": "0002153757",
+    "industry": "Lodging and Conventions",
+    "category": "Other Tech",
+    "what_they_do": "The Arlington hotel group in Norfolk and Suffolk are a unique boutique collection of hotels in the east of England Arlington Hotels | Arlington Group Arlington Hotels George Hotel Norwich Discover Mor",
+    "website": "https://arlingtonhotelgroup.co.uk"
+  },
+  {
+    "date_filed": "2026-09-11",
+    "company": "UnityLab Corp.",
+    "amount_m": 0.87,
+    "city": "DUSHORE",
+    "state": "PA",
+    "founded": "",
+    "cik": "0001943827",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Unity Lab Services offers service and support provided by highly experienced service professionals, including compliance, calibration, maintenance, and repairs.",
+    "website": "https://unitylabservices.com"
+  },
+  {
+    "date_filed": "2026-09-11",
+    "company": "Cube Security Inc.",
+    "amount_m": 48.52,
+    "city": "PALO ALTO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001934798",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "",
+    "website": "https://cubesecurity.co.uk"
+  },
+  {
+    "date_filed": "2026-09-11",
+    "company": "Tempo Therapeutics, Inc.",
+    "amount_m": 14.0,
+    "city": "SAN DIEGO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001813688",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Tempo Therapeutics is a biotechnology and tissue engineering company based out of San Diego, CA specializing in speeding up patient recovery.",
+    "website": "https://tempothera.com"
+  },
+  {
     "date_filed": "2026-09-10",
     "company": "Analytical Insider Inc",
     "amount_m": 0.17,
