@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-09-14",
+    "company": "Aspire Group Ltd.",
+    "amount_m": 0.1,
+    "city": "PHOENIX",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0002155012",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "Aspire Group is the Gulf's first fully integrated healthcare solutions organization \u2014 event management, marketing, CME accreditation, media, social and market research.",
+    "website": "https://aspiregroup.org"
+  },
+  {
+    "date_filed": "2026-09-14",
+    "company": "Ida Sports, Inc.",
+    "amount_m": 2.1,
+    "city": "HOUSTON",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002049321",
+    "industry": "Retailing",
+    "category": "AI / ML",
+    "what_they_do": "This store is unavailable Something went wrong.",
+    "website": "https://idasports.com.au"
+  },
+  {
     "date_filed": "2026-09-11",
     "company": "Arlington Hotel Group LLC",
     "amount_m": 1.15,
