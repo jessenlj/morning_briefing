@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-09-16",
+    "company": "Zaden Technologies, Inc.",
+    "amount_m": 0.11,
+    "city": "HUNTSVILLE",
+    "state": "AL",
+    "founded": "",
+    "cik": "0002153585",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://zadentech.com"
+  },
+  {
+    "date_filed": "2026-09-16",
+    "company": "Twin Health, Inc.",
+    "amount_m": 59.01,
+    "city": "Menlo Park",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001816525",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Twin Health helps employees and health plan members improve their metabolic health for normalized blood sugar, reduced medications, and sustained weight loss.",
+    "website": "https://twinhealth.com"
+  },
+  {
     "date_filed": "2026-09-15",
     "company": "Higher Powers Inc.",
     "amount_m": 0.68,
@@ -11,19 +37,6 @@
     "category": "AI / ML",
     "what_they_do": "Pressure Washing Douglasville: We tackle dirt, grime, and stains on all surfaces, ensuring a spotless finish for residential and commercial properties.",
     "website": "https://higherpowerpressurewash.com"
-  },
-  {
-    "date_filed": "2026-09-15",
-    "company": "Zaden Technologies, Inc.",
-    "amount_m": 0.29,
-    "city": "HUNTSVILLE",
-    "state": "AL",
-    "founded": "",
-    "cik": "0002153585",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "",
-    "website": "https://zadentech.com"
   },
   {
     "date_filed": "2026-09-15",
