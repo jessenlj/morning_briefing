@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-09-22",
+    "company": "Admissions Film LLC",
+    "amount_m": 0.3,
+    "city": "Chicago",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002146038",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Admissions, a short film about what it takes to find lasting peace starring Academy Award nominee James Cromwell, and features an Israeli couple and a Palestinian   Admissions - a Film For Peace, Star",
+    "website": "https://admissionsfilm.com"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "License Corp",
+    "amount_m": 13.35,
+    "city": "JACKSON",
+    "state": "WY",
+    "founded": "",
+    "cik": "0002155842",
+    "industry": "Business Services",
+    "category": "Other Tech",
+    "what_they_do": "California Real Estate License Online - License Solution.",
+    "website": "https://licensesolution.com"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Liife, Inc.",
+    "amount_m": 2.25,
+    "city": "MARLTON",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0002053812",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "D\u00e9couvrez Liife, votre restaurant et brunch healthy \u00e0 Paris.",
+    "website": "https://liife.fr"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Optimize Mind Performance, Inc.",
+    "amount_m": 2.65,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001998001",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Optimize Mind Performance helps individuals and sporting organizations learn mental skills to help reach their potential.",
+    "website": "https://optimizemindperformance.com"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Opus Medical Therapies, LLC",
+    "amount_m": 0.49,
+    "city": "Smyrna",
+    "state": "GA",
+    "founded": "",
+    "cik": "0001785788",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Coming Soon opus-medical.",
+    "website": "https://opus-medical.com"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Rock Fiber, Inc.",
+    "amount_m": 3.49,
+    "city": "HOUSTON",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002035796",
+    "industry": "Manufacturing",
+    "category": "Biotech / Health",
+    "what_they_do": "Rockfiber What is Basalt Fiber Basalt fiber is a mineral-based inorganic derived from the Basalt volcanic rock, with excellent physical, mechanical and chemical properties, derived from molten basalt.",
+    "website": "https://rockfiber.pt"
+  },
+  {
     "date_filed": "2026-09-21",
     "company": "Rebel Audio, Inc.",
     "amount_m": 9.22,
@@ -561,19 +639,6 @@
     "category": "AI / ML",
     "what_they_do": "Discover Malcova's advanced, painless Narrow-Beam CT technology designed for precise early detection of breast cancer and stroke, empowering radiologists and improving patient outcomes.",
     "website": "https://malcova.com"
-  },
-  {
-    "date_filed": "2026-09-08",
-    "company": "Admissions Film LLC",
-    "amount_m": 0.25,
-    "city": "CHICAGO",
-    "state": "IL",
-    "founded": "",
-    "cik": "0002146038",
-    "industry": "Other",
-    "category": "Other Tech",
-    "what_they_do": "Admissions, a short film about what it takes to find lasting peace starring Academy Award nominee James Cromwell, and features an Israeli couple and a Palestinian   Admissions - a Film For Peace, Star",
-    "website": "https://admissionsfilm.com"
   },
   {
     "date_filed": "2026-09-04",
