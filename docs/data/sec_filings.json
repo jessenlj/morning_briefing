@@ -1,5 +1,44 @@
 [
   {
+    "date_filed": "2026-09-23",
+    "company": "Cadense, Inc.",
+    "amount_m": 1.08,
+    "city": "GOLETA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001972869",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "We passionately collaborate with medical ventures to accelerate fundraising and market growth with high-impact storytelling and engaging design.",
+    "website": "https://cadensee.com"
+  },
+  {
+    "date_filed": "2026-09-23",
+    "company": "Fenix Space, Inc.",
+    "amount_m": 4.18,
+    "city": "SAN BERNARDINO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001968212",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Protected page Incorrect password.",
+    "website": "https://fenixspace.com"
+  },
+  {
+    "date_filed": "2026-09-23",
+    "company": "Hera Biotech, Inc.",
+    "amount_m": 1.74,
+    "city": "SAN ANTONIO",
+    "state": "TX",
+    "founded": "",
+    "cik": "0001831293",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Diagnosing Endometriosis and Cervical Cancer\u2014In Tissue.",
+    "website": "https://herabiotech.com"
+  },
+  {
     "date_filed": "2026-09-22",
     "company": "Admissions Film LLC",
     "amount_m": 0.3,
@@ -76,6 +115,36 @@
     "category": "Biotech / Health",
     "what_they_do": "Rockfiber What is Basalt Fiber Basalt fiber is a mineral-based inorganic derived from the Basalt volcanic rock, with excellent physical, mechanical and chemical properties, derived from molten basalt.",
     "website": "https://rockfiber.pt"
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Bioinsights, Inc.",
+    "amount_m": 2.75,
+    "city": "LUTZ",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002156231",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "&lt;!--\n  ============================================================\n  BIOINSIGHTS HUB HERO BANNER \u2014 FINAL VERSION\n  - 60pt heading in #42a8b1\n  - Lato font (already loaded on every page)\n  - Image top-aligned\n  - &#39;Contact us&#39; button linking to enquiries@insights.",
+    "website": "https://insights.bio",
+    "date_added": "2026-09-22",
+    "newly_found": true
+  },
+  {
+    "date_filed": "2026-09-22",
+    "company": "Lockchain Corp.",
+    "amount_m": 2.0,
+    "city": "ATHENS",
+    "state": "GA",
+    "founded": "",
+    "cik": "0001962104",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "",
+    "website": "https://bitcoinbattlefield.live",
+    "date_added": "2026-09-22",
+    "newly_found": true
   },
   {
     "date_filed": "2026-09-21",
