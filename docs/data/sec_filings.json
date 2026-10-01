@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-10-01",
+    "company": "Depo Technologies, Inc.",
+    "amount_m": 0.16,
+    "city": "DALLAS",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002157208",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://depotechnologies.com"
+  },
+  {
+    "date_filed": "2026-10-01",
+    "company": "Green Mountain Firewood Co",
+    "amount_m": 2.15,
+    "city": "OWENSBORO",
+    "state": "KY",
+    "founded": "",
+    "cik": "0001942158",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "",
+    "website": "https://greenmountainfirewood.com"
+  },
+  {
+    "date_filed": "2026-10-01",
+    "company": "Fraud Protection Network, Inc.",
+    "amount_m": 1.1,
+    "city": "AVENTURA",
+    "state": "FL",
+    "founded": "",
+    "cik": "0001580276",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://fraudprotectionnetwork.com"
+  },
+  {
+    "date_filed": "2026-10-01",
+    "company": "Click Therapeutics, Inc.",
+    "amount_m": 50.0,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001623326",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "We combine neuroscience with the power of software to create patient-centric digital treatments.",
+    "website": "https://clicktherapeutics.com"
+  },
+  {
     "date_filed": "2026-09-30",
     "company": "TIDAL PETROLEUM INC",
     "amount_m": 0.81,
@@ -76,6 +128,21 @@
     "category": "AI / ML",
     "what_they_do": "Home - Colonial Outpatient Surgery Center Skip to main content Call 239-333-2560 MENU PROCEDURES & SPECIALTIES PROVIDERS PREPARING FOR SURGERY DURING YOUR STAY AFTER YOUR SURGERY ABOUT US DIRECTIONS F",
     "website": "https://colonialoutpatientsurgerycenter.com"
+  },
+  {
+    "date_filed": "2026-09-30",
+    "company": "Kanah Inc.",
+    "amount_m": 0.2,
+    "city": "ATLANTA",
+    "state": "GA",
+    "founded": "",
+    "cik": "0002156050",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Divine Spark - close upDivine Spark - close up 2020 foam sheet and mixed media 53x7x9 inches https://youtu.",
+    "website": "https://kanakanakana.com",
+    "date_added": "2026-09-30",
+    "newly_found": true
   },
   {
     "date_filed": "2026-09-29",
