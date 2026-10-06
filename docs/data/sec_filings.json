@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-10-06",
+    "company": "RunLoyal, Inc.",
+    "amount_m": 1.27,
+    "city": "ALPHARETTA",
+    "state": "GA",
+    "founded": "",
+    "cik": "0002157791",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "RunLoyal offers powerful pet business software to streamline operations, boost revenue, and deliver exceptional customer experiences.",
+    "website": "https://runloyal.com"
+  },
+  {
+    "date_filed": "2026-10-06",
+    "company": "Cone Technologies, Inc.",
+    "amount_m": 0.97,
+    "city": "WATERTOWN",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002156269",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "",
+    "website": "https://futurecone.com"
+  },
+  {
+    "date_filed": "2026-10-06",
+    "company": "SCATR Corp.",
+    "amount_m": 6.32,
+    "city": "RICHMOND HEIGHTS",
+    "state": "OH",
+    "founded": "",
+    "cik": "0002016362",
+    "industry": "Other Technology",
+    "category": "Energy / Climate",
+    "what_they_do": "Scat Records official site - the finest warbles, crashes, and windmills in underground rock.",
+    "website": "https://realscatrecords.com"
+  },
+  {
+    "date_filed": "2026-10-06",
+    "company": "Xenon Ophthalmics Inc",
+    "amount_m": 3.32,
+    "city": "Jersey City",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0001988832",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Xenon Ophthalmics builds the XO Vision Care System: one system for eye care, from appointment to finished eyewear.",
+    "website": "https://xophthalmics.com"
+  },
+  {
+    "date_filed": "2026-10-06",
+    "company": "Right-Hand Cyber Security, Inc.",
+    "amount_m": 3.0,
+    "city": "SCOTTSDALE",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0001967839",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "403 - Forbidden bg_error_lines circle_dots.",
+    "website": "https://right-hand.ai"
+  },
+  {
+    "date_filed": "2026-10-06",
+    "company": "Rakuten Medical, Inc.",
+    "amount_m": 8.97,
+    "city": "San Diego",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001595215",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Rakuten Medical, Inc.",
+    "website": "https://rakuten-med.com"
+  },
+  {
     "date_filed": "2026-10-05",
     "company": "EKKL LLC",
     "amount_m": 18.65,
@@ -76,6 +154,21 @@
     "category": "Other Tech",
     "what_they_do": "At Brother Justus Whiskey Company, we make whiskey with an unwavering pursuit of our craft.",
     "website": "https://brotherjustus.com"
+  },
+  {
+    "date_filed": "2026-10-05",
+    "company": "PurposeBook LLC",
+    "amount_m": 0.55,
+    "city": "Atlanta",
+    "state": "GA",
+    "founded": "",
+    "cik": "0002158522",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Skip to content ABOUT THE BOOK It\u2019s time for change \u2013 we all agree.",
+    "website": "https://purpose-book.com",
+    "date_added": "2026-10-05",
+    "newly_found": true
   },
   {
     "date_filed": "2026-10-02",
@@ -232,19 +325,6 @@
     "category": "Other Tech",
     "what_they_do": "1WORLD ONLINE \u2014 Get more from online advertising 1WORLD ONLINE \u2014 Get more from online advertising Engagement tools for Media and Travel Unlock the world with 1World.",
     "website": "https://1worldonline.com"
-  },
-  {
-    "date_filed": "2026-09-30",
-    "company": "RunLoyal, Inc.",
-    "amount_m": 1.17,
-    "city": "ALPHARETTA",
-    "state": "GA",
-    "founded": "",
-    "cik": "0002157791",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "RunLoyal offers powerful pet business software to streamline operations, boost revenue, and deliver exceptional customer experiences.",
-    "website": "https://runloyal.com"
   },
   {
     "date_filed": "2026-09-30",
