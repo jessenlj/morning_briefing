@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-10-07",
+    "company": "Unison Risk Advisors Inc.",
+    "amount_m": 56.16,
+    "city": "CLEVELAND",
+    "state": "OH",
+    "founded": "",
+    "cik": "0001794955",
+    "industry": "Insurance",
+    "category": "Fintech",
+    "what_they_do": "Unison Risk Advisors\u2122 is a partnership of independent and employee-owned risk management and insurance brokerage firms, powered by our relentless commitment to individual client service and globally focused solutions.",
+    "website": "https://unisonriskadvisors.com"
+  },
+  {
+    "date_filed": "2026-10-07",
+    "company": "Gradient Health, Inc.",
+    "amount_m": 2.13,
+    "city": "Durham",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001914365",
+    "industry": "Other Health Care",
+    "category": "AI / ML",
+    "what_they_do": "Access 20M+ de-identified patient journeys via Atlas - Gradient Health's AI healthcare data platform.",
+    "website": "https://gradienthealth.io"
+  },
+  {
+    "date_filed": "2026-10-07",
+    "company": "TOP GRAIN TECHNOLOGIES, INC.",
+    "amount_m": 4.1,
+    "city": "HOUSTON",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002127976",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Top Grain Technologies.",
+    "website": "https://topgrain.us"
+  },
+  {
+    "date_filed": "2026-10-07",
+    "company": "Aikido Technologies, Inc.",
+    "amount_m": 1.72,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002026799",
+    "industry": "Other Energy",
+    "category": "AI / ML",
+    "what_they_do": "Compute at GW-scale, from thin air.",
+    "website": "https://aikidotechnologies.com"
+  },
+  {
+    "date_filed": "2026-10-07",
+    "company": "PreciseDx, Inc.",
+    "amount_m": 3.7,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002013833",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "Current standards of care in oncology can be subjective, leading to a high percentage of tumors receiving intermediate grading.",
+    "website": "https://precisedx.ai"
+  },
+  {
+    "date_filed": "2026-10-07",
+    "company": "Fareon, Inc.",
+    "amount_m": 7.0,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001963942",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "FAREON is a specialized employment agency providing skilled technical professionals for projects across the Netherlands.",
+    "website": "https://fareon.nl"
+  },
+  {
     "date_filed": "2026-10-06",
     "company": "RunLoyal, Inc.",
     "amount_m": 1.27,
@@ -827,19 +905,6 @@
     "category": "Other Tech",
     "what_they_do": "Next Wave Partners \u2013 Transformational growth capital Home About Team Portfolio News Contact toggle menu Next Wave Partners LLP Transformational growth capital.",
     "website": "https://nextwavepartners.co.uk"
-  },
-  {
-    "date_filed": "2026-09-21",
-    "company": "Unison Risk Advisors Inc.",
-    "amount_m": 13.95,
-    "city": "CLEVELAND",
-    "state": "OH",
-    "founded": "",
-    "cik": "0001794955",
-    "industry": "Insurance",
-    "category": "Fintech",
-    "what_they_do": "Unison Risk Advisors\u2122 is a partnership of independent and employee-owned risk management and insurance brokerage firms, powered by our relentless commitment to individual client service and globally focused solutions.",
-    "website": "https://unisonriskadvisors.com"
   },
   {
     "date_filed": "2026-09-21",
@@ -1773,19 +1838,6 @@
     "website": "https://levanta.io",
     "date_added": "2026-08-27",
     "newly_found": true
-  },
-  {
-    "date_filed": "2026-08-25",
-    "company": "Gradient Health, Inc.",
-    "amount_m": 3.0,
-    "city": "DURHAM",
-    "state": "NC",
-    "founded": "",
-    "cik": "0001914365",
-    "industry": "Other Health Care",
-    "category": "AI / ML",
-    "what_they_do": "Access 20M+ de-identified patient journeys via Atlas - Gradient Health's AI healthcare data platform.",
-    "website": "https://gradienthealth.io"
   },
   {
     "date_filed": "2026-08-25",
