@@ -1,5 +1,47 @@
 [
   {
+    "date_filed": "2026-10-08",
+    "company": "Ayvera AI Inc.",
+    "amount_m": 0.12,
+    "city": "DUBLIN",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002158648",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-10-08"
+  },
+  {
+    "date_filed": "2026-10-08",
+    "company": "Mindset Innovation II, Inc.",
+    "amount_m": 0.7,
+    "city": "SANTA MONICA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002149304",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-10-08"
+  },
+  {
+    "date_filed": "2026-10-08",
+    "company": "3 E Network Technology Group Ltd  (MASK)",
+    "amount_m": 1.0,
+    "city": "HONG KONG",
+    "state": "F4",
+    "founded": "",
+    "cik": "0001993097",
+    "industry": "Computers",
+    "category": "Other Tech",
+    "what_they_do": "No web presence found \u2014 flag for review",
+    "website": "",
+    "date_added": "2026-10-08"
+  },
+  {
     "date_filed": "2026-10-07",
     "company": "Luminal AI, Inc.",
     "amount_m": 29.16,
