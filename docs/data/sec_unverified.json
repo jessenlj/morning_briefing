@@ -3750,33 +3750,5 @@
     "what_they_do": "No web presence found \u2014 flag for review",
     "website": "",
     "date_added": "2026-08-12"
-  },
-  {
-    "date_filed": "2026-08-11",
-    "company": "Kikitora, Inc.",
-    "amount_m": 19.74,
-    "city": "SAN FRANCISCO",
-    "state": "CA",
-    "founded": "",
-    "cik": "0002148534",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-08-11"
-  },
-  {
-    "date_filed": "2026-08-11",
-    "company": "Eleanor Infrastructure LLC",
-    "amount_m": 3.43,
-    "city": "WESTFIELD",
-    "state": "IN",
-    "founded": "",
-    "cik": "0002148117",
-    "industry": "Other",
-    "category": "Other Tech",
-    "what_they_do": "No web presence found \u2014 flag for review",
-    "website": "",
-    "date_added": "2026-08-11"
   }
 ]
