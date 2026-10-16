@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-10-16",
+    "company": "1921 Technologies Inc.",
+    "amount_m": 3.0,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002159256",
+    "industry": "Other Technology",
+    "category": "Cybersecurity",
+    "what_they_do": "Streamlining Education Administration Processes Creating More Hours In The Day For Administrators To Focus On Students Get Started School & District Continuous Improvement and Compliance Software Crea",
+    "website": "https://806technologies.com"
+  },
+  {
+    "date_filed": "2026-10-16",
+    "company": "Polt AI, Inc.",
+    "amount_m": 0.15,
+    "city": "LARGO",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002150777",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Building Confidence and Character Welcome to Poltair School Skip to content \u2193 Building Con.",
+    "website": "https://poltairschool.co.uk"
+  },
+  {
+    "date_filed": "2026-10-16",
+    "company": "BluEvo LLC",
+    "amount_m": 16.39,
+    "city": "WILMINGTON",
+    "state": "DE",
+    "founded": "",
+    "cik": "0001997548",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "BlueVolt's online training solution and course-sharing network connects channel partners through a centralized and scalable solution.",
+    "website": "https://bluevolt.com"
+  },
+  {
+    "date_filed": "2026-10-16",
+    "company": "ShortTok, Inc.",
+    "amount_m": 5.0,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001931747",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "ShortTok, Inc. Storytelling AI for Real World Video ShortTok's AI empowers users to quickly create short videos tailored to their exact preferences. We transform traditional one-size-fits-all videos i",
+    "website": "https://shorttok.com"
+  },
+  {
     "date_filed": "2026-10-15",
     "company": "OpsMate AI, Inc.",
     "amount_m": 3.38,
