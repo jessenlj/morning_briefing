@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-10-19",
+    "company": "Satlyt Inc.",
+    "amount_m": 7.79,
+    "city": "SUNNYVALE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002160771",
+    "industry": "Other Technology",
+    "category": "Hardware",
+    "what_they_do": "With 30+ years of experience, SATLYTICS offers independent consulting for the application of geodata in agriculture with a focus on satellite imaging technologies.",
+    "website": "https://satlytics.com"
+  },
+  {
+    "date_filed": "2026-10-19",
+    "company": "Adela, Inc.",
+    "amount_m": 12.0,
+    "city": "FOSTER CITY",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001852167",
+    "industry": "Biotechnology",
+    "category": "AI / ML",
+    "what_they_do": "Explore Adelaide University, home to future-defining research, transformative teaching, and an exceptional student experience.",
+    "website": "https://adelaide.edu.au"
+  },
+  {
     "date_filed": "2026-10-16",
     "company": "1921 Technologies Inc.",
     "amount_m": 3.0,
