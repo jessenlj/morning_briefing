@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-10-20",
+    "company": "LXRE Inc.",
+    "amount_m": 1.0,
+    "city": "DENVER",
+    "state": "CO",
+    "founded": "",
+    "cik": "0002159433",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Aluguer de Motos & Scooters em Lisboa: Assist\u00eancia em Viagem 24h, Seguro, Equipamento Pessoal e Acess\u00f3rios desde 30\u20ac.",
+    "website": "https://lxrent.pt"
+  },
+  {
+    "date_filed": "2026-10-20",
+    "company": "Allstacks, Inc.",
+    "amount_m": 4.05,
+    "city": "RALEIGH",
+    "state": "NC",
+    "founded": "",
+    "cik": "0001796878",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The intelligence and agentic orchestration platform for product and engineering teams to plan, manage, measure, and optimize the software creation process.",
+    "website": "https://allstacks.com"
+  },
+  {
     "date_filed": "2026-10-19",
     "company": "Satlyt Inc.",
     "amount_m": 7.79,
