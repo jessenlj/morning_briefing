@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-10-26",
+    "company": "Overwatch Data, Inc.",
+    "amount_m": 14.96,
+    "city": "BROOKLYN",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002054765",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI-native threat intelligence and risk operations for fraud, cyber and merchant risk teams.",
+    "website": "https://overwatchdata.io"
+  },
+  {
+    "date_filed": "2026-10-26",
+    "company": "BigHat Biosciences, Inc.",
+    "amount_m": 75.14,
+    "city": "SAN MATEO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001797256",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Home About Platform Therapeutics Partnering Careers Newsroom Publications Contact X LinkedIn info@bighatbio.",
+    "website": "https://bighatbio.com"
+  },
+  {
     "date_filed": "2026-10-23",
     "company": "ZeroCarb Inc.",
     "amount_m": 0.19,
