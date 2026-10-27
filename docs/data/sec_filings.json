@@ -1,5 +1,57 @@
 [
   {
+    "date_filed": "2026-10-27",
+    "company": "Nuclein, LLC",
+    "amount_m": 15.65,
+    "city": "AUSTIN",
+    "state": "TX",
+    "founded": "",
+    "cik": "0001787352",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "DASH\u2122 Rapid PCR System is a simple, affordable, point-of-care platform that performs sample-to-answer PCR in 15 minutes.",
+    "website": "https://nuclein.com"
+  },
+  {
+    "date_filed": "2026-10-27",
+    "company": "INTRAMOTEV INC.",
+    "amount_m": 10.73,
+    "city": "ST. LOUIS",
+    "state": "MO",
+    "founded": "",
+    "cik": "0001945538",
+    "industry": "Manufacturing",
+    "category": "AI / ML",
+    "what_they_do": "Transform any railcar into an autonomous battery-electric asset with Intramotev's TugVolt retrofit kits.",
+    "website": "https://intramotev.com"
+  },
+  {
+    "date_filed": "2026-10-27",
+    "company": "Femtosense, Inc.",
+    "amount_m": 22.55,
+    "city": "SAN BRUNO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001752536",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Embedded AI platform built upon a unique AI accelerator capable of delivering higher performance at lower latency, using less energy in smaller silicon.",
+    "website": "https://femtosense.ai"
+  },
+  {
+    "date_filed": "2026-10-27",
+    "company": "Commure, Inc.",
+    "amount_m": 70.09,
+    "city": "MOUNTAIN VIEW",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001717731",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Commure turns labor into software with AI-powered inbound and outbound calling, intake, documentation, coding, claims, and payment solutions.",
+    "website": "https://commure.com"
+  },
+  {
     "date_filed": "2026-10-26",
     "company": "Overwatch Data, Inc.",
     "amount_m": 14.96,
@@ -3751,19 +3803,6 @@
   },
   {
     "date_filed": "2026-06-22",
-    "company": "Nuclein, LLC",
-    "amount_m": 1.29,
-    "city": "AUSTIN",
-    "state": "TX",
-    "founded": "",
-    "cik": "0001787352",
-    "industry": "Biotechnology",
-    "category": "Biotech / Health",
-    "what_they_do": "DASH\u2122 Rapid PCR System is a simple, affordable, point-of-care platform that performs sample-to-answer PCR in 15 minutes.",
-    "website": "https://nuclein.com"
-  },
-  {
-    "date_filed": "2026-06-22",
     "company": "MakuSafe Corp.",
     "amount_m": 12.02,
     "city": "WEST DES MOINES",
@@ -4720,19 +4759,6 @@
     "category": "AI / ML",
     "what_they_do": "Welcome! - The Austelle Foundation Close Home Mission Board Recipients Contact The Austelle Foundation seeks to strengthen communities through support of environmental initiatives, veterans' services organizations, and Islamic charities.",
     "website": "https://austellefoundation.org"
-  },
-  {
-    "date_filed": "2026-05-05",
-    "company": "INTRAMOTEV INC.",
-    "amount_m": 10.76,
-    "city": "ST. LOUIS",
-    "state": "MO",
-    "founded": "",
-    "cik": "0001945538",
-    "industry": "Manufacturing",
-    "category": "AI / ML",
-    "what_they_do": "Intramotev - Rail.",
-    "website": "https://intramotev.com"
   },
   {
     "date_filed": "2026-05-05",
