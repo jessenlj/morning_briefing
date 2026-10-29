@@ -1,5 +1,18 @@
 [
   {
+    "date_filed": "2026-10-29",
+    "company": "Drink Mockly, Inc.",
+    "amount_m": 0.53,
+    "city": "NEW ORLEANS",
+    "state": "LA",
+    "founded": "",
+    "cik": "0002162776",
+    "industry": "Other",
+    "category": "Other Tech",
+    "what_they_do": "Mockly is on a mission to liberate spirited drinkers from the dull and lifeless world of alcohol-free beverages.",
+    "website": "https://drinkmockly.com"
+  },
+  {
     "date_filed": "2026-10-28",
     "company": "CELESTIS, INC",
     "amount_m": 0.17,
@@ -89,6 +102,21 @@
     "category": "AI / ML",
     "what_they_do": "Neighborhood Finance Corporation is a nonprofit mortgage lender specializing in sustainable homeownership, home renovations, and neighborhood revitalization through collaborative partnerships.",
     "website": "https://neighborhoodfinance.org"
+  },
+  {
+    "date_filed": "2026-10-28",
+    "company": "CVAT.ai Corp",
+    "amount_m": 2.5,
+    "city": "Wilmington",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002157596",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Turn raw images, videos, audio and 3D data into model-ready datasets with CVAT.",
+    "website": "https://cvat.ai",
+    "date_added": "2026-10-28",
+    "newly_found": true
   },
   {
     "date_filed": "2026-10-27",
