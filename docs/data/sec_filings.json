@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-11-05",
+    "company": "Walden Local, Inc.",
+    "amount_m": 4.8,
+    "city": "TEWKSBURY",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001640490",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "Meat delivery from small regenerative farms.",
+    "website": "https://waldenlocalmeat.com"
+  },
+  {
+    "date_filed": "2026-11-05",
+    "company": "Sanaren, Inc.",
+    "amount_m": 0.1,
+    "city": "ANDOVER",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002163753",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Frontpage | SanArena Rettungsschule Direkt zum Inhalt Nothilfe-, Reanimations- und Ersthelferkurse f\u00fcr Sie pers\u00f6nlich oder Ihr Team Nothilfekurse Lernen Sie die Grundlagen f\u00fcr die Nothilfe im Strassenverkehr oder f\u00fcr Erste Hilfe Massnahmen Zuhause oder im Betrieb kennen.",
+    "website": "https://sanarena.ch"
+  },
+  {
+    "date_filed": "2026-11-05",
+    "company": "Solution Energy, Inc.",
+    "amount_m": 4.0,
+    "city": "Houston",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002090365",
+    "industry": "Other Technology",
+    "category": "Energy / Climate",
+    "what_they_do": "Join the clean energy revolution with Lynkwell's integrated EV ecosystem.",
+    "website": "https://solution.energy"
+  },
+  {
+    "date_filed": "2026-11-05",
+    "company": "Augment Health, Inc.",
+    "amount_m": 0.37,
+    "city": "NASHVILLE",
+    "state": "TN",
+    "founded": "",
+    "cik": "0001883666",
+    "industry": "Manufacturing",
+    "category": "Biotech / Health",
+    "what_they_do": "Augment Health - Smart bladder monitoring for neurological conditions Augment Health Learn More.",
+    "website": "https://augment.health"
+  },
+  {
+    "date_filed": "2026-11-05",
+    "company": "FarmQA, Inc.",
+    "amount_m": 0.25,
+    "city": "Fargo",
+    "state": "ND",
+    "founded": "",
+    "cik": "0001826922",
+    "industry": "Other Technology",
+    "category": "Hardware",
+    "what_they_do": "FarmQA agronomy software connects crop scouting, field data, recommendations, satellite imagery, planning and reporting in one easy-to-use platform.",
+    "website": "https://farmqa.com"
+  },
+  {
+    "date_filed": "2026-11-05",
+    "company": "Multiply Labs, Inc.",
+    "amount_m": 52.25,
+    "city": "San Francisco",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001690573",
+    "industry": "Other Technology",
+    "category": "Biotech / Health",
+    "what_they_do": "Multiply Labs | Robotic Biomanufacturing Infrastructure We\u2019re proud to announce our Announcing our $75M Series B , led by NantWorks with participation from AstraZeneca, Lingotto, and more.",
+    "website": "https://multiplylabs.com"
+  },
+  {
     "date_filed": "2026-11-04",
     "company": "House Fly Home Services, Inc.",
     "amount_m": 0.6,
@@ -1375,19 +1453,6 @@
     "category": "Other Tech",
     "what_they_do": "CANEX Metals Inc.",
     "website": "https://canexmetals.ca"
-  },
-  {
-    "date_filed": "2026-10-05",
-    "company": "Walden Local, Inc.",
-    "amount_m": 4.05,
-    "city": "TEWKSBURY",
-    "state": "MA",
-    "founded": "",
-    "cik": "0001640490",
-    "industry": "Other",
-    "category": "AI / ML",
-    "what_they_do": "Meat delivery from small regenerative farms.",
-    "website": "https://waldenlocalmeat.com"
   },
   {
     "date_filed": "2026-10-05",
