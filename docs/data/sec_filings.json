@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-11-13",
+    "company": "Polt AI, Inc.",
+    "amount_m": 0.2,
+    "city": "LARGO",
+    "state": "FL",
+    "founded": "",
+    "cik": "0002150777",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Building Confidence and Character Welcome to Poltair School Skip to content \u2193.",
+    "website": "https://poltairschool.co.uk"
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "SKAI INNOVATIONS INC.",
+    "amount_m": 0.33,
+    "city": "SCOTTSDALE",
+    "state": "AZ",
+    "founded": "",
+    "cik": "0002130869",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "High-resolution imagery.",
+    "website": "https://skaiinnovations.com"
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "SmartCharts Inc.",
+    "amount_m": 0.14,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002164332",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "SmartCharts is the world's first AI trading analysis platform, offering AI-powered strategies and one-click execution to maximize your trading potential.",
+    "website": "https://smartcharts.net"
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "Nighthawk Flight Systems, Inc.",
+    "amount_m": 1.9,
+    "city": "VISTA",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002160846",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Upgrade your aircraft with Nighthawk\u2019s FAA certified primary flight displays.",
+    "website": "https://nighthawkfs.com"
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "ANDROMEDA ROBOTICS, INC.",
+    "amount_m": 30.02,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002086259",
+    "industry": "Other Technology",
+    "category": "Hardware",
+    "what_they_do": "At Andromeda, our personalised robot companions are helping aged care and assisted living teams bring joy and connection to residents to improve wellbeing.",
+    "website": "https://andromedarobotics.ai"
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "EV Life, Inc.",
+    "amount_m": 7.0,
+    "city": "SACRAMENTO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001960557",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "The EV incentives engine for automakers and dealers.",
+    "website": "https://evlife.co"
+  },
+  {
     "date_filed": "2026-11-12",
     "company": "Peace Coffee PBC",
     "amount_m": 0.2,
@@ -102,6 +180,21 @@
     "category": "Biotech / Health",
     "what_they_do": "Orcosa is a clinical-stage pharmaceutical company developing medicines with RITe\u2122, our proprietary tablet technology.",
     "website": "https://orcosa.com"
+  },
+  {
+    "date_filed": "2026-11-12",
+    "company": "T-Reqs, Inc.",
+    "amount_m": 0.43,
+    "city": "ARLINGTON",
+    "state": "MA",
+    "founded": "",
+    "cik": "0002163639",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Boost your sim racing with cockpits, monitor mountings and sim rig accessories of the highest quality.",
+    "website": "https://treq-sim.com",
+    "date_added": "2026-11-12",
+    "newly_found": true
   },
   {
     "date_filed": "2026-11-10",
@@ -1117,19 +1210,6 @@
     "category": "Cybersecurity",
     "what_they_do": "Streamlining Education Administration Processes Creating More Hours In The Day For Administrators To Focus On Students Get Started School & District Continuous Improvement and Compliance Software Crea",
     "website": "https://806technologies.com"
-  },
-  {
-    "date_filed": "2026-10-16",
-    "company": "Polt AI, Inc.",
-    "amount_m": 0.15,
-    "city": "LARGO",
-    "state": "FL",
-    "founded": "",
-    "cik": "0002150777",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "Building Confidence and Character Welcome to Poltair School Skip to content \u2193 Building Con.",
-    "website": "https://poltairschool.co.uk"
   },
   {
     "date_filed": "2026-10-16",
@@ -5590,19 +5670,6 @@
     "category": "Energy / Climate",
     "what_they_do": "Convened by World Resources Institute and the Bezos Earth Fund Homepage\u2014 Land & Carbon Lab Unlocking Universal Access to Climate and Nature Monitoring Convened by World Resources Institute and the Bez",
     "website": "https://landcarbonlab.org"
-  },
-  {
-    "date_filed": "2026-04-27",
-    "company": "SKAI INNOVATIONS INC.",
-    "amount_m": 0.15,
-    "city": "SCOTTSDALE",
-    "state": "AZ",
-    "founded": "",
-    "cik": "0002130869",
-    "industry": "Other Technology",
-    "category": "AI / ML",
-    "what_they_do": "High-resolution imagery.",
-    "website": "https://skaiinnovations.com"
   },
   {
     "date_filed": "2026-04-24",
