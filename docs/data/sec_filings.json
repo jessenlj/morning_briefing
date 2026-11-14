@@ -78,6 +78,36 @@
     "website": "https://evlife.co"
   },
   {
+    "date_filed": "2026-11-13",
+    "company": "WHE Inc.",
+    "amount_m": 0.3,
+    "city": "GOLDEN",
+    "state": "CO",
+    "founded": "",
+    "cik": "0002165055",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Employee Scheduling the fast, easy & affordable way - unique advanced employee scheduling system keeps your employees happy and saves you time and money.",
+    "website": "https://whentowork.com",
+    "date_added": "2026-11-13",
+    "newly_found": true
+  },
+  {
+    "date_filed": "2026-11-13",
+    "company": "Eco, Inc.",
+    "amount_m": 6.53,
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002163486",
+    "industry": "Other Technology",
+    "category": "Hardware",
+    "what_they_do": "ecobee designs intelligent thermostats, cameras, and sensors that work better together to improve everyday life.",
+    "website": "https://ecobee.com",
+    "date_added": "2026-11-13",
+    "newly_found": true
+  },
+  {
     "date_filed": "2026-11-12",
     "company": "Peace Coffee PBC",
     "amount_m": 0.2,
