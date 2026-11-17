@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-11-17",
+    "company": "DIVIROD, Inc.",
+    "amount_m": 2.15,
+    "city": "BOULDER",
+    "state": "CO",
+    "founded": "",
+    "cik": "0001733728",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Stay ahead of water risks with our Real-Time Advanced Water Data and Risk Monitoring Solutions.",
+    "website": "https://divirod.com"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "Tractian Inc.",
+    "amount_m": 106.45,
+    "city": "ATLANTA",
+    "state": "GA",
+    "founded": "",
+    "cik": "0002165237",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Turn reactive maintenance into predictable operations through AI-powered hardware and software built to protect revenue, reduce costs, and mitigate risk.",
+    "website": "https://tractian.com"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "E3 Energy Solution Co",
+    "amount_m": 0.6,
+    "city": "ARVADA",
+    "state": "CO",
+    "founded": "",
+    "cik": "0002151502",
+    "industry": "Other",
+    "category": "Energy / Climate",
+    "what_they_do": "E 4 Energy Solutions is an Energy Management Solutions company serving buildings, commercial and industrial sectors.",
+    "website": "https://e4energy.in"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "Reach Neuro, Inc.",
+    "amount_m": 2.0,
+    "city": "PROVIDENCE",
+    "state": "RI",
+    "founded": "",
+    "cik": "0001942277",
+    "industry": "Other Health Care",
+    "category": "Biotech / Health",
+    "what_they_do": "We are an early stage startup developing the first-ever treatment for chronic disability caused by stroke.",
+    "website": "https://reachneuro.com"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "UCHU Biosensors, Inc.",
+    "amount_m": 1.33,
+    "city": "Newark",
+    "state": "NJ",
+    "founded": "",
+    "cik": "0001938243",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "",
+    "website": "https://uchubiosensors.com"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "Ursa Space Systems Inc.",
+    "amount_m": 12.1,
+    "city": "ITHACA",
+    "state": "NY",
+    "founded": "",
+    "cik": "0001658448",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Ursa Space | Ursa Space Systems Skip to main content From pixels to insights \u00ae Get Started geospatial AI for global change A real-time view of what matters most.",
+    "website": "https://ursaspace.com"
+  },
+  {
     "date_filed": "2026-11-16",
     "company": "FB Technologies Inc.",
     "amount_m": 0.5,
@@ -115,6 +193,21 @@
     "category": "Other Tech",
     "what_they_do": "Maple Gold Mines is a well-funded gold exploration company focused on advancing one of the largest undeveloped gold projects in Quebec.",
     "website": "https://maplegoldmines.com"
+  },
+  {
+    "date_filed": "2026-11-16",
+    "company": "Araico Corp",
+    "amount_m": 36.9,
+    "city": "ASUNCION",
+    "state": "R4",
+    "founded": "",
+    "cik": "0002164789",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "To get general information about Arai products available in your territory, please select one of the market information icons below.",
+    "website": "https://arai.co.jp",
+    "date_added": "2026-11-16",
+    "newly_found": true
   },
   {
     "date_filed": "2026-11-13",
@@ -5252,19 +5345,6 @@
     "category": "Other Tech",
     "what_they_do": "InspectionGo Your Partner for Transformation & Growth Whether your company is a one-person operation or a multi-inspector firm, we provide the support you need to thrive on your own terms.",
     "website": "https://inspectiongo.com"
-  },
-  {
-    "date_filed": "2026-06-01",
-    "company": "DIVIROD, Inc.",
-    "amount_m": 2.0,
-    "city": "BOULDER",
-    "state": "CO",
-    "founded": "",
-    "cik": "0001733728",
-    "industry": "Other Technology",
-    "category": "Other Tech",
-    "what_they_do": "Stay ahead of water risks with our Real-Time Advanced Water Data and Risk Monitoring Solutions.",
-    "website": "https://divirod.com"
   },
   {
     "date_filed": "2026-05-29",
