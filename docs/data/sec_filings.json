@@ -1,5 +1,70 @@
 [
   {
+    "date_filed": "2026-11-18",
+    "company": "SmartCharts Inc.",
+    "amount_m": 0.25,
+    "city": "CHICAGO",
+    "state": "IL",
+    "founded": "",
+    "cik": "0002164332",
+    "industry": "Other",
+    "category": "AI / ML",
+    "what_they_do": "SmartCharts is the world's first AI trading analysis platform, offering AI-powered strategies and one-click execution to maximize your trading potential.",
+    "website": "https://smartcharts.net"
+  },
+  {
+    "date_filed": "2026-11-18",
+    "company": "Galvanize Therapeutics, Inc.",
+    "amount_m": 136.19,
+    "city": "REDWOOD CITY",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001659073",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "Galvanize Therapeutics designs pulsed electric field energy devices for the surgical ablation of soft tissue, engineered to work with the body's biology.",
+    "website": "https://galvanizetx.com"
+  },
+  {
+    "date_filed": "2026-11-18",
+    "company": "IOTUM INC",
+    "amount_m": 0.71,
+    "city": "TORONTO",
+    "state": "A6",
+    "founded": "",
+    "cik": "0001296604",
+    "industry": "Telecommunications",
+    "category": "Other Tech",
+    "what_they_do": "Embed video, voice, and messaging into your product with iotum's video API and white-label softphone.",
+    "website": "https://iotum.com"
+  },
+  {
+    "date_filed": "2026-11-18",
+    "company": "Ansa Biotechnologies, Inc.",
+    "amount_m": 54.4,
+    "city": "EMERYVILLE",
+    "state": "CA",
+    "founded": "",
+    "cik": "0001816722",
+    "industry": "Biotechnology",
+    "category": "Biotech / Health",
+    "what_they_do": "",
+    "website": "https://ansabio.com"
+  },
+  {
+    "date_filed": "2026-11-18",
+    "company": "Edison Motors Ltd.",
+    "amount_m": 0.99,
+    "city": "Donald",
+    "state": "A1",
+    "founded": "",
+    "cik": "0002052766",
+    "industry": "Manufacturing",
+    "category": "Other Tech",
+    "what_they_do": "Edison Motors - Diesel-Electric Trucks.",
+    "website": "https://edisonmotors.ca"
+  },
+  {
     "date_filed": "2026-11-17",
     "company": "DIVIROD, Inc.",
     "amount_m": 2.15,
@@ -76,6 +141,36 @@
     "category": "AI / ML",
     "what_they_do": "Ursa Space | Ursa Space Systems Skip to main content From pixels to insights \u00ae Get Started geospatial AI for global change A real-time view of what matters most.",
     "website": "https://ursaspace.com"
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "HoneyHive Inc.",
+    "amount_m": 5.5,
+    "city": "NEW YORK",
+    "state": "NY",
+    "founded": "",
+    "cik": "0002165474",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Honey & Hive is the all-in-one marketing solution for small businesses, startups, and thought leaders, providing strategic marketing that drives growth and increases visibility.",
+    "website": "https://honeyxhive.com",
+    "date_added": "2026-11-17",
+    "newly_found": true
+  },
+  {
+    "date_filed": "2026-11-17",
+    "company": "RehabPath Inc.",
+    "amount_m": 0.5,
+    "city": "MADISON",
+    "state": "WI",
+    "founded": "",
+    "cik": "0001791847",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Rasakan kemudahan mencoba fitur terlengkap King4d penyedia situs Pragmatic resmi Pakai akun demo gratis saldo untuk eksperimen pola terbaik tanpa perlu takut kehilangan modal.",
+    "website": "https://rehabs.africa",
+    "date_added": "2026-11-17",
+    "newly_found": true
   },
   {
     "date_filed": "2026-11-16",
@@ -234,19 +329,6 @@
     "category": "AI / ML",
     "what_they_do": "High-resolution imagery.",
     "website": "https://skaiinnovations.com"
-  },
-  {
-    "date_filed": "2026-11-13",
-    "company": "SmartCharts Inc.",
-    "amount_m": 0.14,
-    "city": "CHICAGO",
-    "state": "IL",
-    "founded": "",
-    "cik": "0002164332",
-    "industry": "Other",
-    "category": "AI / ML",
-    "what_they_do": "SmartCharts is the world's first AI trading analysis platform, offering AI-powered strategies and one-click execution to maximize your trading potential.",
-    "website": "https://smartcharts.net"
   },
   {
     "date_filed": "2026-11-13",
