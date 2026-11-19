@@ -1,5 +1,31 @@
 [
   {
+    "date_filed": "2026-11-19",
+    "company": "Baryons Inc.",
+    "amount_m": 0.79,
+    "city": "JOHNSTOWN",
+    "state": "PA",
+    "founded": "",
+    "cik": "0002082177",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Baryons Software Solutions delivers Products, IT services, custom built software via agile development & consulting services globally.",
+    "website": "https://baryonssoftsolutions.com"
+  },
+  {
+    "date_filed": "2026-11-19",
+    "company": "KnowRisk, Inc.",
+    "amount_m": 0.57,
+    "city": "Las Vegas",
+    "state": "NV",
+    "founded": "",
+    "cik": "0002055022",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "KnowRisk Software Skip to content.",
+    "website": "https://knowrisk.com"
+  },
+  {
     "date_filed": "2026-11-18",
     "company": "SmartCharts Inc.",
     "amount_m": 0.25,
