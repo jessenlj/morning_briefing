@@ -1,5 +1,83 @@
 [
   {
+    "date_filed": "2026-11-20",
+    "company": "Zeely, Inc.",
+    "amount_m": 17.06,
+    "city": "WILMINGTON",
+    "state": "DE",
+    "founded": "",
+    "cik": "0002155182",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Create high-performing ads in seconds with Zeely \u2014 your go-to AI ads maker.",
+    "website": "https://zeely.app"
+  },
+  {
+    "date_filed": "2026-11-20",
+    "company": "PLENTI LLC",
+    "amount_m": 0.1,
+    "city": "HOUSTON",
+    "state": "TX",
+    "founded": "",
+    "cik": "0002138359",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Streamline operations, unlock revenue, increase tenant satisfaction and remain compliant - with Plentific\u2019s cloud based property management software.",
+    "website": "https://plentific.com"
+  },
+  {
+    "date_filed": "2026-11-20",
+    "company": "BrightAI Corp",
+    "amount_m": 85.35,
+    "city": "Palo Alto",
+    "state": "CA",
+    "founded": "",
+    "cik": "0002031706",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "Brightaira is the AI-native operational partner for IT \u2014 agentic AI agents that detect, correlate, and resolve incidents in real time, quantifying business impact automatically.",
+    "website": "https://brightaira.com"
+  },
+  {
+    "date_filed": "2026-11-20",
+    "company": "Matchpoint Therapeutics Inc.",
+    "amount_m": 68.4,
+    "city": "Watertown",
+    "state": "MA",
+    "founded": "",
+    "cik": "0001950915",
+    "industry": "Pharmaceuticals",
+    "category": "AI / ML",
+    "what_they_do": "Matchpoint aims to discover and develop precision small molecules that harness the power of covalency to bring new possibilities to the treatment of serious immune disease and cancer.",
+    "website": "https://matchpointtx.com"
+  },
+  {
+    "date_filed": "2026-11-20",
+    "company": "Ennabl, Inc.",
+    "amount_m": 2.0,
+    "city": "GREENWICH",
+    "state": "CT",
+    "founded": "",
+    "cik": "0001886670",
+    "industry": "Other Technology",
+    "category": "AI / ML",
+    "what_they_do": "AI built for agencies and brokers.",
+    "website": "https://ennabl.com"
+  },
+  {
+    "date_filed": "2026-11-20",
+    "company": "Perpay, Inc",
+    "amount_m": 21.72,
+    "city": "PHILADELPHIA",
+    "state": "PA",
+    "founded": "",
+    "cik": "0001644247",
+    "industry": "Other Technology",
+    "category": "Other Tech",
+    "what_they_do": "Get up to $1,000 to spend now.",
+    "website": "https://perpay.com"
+  },
+  {
     "date_filed": "2026-11-19",
     "company": "Baryons Inc.",
     "amount_m": 0.79,
@@ -24,6 +102,21 @@
     "category": "Other Tech",
     "what_they_do": "KnowRisk Software Skip to content.",
     "website": "https://knowrisk.com"
+  },
+  {
+    "date_filed": "2026-11-19",
+    "company": "Battery Mineral Resources Corp.",
+    "amount_m": 9.68,
+    "city": "VANCOUVER",
+    "state": "A1",
+    "founded": "",
+    "cik": "0001997773",
+    "industry": "Other",
+    "category": "Hardware",
+    "what_they_do": "Battery Mineral Resources is a multi-commodity battery materials provider focused on the development and integration of minerals critical to the rechargeable battery market and energy storage sector.",
+    "website": "https://bmrcorp.com",
+    "date_added": "2026-11-19",
+    "newly_found": true
   },
   {
     "date_filed": "2026-11-18",
@@ -5925,21 +6018,6 @@
     "category": "AI / ML",
     "what_they_do": "Welcome! - The Austelle Foundation Close Home Mission Board Recipients Contact The Austelle Foundation seeks to strengthen communities through support of environmental initiatives, veterans' services organizations, and Islamic charities.",
     "website": "https://austellefoundation.org"
-  },
-  {
-    "date_filed": "2026-05-05",
-    "company": "Battery Mineral Resources Corp.",
-    "amount_m": 0.33,
-    "city": "VANCOUVER",
-    "state": "A1",
-    "founded": "",
-    "cik": "0001997773",
-    "industry": "Other",
-    "category": "Hardware",
-    "what_they_do": "Battery Mineral Resources is a multi-commodity battery materials provider focused on the development and integration of minerals critical to the rechargeable battery market and energy storage sector.",
-    "website": "https://bmrcorp.com",
-    "date_added": "2026-05-05",
-    "newly_found": true
   },
   {
     "date_filed": "2026-04-30",
